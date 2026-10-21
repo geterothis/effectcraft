@@ -738,6 +738,21 @@ impl Inner {
         // whole; in-memory files (`add_bytes`) and wasm32 builds open from bytes.
         let in_memory = lock(&self.files).contains_key(&**path);
         let file = std::path::Path::new(&**path);
+        // QuickTime Animation (`rle `) is decoded here, not by FilmCraft.
+        if !in_memory {
+            match crate::qt_anim::open(file) {
+                Ok(Some(src)) => {
+                    let (header, reader) = (crate::stream::movie_header(file), crate::stream::file_reader(file));
+                    let stamp = crate::stream::file_stamp(file).unwrap_or(FileStamp::Missing);
+                    return (Some(Opened::new(src, header.as_deref(), reader.as_deref())), ReadFile::new(path.clone(), stamp));
+                }
+                Ok(None) => {}
+                Err(e) => {
+                    self.note_problem(path, "Animation", &e);
+                    return (None, ReadFile::new(path.clone(), FileStamp::Missing));
+                }
+            }
+        }
         let in_place = if in_memory { None } else { crate::stream::open_source(file) };
         let in_place = in_place.map(|(src, stamp)| {
             let (header, reader) = (crate::stream::movie_header(file), crate::stream::file_reader(file));
