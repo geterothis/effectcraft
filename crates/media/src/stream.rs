@@ -88,6 +88,17 @@ pub(crate) fn open_source(path: &Path) -> Option<(Result<SharedSource>, FileStam
     Some((opened.map_err(Into::into), stamp))
 }
 
+/// The identity of the file at `path` as opened now (`None` when it can't be opened).
+#[cfg(any(unix, windows))]
+pub(crate) fn file_stamp(path: &Path) -> Option<FileStamp> {
+    FileReader::open(path).ok().map(|r| r.stamp)
+}
+
+#[cfg(not(any(unix, windows)))]
+pub(crate) fn file_stamp(_path: &Path) -> Option<FileStamp> {
+    None
+}
+
 /// Without a native file system there is no in-place source: always `None`.
 #[cfg(not(any(unix, windows)))]
 pub(crate) fn open_source(_path: &Path) -> Option<(Result<SharedSource>, FileStamp)> {
