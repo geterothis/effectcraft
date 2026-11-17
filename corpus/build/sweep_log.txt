@@ -1,0 +1,732 @@
+ADD Blur & Sharpen | Bilateral Blur | ADBE Bilateral
+  -> ok
+ADD Blur & Sharpen | CC Cross Blur | CS CrossBlur
+  -> ok
+ADD Blur & Sharpen | CC Radial Blur | CC Radial Blur
+  -> ok
+ADD Blur & Sharpen | CC Radial Fast Blur | CC Radial Fast Blur
+  -> ok
+ADD Blur & Sharpen | CC Vector Blur | CC Vector Blur
+  -> ok
+ADD Blur & Sharpen | Camera Lens Blur | ADBE Camera Lens Blur
+  -> ok
+ADD Blur & Sharpen | Camera-Shake Deblur | ADBE CameraShakeDeblur
+  -> ok
+ADD Blur & Sharpen | Channel Blur | ADBE Channel Blur
+  -> ok
+ADD Blur & Sharpen | Compound Blur | ADBE Compound Blur
+  -> ok
+ADD Blur & Sharpen | Directional Blur | ADBE Motion Blur
+  -> ok
+ADD Blur & Sharpen | Fast Box Blur | ADBE Box Blur2
+  -> ok
+ADD Blur & Sharpen | Gaussian Blur | ADBE Gaussian Blur 2
+  -> ok
+ADD Blur & Sharpen | Radial Blur | ADBE Radial Blur
+  -> ok
+ADD Blur & Sharpen | Sharpen | ADBE Sharpen
+  -> ok
+ADD Blur & Sharpen | Smart Blur | ADBE Smart Blur
+  -> ok
+ADD Blur & Sharpen | Unsharp Mask | ADBE Unsharp Mask2
+  -> ok
+ADD Channel | Arithmetic | ADBE Arithmetic
+  -> ok
+ADD Channel | Blend | ADBE Blend
+  -> ok
+ADD Channel | CC Composite | CS Composite
+  -> ok
+ADD Channel | Calculations | ADBE Calculations
+  -> ok
+ADD Channel | Channel Combiner | ADBE Channel Combiner
+  -> ok
+ADD Channel | Compound Arithmetic | ADBE Compound Arithmetic
+  -> ok
+ADD Channel | Invert | ADBE Invert
+  -> ok
+ADD Channel | Minimax | ADBE Minimax
+  -> ok
+ADD Channel | Remove Color Matting | ADBE Remove Color Matting
+  -> ok
+ADD Channel | Set Channels | ADBE Set Channels
+  -> ok
+ADD Channel | Set Matte | ADBE Set Matte3
+  -> ok
+ADD Channel | Shift Channels | ADBE Shift Channels
+  -> ok
+ADD Channel | Solid Composite | ADBE Solid Composite
+  -> ok
+ADD Color Correction | Auto Color | ADBE AutoColor
+  -> ok
+ADD Color Correction | Auto Contrast | ADBE AutoContrast
+  -> ok
+ADD Color Correction | Auto Levels | ADBE AutoLevels
+  -> ok
+ADD Color Correction | Black & White | ADBE Black&White
+  -> ok
+ADD Color Correction | Brightness & Contrast | ADBE Brightness & Contrast 2
+  -> ok
+ADD Color Correction | Broadcast Colors | ADBE Broadcast Colors
+  -> ok
+ADD Color Correction | CC Color Neutralizer | CS Color Neutralizer
+  -> ok
+ADD Color Correction | CC Color Offset | CC Color Offset
+  -> ok
+ADD Color Correction | CC Kernel | CS Kernel
+  -> ok
+ADD Color Correction | CC Toner | CC Toner
+  -> ok
+ADD Color Correction | Change Color | ADBE Change Color
+  -> ok
+ADD Color Correction | Change to Color | ADBE Change To Color
+  -> ok
+ADD Color Correction | Channel Mixer | ADBE CHANNEL MIXER
+  -> ok
+ADD Color Correction | Color Balance | ADBE Color Balance 2
+  -> ok
+ADD Color Correction | Color Balance (HLS) | ADBE Color Balance (HLS)
+  -> ok
+ADD Color Correction | Color Link | ADBE Color Link
+  -> ok
+ADD Color Correction | Color Stabilizer | ADBE Deflicker
+  -> ok
+ADD Color Correction | Colorama | APC Colorama
+  -> ok
+ADD Color Correction | Curves | ADBE CurvesCustom
+  -> ok
+ADD Color Correction | Equalize | ADBE Equalize
+  -> ok
+ADD Color Correction | Exposure | ADBE Exposure2
+  -> ok
+ADD Color Correction | Gamma/Pedestal/Gain | ADBE Gamma/Pedestal/Gain2
+  -> ok
+ADD Color Correction | Hue/Saturation | ADBE HUE SATURATION
+  -> ok
+ADD Color Correction | Leave Color | ADBE Leave Color
+  -> ok
+ADD Color Correction | Levels | ADBE Easy Levels2
+  -> ok
+ADD Color Correction | Levels (Individual Controls) | ADBE Pro Levels2
+  -> ok
+ADD Color Correction | Lumetri Color | ADBE Lumetri
+  -> ok
+ADD Color Correction | OCIO CDL Transform | ADBE OCIO CDL Transform
+  -> ok
+ADD Color Correction | OCIO Color Space Transform | ADBE OCIO Color Space Transform
+  -> ok
+ADD Color Correction | OCIO Display Transform | ADBE OCIO Display Transform
+  -> ok
+ADD Color Correction | OCIO File Transform | ADBE OCIO FILE Transform
+  -> ok
+ADD Color Correction | OCIO Look Transform | ADBE OCIO Look Transform
+  -> ok
+ADD Color Correction | PS Arbitrary Map | ADBE PS Arbitrary Map
+  -> ok
+ADD Color Correction | Photo Filter | ADBE PhotoFilterPS
+  -> ok
+ADD Color Correction | Selective Color | ADBE SelectiveColor
+  -> ok
+ADD Color Correction | Shadow/Highlight | ADBE ShadowHighlight
+  -> ok
+ADD Color Correction | Tint | ADBE Tint
+  -> ok
+ADD Color Correction | Tritone | ADBE Tritone
+  -> ok
+ADD Color Correction | Vibrance | ADBE Vibrance
+  -> ok
+ADD Color Correction | Video Limiter | ADBE DigitalVideoLimiter
+  -> ok
+ADD Distort | Bezier Warp | ADBE BEZMESH
+  -> ok
+ADD Distort | Bulge | ADBE Bulge
+  -> ok
+ADD Distort | CC Bend It | CC Bend It
+  -> ok
+ADD Distort | CC Bender | CC Bender
+  -> ok
+ADD Distort | CC Blobbylize | CC Blobbylize
+  -> ok
+ADD Distort | CC Flo Motion | CC Flo Motion
+  -> ok
+ADD Distort | CC Griddler | CC Griddler
+  -> ok
+ADD Distort | CC Lens | CC Lens
+  -> ok
+ADD Distort | CC Page Turn | CC Page Turn
+  -> ok
+ADD Distort | CC Power Pin | CC Power Pin
+  -> ok
+ADD Distort | CC Ripple Pulse | CC Ripple Pulse
+  -> ok
+ADD Distort | CC Slant | CC Slant
+  -> ok
+ADD Distort | CC Smear | CC Smear
+  -> ok
+ADD Distort | CC Split | CC Split
+  -> ok
+ADD Distort | CC Split 2 | CC Split 2
+  -> ok
+ADD Distort | CC Tiler | CC Tiler
+  -> ok
+ADD Distort | Corner Pin | ADBE Corner Pin
+  -> ok
+ADD Distort | Detail-preserving Upscale | ADBE Upscale
+  -> ok
+ADD Distort | Displacement Map | ADBE Displacement Map
+  -> ok
+ADD Distort | Liquify | ADBE LIQUIFY
+  -> ok
+ADD Distort | Magnify | ADBE Magnify
+  -> ok
+ADD Distort | Mesh Warp | ADBE MESH WARP
+  -> ok
+ADD Distort | Mirror | ADBE Mirror
+  -> ok
+ADD Distort | Offset | ADBE Offset
+  -> ok
+ADD Distort | Optics Compensation | ADBE Optics Compensation
+  -> ok
+ADD Distort | Polar Coordinates | ADBE Polar Coordinates
+  -> ok
+ADD Distort | Reshape | ADBE RESHAPE
+  -> ok
+ADD Distort | Ripple | ADBE Ripple
+  -> ok
+ADD Distort | Rolling Shutter Repair | ADBE Rolling Shutter
+  -> ok
+ADD Distort | Smear | ADBE SCHMEAR
+  -> ok
+ADD Distort | Spherize | ADBE Spherize
+  -> ok
+ADD Distort | Transform | ADBE Geometry2
+  -> ok
+ADD Distort | Turbulent Displace | ADBE Turbulent Displace
+  -> ok
+ADD Distort | Twirl (Legacy) | ADBE Twirl
+  -> ok
+ADD Distort | Warp | ADBE WRPMESH
+  -> ok
+ADD Distort | Warp Stabilizer | ADBE SubspaceStabilizer
+  -> ok
+ADD Distort | Wave Warp | ADBE Wave Warp
+  -> ok
+ADD Expression Controls | 3D Point Control | ADBE Point3D Control
+  -> ok
+ADD Expression Controls | Angle Control | ADBE Angle Control
+  -> ok
+ADD Expression Controls | Checkbox Control | ADBE Checkbox Control
+  -> ok
+ADD Expression Controls | Color Control | ADBE Color Control
+  -> ok
+ADD Expression Controls | Dropdown Menu Control | ADBE Dropdown Control
+  -> ok
+ADD Expression Controls | Layer Control | ADBE Layer Control
+  -> ok
+ADD Expression Controls | Point Control | ADBE Point Control
+  -> ok
+ADD Expression Controls | Slider Control | ADBE Slider Control
+  -> ok
+ADD Generate | 4-Color Gradient | ADBE 4ColorGradient
+  -> ok
+ADD Generate | Advanced Lightning | ADBE Lightning 2
+  -> ok
+ADD Generate | Audio Spectrum | ADBE AudSpect
+  -> ok
+ADD Generate | Audio Waveform | ADBE AudWave
+  -> ok
+ADD Generate | Beam | ADBE Laser
+  -> ok
+ADD Generate | CC Glue Gun | CC Glue Gun
+  -> ok
+ADD Generate | CC Light Burst 2.5 | CC Light Burst 2.5
+  -> ok
+ADD Generate | CC Light Rays | CC Light Rays
+  -> ok
+ADD Generate | CC Light Sweep | CC Light Sweep
+  -> ok
+ADD Generate | CC Threads | CS Threads
+  -> ok
+ADD Generate | Cell Pattern | ADBE Cell Pattern
+  -> ok
+ADD Generate | Checkerboard | ADBE Checkerboard
+  -> ok
+ADD Generate | Circle | ADBE Circle
+  -> ok
+ADD Generate | Ellipse | ADBE ELLIPSE
+  -> ok
+ADD Generate | Eyedropper Fill | ADBE Eyedropper Fill
+  -> ok
+ADD Generate | Fill | ADBE Fill
+  -> ok
+ADD Generate | Fractal | ADBE Fractal
+  -> ok
+ADD Generate | Gradient Ramp | ADBE Ramp
+  -> ok
+ADD Generate | Grid | ADBE Grid
+  -> ok
+ADD Generate | Lens Flare | ADBE Lens Flare
+  -> ok
+ADD Generate | Paint Bucket | ADBE Paint Bucket
+  -> ok
+ADD Generate | Radio Waves | APC Radio Waves
+  -> ok
+ADD Generate | Scribble | ADBE Scribble Fill
+  -> ok
+ADD Generate | Stroke | ADBE Stroke
+  -> ok
+ADD Generate | Vegas | APC Vegas
+  -> ok
+ADD Generate | Write-on | ADBE Write-on
+  -> ok
+ADD Keying | Advanced Spill Suppressor | ADBE Spill2
+  -> ok
+ADD Keying | CC Simple Wire Removal | CC Simple Wire Removal
+  -> ok
+ADD Keying | Color Difference Key | ADBE Color Difference Key
+  -> ok
+ADD Keying | Color Range | ADBE Color Range
+  -> ok
+ADD Keying | Difference Matte | ADBE Difference Matte2
+  -> ok
+ADD Keying | Extract | ADBE Extract
+  -> ok
+ADD Keying | Inner/Outer Key | ADBE ATG Extract
+  -> ok
+ADD Keying | Key Cleaner | ADBE KeyCleaner
+  -> ok
+ADD Keying | Keylight (1.2) | Keylight 906
+  -> ok
+ADD Keying | Linear Color Key | ADBE Linear Color Key2
+  -> ok
+ADD Keying | Unmult | ADBE Unmult
+  -> ok
+ADD Matte | Matte Choker | ADBE Matte Choker
+  -> ok
+ADD Matte | Refine Hard Matte | ADBE RefineRBMatte
+  -> ok
+ADD Matte | Refine Soft Matte | ADBE RefineMatte2
+  -> ok
+ADD Matte | Simple Choker | ADBE Simple Choker
+  -> ok
+ADD Noise & Grain | Add Grain | VISINF Grain Implant
+  -> ok
+ADD Noise & Grain | Curl Noise | ADBE Curl Noise
+  -> ok
+ADD Noise & Grain | Dust & Scratches | ADBE Dust & Scratches
+  -> ok
+ADD Noise & Grain | Fractal Noise | ADBE Fractal Noise
+  -> ok
+ADD Noise & Grain | Match Grain | VISINF Grain Duplication
+  -> ok
+ADD Noise & Grain | Median | ADBE PS Median
+  -> ok
+ADD Noise & Grain | Median (Legacy) | ADBE Median
+  -> ok
+ADD Noise & Grain | Noise | ADBE Noise2
+  -> ok
+ADD Noise & Grain | Noise Alpha | ADBE Noise Alpha2
+  -> ok
+ADD Noise & Grain | Noise HLS | ADBE Noise HLS2
+  -> ok
+ADD Noise & Grain | Noise HLS Auto | ADBE Noise HLS Auto2
+  -> ok
+ADD Noise & Grain | Remove Grain | VISINF Grain Removal
+  -> ok
+ADD Noise & Grain | Turbulent Noise | ADBE AIF Perlin Noise 3D
+  -> ok
+ADD Perspective | 3D Camera Tracker | ADBE 3D Tracker
+  -> ok
+ADD Perspective | 3D Glasses | ADBE 3D Glasses2
+  -> ok
+ADD Perspective | Bevel Alpha | ADBE Bevel Alpha
+  -> ok
+ADD Perspective | Bevel Edges | ADBE Bevel Edges
+  -> ok
+ADD Perspective | CC Cylinder | CC Cylinder
+  -> ok
+ADD Perspective | CC Environment | CC Environment
+  -> ok
+ADD Perspective | CC Sphere | CC Sphere
+  -> ok
+ADD Perspective | CC Spotlight | CC Spotlight
+  -> ok
+ADD Perspective | Drop Shadow | ADBE Drop Shadow
+  -> ok
+ADD Perspective | Radial Shadow | ADBE Radial Shadow
+  -> ok
+ADD Simulation | CC Ball Action | CC Ball Action
+  -> ok
+ADD Simulation | CC Bubbles | CC Bubbles
+  -> ok
+ADD Simulation | CC Drizzle | CC Drizzle
+  -> ok
+ADD Simulation | CC Hair | CC Hair
+  -> ok
+ADD Simulation | CC Mr. Mercury | CC Mr. Mercury
+  -> ok
+ADD Simulation | CC Particle Systems II | CC Particle Systems II
+  -> ok
+ADD Simulation | CC Particle World | CC Particle World
+  -> ok
+ADD Simulation | CC Pixel Polly | CC Pixel Polly
+  -> ok
+ADD Simulation | CC Rainfall | CSRainfall
+  -> ok
+ADD Simulation | CC Scatterize | CC Scatterize
+  -> ok
+ADD Simulation | CC Snowfall | CSSnowfall
+  -> ok
+ADD Simulation | CC Star Burst | CC Star Burst
+  -> ok
+ADD Simulation | Card Dance | APC CardDanceCam
+  -> ok
+ADD Simulation | Caustics | APC Caustics
+  -> ok
+ADD Simulation | Foam | APC Foam
+  -> ok
+ADD Simulation | Particle Playground | ADBE Playgnd
+  -> ok
+ADD Simulation | Shatter | APC Shatter
+  -> ok
+ADD Simulation | Wave World | APC Wave World
+  -> ok
+ADD Perspective | 3D Camera Tracker | ADBE 3D Tracker
+  -> ok
+ADD Perspective | 3D Glasses | ADBE 3D Glasses2
+  -> ok
+ADD Perspective | Bevel Alpha | ADBE Bevel Alpha
+  -> ok
+ADD Perspective | Bevel Edges | ADBE Bevel Edges
+  -> ok
+ADD Perspective | CC Cylinder | CC Cylinder
+  -> ok
+ADD Perspective | CC Environment | CC Environment
+  -> ok
+ADD Perspective | CC Sphere | CC Sphere
+  -> ok
+ADD Perspective | CC Spotlight | CC Spotlight
+  -> ok
+ADD Perspective | Drop Shadow | ADBE Drop Shadow
+  -> ok
+ADD Perspective | Radial Shadow | ADBE Radial Shadow
+  -> ok
+ADD Simulation | CC Ball Action | CC Ball Action
+  -> ok
+ADD Simulation | CC Bubbles | CC Bubbles
+  -> ok
+ADD Simulation | CC Drizzle | CC Drizzle
+  -> ok
+ADD Simulation | CC Hair | CC Hair
+  -> ok
+ADD Simulation | CC Mr. Mercury | CC Mr. Mercury
+  -> ok
+ADD Simulation | CC Particle Systems II | CC Particle Systems II
+  -> ok
+ADD Simulation | CC Particle World | CC Particle World
+  -> ok
+ADD Simulation | CC Pixel Polly | CC Pixel Polly
+  -> ok
+ADD Simulation | CC Rainfall | CSRainfall
+  -> ok
+ADD Simulation | CC Scatterize | CC Scatterize
+  -> ok
+ADD Simulation | CC Snowfall | CSSnowfall
+  -> ok
+ADD Simulation | CC Star Burst | CC Star Burst
+  -> ok
+ADD Simulation | Card Dance | APC CardDanceCam
+  -> ok
+ADD Simulation | Caustics | APC Caustics
+  -> ok
+ADD Simulation | Foam | APC Foam
+  -> ok
+ADD Simulation | Particle Playground | ADBE Playgnd
+  -> ok
+ADD Simulation | Shatter | APC Shatter
+  -> ok
+ADD Simulation | Wave World | APC Wave World
+  -> ok
+ADD Stylize | Brush Strokes | ADBE Brush Strokes
+  -> ok
+ADD Stylize | CC Block Load | CS BlockLoad
+  -> ok
+ADD Stylize | CC Burn Film | CC Burn Film
+  -> ok
+ADD Stylize | CC Glass | CC Glass
+  -> ok
+ADD Stylize | CC HexTile | CS HexTile
+  -> ok
+ADD Stylize | CC Kaleida | CC Kaleida
+  -> ok
+ADD Stylize | CC Mr. Smoothie | CC Mr. Smoothie
+  -> ok
+ADD Stylize | CC Plastic | CC Plastic
+  -> ok
+ADD Stylize | CC RepeTile | CC RepeTile
+  -> ok
+ADD Stylize | CC Threshold | CC Threshold
+  -> ok
+ADD Stylize | CC Threshold RGB | CC Threshold RGB
+  -> ok
+ADD Stylize | CC Vignette | CS Vignette
+  -> ok
+ADD Stylize | Cartoon | ADBE Cartoonify
+  -> ok
+ADD Stylize | Color Emboss | ADBE Color Emboss
+  -> ok
+ADD Stylize | Emboss | ADBE Emboss
+  -> ok
+ADD Stylize | Find Edges | ADBE Find Edges
+  -> ok
+ADD Stylize | Glow | ADBE Glo2
+  -> ok
+ADD Stylize | Mosaic | ADBE Mosaic
+  -> ok
+ADD Stylize | Motion Tile | ADBE Tile
+  -> ok
+ADD Stylize | Posterize | ADBE Posterize
+  -> ok
+ADD Stylize | Roughen Edges | ADBE Roughen Edges
+  -> ok
+ADD Stylize | Scatter | ADBE Scatter
+  -> ok
+ADD Stylize | Strobe Light | ADBE Strobe
+  -> ok
+ADD Stylize | Texturize | ADBE Texturize
+  -> ok
+ADD Stylize | Threshold | ADBE Threshold2
+  -> ok
+ADD Text | Numbers | ADBE Numbers2
+  -> null
+ADD Text | Timecode | ADBE Timecode
+  -> ok
+ADD Time | CC Force Motion Blur | CC Force Motion Blur
+  -> ok
+ADD Time | CC Wide Time | CC Wide Time
+  -> ok
+ADD Time | Echo | ADBE Echo
+  -> ok
+ADD Time | Pixel Motion Blur | ADBE OFMotionBlur
+  -> ok
+ADD Time | Posterize Time | ADBE Posterize Time
+  -> ok
+ADD Time | Time Difference | ADBE Difference
+  -> ok
+ADD Time | Time Displacement | ADBE Time Displacement
+  -> ok
+ADD Time | Timewarp | ADBE Timewarp
+  -> ok
+ADD Transition | Block Dissolve | ADBE Block Dissolve
+  -> ok
+ADD Transition | CC Glass Wipe | CC Glass Wipe
+  -> ok
+ADD Transition | CC Grid Wipe | CC Grid Wipe
+  -> ok
+ADD Transition | CC Image Wipe | CC Image Wipe
+  -> ok
+ADD Transition | CC Jaws | CC Jaws
+  -> ok
+ADD Transition | CC Light Wipe | CC Light Wipe
+  -> ok
+ADD Transition | CC Line Sweep | CS LineSweep
+  -> ok
+ADD Transition | CC Radial ScaleWipe | CC Radial ScaleWipe
+  -> ok
+ADD Transition | CC Scale Wipe | CC Scale Wipe
+  -> ok
+ADD Transition | CC Twister | CC Twister
+  -> ok
+ADD Transition | CC WarpoMatic | CC WarpoMatic
+  -> ok
+ADD Transition | Card Wipe | APC CardWipeCam
+  -> ok
+ADD Transition | Gradient Wipe | ADBE Gradient Wipe
+  -> ok
+ADD Transition | Iris Wipe | ADBE IRIS_WIPE
+  -> ok
+ADD Transition | Linear Wipe | ADBE Linear Wipe
+  -> ok
+ADD Transition | Radial Wipe | ADBE Radial Wipe
+  -> ok
+ADD Transition | Venetian Blinds | ADBE Venetian Blinds
+  -> ok
+ADD Utility | Apply Color LUT | ADBE Apply Color LUT2
+  -> ok
+ADD Utility | CC Overbrights | CC Overbrights
+  -> ok
+ADD Utility | Cineon Converter | ADBE Cineon Converter2
+  -> ok
+ADD Utility | Color Profile Converter | ADBE ProfileToProfile
+  -> ok
+ADD Utility | Grow Bounds | ADBE GROW BOUNDS
+  -> ok
+ADD Utility | HDR Compander | ADBE Compander
+  -> ok
+ADD Utility | HDR Highlight Compression | ADBE HDR ToneMap
+  -> ok
+ADD Audio | Backwards | ADBE Aud Reverse
+  -> ok
+ADD Audio | Bass & Treble | ADBE Aud BT
+  -> ok
+ADD Audio | Compressor | ADBE Aud Compressor
+  -> ok
+ADD Audio | Delay | ADBE Aud Delay
+  -> ok
+ADD Audio | Distortion | ADBE Aud Distortion
+  -> ok
+ADD Audio | Flange & Chorus | ADBE Aud_Flange
+  -> ok
+ADD Audio | Gate | ADBE Aud Gate
+  -> ok
+ADD Audio | High-Low Pass | ADBE Aud HiLo
+  -> ok
+ADD Audio | Modulator | ADBE Aud Modulator
+  -> ok
+ADD Audio | Parametric EQ | ADBE Param EQ
+  -> ok
+ADD Audio | Reverb | ADBE Aud Reverb
+  -> ok
+ADD Audio | Stereo Mixer | ADBE Aud Stereo Mixer
+  -> ok
+ADD Audio | Tone | ADBE Aud Tone
+  -> ok
+ADD 3D Channel | 3D Channel Extract | ADBE AUX CHANNEL EXTRACT
+  -> ok
+ADD 3D Channel | Cryptomatte | Cryptomatte
+  -> ok
+ADD 3D Channel | Depth Matte | ADBE DEPTH MATTE
+  -> ok
+ADD 3D Channel | Depth of Field | ADBE DEPTH FIELD
+  -> ok
+ADD 3D Channel | EXtractoR | EXtractoR
+  -> ok
+ADD 3D Channel | Fog 3D | ADBE FOG_3D
+  -> ok
+ADD 3D Channel | ID Matte | ADBE ID MATTE
+  -> ok
+ADD 3D Channel | IDentifier | IDentifier
+  -> ok
+ADD Immersive Video | VR Blur | Mettle SkyBox Blur
+  -> ok
+ADD Immersive Video | VR Chromatic Aberrations | Mettle SkyBox Chromatic Aberrat
+  -> ok
+ADD Immersive Video | VR Color Gradients | Mettle SkyBox Color Gradients
+  -> ok
+ADD Immersive Video | VR Converter | Mettle SkyBox Converter
+  -> ok
+ADD Immersive Video | VR De-Noise | Mettle SkyBox Denoise
+  -> ok
+ADD Immersive Video | VR Digital Glitch | Mettle SkyBox Digital Glitch
+  -> ok
+ADD Immersive Video | VR Fractal Noise | Mettle SkyBox Fractal Noise
+  -> ok
+ADD Immersive Video | VR Glow | Mettle SkyBox Glow
+  -> ok
+ADD Immersive Video | VR Plane to Sphere | Mettle SkyBox Project 2D
+  -> ok
+ADD Immersive Video | VR Rotate Sphere | Mettle SkyBox Rotate Sphere
+  -> ok
+ADD Immersive Video | VR Sharpen | Mettle SkyBox Sharpen
+  -> ok
+ADD Immersive Video | VR Sphere To Plane | Mettle SkyBox Viewer
+  -> ok
+ADD Obsolete | Basic 3D | ADBE Basic 3D
+  -> ok
+ADD Obsolete | Basic Text | ADBE Basic Text2
+  -> null
+ADD Obsolete | Color Key | ADBE Color Key
+  -> ok
+ADD Obsolete | Gaussian Blur (Legacy) | ADBE Gaussian Blur
+  -> ok
+ADD Obsolete | Lightning | ADBE Lightning
+  -> ok
+ADD Obsolete | Luma Key | ADBE Luma Key
+  -> ok
+ADD Obsolete | Path Text | ADBE Path Text
+  -> null
+ADD Obsolete | Reduce Interlace Flicker | ADBE Reduce Interlace Flicker
+  -> ok
+ADD Obsolete | Spill Suppressor | ADBE Spill Suppressor
+  -> ok
+ADD Obsolete | mocha shape | ISL MochaShapeImporter
+  -> ok
+ADD _Obsolete | 3D Glasses (Obsolete) | ADBE 3D Glasses
+  -> ok
+ADD _Obsolete | Alpha Levels | ADBE Alpha Levels3
+  -> ok
+ADD _Obsolete | Alpha Levels | ADBE Alpha Levels2
+  -> ok
+ADD _Obsolete | Apply Color LUT | ADBE Apply Color LUT
+  -> ok
+ADD _Obsolete | Box Blur | ADBE Box Blur
+  -> ok
+ADD _Obsolete | Brightness & Contrast | ADBE Brightness & Contrast
+  -> ok
+ADD _Obsolete | CC Composite (obsolete) | CC Composite
+  -> ok
+ADD _Obsolete | CC PS Classic (obsolete) | CC PS Classic
+  -> ok
+ADD _Obsolete | CC PS LE Classic (obsolete) | CC PS LE Classic
+  -> ok
+ADD _Obsolete | CC Rain (obsolete) | CC Rain
+  -> ok
+ADD _Obsolete | CC Snow (obsolete) | CC Snow
+  -> ok
+ADD _Obsolete | CC Time Blend | CC Time Blend
+  -> ok
+ADD _Obsolete | CC Time Blend FX | CC Time Blend FX
+  -> ok
+ADD _Obsolete | Cineon Converter | ADBE Cineon Converter
+  -> ok
+ADD _Obsolete | Color Balance | ADBE Color Balance
+  -> ok
+ADD _Obsolete | Exposure | ADBE Exposure
+  -> ok
+ADD _Obsolete | Fast Blur (Legacy) | ADBE Fast Blur
+  -> ok
+ADD _Obsolete | Levels | ADBE Easy Levels
+  -> ok
+ADD _Obsolete | Levels (Individual Controls) | ADBE Pro Levels
+  -> ok
+ADD _Obsolete | Noise | ADBE Noise
+  -> ok
+ADD _Obsolete | Noise Alpha | ADBE Noise Alpha
+  -> ok
+ADD _Obsolete | Noise HLS | ADBE Noise HLS
+  -> ok
+ADD _Obsolete | Noise HLS Auto | ADBE Noise HLS Auto
+  -> ok
+ADD _Obsolete | Paint | ADBE Paint
+  -> ok
+ADD _Obsolete | Photo Filter | ADBE Photo Filter
+  -> ok
+ADD _Obsolete | Photoshop Bevel And Emboss | ADBE PSL Bevel Emboss
+  -> ok
+ADD _Obsolete | Photoshop Drop Shadow | ADBE PSL Drop Shadow
+  -> ok
+ADD _Obsolete | Photoshop Inner Glow | ADBE PSL Inner Glow
+  -> ok
+ADD _Obsolete | Photoshop Inner Shadow | ADBE PSL Inner Shadow
+  -> ok
+ADD _Obsolete | Photoshop Outer Glow | ADBE PSL Outer Glow
+  -> ok
+ADD _Obsolete | Photoshop Solid Fill | ADBE PSL Solid Fill
+  -> ok
+ADD _Obsolete | Puppet | ADBE FreePin3
+  -> ok
+ADD _Obsolete | Refine Matte | ADBE RefineMatte
+  -> ok
+ADD _Obsolete | Roto Brush & Refine Edge | ADBE Samurai
+  -> ok
+ADD _Obsolete | Set Matte | ADBE Set Matte2
+  -> ok
+ADD _Obsolete | Three-Way Color Corrector | ADBE Three-Way Color Corrector
+  -> ok
+ADD _Obsolete | Threshold | ADBE Threshold
+  -> ok
+ADD _Obsolete | Transform | ADBE Geometry
+  -> ok
+ADD _Obsolete | Unsharp Mask | ADBE Unsharp Mask
+  -> ok
+ADD Boris FX Mocha | Mocha AE | mochaAECC
+  -> ok

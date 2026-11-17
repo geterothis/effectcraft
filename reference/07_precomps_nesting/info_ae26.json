@@ -1,0 +1,1 @@
+{"main":"precomps_nesting","refs":["pre_L2_mid_25fps"],"tests":["3-level nesting","precomp at different fps (25) and size","precomp instance with negative start time","collapse transformations scaled 400% (vector stays sharp)","time stretch 200% on precomp layer"],"warnings":[],"aeVersion":"26.5x89","id":"07_precomps_nesting","queued":3}

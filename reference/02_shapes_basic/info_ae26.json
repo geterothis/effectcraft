@@ -1,0 +1,1 @@
+{"main":"shapes_basic","refs":[],"tests":["rect/ellipse/star/polygon/bezier path","fill + stroke, joins, caps","dashes","linear & radial gradient fill (default white-black colors)","gradient stroke","nested groups with transform & opacity","even-odd fill rule","animated rect size"],"warnings":[],"aeVersion":"26.5x89","id":"02_shapes_basic","queued":2}

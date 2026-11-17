@@ -1,0 +1,3156 @@
+{
+ "title": "EffectCraft .aep import/export test corpus",
+ "built_with": "Adobe After Effects 26.5x89 (ExtendScript, background instance), Windows 11",
+ "generator": "build/corpus_lib.jsx (feature files), build/corpus_sweep.jsx (effects sweep), build/make_media.py (media)",
+ "path_layout": "Footage is referenced as <root>/media/... from <root>/aep/ae2026_v26/*.aep; keep this relative layout. Absolute path stored in the .aep: D:/AI_ZONE/Commerical/AE_IDEAS/effectcraft-aep-corpus/media/...",
+ "older_formats": "Not included: AE 2024/2025 are not installed on the build PC (only leftover folders), and AE 2026 'Save a Copy As 25.x/24.x' crashes the windowless AE instance.",
+ "reference_render": "aerender, Best Settings, PNG sequence RGB+alpha of the main comp (every frame, 0-based numbering [#####]) + H.264 15 Mbps; extra comps one PNG frame at t=1s. Times in reference/timings.",
+ "feature_files": [
+  {
+   "id": "01_solids_nulls_adjustment",
+   "file": "aep/ae2026_v26/01_solids_nulls_adjustment.aep",
+   "size_bytes": 255917,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": null,
+   "extra_ref_comps": [],
+   "tests": [],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/01_solids_nulls_adjustment/_png",
+    "mp4": "reference/01_solids_nulls_adjustment/.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 12.23,
+   "note": "Solids (incl. PAR 2), null parent with rotation keys, adjustment layer with a mask limiting Hue/Saturation + Gaussian Blur, disabled/guide/shy/locked/draft layers, trimmed in/out, label+comment, purple comp background."
+  },
+  {
+   "id": "02_shapes_basic",
+   "file": "aep/ae2026_v26/02_shapes_basic.aep",
+   "size_bytes": 151335,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "shapes_basic",
+   "extra_ref_comps": [],
+   "tests": [
+    "rect/ellipse/star/polygon/bezier path",
+    "fill + stroke, joins, caps",
+    "dashes",
+    "linear & radial gradient fill (default white-black colors)",
+    "gradient stroke",
+    "nested groups with transform & opacity",
+    "even-odd fill rule",
+    "animated rect size"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/02_shapes_basic/shapes_basic_png",
+    "mp4": "reference/02_shapes_basic/shapes_basic.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 12.22
+  },
+  {
+   "id": "03_shapes_modifiers",
+   "file": "aep/ae2026_v26/03_shapes_modifiers.aep",
+   "size_bytes": 236259,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "shapes_modifiers",
+   "extra_ref_comps": [],
+   "tests": [
+    "repeater (animated offset)",
+    "trim paths (animated end/offset)",
+    "offset paths",
+    "twist",
+    "zig zag",
+    "pucker & bloat",
+    "wiggle paths (roughen)",
+    "merge paths + round corners",
+    "wiggle transform"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/03_shapes_modifiers/shapes_modifiers_png",
+    "mp4": "reference/03_shapes_modifiers/shapes_modifiers.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 12.31
+  },
+  {
+   "id": "04_text",
+   "file": "aep/ae2026_v26/04_text.aep",
+   "size_bytes": 304563,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "text",
+   "extra_ref_comps": [],
+   "tests": [
+    "point text fonts Arial-Bold/Georgia/Times/Impact/Verdana",
+    "stroke over fill, tracking, all caps, justification",
+    "paragraph box text, leading",
+    "animator range selector (position/opacity)",
+    "animator wiggly selector (scale/rotation/fill)",
+    "expression selector + tracking + blur",
+    "text on mask path, first margin keys",
+    "source text hold keyframes",
+    "per-character 3D flag"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/04_text/text_png",
+    "mp4": "reference/04_text/text.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 14.83
+  },
+  {
+   "id": "05_footage_images",
+   "file": "aep/ae2026_v26/05_footage_images.aep",
+   "size_bytes": 336685,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "footage_images",
+   "extra_ref_comps": [],
+   "tests": [
+    "PNG with alpha",
+    "JPG",
+    "PNG radial soft alpha",
+    "PSD as merged footage",
+    "PSD imported as composition (layers)",
+    "PNG sequence conformed to 12fps, loop 3"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/05_footage_images/footage_images_png",
+    "mp4": "reference/05_footage_images/footage_images.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 12.86
+  },
+  {
+   "id": "06_footage_video_audio",
+   "file": "aep/ae2026_v26/06_footage_video_audio.aep",
+   "size_bytes": 190061,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "footage_video_audio",
+   "extra_ref_comps": [],
+   "tests": [
+    "H.264 MP4 1280x720 30fps (embedded AAC, audio switched off)",
+    "25fps clip in 30fps comp, startTime 0.5",
+    "ProRes 4444 with alpha",
+    "WAV stereo 48k with audio level fades",
+    "MP3 44.1k starting at 1s"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/06_footage_video_audio/footage_video_audio_png",
+    "mp4": "reference/06_footage_video_audio/footage_video_audio.mp4",
+    "files": 121
+   },
+   "aerender_seconds_wall": 17.56
+  },
+  {
+   "id": "07_precomps_nesting",
+   "file": "aep/ae2026_v26/07_precomps_nesting.aep",
+   "size_bytes": 375413,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "precomps_nesting",
+   "extra_ref_comps": [
+    "pre_L2_mid_25fps"
+   ],
+   "tests": [
+    "3-level nesting",
+    "precomp at different fps (25) and size",
+    "precomp instance with negative start time",
+    "collapse transformations scaled 400% (vector stays sharp)",
+    "time stretch 200% on precomp layer"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/07_precomps_nesting/precomps_nesting_png",
+    "mp4": "reference/07_precomps_nesting/precomps_nesting.mp4",
+    "files": 92
+   },
+   "aerender_seconds_wall": 12.2
+  },
+  {
+   "id": "08_masks",
+   "file": "aep/ae2026_v26/08_masks.aep",
+   "size_bytes": 233733,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "masks",
+   "extra_ref_comps": [],
+   "tests": [
+    "mask modes add/subtract/intersect/difference/lighten/darken/none",
+    "feather, expansion, opacity, inverted",
+    "animated mask path (square->circle)",
+    "rotobezier open mask driving Stroke effect"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/08_masks/masks_png",
+    "mp4": "reference/08_masks/masks.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 13.65
+  },
+  {
+   "id": "09_track_mattes",
+   "file": "aep/ae2026_v26/09_track_mattes.aep",
+   "size_bytes": 271147,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "track_mattes",
+   "extra_ref_comps": [],
+   "tests": [
+    "alpha / alpha inverted matte (text matte)",
+    "luma / luma inverted matte (image matte)",
+    "one matte shared by two layers, matte not adjacent, animated"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/09_track_mattes/track_mattes_png",
+    "mp4": "reference/09_track_mattes/track_mattes.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 14.83
+  },
+  {
+   "id": "10_blend_modes",
+   "file": "aep/ae2026_v26/10_blend_modes.aep",
+   "size_bytes": 616185,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "blend_modes",
+   "extra_ref_comps": [],
+   "tests": [
+    "31 blend modes over photo: NORMAL,DISSOLVE,DARKEN,MULTIPLY,COLOR_BURN,CLASSIC_COLOR_BURN,LINEAR_BURN,DARKER_COLOR,ADD,LIGHTEN,SCREEN,COLOR_DODGE,CLASSIC_COLOR_DODGE,LINEAR_DODGE,LIGHTER_COLOR,OVERLAY,SOFT_LIGHT,HARD_LIGHT,LINEAR_LIGHT,VIVID_LIGHT,PIN_LIGHT,HARD_MIX,DIFFERENCE,CLASSIC_DIFFERENCE,EXCLUSION,SUBTRACT,DIVIDE,HUE,SATURATION,COLOR,LUMINOSITY",
+    "preserve transparency (T switch) in precomp"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/10_blend_modes/blend_modes_png",
+    "mp4": "reference/10_blend_modes/blend_modes.mp4",
+    "files": 31
+   },
+   "aerender_seconds_wall": 13.65
+  },
+  {
+   "id": "11_3d_camera_lights",
+   "file": "aep/ae2026_v26/11_3d_camera_lights.aep",
+   "size_bytes": 294101,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "threed_camera_lights",
+   "extra_ref_comps": [
+    "threed_one_node_camera"
+   ],
+   "tests": [
+    "Classic 3D renderer",
+    "3D solids/footage/text, orientation vs rotation",
+    "two-node camera with DOF, animated position",
+    "spot (shadows), point, ambient, parallel lights",
+    "casts/accepts shadows material options",
+    "one-node camera with Z rotation (2nd comp)"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/11_3d_camera_lights/threed_camera_lights_png",
+    "mp4": "reference/11_3d_camera_lights/threed_camera_lights.mp4",
+    "files": 92
+   },
+   "aerender_seconds_wall": 14.8
+  },
+  {
+   "id": "12_keyframes_easing",
+   "file": "aep/ae2026_v26/12_keyframes_easing.aep",
+   "size_bytes": 365583,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "keyframes_easing",
+   "extra_ref_comps": [],
+   "tests": [
+    "linear, easy ease 33%, ease 80%, hold",
+    "custom speed/influence",
+    "auto-bezier, continuous",
+    "spatial bezier tangents + roving key + auto-orient along path",
+    "separated X/Y dimensions",
+    "3-dim scale ease",
+    "mixed in-linear/out-bezier key"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/12_keyframes_easing/keyframes_easing_png",
+    "mp4": "reference/12_keyframes_easing/keyframes_easing.mp4",
+    "files": 121
+   },
+   "aerender_seconds_wall": 12.01
+  },
+  {
+   "id": "13_expressions",
+   "file": "aep/ae2026_v26/13_expressions.aep",
+   "size_bytes": 333821,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "expressions",
+   "extra_ref_comps": [],
+   "tests": [
+    "wiggle with seedRandom",
+    "loopOut cycle / pingpong",
+    "time-driven rotation",
+    "linear() from slider",
+    "color/checkbox/point/angle expression controls",
+    "valueAtTime layer reference",
+    "posterizeTime",
+    "lookAt via atan2",
+    "sourceText expression",
+    "expression on effect parameter",
+    "index + hslToRgb",
+    "ease() function",
+    "JavaScript engine expressions (project default)"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/13_expressions/expressions_png",
+    "mp4": "reference/13_expressions/expressions.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 13.2
+  },
+  {
+   "id": "14a_effects_blur_color",
+   "file": "aep/ae2026_v26/14a_effects_blur_color.aep",
+   "size_bytes": 2268217,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "effects_blur_color",
+   "extra_ref_comps": [
+    "fx_gaussian_blur",
+    "fx_fast_box_blur",
+    "fx_directional_blur",
+    "fx_radial_blur_zoom",
+    "fx_glow",
+    "fx_hue_saturation",
+    "fx_brightness_contrast",
+    "fx_levels_gamma",
+    "fx_curves_default",
+    "fx_exposure",
+    "fx_tint",
+    "fx_tritone",
+    "fx_fill",
+    "fx_invert",
+    "fx_black_white",
+    "fx_vibrance",
+    "fx_posterize",
+    "fx_noise",
+    "fx_sharpen",
+    "fx_unsharp_mask"
+   ],
+   "tests": [
+    "gaussian_blur",
+    "fast_box_blur",
+    "directional_blur",
+    "radial_blur_zoom",
+    "glow",
+    "hue_saturation",
+    "brightness_contrast",
+    "levels_gamma",
+    "curves_default",
+    "exposure",
+    "tint",
+    "tritone",
+    "fill",
+    "invert",
+    "black_white",
+    "vibrance",
+    "posterize",
+    "noise",
+    "sharpen",
+    "unsharp_mask"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/14a_effects_blur_color/effects_blur_color_png",
+    "mp4": "reference/14a_effects_blur_color/effects_blur_color.mp4",
+    "files": 81
+   },
+   "aerender_seconds_wall": 27.48
+  },
+  {
+   "id": "14b_effects_distort_generate",
+   "file": "aep/ae2026_v26/14b_effects_distort_generate.aep",
+   "size_bytes": 2181919,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "effects_distort_generate",
+   "extra_ref_comps": [
+    "fx_transform",
+    "fx_corner_pin",
+    "fx_mirror",
+    "fx_offset",
+    "fx_motion_tile",
+    "fx_wave_warp",
+    "fx_turbulent_displace",
+    "fx_bulge",
+    "fx_twirl",
+    "fx_polar_coordinates",
+    "fx_gradient_ramp_radial",
+    "fx_four_color_gradient",
+    "fx_fractal_noise_anim",
+    "fx_checkerboard",
+    "fx_grid",
+    "fx_cell_pattern",
+    "fx_cc_bend_it",
+    "fx_cc_radial_fast_blur",
+    "fx_cc_vignette"
+   ],
+   "tests": [
+    "transform",
+    "corner_pin",
+    "mirror",
+    "offset",
+    "motion_tile",
+    "wave_warp",
+    "turbulent_displace",
+    "bulge",
+    "twirl",
+    "polar_coordinates",
+    "gradient_ramp_radial",
+    "four_color_gradient",
+    "fractal_noise_anim",
+    "checkerboard",
+    "grid",
+    "cell_pattern",
+    "cc_bend_it",
+    "cc_radial_fast_blur",
+    "cc_vignette"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/14b_effects_distort_generate/effects_distort_generate_png",
+    "mp4": "reference/14b_effects_distort_generate/effects_distort_generate.mp4",
+    "files": 80
+   },
+   "aerender_seconds_wall": 22.45
+  },
+  {
+   "id": "14c_effects_stylize_transition",
+   "file": "aep/ae2026_v26/14c_effects_stylize_transition.aep",
+   "size_bytes": 2099061,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "effects_stylize_transition",
+   "extra_ref_comps": [
+    "fx_drop_shadow",
+    "fx_simple_choker",
+    "fx_echo",
+    "fx_find_edges",
+    "fx_mosaic",
+    "fx_emboss",
+    "fx_venetian_blinds",
+    "fx_linear_wipe_anim",
+    "fx_radial_wipe",
+    "fx_stroke_on_mask",
+    "fx_color_key",
+    "fx_linear_color_key",
+    "fx_set_channels",
+    "fx_minimax",
+    "fx_roughen_edges",
+    "fx_scatter",
+    "fx_strobe_light",
+    "fx_block_dissolve"
+   ],
+   "tests": [
+    "drop_shadow",
+    "simple_choker",
+    "echo",
+    "find_edges",
+    "mosaic",
+    "emboss",
+    "venetian_blinds",
+    "linear_wipe_anim",
+    "radial_wipe",
+    "stroke_on_mask",
+    "color_key",
+    "linear_color_key",
+    "set_channels",
+    "minimax",
+    "roughen_edges",
+    "scatter",
+    "strobe_light",
+    "block_dissolve"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/14c_effects_stylize_transition/effects_stylize_transition_png",
+    "mp4": "reference/14c_effects_stylize_transition/effects_stylize_transition.mp4",
+    "files": 79
+   },
+   "aerender_seconds_wall": 22.86
+  },
+  {
+   "id": "15_time_remap",
+   "file": "aep/ae2026_v26/15_time_remap.aep",
+   "size_bytes": 274047,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "time_remap",
+   "extra_ref_comps": [],
+   "tests": [
+    "time remap reverse + hold freeze",
+    "eased speed ramp",
+    "time stretch -100% (reverse) and 50%",
+    "time remap slow-mo on video with frame mix blending"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/15_time_remap/time_remap_png",
+    "mp4": "reference/15_time_remap/time_remap.mp4",
+    "files": 121
+   },
+   "aerender_seconds_wall": 20.09
+  },
+  {
+   "id": "16_parenting",
+   "file": "aep/ae2026_v26/16_parenting.aep",
+   "size_bytes": 238051,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "parenting",
+   "extra_ref_comps": [],
+   "tests": [
+    "3-level chain with anchors and rotation",
+    "parent with non-uniform scale animation",
+    "negative scale parent (mirror)",
+    "2D child of 3D parent",
+    "text layer parented to animated layer"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/16_parenting/parenting_png",
+    "mp4": "reference/16_parenting/parenting.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 15.46
+  },
+  {
+   "id": "17_essential_graphics",
+   "file": "aep/ae2026_v26/17_essential_graphics.aep",
+   "size_bytes": 285885,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "essential_graphics",
+   "extra_ref_comps": [
+    "EGP_badge_template"
+   ],
+   "tests": [
+    "Essential Properties on precomp: Title Text, Badge Color, Badge Scale, Icon Opacity, Icon Rotation",
+    "3 instances: defaults, static overrides (text/color/scale/opacity/rotation), keyframed overrides",
+    "motionGraphicsTemplateName"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/17_essential_graphics/essential_graphics_png",
+    "mp4": "reference/17_essential_graphics/essential_graphics.mp4",
+    "files": 92
+   },
+   "aerender_seconds_wall": 14.69
+  },
+  {
+   "id": "18_markers_comp_settings",
+   "file": "aep/ae2026_v26/18_markers_comp_settings.aep",
+   "size_bytes": 303805,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "markers_comp_settings",
+   "extra_ref_comps": [
+    "comp_par_anamorphic_23976",
+    "comp_odd_size_60fps"
+   ],
+   "tests": [
+    "29.97 drop-frame, start timecode 01:00:00;00",
+    "work area",
+    "comp motion blur (shutter 270/-135) per-layer on/off",
+    "comp markers with duration/chapter/url/label",
+    "layer marker with comment + parameters",
+    "non-square PAR 4:3 at 23.976",
+    "odd size 333x777 at 60fps"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/18_markers_comp_settings/markers_comp_settings_png",
+    "mp4": "reference/18_markers_comp_settings/markers_comp_settings.mp4",
+    "files": 93
+   },
+   "aerender_seconds_wall": 13.42
+  },
+  {
+   "id": "20_kitchen_sink",
+   "file": "aep/ae2026_v26/20_kitchen_sink.aep",
+   "size_bytes": 308529,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "kitchen_sink",
+   "extra_ref_comps": [],
+   "tests": [
+    "combined: blurred plate, inverted feathered mask multiply vignette, 3D precomp card with text animator + trim path + drop shadow, camera dolly, repeater sparks with glow (add mode), audio, null parent with expression"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/20_kitchen_sink/kitchen_sink_png",
+    "mp4": "reference/20_kitchen_sink/kitchen_sink.mp4",
+    "files": 151
+   },
+   "aerender_seconds_wall": 26.4
+  },
+  {
+   "id": "21_project_16bpc",
+   "file": "aep/ae2026_v26/21_project_16bpc.aep",
+   "size_bytes": 197693,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "project_16bpc",
+   "extra_ref_comps": [],
+   "tests": [
+    "project 16 bpc",
+    "smooth ramp (banding)",
+    "exposure + glow"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/21_project_16bpc/project_16bpc_png",
+    "mp4": "reference/21_project_16bpc/project_16bpc.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 17.61
+  },
+  {
+   "id": "22_project_32bpc_linear",
+   "file": "aep/ae2026_v26/22_project_32bpc_linear.aep",
+   "size_bytes": 202227,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "project_32bpc_linear",
+   "extra_ref_comps": [],
+   "tests": [
+    "project 32 bpc float",
+    "linear blending / linearized working space (if supported)",
+    "overbright exposure + glow, add blend"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/22_project_32bpc_linear/project_32bpc_linear_png",
+    "mp4": "reference/22_project_32bpc_linear/project_32bpc_linear.mp4",
+    "files": 91
+   },
+   "aerender_seconds_wall": 18.13
+  },
+  {
+   "id": "23_project_structure",
+   "file": "aep/ae2026_v26/23_project_structure.aep",
+   "size_bytes": 232661,
+   "saved_with": "After Effects 26.5 (2026)",
+   "main_comp": "project_structure",
+   "extra_ref_comps": [],
+   "tests": [
+    "nested project folders",
+    "renamed + unused footage",
+    "item labels and comments",
+    "placeholder (missing footage) item",
+    "proxy set but disabled on precomp",
+    "auto Solids folder"
+   ],
+   "warnings_while_building": [],
+   "reference": {
+    "png_sequence_dir": "reference/23_project_structure/project_structure_png",
+    "mp4": "reference/23_project_structure/project_structure.mp4",
+    "files": 0
+   },
+   "aerender_seconds_wall": 9.85
+  }
+ ],
+ "effects_sweep": {
+  "description": "Every built-in effect (Adobe, Cycore CC, Keylight, Mocha, Immersive, obsolete) found in AE 26.5, each on its own 320x180 2 s comp with DEFAULT parameters applied to a shared source precomp (SWEEP_SOURCE: photo plate + moving grid PNG; audio effects on a WAV layer). <Category>_contact tiles them 6 per row.",
+  "effect_count": 338,
+  "not_applied": [
+   {
+    "effect": "Basic Text",
+    "matchName": "ADBE Basic Text2",
+    "comp": "fx_Basic_Text",
+    "status": "null",
+    "file": "fx_all_Obsolete"
+   },
+   {
+    "effect": "Path Text",
+    "matchName": "ADBE Path Text",
+    "comp": "fx_Path_Text",
+    "status": "null",
+    "file": "fx_all_Obsolete"
+   },
+   {
+    "effect": "Numbers",
+    "matchName": "ADBE Numbers2",
+    "comp": "fx_Numbers",
+    "status": "null",
+    "file": "fx_all_Text"
+   }
+  ],
+  "files": [
+   {
+    "id": "fx_all_3D_Channel",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_3D_Channel.aep",
+    "size_bytes": 1000407,
+    "category": "3D Channel",
+    "contact_comp": "3D_Channel_contact",
+    "effects": [
+     {
+      "effect": "3D Channel Extract",
+      "matchName": "ADBE AUX CHANNEL EXTRACT",
+      "comp": "fx_3D_Channel_Extract",
+      "status": "ok"
+     },
+     {
+      "effect": "Cryptomatte",
+      "matchName": "Cryptomatte",
+      "comp": "fx_Cryptomatte",
+      "status": "ok"
+     },
+     {
+      "effect": "Depth Matte",
+      "matchName": "ADBE DEPTH MATTE",
+      "comp": "fx_Depth_Matte",
+      "status": "ok"
+     },
+     {
+      "effect": "Depth of Field",
+      "matchName": "ADBE DEPTH FIELD",
+      "comp": "fx_Depth_of_Field",
+      "status": "ok"
+     },
+     {
+      "effect": "EXtractoR",
+      "matchName": "EXtractoR",
+      "comp": "fx_EXtractoR",
+      "status": "ok"
+     },
+     {
+      "effect": "Fog 3D",
+      "matchName": "ADBE FOG_3D",
+      "comp": "fx_Fog_3D",
+      "status": "ok"
+     },
+     {
+      "effect": "ID Matte",
+      "matchName": "ADBE ID MATTE",
+      "comp": "fx_ID_Matte",
+      "status": "ok"
+     },
+     {
+      "effect": "IDentifier",
+      "matchName": "IDentifier",
+      "comp": "fx_IDentifier",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_3D_Channel/3D_Channel_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_3D_Channel/3D_Channel_contact.mp4"
+    },
+    "aerender_seconds_wall": 12.61
+   },
+   {
+    "id": "fx_all_Audio",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Audio.aep",
+    "size_bytes": 1651735,
+    "category": "Audio",
+    "contact_comp": "Audio_contact",
+    "effects": [
+     {
+      "effect": "Backwards",
+      "matchName": "ADBE Aud Reverse",
+      "comp": "fx_Backwards",
+      "status": "ok"
+     },
+     {
+      "effect": "Bass & Treble",
+      "matchName": "ADBE Aud BT",
+      "comp": "fx_Bass_Treble",
+      "status": "ok"
+     },
+     {
+      "effect": "Compressor",
+      "matchName": "ADBE Aud Compressor",
+      "comp": "fx_Compressor",
+      "status": "ok"
+     },
+     {
+      "effect": "Delay",
+      "matchName": "ADBE Aud Delay",
+      "comp": "fx_Delay",
+      "status": "ok"
+     },
+     {
+      "effect": "Distortion",
+      "matchName": "ADBE Aud Distortion",
+      "comp": "fx_Distortion",
+      "status": "ok"
+     },
+     {
+      "effect": "Flange & Chorus",
+      "matchName": "ADBE Aud_Flange",
+      "comp": "fx_Flange_Chorus",
+      "status": "ok"
+     },
+     {
+      "effect": "Gate",
+      "matchName": "ADBE Aud Gate",
+      "comp": "fx_Gate",
+      "status": "ok"
+     },
+     {
+      "effect": "High-Low Pass",
+      "matchName": "ADBE Aud HiLo",
+      "comp": "fx_High_Low_Pass",
+      "status": "ok"
+     },
+     {
+      "effect": "Modulator",
+      "matchName": "ADBE Aud Modulator",
+      "comp": "fx_Modulator",
+      "status": "ok"
+     },
+     {
+      "effect": "Parametric EQ",
+      "matchName": "ADBE Param EQ",
+      "comp": "fx_Parametric_EQ",
+      "status": "ok"
+     },
+     {
+      "effect": "Reverb",
+      "matchName": "ADBE Aud Reverb",
+      "comp": "fx_Reverb",
+      "status": "ok"
+     },
+     {
+      "effect": "Stereo Mixer",
+      "matchName": "ADBE Aud Stereo Mixer",
+      "comp": "fx_Stereo_Mixer",
+      "status": "ok"
+     },
+     {
+      "effect": "Tone",
+      "matchName": "ADBE Aud Tone",
+      "comp": "fx_Tone",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Audio/Audio_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Audio/Audio_contact.mp4"
+    },
+    "aerender_seconds_wall": 12.43
+   },
+   {
+    "id": "fx_all_Blur_Sharpen",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Blur_Sharpen.aep",
+    "size_bytes": 1793943,
+    "category": "Blur & Sharpen",
+    "contact_comp": "Blur_Sharpen_contact",
+    "effects": [
+     {
+      "effect": "Bilateral Blur",
+      "matchName": "ADBE Bilateral",
+      "comp": "fx_Bilateral_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Cross Blur",
+      "matchName": "CS CrossBlur",
+      "comp": "fx_CC_Cross_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Radial Blur",
+      "matchName": "CC Radial Blur",
+      "comp": "fx_CC_Radial_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Radial Fast Blur",
+      "matchName": "CC Radial Fast Blur",
+      "comp": "fx_CC_Radial_Fast_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Vector Blur",
+      "matchName": "CC Vector Blur",
+      "comp": "fx_CC_Vector_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Camera Lens Blur",
+      "matchName": "ADBE Camera Lens Blur",
+      "comp": "fx_Camera_Lens_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Camera-Shake Deblur",
+      "matchName": "ADBE CameraShakeDeblur",
+      "comp": "fx_Camera_Shake_Deblur",
+      "status": "ok"
+     },
+     {
+      "effect": "Channel Blur",
+      "matchName": "ADBE Channel Blur",
+      "comp": "fx_Channel_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Compound Blur",
+      "matchName": "ADBE Compound Blur",
+      "comp": "fx_Compound_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Directional Blur",
+      "matchName": "ADBE Motion Blur",
+      "comp": "fx_Directional_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Fast Box Blur",
+      "matchName": "ADBE Box Blur2",
+      "comp": "fx_Fast_Box_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Gaussian Blur",
+      "matchName": "ADBE Gaussian Blur 2",
+      "comp": "fx_Gaussian_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Radial Blur",
+      "matchName": "ADBE Radial Blur",
+      "comp": "fx_Radial_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Sharpen",
+      "matchName": "ADBE Sharpen",
+      "comp": "fx_Sharpen",
+      "status": "ok"
+     },
+     {
+      "effect": "Smart Blur",
+      "matchName": "ADBE Smart Blur",
+      "comp": "fx_Smart_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Unsharp Mask",
+      "matchName": "ADBE Unsharp Mask2",
+      "comp": "fx_Unsharp_Mask",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Blur_Sharpen/Blur_Sharpen_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Blur_Sharpen/Blur_Sharpen_contact.mp4"
+    },
+    "aerender_seconds_wall": 17.05
+   },
+   {
+    "id": "fx_all_Boris_FX_Mocha",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Boris_FX_Mocha.aep",
+    "size_bytes": 342237,
+    "category": "Boris FX Mocha",
+    "contact_comp": "Boris_FX_Mocha_contact",
+    "effects": [
+     {
+      "effect": "Mocha AE",
+      "matchName": "mochaAECC",
+      "comp": "fx_Mocha_AE",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Boris_FX_Mocha/Boris_FX_Mocha_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Boris_FX_Mocha/Boris_FX_Mocha_contact.mp4"
+    },
+    "aerender_seconds_wall": 13.23
+   },
+   {
+    "id": "fx_all_Channel",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Channel.aep",
+    "size_bytes": 1525525,
+    "category": "Channel",
+    "contact_comp": "Channel_contact",
+    "effects": [
+     {
+      "effect": "Arithmetic",
+      "matchName": "ADBE Arithmetic",
+      "comp": "fx_Arithmetic",
+      "status": "ok"
+     },
+     {
+      "effect": "Blend",
+      "matchName": "ADBE Blend",
+      "comp": "fx_Blend",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Composite",
+      "matchName": "CS Composite",
+      "comp": "fx_CC_Composite",
+      "status": "ok"
+     },
+     {
+      "effect": "Calculations",
+      "matchName": "ADBE Calculations",
+      "comp": "fx_Calculations",
+      "status": "ok"
+     },
+     {
+      "effect": "Channel Combiner",
+      "matchName": "ADBE Channel Combiner",
+      "comp": "fx_Channel_Combiner",
+      "status": "ok"
+     },
+     {
+      "effect": "Compound Arithmetic",
+      "matchName": "ADBE Compound Arithmetic",
+      "comp": "fx_Compound_Arithmetic",
+      "status": "ok"
+     },
+     {
+      "effect": "Invert",
+      "matchName": "ADBE Invert",
+      "comp": "fx_Invert",
+      "status": "ok"
+     },
+     {
+      "effect": "Minimax",
+      "matchName": "ADBE Minimax",
+      "comp": "fx_Minimax",
+      "status": "ok"
+     },
+     {
+      "effect": "Remove Color Matting",
+      "matchName": "ADBE Remove Color Matting",
+      "comp": "fx_Remove_Color_Matting",
+      "status": "ok"
+     },
+     {
+      "effect": "Set Channels",
+      "matchName": "ADBE Set Channels",
+      "comp": "fx_Set_Channels",
+      "status": "ok"
+     },
+     {
+      "effect": "Set Matte",
+      "matchName": "ADBE Set Matte3",
+      "comp": "fx_Set_Matte",
+      "status": "ok"
+     },
+     {
+      "effect": "Shift Channels",
+      "matchName": "ADBE Shift Channels",
+      "comp": "fx_Shift_Channels",
+      "status": "ok"
+     },
+     {
+      "effect": "Solid Composite",
+      "matchName": "ADBE Solid Composite",
+      "comp": "fx_Solid_Composite",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Channel/Channel_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Channel/Channel_contact.mp4"
+    },
+    "aerender_seconds_wall": 10.71
+   },
+   {
+    "id": "fx_all_Color_Correction",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Color_Correction.aep",
+    "size_bytes": 4461025,
+    "category": "Color Correction",
+    "contact_comp": "Color_Correction_contact",
+    "effects": [
+     {
+      "effect": "Auto Color",
+      "matchName": "ADBE AutoColor",
+      "comp": "fx_Auto_Color",
+      "status": "ok"
+     },
+     {
+      "effect": "Auto Contrast",
+      "matchName": "ADBE AutoContrast",
+      "comp": "fx_Auto_Contrast",
+      "status": "ok"
+     },
+     {
+      "effect": "Auto Levels",
+      "matchName": "ADBE AutoLevels",
+      "comp": "fx_Auto_Levels",
+      "status": "ok"
+     },
+     {
+      "effect": "Black & White",
+      "matchName": "ADBE Black&White",
+      "comp": "fx_Black_White",
+      "status": "ok"
+     },
+     {
+      "effect": "Brightness & Contrast",
+      "matchName": "ADBE Brightness & Contrast 2",
+      "comp": "fx_Brightness_Contrast",
+      "status": "ok"
+     },
+     {
+      "effect": "Broadcast Colors",
+      "matchName": "ADBE Broadcast Colors",
+      "comp": "fx_Broadcast_Colors",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Color Neutralizer",
+      "matchName": "CS Color Neutralizer",
+      "comp": "fx_CC_Color_Neutralizer",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Color Offset",
+      "matchName": "CC Color Offset",
+      "comp": "fx_CC_Color_Offset",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Kernel",
+      "matchName": "CS Kernel",
+      "comp": "fx_CC_Kernel",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Toner",
+      "matchName": "CC Toner",
+      "comp": "fx_CC_Toner",
+      "status": "ok"
+     },
+     {
+      "effect": "Change Color",
+      "matchName": "ADBE Change Color",
+      "comp": "fx_Change_Color",
+      "status": "ok"
+     },
+     {
+      "effect": "Change to Color",
+      "matchName": "ADBE Change To Color",
+      "comp": "fx_Change_to_Color",
+      "status": "ok"
+     },
+     {
+      "effect": "Channel Mixer",
+      "matchName": "ADBE CHANNEL MIXER",
+      "comp": "fx_Channel_Mixer",
+      "status": "ok"
+     },
+     {
+      "effect": "Color Balance",
+      "matchName": "ADBE Color Balance 2",
+      "comp": "fx_Color_Balance",
+      "status": "ok"
+     },
+     {
+      "effect": "Color Balance (HLS)",
+      "matchName": "ADBE Color Balance (HLS)",
+      "comp": "fx_Color_Balance_HLS",
+      "status": "ok"
+     },
+     {
+      "effect": "Color Link",
+      "matchName": "ADBE Color Link",
+      "comp": "fx_Color_Link",
+      "status": "ok"
+     },
+     {
+      "effect": "Color Stabilizer",
+      "matchName": "ADBE Deflicker",
+      "comp": "fx_Color_Stabilizer",
+      "status": "ok"
+     },
+     {
+      "effect": "Colorama",
+      "matchName": "APC Colorama",
+      "comp": "fx_Colorama",
+      "status": "ok"
+     },
+     {
+      "effect": "Curves",
+      "matchName": "ADBE CurvesCustom",
+      "comp": "fx_Curves",
+      "status": "ok"
+     },
+     {
+      "effect": "Equalize",
+      "matchName": "ADBE Equalize",
+      "comp": "fx_Equalize",
+      "status": "ok"
+     },
+     {
+      "effect": "Exposure",
+      "matchName": "ADBE Exposure2",
+      "comp": "fx_Exposure",
+      "status": "ok"
+     },
+     {
+      "effect": "Gamma/Pedestal/Gain",
+      "matchName": "ADBE Gamma/Pedestal/Gain2",
+      "comp": "fx_Gamma_Pedestal_Gain",
+      "status": "ok"
+     },
+     {
+      "effect": "Hue/Saturation",
+      "matchName": "ADBE HUE SATURATION",
+      "comp": "fx_Hue_Saturation",
+      "status": "ok"
+     },
+     {
+      "effect": "Leave Color",
+      "matchName": "ADBE Leave Color",
+      "comp": "fx_Leave_Color",
+      "status": "ok"
+     },
+     {
+      "effect": "Levels",
+      "matchName": "ADBE Easy Levels2",
+      "comp": "fx_Levels",
+      "status": "ok"
+     },
+     {
+      "effect": "Levels (Individual Controls)",
+      "matchName": "ADBE Pro Levels2",
+      "comp": "fx_Levels_Individual_Controls",
+      "status": "ok"
+     },
+     {
+      "effect": "Lumetri Color",
+      "matchName": "ADBE Lumetri",
+      "comp": "fx_Lumetri_Color",
+      "status": "ok"
+     },
+     {
+      "effect": "OCIO CDL Transform",
+      "matchName": "ADBE OCIO CDL Transform",
+      "comp": "fx_OCIO_CDL_Transform",
+      "status": "ok"
+     },
+     {
+      "effect": "OCIO Color Space Transform",
+      "matchName": "ADBE OCIO Color Space Transform",
+      "comp": "fx_OCIO_Color_Space_Transform",
+      "status": "ok"
+     },
+     {
+      "effect": "OCIO Display Transform",
+      "matchName": "ADBE OCIO Display Transform",
+      "comp": "fx_OCIO_Display_Transform",
+      "status": "ok"
+     },
+     {
+      "effect": "OCIO File Transform",
+      "matchName": "ADBE OCIO FILE Transform",
+      "comp": "fx_OCIO_File_Transform",
+      "status": "ok"
+     },
+     {
+      "effect": "OCIO Look Transform",
+      "matchName": "ADBE OCIO Look Transform",
+      "comp": "fx_OCIO_Look_Transform",
+      "status": "ok"
+     },
+     {
+      "effect": "PS Arbitrary Map",
+      "matchName": "ADBE PS Arbitrary Map",
+      "comp": "fx_PS_Arbitrary_Map",
+      "status": "ok"
+     },
+     {
+      "effect": "Photo Filter",
+      "matchName": "ADBE PhotoFilterPS",
+      "comp": "fx_Photo_Filter",
+      "status": "ok"
+     },
+     {
+      "effect": "Selective Color",
+      "matchName": "ADBE SelectiveColor",
+      "comp": "fx_Selective_Color",
+      "status": "ok"
+     },
+     {
+      "effect": "Shadow/Highlight",
+      "matchName": "ADBE ShadowHighlight",
+      "comp": "fx_Shadow_Highlight",
+      "status": "ok"
+     },
+     {
+      "effect": "Tint",
+      "matchName": "ADBE Tint",
+      "comp": "fx_Tint",
+      "status": "ok"
+     },
+     {
+      "effect": "Tritone",
+      "matchName": "ADBE Tritone",
+      "comp": "fx_Tritone",
+      "status": "ok"
+     },
+     {
+      "effect": "Vibrance",
+      "matchName": "ADBE Vibrance",
+      "comp": "fx_Vibrance",
+      "status": "ok"
+     },
+     {
+      "effect": "Video Limiter",
+      "matchName": "ADBE DigitalVideoLimiter",
+      "comp": "fx_Video_Limiter",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Color_Correction/Color_Correction_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Color_Correction/Color_Correction_contact.mp4"
+    },
+    "aerender_seconds_wall": 14.01
+   },
+   {
+    "id": "fx_all_Distort",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Distort.aep",
+    "size_bytes": 3947893,
+    "category": "Distort",
+    "contact_comp": "Distort_contact",
+    "effects": [
+     {
+      "effect": "Bezier Warp",
+      "matchName": "ADBE BEZMESH",
+      "comp": "fx_Bezier_Warp",
+      "status": "ok"
+     },
+     {
+      "effect": "Bulge",
+      "matchName": "ADBE Bulge",
+      "comp": "fx_Bulge",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Bend It",
+      "matchName": "CC Bend It",
+      "comp": "fx_CC_Bend_It",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Bender",
+      "matchName": "CC Bender",
+      "comp": "fx_CC_Bender",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Blobbylize",
+      "matchName": "CC Blobbylize",
+      "comp": "fx_CC_Blobbylize",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Flo Motion",
+      "matchName": "CC Flo Motion",
+      "comp": "fx_CC_Flo_Motion",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Griddler",
+      "matchName": "CC Griddler",
+      "comp": "fx_CC_Griddler",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Lens",
+      "matchName": "CC Lens",
+      "comp": "fx_CC_Lens",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Page Turn",
+      "matchName": "CC Page Turn",
+      "comp": "fx_CC_Page_Turn",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Power Pin",
+      "matchName": "CC Power Pin",
+      "comp": "fx_CC_Power_Pin",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Ripple Pulse",
+      "matchName": "CC Ripple Pulse",
+      "comp": "fx_CC_Ripple_Pulse",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Slant",
+      "matchName": "CC Slant",
+      "comp": "fx_CC_Slant",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Smear",
+      "matchName": "CC Smear",
+      "comp": "fx_CC_Smear",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Split",
+      "matchName": "CC Split",
+      "comp": "fx_CC_Split",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Split 2",
+      "matchName": "CC Split 2",
+      "comp": "fx_CC_Split_2",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Tiler",
+      "matchName": "CC Tiler",
+      "comp": "fx_CC_Tiler",
+      "status": "ok"
+     },
+     {
+      "effect": "Corner Pin",
+      "matchName": "ADBE Corner Pin",
+      "comp": "fx_Corner_Pin",
+      "status": "ok"
+     },
+     {
+      "effect": "Detail-preserving Upscale",
+      "matchName": "ADBE Upscale",
+      "comp": "fx_Detail_preserving_Upscale",
+      "status": "ok"
+     },
+     {
+      "effect": "Displacement Map",
+      "matchName": "ADBE Displacement Map",
+      "comp": "fx_Displacement_Map",
+      "status": "ok"
+     },
+     {
+      "effect": "Liquify",
+      "matchName": "ADBE LIQUIFY",
+      "comp": "fx_Liquify",
+      "status": "ok"
+     },
+     {
+      "effect": "Magnify",
+      "matchName": "ADBE Magnify",
+      "comp": "fx_Magnify",
+      "status": "ok"
+     },
+     {
+      "effect": "Mesh Warp",
+      "matchName": "ADBE MESH WARP",
+      "comp": "fx_Mesh_Warp",
+      "status": "ok"
+     },
+     {
+      "effect": "Mirror",
+      "matchName": "ADBE Mirror",
+      "comp": "fx_Mirror",
+      "status": "ok"
+     },
+     {
+      "effect": "Offset",
+      "matchName": "ADBE Offset",
+      "comp": "fx_Offset",
+      "status": "ok"
+     },
+     {
+      "effect": "Optics Compensation",
+      "matchName": "ADBE Optics Compensation",
+      "comp": "fx_Optics_Compensation",
+      "status": "ok"
+     },
+     {
+      "effect": "Polar Coordinates",
+      "matchName": "ADBE Polar Coordinates",
+      "comp": "fx_Polar_Coordinates",
+      "status": "ok"
+     },
+     {
+      "effect": "Reshape",
+      "matchName": "ADBE RESHAPE",
+      "comp": "fx_Reshape",
+      "status": "ok"
+     },
+     {
+      "effect": "Ripple",
+      "matchName": "ADBE Ripple",
+      "comp": "fx_Ripple",
+      "status": "ok"
+     },
+     {
+      "effect": "Rolling Shutter Repair",
+      "matchName": "ADBE Rolling Shutter",
+      "comp": "fx_Rolling_Shutter_Repair",
+      "status": "ok"
+     },
+     {
+      "effect": "Smear",
+      "matchName": "ADBE SCHMEAR",
+      "comp": "fx_Smear",
+      "status": "ok"
+     },
+     {
+      "effect": "Spherize",
+      "matchName": "ADBE Spherize",
+      "comp": "fx_Spherize",
+      "status": "ok"
+     },
+     {
+      "effect": "Transform",
+      "matchName": "ADBE Geometry2",
+      "comp": "fx_Transform",
+      "status": "ok"
+     },
+     {
+      "effect": "Turbulent Displace",
+      "matchName": "ADBE Turbulent Displace",
+      "comp": "fx_Turbulent_Displace",
+      "status": "ok"
+     },
+     {
+      "effect": "Twirl (Legacy)",
+      "matchName": "ADBE Twirl",
+      "comp": "fx_Twirl_Legacy",
+      "status": "ok"
+     },
+     {
+      "effect": "Warp",
+      "matchName": "ADBE WRPMESH",
+      "comp": "fx_Warp",
+      "status": "ok"
+     },
+     {
+      "effect": "Warp Stabilizer",
+      "matchName": "ADBE SubspaceStabilizer",
+      "comp": "fx_Warp_Stabilizer",
+      "status": "ok"
+     },
+     {
+      "effect": "Wave Warp",
+      "matchName": "ADBE Wave Warp",
+      "comp": "fx_Wave_Warp",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Distort/Distort_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Distort/Distort_contact.mp4"
+    },
+    "aerender_seconds_wall": 16.08
+   },
+   {
+    "id": "fx_all_Expression_Controls",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Expression_Controls.aep",
+    "size_bytes": 981725,
+    "category": "Expression Controls",
+    "contact_comp": "Expression_Controls_contact",
+    "effects": [
+     {
+      "effect": "3D Point Control",
+      "matchName": "ADBE Point3D Control",
+      "comp": "fx_3D_Point_Control",
+      "status": "ok"
+     },
+     {
+      "effect": "Angle Control",
+      "matchName": "ADBE Angle Control",
+      "comp": "fx_Angle_Control",
+      "status": "ok"
+     },
+     {
+      "effect": "Checkbox Control",
+      "matchName": "ADBE Checkbox Control",
+      "comp": "fx_Checkbox_Control",
+      "status": "ok"
+     },
+     {
+      "effect": "Color Control",
+      "matchName": "ADBE Color Control",
+      "comp": "fx_Color_Control",
+      "status": "ok"
+     },
+     {
+      "effect": "Dropdown Menu Control",
+      "matchName": "ADBE Dropdown Control",
+      "comp": "fx_Dropdown_Menu_Control",
+      "status": "ok"
+     },
+     {
+      "effect": "Layer Control",
+      "matchName": "ADBE Layer Control",
+      "comp": "fx_Layer_Control",
+      "status": "ok"
+     },
+     {
+      "effect": "Point Control",
+      "matchName": "ADBE Point Control",
+      "comp": "fx_Point_Control",
+      "status": "ok"
+     },
+     {
+      "effect": "Slider Control",
+      "matchName": "ADBE Slider Control",
+      "comp": "fx_Slider_Control",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Expression_Controls/Expression_Controls_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Expression_Controls/Expression_Controls_contact.mp4"
+    },
+    "aerender_seconds_wall": 12.18
+   },
+   {
+    "id": "fx_all_Generate",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Generate.aep",
+    "size_bytes": 2933527,
+    "category": "Generate",
+    "contact_comp": "Generate_contact",
+    "effects": [
+     {
+      "effect": "4-Color Gradient",
+      "matchName": "ADBE 4ColorGradient",
+      "comp": "fx_4_Color_Gradient",
+      "status": "ok"
+     },
+     {
+      "effect": "Advanced Lightning",
+      "matchName": "ADBE Lightning 2",
+      "comp": "fx_Advanced_Lightning",
+      "status": "ok"
+     },
+     {
+      "effect": "Audio Spectrum",
+      "matchName": "ADBE AudSpect",
+      "comp": "fx_Audio_Spectrum",
+      "status": "ok"
+     },
+     {
+      "effect": "Audio Waveform",
+      "matchName": "ADBE AudWave",
+      "comp": "fx_Audio_Waveform",
+      "status": "ok"
+     },
+     {
+      "effect": "Beam",
+      "matchName": "ADBE Laser",
+      "comp": "fx_Beam",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Glue Gun",
+      "matchName": "CC Glue Gun",
+      "comp": "fx_CC_Glue_Gun",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Light Burst 2.5",
+      "matchName": "CC Light Burst 2.5",
+      "comp": "fx_CC_Light_Burst_2_5",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Light Rays",
+      "matchName": "CC Light Rays",
+      "comp": "fx_CC_Light_Rays",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Light Sweep",
+      "matchName": "CC Light Sweep",
+      "comp": "fx_CC_Light_Sweep",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Threads",
+      "matchName": "CS Threads",
+      "comp": "fx_CC_Threads",
+      "status": "ok"
+     },
+     {
+      "effect": "Cell Pattern",
+      "matchName": "ADBE Cell Pattern",
+      "comp": "fx_Cell_Pattern",
+      "status": "ok"
+     },
+     {
+      "effect": "Checkerboard",
+      "matchName": "ADBE Checkerboard",
+      "comp": "fx_Checkerboard",
+      "status": "ok"
+     },
+     {
+      "effect": "Circle",
+      "matchName": "ADBE Circle",
+      "comp": "fx_Circle",
+      "status": "ok"
+     },
+     {
+      "effect": "Ellipse",
+      "matchName": "ADBE ELLIPSE",
+      "comp": "fx_Ellipse",
+      "status": "ok"
+     },
+     {
+      "effect": "Eyedropper Fill",
+      "matchName": "ADBE Eyedropper Fill",
+      "comp": "fx_Eyedropper_Fill",
+      "status": "ok"
+     },
+     {
+      "effect": "Fill",
+      "matchName": "ADBE Fill",
+      "comp": "fx_Fill",
+      "status": "ok"
+     },
+     {
+      "effect": "Fractal",
+      "matchName": "ADBE Fractal",
+      "comp": "fx_Fractal",
+      "status": "ok"
+     },
+     {
+      "effect": "Gradient Ramp",
+      "matchName": "ADBE Ramp",
+      "comp": "fx_Gradient_Ramp",
+      "status": "ok"
+     },
+     {
+      "effect": "Grid",
+      "matchName": "ADBE Grid",
+      "comp": "fx_Grid",
+      "status": "ok"
+     },
+     {
+      "effect": "Lens Flare",
+      "matchName": "ADBE Lens Flare",
+      "comp": "fx_Lens_Flare",
+      "status": "ok"
+     },
+     {
+      "effect": "Paint Bucket",
+      "matchName": "ADBE Paint Bucket",
+      "comp": "fx_Paint_Bucket",
+      "status": "ok"
+     },
+     {
+      "effect": "Radio Waves",
+      "matchName": "APC Radio Waves",
+      "comp": "fx_Radio_Waves",
+      "status": "ok"
+     },
+     {
+      "effect": "Scribble",
+      "matchName": "ADBE Scribble Fill",
+      "comp": "fx_Scribble",
+      "status": "ok"
+     },
+     {
+      "effect": "Stroke",
+      "matchName": "ADBE Stroke",
+      "comp": "fx_Stroke",
+      "status": "ok"
+     },
+     {
+      "effect": "Vegas",
+      "matchName": "APC Vegas",
+      "comp": "fx_Vegas",
+      "status": "ok"
+     },
+     {
+      "effect": "Write-on",
+      "matchName": "ADBE Write-on",
+      "comp": "fx_Write_on",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Generate/Generate_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Generate/Generate_contact.mp4"
+    },
+    "aerender_seconds_wall": 12.91
+   },
+   {
+    "id": "fx_all_Immersive_Video",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Immersive_Video.aep",
+    "size_bytes": 1452665,
+    "category": "Immersive Video",
+    "contact_comp": "Immersive_Video_contact",
+    "effects": [
+     {
+      "effect": "VR Blur",
+      "matchName": "Mettle SkyBox Blur",
+      "comp": "fx_VR_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "VR Chromatic Aberrations",
+      "matchName": "Mettle SkyBox Chromatic Aberrat",
+      "comp": "fx_VR_Chromatic_Aberrations",
+      "status": "ok"
+     },
+     {
+      "effect": "VR Color Gradients",
+      "matchName": "Mettle SkyBox Color Gradients",
+      "comp": "fx_VR_Color_Gradients",
+      "status": "ok"
+     },
+     {
+      "effect": "VR Converter",
+      "matchName": "Mettle SkyBox Converter",
+      "comp": "fx_VR_Converter",
+      "status": "ok"
+     },
+     {
+      "effect": "VR De-Noise",
+      "matchName": "Mettle SkyBox Denoise",
+      "comp": "fx_VR_De_Noise",
+      "status": "ok"
+     },
+     {
+      "effect": "VR Digital Glitch",
+      "matchName": "Mettle SkyBox Digital Glitch",
+      "comp": "fx_VR_Digital_Glitch",
+      "status": "ok"
+     },
+     {
+      "effect": "VR Fractal Noise",
+      "matchName": "Mettle SkyBox Fractal Noise",
+      "comp": "fx_VR_Fractal_Noise",
+      "status": "ok"
+     },
+     {
+      "effect": "VR Glow",
+      "matchName": "Mettle SkyBox Glow",
+      "comp": "fx_VR_Glow",
+      "status": "ok"
+     },
+     {
+      "effect": "VR Plane to Sphere",
+      "matchName": "Mettle SkyBox Project 2D",
+      "comp": "fx_VR_Plane_to_Sphere",
+      "status": "ok"
+     },
+     {
+      "effect": "VR Rotate Sphere",
+      "matchName": "Mettle SkyBox Rotate Sphere",
+      "comp": "fx_VR_Rotate_Sphere",
+      "status": "ok"
+     },
+     {
+      "effect": "VR Sharpen",
+      "matchName": "Mettle SkyBox Sharpen",
+      "comp": "fx_VR_Sharpen",
+      "status": "ok"
+     },
+     {
+      "effect": "VR Sphere To Plane",
+      "matchName": "Mettle SkyBox Viewer",
+      "comp": "fx_VR_Sphere_To_Plane",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Immersive_Video/Immersive_Video_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Immersive_Video/Immersive_Video_contact.mp4"
+    },
+    "aerender_seconds_wall": 11.06
+   },
+   {
+    "id": "fx_all_Keying",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Keying.aep",
+    "size_bytes": 1419575,
+    "category": "Keying",
+    "contact_comp": "Keying_contact",
+    "effects": [
+     {
+      "effect": "Advanced Spill Suppressor",
+      "matchName": "ADBE Spill2",
+      "comp": "fx_Advanced_Spill_Suppressor",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Simple Wire Removal",
+      "matchName": "CC Simple Wire Removal",
+      "comp": "fx_CC_Simple_Wire_Removal",
+      "status": "ok"
+     },
+     {
+      "effect": "Color Difference Key",
+      "matchName": "ADBE Color Difference Key",
+      "comp": "fx_Color_Difference_Key",
+      "status": "ok"
+     },
+     {
+      "effect": "Color Range",
+      "matchName": "ADBE Color Range",
+      "comp": "fx_Color_Range",
+      "status": "ok"
+     },
+     {
+      "effect": "Difference Matte",
+      "matchName": "ADBE Difference Matte2",
+      "comp": "fx_Difference_Matte",
+      "status": "ok"
+     },
+     {
+      "effect": "Extract",
+      "matchName": "ADBE Extract",
+      "comp": "fx_Extract",
+      "status": "ok"
+     },
+     {
+      "effect": "Inner/Outer Key",
+      "matchName": "ADBE ATG Extract",
+      "comp": "fx_Inner_Outer_Key",
+      "status": "ok"
+     },
+     {
+      "effect": "Key Cleaner",
+      "matchName": "ADBE KeyCleaner",
+      "comp": "fx_Key_Cleaner",
+      "status": "ok"
+     },
+     {
+      "effect": "Keylight (1.2)",
+      "matchName": "Keylight 906",
+      "comp": "fx_Keylight_1_2",
+      "status": "ok"
+     },
+     {
+      "effect": "Linear Color Key",
+      "matchName": "ADBE Linear Color Key2",
+      "comp": "fx_Linear_Color_Key",
+      "status": "ok"
+     },
+     {
+      "effect": "Unmult",
+      "matchName": "ADBE Unmult",
+      "comp": "fx_Unmult",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Keying/Keying_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Keying/Keying_contact.mp4"
+    },
+    "aerender_seconds_wall": 13.82
+   },
+   {
+    "id": "fx_all_Matte",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Matte.aep",
+    "size_bytes": 614869,
+    "category": "Matte",
+    "contact_comp": "Matte_contact",
+    "effects": [
+     {
+      "effect": "Matte Choker",
+      "matchName": "ADBE Matte Choker",
+      "comp": "fx_Matte_Choker",
+      "status": "ok"
+     },
+     {
+      "effect": "Refine Hard Matte",
+      "matchName": "ADBE RefineRBMatte",
+      "comp": "fx_Refine_Hard_Matte",
+      "status": "ok"
+     },
+     {
+      "effect": "Refine Soft Matte",
+      "matchName": "ADBE RefineMatte2",
+      "comp": "fx_Refine_Soft_Matte",
+      "status": "ok"
+     },
+     {
+      "effect": "Simple Choker",
+      "matchName": "ADBE Simple Choker",
+      "comp": "fx_Simple_Choker",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Matte/Matte_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Matte/Matte_contact.mp4"
+    },
+    "aerender_seconds_wall": 12.76
+   },
+   {
+    "id": "fx_all_Noise_Grain",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Noise_Grain.aep",
+    "size_bytes": 1677463,
+    "category": "Noise & Grain",
+    "contact_comp": "Noise_Grain_contact",
+    "effects": [
+     {
+      "effect": "Add Grain",
+      "matchName": "VISINF Grain Implant",
+      "comp": "fx_Add_Grain",
+      "status": "ok"
+     },
+     {
+      "effect": "Curl Noise",
+      "matchName": "ADBE Curl Noise",
+      "comp": "fx_Curl_Noise",
+      "status": "ok"
+     },
+     {
+      "effect": "Dust & Scratches",
+      "matchName": "ADBE Dust & Scratches",
+      "comp": "fx_Dust_Scratches",
+      "status": "ok"
+     },
+     {
+      "effect": "Fractal Noise",
+      "matchName": "ADBE Fractal Noise",
+      "comp": "fx_Fractal_Noise",
+      "status": "ok"
+     },
+     {
+      "effect": "Match Grain",
+      "matchName": "VISINF Grain Duplication",
+      "comp": "fx_Match_Grain",
+      "status": "ok"
+     },
+     {
+      "effect": "Median",
+      "matchName": "ADBE PS Median",
+      "comp": "fx_Median",
+      "status": "ok"
+     },
+     {
+      "effect": "Median (Legacy)",
+      "matchName": "ADBE Median",
+      "comp": "fx_Median_Legacy",
+      "status": "ok"
+     },
+     {
+      "effect": "Noise",
+      "matchName": "ADBE Noise2",
+      "comp": "fx_Noise",
+      "status": "ok"
+     },
+     {
+      "effect": "Noise Alpha",
+      "matchName": "ADBE Noise Alpha2",
+      "comp": "fx_Noise_Alpha",
+      "status": "ok"
+     },
+     {
+      "effect": "Noise HLS",
+      "matchName": "ADBE Noise HLS2",
+      "comp": "fx_Noise_HLS",
+      "status": "ok"
+     },
+     {
+      "effect": "Noise HLS Auto",
+      "matchName": "ADBE Noise HLS Auto2",
+      "comp": "fx_Noise_HLS_Auto",
+      "status": "ok"
+     },
+     {
+      "effect": "Remove Grain",
+      "matchName": "VISINF Grain Removal",
+      "comp": "fx_Remove_Grain",
+      "status": "ok"
+     },
+     {
+      "effect": "Turbulent Noise",
+      "matchName": "ADBE AIF Perlin Noise 3D",
+      "comp": "fx_Turbulent_Noise",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Noise_Grain/Noise_Grain_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Noise_Grain/Noise_Grain_contact.mp4"
+    },
+    "aerender_seconds_wall": 16.41
+   },
+   {
+    "id": "fx_all_Obsolete",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Obsolete.aep",
+    "size_bytes": 1193509,
+    "category": "Obsolete",
+    "contact_comp": "Obsolete_contact",
+    "effects": [
+     {
+      "effect": "Basic 3D",
+      "matchName": "ADBE Basic 3D",
+      "comp": "fx_Basic_3D",
+      "status": "ok"
+     },
+     {
+      "effect": "Basic Text",
+      "matchName": "ADBE Basic Text2",
+      "comp": "fx_Basic_Text",
+      "status": "null"
+     },
+     {
+      "effect": "Color Key",
+      "matchName": "ADBE Color Key",
+      "comp": "fx_Color_Key",
+      "status": "ok"
+     },
+     {
+      "effect": "Gaussian Blur (Legacy)",
+      "matchName": "ADBE Gaussian Blur",
+      "comp": "fx_Gaussian_Blur_Legacy",
+      "status": "ok"
+     },
+     {
+      "effect": "Lightning",
+      "matchName": "ADBE Lightning",
+      "comp": "fx_Lightning",
+      "status": "ok"
+     },
+     {
+      "effect": "Luma Key",
+      "matchName": "ADBE Luma Key",
+      "comp": "fx_Luma_Key",
+      "status": "ok"
+     },
+     {
+      "effect": "Path Text",
+      "matchName": "ADBE Path Text",
+      "comp": "fx_Path_Text",
+      "status": "null"
+     },
+     {
+      "effect": "Reduce Interlace Flicker",
+      "matchName": "ADBE Reduce Interlace Flicker",
+      "comp": "fx_Reduce_Interlace_Flicker",
+      "status": "ok"
+     },
+     {
+      "effect": "Spill Suppressor",
+      "matchName": "ADBE Spill Suppressor",
+      "comp": "fx_Spill_Suppressor",
+      "status": "ok"
+     },
+     {
+      "effect": "mocha shape",
+      "matchName": "ISL MochaShapeImporter",
+      "comp": "fx_mocha_shape",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Obsolete/Obsolete_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Obsolete/Obsolete_contact.mp4"
+    },
+    "aerender_seconds_wall": 12.35
+   },
+   {
+    "id": "fx_all_Obsolete_hidden",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Obsolete_hidden.aep",
+    "size_bytes": 4216273,
+    "category": "_Obsolete",
+    "contact_comp": "Obsolete_contact",
+    "effects": [
+     {
+      "effect": "3D Glasses (Obsolete)",
+      "matchName": "ADBE 3D Glasses",
+      "comp": "fx_3D_Glasses_Obsolete",
+      "status": "ok"
+     },
+     {
+      "effect": "Alpha Levels",
+      "matchName": "ADBE Alpha Levels3",
+      "comp": "fx_Alpha_Levels",
+      "status": "ok"
+     },
+     {
+      "effect": "Alpha Levels",
+      "matchName": "ADBE Alpha Levels2",
+      "comp": "fx_Alpha_Levels",
+      "status": "ok"
+     },
+     {
+      "effect": "Apply Color LUT",
+      "matchName": "ADBE Apply Color LUT",
+      "comp": "fx_Apply_Color_LUT",
+      "status": "ok"
+     },
+     {
+      "effect": "Box Blur",
+      "matchName": "ADBE Box Blur",
+      "comp": "fx_Box_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Brightness & Contrast",
+      "matchName": "ADBE Brightness & Contrast",
+      "comp": "fx_Brightness_Contrast",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Composite (obsolete)",
+      "matchName": "CC Composite",
+      "comp": "fx_CC_Composite_obsolete",
+      "status": "ok"
+     },
+     {
+      "effect": "CC PS Classic (obsolete)",
+      "matchName": "CC PS Classic",
+      "comp": "fx_CC_PS_Classic_obsolete",
+      "status": "ok"
+     },
+     {
+      "effect": "CC PS LE Classic (obsolete)",
+      "matchName": "CC PS LE Classic",
+      "comp": "fx_CC_PS_LE_Classic_obsolete",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Rain (obsolete)",
+      "matchName": "CC Rain",
+      "comp": "fx_CC_Rain_obsolete",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Snow (obsolete)",
+      "matchName": "CC Snow",
+      "comp": "fx_CC_Snow_obsolete",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Time Blend",
+      "matchName": "CC Time Blend",
+      "comp": "fx_CC_Time_Blend",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Time Blend FX",
+      "matchName": "CC Time Blend FX",
+      "comp": "fx_CC_Time_Blend_FX",
+      "status": "ok"
+     },
+     {
+      "effect": "Cineon Converter",
+      "matchName": "ADBE Cineon Converter",
+      "comp": "fx_Cineon_Converter",
+      "status": "ok"
+     },
+     {
+      "effect": "Color Balance",
+      "matchName": "ADBE Color Balance",
+      "comp": "fx_Color_Balance",
+      "status": "ok"
+     },
+     {
+      "effect": "Exposure",
+      "matchName": "ADBE Exposure",
+      "comp": "fx_Exposure",
+      "status": "ok"
+     },
+     {
+      "effect": "Fast Blur (Legacy)",
+      "matchName": "ADBE Fast Blur",
+      "comp": "fx_Fast_Blur_Legacy",
+      "status": "ok"
+     },
+     {
+      "effect": "Levels",
+      "matchName": "ADBE Easy Levels",
+      "comp": "fx_Levels",
+      "status": "ok"
+     },
+     {
+      "effect": "Levels (Individual Controls)",
+      "matchName": "ADBE Pro Levels",
+      "comp": "fx_Levels_Individual_Controls",
+      "status": "ok"
+     },
+     {
+      "effect": "Noise",
+      "matchName": "ADBE Noise",
+      "comp": "fx_Noise",
+      "status": "ok"
+     },
+     {
+      "effect": "Noise Alpha",
+      "matchName": "ADBE Noise Alpha",
+      "comp": "fx_Noise_Alpha",
+      "status": "ok"
+     },
+     {
+      "effect": "Noise HLS",
+      "matchName": "ADBE Noise HLS",
+      "comp": "fx_Noise_HLS",
+      "status": "ok"
+     },
+     {
+      "effect": "Noise HLS Auto",
+      "matchName": "ADBE Noise HLS Auto",
+      "comp": "fx_Noise_HLS_Auto",
+      "status": "ok"
+     },
+     {
+      "effect": "Paint",
+      "matchName": "ADBE Paint",
+      "comp": "fx_Paint",
+      "status": "ok"
+     },
+     {
+      "effect": "Photo Filter",
+      "matchName": "ADBE Photo Filter",
+      "comp": "fx_Photo_Filter",
+      "status": "ok"
+     },
+     {
+      "effect": "Photoshop Bevel And Emboss",
+      "matchName": "ADBE PSL Bevel Emboss",
+      "comp": "fx_Photoshop_Bevel_And_Emboss",
+      "status": "ok"
+     },
+     {
+      "effect": "Photoshop Drop Shadow",
+      "matchName": "ADBE PSL Drop Shadow",
+      "comp": "fx_Photoshop_Drop_Shadow",
+      "status": "ok"
+     },
+     {
+      "effect": "Photoshop Inner Glow",
+      "matchName": "ADBE PSL Inner Glow",
+      "comp": "fx_Photoshop_Inner_Glow",
+      "status": "ok"
+     },
+     {
+      "effect": "Photoshop Inner Shadow",
+      "matchName": "ADBE PSL Inner Shadow",
+      "comp": "fx_Photoshop_Inner_Shadow",
+      "status": "ok"
+     },
+     {
+      "effect": "Photoshop Outer Glow",
+      "matchName": "ADBE PSL Outer Glow",
+      "comp": "fx_Photoshop_Outer_Glow",
+      "status": "ok"
+     },
+     {
+      "effect": "Photoshop Solid Fill",
+      "matchName": "ADBE PSL Solid Fill",
+      "comp": "fx_Photoshop_Solid_Fill",
+      "status": "ok"
+     },
+     {
+      "effect": "Puppet",
+      "matchName": "ADBE FreePin3",
+      "comp": "fx_Puppet",
+      "status": "ok"
+     },
+     {
+      "effect": "Refine Matte",
+      "matchName": "ADBE RefineMatte",
+      "comp": "fx_Refine_Matte",
+      "status": "ok"
+     },
+     {
+      "effect": "Roto Brush & Refine Edge",
+      "matchName": "ADBE Samurai",
+      "comp": "fx_Roto_Brush_Refine_Edge",
+      "status": "ok"
+     },
+     {
+      "effect": "Set Matte",
+      "matchName": "ADBE Set Matte2",
+      "comp": "fx_Set_Matte",
+      "status": "ok"
+     },
+     {
+      "effect": "Three-Way Color Corrector",
+      "matchName": "ADBE Three-Way Color Corrector",
+      "comp": "fx_Three_Way_Color_Corrector",
+      "status": "ok"
+     },
+     {
+      "effect": "Threshold",
+      "matchName": "ADBE Threshold",
+      "comp": "fx_Threshold",
+      "status": "ok"
+     },
+     {
+      "effect": "Transform",
+      "matchName": "ADBE Geometry",
+      "comp": "fx_Transform",
+      "status": "ok"
+     },
+     {
+      "effect": "Unsharp Mask",
+      "matchName": "ADBE Unsharp Mask",
+      "comp": "fx_Unsharp_Mask",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Obsolete_hidden/Obsolete_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Obsolete_hidden/Obsolete_contact.mp4"
+    },
+    "aerender_seconds_wall": 15.49
+   },
+   {
+    "id": "fx_all_Perspective",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Perspective.aep",
+    "size_bytes": 1238733,
+    "category": "Perspective",
+    "contact_comp": "Perspective_contact",
+    "effects": [
+     {
+      "effect": "3D Camera Tracker",
+      "matchName": "ADBE 3D Tracker",
+      "comp": "fx_3D_Camera_Tracker",
+      "status": "ok"
+     },
+     {
+      "effect": "3D Glasses",
+      "matchName": "ADBE 3D Glasses2",
+      "comp": "fx_3D_Glasses",
+      "status": "ok"
+     },
+     {
+      "effect": "Bevel Alpha",
+      "matchName": "ADBE Bevel Alpha",
+      "comp": "fx_Bevel_Alpha",
+      "status": "ok"
+     },
+     {
+      "effect": "Bevel Edges",
+      "matchName": "ADBE Bevel Edges",
+      "comp": "fx_Bevel_Edges",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Cylinder",
+      "matchName": "CC Cylinder",
+      "comp": "fx_CC_Cylinder",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Environment",
+      "matchName": "CC Environment",
+      "comp": "fx_CC_Environment",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Sphere",
+      "matchName": "CC Sphere",
+      "comp": "fx_CC_Sphere",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Spotlight",
+      "matchName": "CC Spotlight",
+      "comp": "fx_CC_Spotlight",
+      "status": "ok"
+     },
+     {
+      "effect": "Drop Shadow",
+      "matchName": "ADBE Drop Shadow",
+      "comp": "fx_Drop_Shadow",
+      "status": "ok"
+     },
+     {
+      "effect": "Radial Shadow",
+      "matchName": "ADBE Radial Shadow",
+      "comp": "fx_Radial_Shadow",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Perspective/Perspective_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Perspective/Perspective_contact.mp4"
+    },
+    "aerender_seconds_wall": 12.48
+   },
+   {
+    "id": "fx_all_Simulation",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Simulation.aep",
+    "size_bytes": 2391231,
+    "category": "Simulation",
+    "contact_comp": "Simulation_contact",
+    "effects": [
+     {
+      "effect": "CC Ball Action",
+      "matchName": "CC Ball Action",
+      "comp": "fx_CC_Ball_Action",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Bubbles",
+      "matchName": "CC Bubbles",
+      "comp": "fx_CC_Bubbles",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Drizzle",
+      "matchName": "CC Drizzle",
+      "comp": "fx_CC_Drizzle",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Hair",
+      "matchName": "CC Hair",
+      "comp": "fx_CC_Hair",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Mr. Mercury",
+      "matchName": "CC Mr. Mercury",
+      "comp": "fx_CC_Mr_Mercury",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Particle Systems II",
+      "matchName": "CC Particle Systems II",
+      "comp": "fx_CC_Particle_Systems_II",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Particle World",
+      "matchName": "CC Particle World",
+      "comp": "fx_CC_Particle_World",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Pixel Polly",
+      "matchName": "CC Pixel Polly",
+      "comp": "fx_CC_Pixel_Polly",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Rainfall",
+      "matchName": "CSRainfall",
+      "comp": "fx_CC_Rainfall",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Scatterize",
+      "matchName": "CC Scatterize",
+      "comp": "fx_CC_Scatterize",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Snowfall",
+      "matchName": "CSSnowfall",
+      "comp": "fx_CC_Snowfall",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Star Burst",
+      "matchName": "CC Star Burst",
+      "comp": "fx_CC_Star_Burst",
+      "status": "ok"
+     },
+     {
+      "effect": "Card Dance",
+      "matchName": "APC CardDanceCam",
+      "comp": "fx_Card_Dance",
+      "status": "ok"
+     },
+     {
+      "effect": "Caustics",
+      "matchName": "APC Caustics",
+      "comp": "fx_Caustics",
+      "status": "ok"
+     },
+     {
+      "effect": "Foam",
+      "matchName": "APC Foam",
+      "comp": "fx_Foam",
+      "status": "ok"
+     },
+     {
+      "effect": "Particle Playground",
+      "matchName": "ADBE Playgnd",
+      "comp": "fx_Particle_Playground",
+      "status": "ok"
+     },
+     {
+      "effect": "Shatter",
+      "matchName": "APC Shatter",
+      "comp": "fx_Shatter",
+      "status": "ok"
+     },
+     {
+      "effect": "Wave World",
+      "matchName": "APC Wave World",
+      "comp": "fx_Wave_World",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Simulation/Simulation_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Simulation/Simulation_contact.mp4"
+    },
+    "aerender_seconds_wall": 31.07
+   },
+   {
+    "id": "fx_all_Stylize",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Stylize.aep",
+    "size_bytes": 2718093,
+    "category": "Stylize",
+    "contact_comp": "Stylize_contact",
+    "effects": [
+     {
+      "effect": "Brush Strokes",
+      "matchName": "ADBE Brush Strokes",
+      "comp": "fx_Brush_Strokes",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Block Load",
+      "matchName": "CS BlockLoad",
+      "comp": "fx_CC_Block_Load",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Burn Film",
+      "matchName": "CC Burn Film",
+      "comp": "fx_CC_Burn_Film",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Glass",
+      "matchName": "CC Glass",
+      "comp": "fx_CC_Glass",
+      "status": "ok"
+     },
+     {
+      "effect": "CC HexTile",
+      "matchName": "CS HexTile",
+      "comp": "fx_CC_HexTile",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Kaleida",
+      "matchName": "CC Kaleida",
+      "comp": "fx_CC_Kaleida",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Mr. Smoothie",
+      "matchName": "CC Mr. Smoothie",
+      "comp": "fx_CC_Mr_Smoothie",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Plastic",
+      "matchName": "CC Plastic",
+      "comp": "fx_CC_Plastic",
+      "status": "ok"
+     },
+     {
+      "effect": "CC RepeTile",
+      "matchName": "CC RepeTile",
+      "comp": "fx_CC_RepeTile",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Threshold",
+      "matchName": "CC Threshold",
+      "comp": "fx_CC_Threshold",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Threshold RGB",
+      "matchName": "CC Threshold RGB",
+      "comp": "fx_CC_Threshold_RGB",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Vignette",
+      "matchName": "CS Vignette",
+      "comp": "fx_CC_Vignette",
+      "status": "ok"
+     },
+     {
+      "effect": "Cartoon",
+      "matchName": "ADBE Cartoonify",
+      "comp": "fx_Cartoon",
+      "status": "ok"
+     },
+     {
+      "effect": "Color Emboss",
+      "matchName": "ADBE Color Emboss",
+      "comp": "fx_Color_Emboss",
+      "status": "ok"
+     },
+     {
+      "effect": "Emboss",
+      "matchName": "ADBE Emboss",
+      "comp": "fx_Emboss",
+      "status": "ok"
+     },
+     {
+      "effect": "Find Edges",
+      "matchName": "ADBE Find Edges",
+      "comp": "fx_Find_Edges",
+      "status": "ok"
+     },
+     {
+      "effect": "Glow",
+      "matchName": "ADBE Glo2",
+      "comp": "fx_Glow",
+      "status": "ok"
+     },
+     {
+      "effect": "Mosaic",
+      "matchName": "ADBE Mosaic",
+      "comp": "fx_Mosaic",
+      "status": "ok"
+     },
+     {
+      "effect": "Motion Tile",
+      "matchName": "ADBE Tile",
+      "comp": "fx_Motion_Tile",
+      "status": "ok"
+     },
+     {
+      "effect": "Posterize",
+      "matchName": "ADBE Posterize",
+      "comp": "fx_Posterize",
+      "status": "ok"
+     },
+     {
+      "effect": "Roughen Edges",
+      "matchName": "ADBE Roughen Edges",
+      "comp": "fx_Roughen_Edges",
+      "status": "ok"
+     },
+     {
+      "effect": "Scatter",
+      "matchName": "ADBE Scatter",
+      "comp": "fx_Scatter",
+      "status": "ok"
+     },
+     {
+      "effect": "Strobe Light",
+      "matchName": "ADBE Strobe",
+      "comp": "fx_Strobe_Light",
+      "status": "ok"
+     },
+     {
+      "effect": "Texturize",
+      "matchName": "ADBE Texturize",
+      "comp": "fx_Texturize",
+      "status": "ok"
+     },
+     {
+      "effect": "Threshold",
+      "matchName": "ADBE Threshold2",
+      "comp": "fx_Threshold",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Stylize/Stylize_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Stylize/Stylize_contact.mp4"
+    },
+    "aerender_seconds_wall": 12.4
+   },
+   {
+    "id": "fx_all_Text",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Text.aep",
+    "size_bytes": 400883,
+    "category": "Text",
+    "contact_comp": "Text_contact",
+    "effects": [
+     {
+      "effect": "Numbers",
+      "matchName": "ADBE Numbers2",
+      "comp": "fx_Numbers",
+      "status": "null"
+     },
+     {
+      "effect": "Timecode",
+      "matchName": "ADBE Timecode",
+      "comp": "fx_Timecode",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Text/Text_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Text/Text_contact.mp4"
+    },
+    "aerender_seconds_wall": 10.34
+   },
+   {
+    "id": "fx_all_Time",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Time.aep",
+    "size_bytes": 1013283,
+    "category": "Time",
+    "contact_comp": "Time_contact",
+    "effects": [
+     {
+      "effect": "CC Force Motion Blur",
+      "matchName": "CC Force Motion Blur",
+      "comp": "fx_CC_Force_Motion_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Wide Time",
+      "matchName": "CC Wide Time",
+      "comp": "fx_CC_Wide_Time",
+      "status": "ok"
+     },
+     {
+      "effect": "Echo",
+      "matchName": "ADBE Echo",
+      "comp": "fx_Echo",
+      "status": "ok"
+     },
+     {
+      "effect": "Pixel Motion Blur",
+      "matchName": "ADBE OFMotionBlur",
+      "comp": "fx_Pixel_Motion_Blur",
+      "status": "ok"
+     },
+     {
+      "effect": "Posterize Time",
+      "matchName": "ADBE Posterize Time",
+      "comp": "fx_Posterize_Time",
+      "status": "ok"
+     },
+     {
+      "effect": "Time Difference",
+      "matchName": "ADBE Difference",
+      "comp": "fx_Time_Difference",
+      "status": "ok"
+     },
+     {
+      "effect": "Time Displacement",
+      "matchName": "ADBE Time Displacement",
+      "comp": "fx_Time_Displacement",
+      "status": "ok"
+     },
+     {
+      "effect": "Timewarp",
+      "matchName": "ADBE Timewarp",
+      "comp": "fx_Timewarp",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Time/Time_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Time/Time_contact.mp4"
+    },
+    "aerender_seconds_wall": 17.47
+   },
+   {
+    "id": "fx_all_Transition",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Transition.aep",
+    "size_bytes": 1927351,
+    "category": "Transition",
+    "contact_comp": "Transition_contact",
+    "effects": [
+     {
+      "effect": "Block Dissolve",
+      "matchName": "ADBE Block Dissolve",
+      "comp": "fx_Block_Dissolve",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Glass Wipe",
+      "matchName": "CC Glass Wipe",
+      "comp": "fx_CC_Glass_Wipe",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Grid Wipe",
+      "matchName": "CC Grid Wipe",
+      "comp": "fx_CC_Grid_Wipe",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Image Wipe",
+      "matchName": "CC Image Wipe",
+      "comp": "fx_CC_Image_Wipe",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Jaws",
+      "matchName": "CC Jaws",
+      "comp": "fx_CC_Jaws",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Light Wipe",
+      "matchName": "CC Light Wipe",
+      "comp": "fx_CC_Light_Wipe",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Line Sweep",
+      "matchName": "CS LineSweep",
+      "comp": "fx_CC_Line_Sweep",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Radial ScaleWipe",
+      "matchName": "CC Radial ScaleWipe",
+      "comp": "fx_CC_Radial_ScaleWipe",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Scale Wipe",
+      "matchName": "CC Scale Wipe",
+      "comp": "fx_CC_Scale_Wipe",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Twister",
+      "matchName": "CC Twister",
+      "comp": "fx_CC_Twister",
+      "status": "ok"
+     },
+     {
+      "effect": "CC WarpoMatic",
+      "matchName": "CC WarpoMatic",
+      "comp": "fx_CC_WarpoMatic",
+      "status": "ok"
+     },
+     {
+      "effect": "Card Wipe",
+      "matchName": "APC CardWipeCam",
+      "comp": "fx_Card_Wipe",
+      "status": "ok"
+     },
+     {
+      "effect": "Gradient Wipe",
+      "matchName": "ADBE Gradient Wipe",
+      "comp": "fx_Gradient_Wipe",
+      "status": "ok"
+     },
+     {
+      "effect": "Iris Wipe",
+      "matchName": "ADBE IRIS_WIPE",
+      "comp": "fx_Iris_Wipe",
+      "status": "ok"
+     },
+     {
+      "effect": "Linear Wipe",
+      "matchName": "ADBE Linear Wipe",
+      "comp": "fx_Linear_Wipe",
+      "status": "ok"
+     },
+     {
+      "effect": "Radial Wipe",
+      "matchName": "ADBE Radial Wipe",
+      "comp": "fx_Radial_Wipe",
+      "status": "ok"
+     },
+     {
+      "effect": "Venetian Blinds",
+      "matchName": "ADBE Venetian Blinds",
+      "comp": "fx_Venetian_Blinds",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Transition/Transition_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Transition/Transition_contact.mp4"
+    },
+    "aerender_seconds_wall": 12.44
+   },
+   {
+    "id": "fx_all_Utility",
+    "file": "aep/ae2026_v26/effects_sweep/fx_all_Utility.aep",
+    "size_bytes": 910853,
+    "category": "Utility",
+    "contact_comp": "Utility_contact",
+    "effects": [
+     {
+      "effect": "Apply Color LUT",
+      "matchName": "ADBE Apply Color LUT2",
+      "comp": "fx_Apply_Color_LUT",
+      "status": "ok"
+     },
+     {
+      "effect": "CC Overbrights",
+      "matchName": "CC Overbrights",
+      "comp": "fx_CC_Overbrights",
+      "status": "ok"
+     },
+     {
+      "effect": "Cineon Converter",
+      "matchName": "ADBE Cineon Converter2",
+      "comp": "fx_Cineon_Converter",
+      "status": "ok"
+     },
+     {
+      "effect": "Color Profile Converter",
+      "matchName": "ADBE ProfileToProfile",
+      "comp": "fx_Color_Profile_Converter",
+      "status": "ok"
+     },
+     {
+      "effect": "Grow Bounds",
+      "matchName": "ADBE GROW BOUNDS",
+      "comp": "fx_Grow_Bounds",
+      "status": "ok"
+     },
+     {
+      "effect": "HDR Compander",
+      "matchName": "ADBE Compander",
+      "comp": "fx_HDR_Compander",
+      "status": "ok"
+     },
+     {
+      "effect": "HDR Highlight Compression",
+      "matchName": "ADBE HDR ToneMap",
+      "comp": "fx_HDR_Highlight_Compression",
+      "status": "ok"
+     }
+    ],
+    "reference": {
+     "frame_t1s": "reference/effects_sweep/fx_all_Utility/Utility_contact_t1s_00030.png",
+     "mp4": "reference/effects_sweep/fx_all_Utility/Utility_contact.mp4"
+    },
+    "aerender_seconds_wall": 12.07
+   }
+  ]
+ },
+ "media": [
+  {
+   "file": "media/chord_stereo_48k.wav",
+   "size_bytes": 960078
+  },
+  {
+   "file": "media/grid_rgba.png",
+   "size_bytes": 4645
+  },
+  {
+   "file": "media/layered.psd",
+   "size_bytes": 1274170
+  },
+  {
+   "file": "media/luma_matte.png",
+   "size_bytes": 5991
+  },
+  {
+   "file": "media/plate_1280x720.jpg",
+   "size_bytes": 94507
+  },
+  {
+   "file": "media/soft_alpha.png",
+   "size_bytes": 12173
+  },
+  {
+   "file": "media/sweep_44k.mp3",
+   "size_bytes": 97845
+  },
+  {
+   "file": "media/testsrc_360p25_h264.mp4",
+   "size_bytes": 26691
+  },
+  {
+   "file": "media/testsrc_720p30_h264_aac.mp4",
+   "size_bytes": 2510235
+  },
+  {
+   "file": "media/wipe_alpha_prores4444.mov",
+   "size_bytes": 5095427
+  },
+  {
+   "file": "media/seq/spin_0000.png",
+   "size_bytes": 1545
+  },
+  {
+   "file": "media/seq/spin_0001.png",
+   "size_bytes": 2586
+  },
+  {
+   "file": "media/seq/spin_0002.png",
+   "size_bytes": 3389
+  },
+  {
+   "file": "media/seq/spin_0003.png",
+   "size_bytes": 3651
+  },
+  {
+   "file": "media/seq/spin_0004.png",
+   "size_bytes": 2962
+  },
+  {
+   "file": "media/seq/spin_0005.png",
+   "size_bytes": 3380
+  },
+  {
+   "file": "media/seq/spin_0006.png",
+   "size_bytes": 3158
+  },
+  {
+   "file": "media/seq/spin_0007.png",
+   "size_bytes": 3001
+  },
+  {
+   "file": "media/seq/spin_0008.png",
+   "size_bytes": 3836
+  },
+  {
+   "file": "media/seq/spin_0009.png",
+   "size_bytes": 3707
+  },
+  {
+   "file": "media/seq/spin_0010.png",
+   "size_bytes": 2970
+  },
+  {
+   "file": "media/seq/spin_0011.png",
+   "size_bytes": 1611
+  },
+  {
+   "file": "media/seq/spin_0012.png",
+   "size_bytes": 1702
+  },
+  {
+   "file": "media/seq/spin_0013.png",
+   "size_bytes": 2619
+  },
+  {
+   "file": "media/seq/spin_0014.png",
+   "size_bytes": 2359
+  },
+  {
+   "file": "media/seq/spin_0015.png",
+   "size_bytes": 2813
+  },
+  {
+   "file": "media/seq/spin_0016.png",
+   "size_bytes": 3073
+  },
+  {
+   "file": "media/seq/spin_0017.png",
+   "size_bytes": 2354
+  },
+  {
+   "file": "media/seq/spin_0018.png",
+   "size_bytes": 2613
+  },
+  {
+   "file": "media/seq/spin_0019.png",
+   "size_bytes": 3054
+  },
+  {
+   "file": "media/seq/spin_0020.png",
+   "size_bytes": 3392
+  },
+  {
+   "file": "media/seq/spin_0021.png",
+   "size_bytes": 2750
+  },
+  {
+   "file": "media/seq/spin_0022.png",
+   "size_bytes": 3136
+  },
+  {
+   "file": "media/seq/spin_0023.png",
+   "size_bytes": 3064
+  }
+ ]
+}

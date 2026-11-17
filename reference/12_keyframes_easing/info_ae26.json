@@ -1,0 +1,1 @@
+{"main":"keyframes_easing","refs":[],"tests":["linear, easy ease 33%, ease 80%, hold","custom speed/influence","auto-bezier, continuous","spatial bezier tangents + roving key + auto-orient along path","separated X/Y dimensions","3-dim scale ease","mixed in-linear/out-bezier key"],"warnings":[],"aeVersion":"26.5x89","id":"12_keyframes_easing","queued":2}

@@ -1,0 +1,9 @@
+{
+  "machine": "Kirill's workstation (Windows 11 Pro)",
+  "cpu": "AMD Ryzen 9 7900X 12-Core (24 threads, 4.7 GHz)",
+  "gpu": "NVIDIA GeForce RTX 4080 SUPER (driver 32.0.16.1088) + AMD Radeon iGPU",
+  "ram_gb": 63.1,
+  "after_effects": "26.5 (build 89)",
+  "renderer": "aerender.exe, Best Settings, one aerender process per .aep, sound off",
+  "note": "seconds_wall includes aerender startup (~8-10 s per .aep) and all queued items of that project (PNG sequence + H.264 of the main comp, plus single PNG frames of extra comps). Per-item times are in aerender_logs/*.log ('Total Time Elapsed' after each 'Finished composition')."
+}

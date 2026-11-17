@@ -1,0 +1,159 @@
+aerender version 26.5x89
+PROGRESS: Launching After Effects...
+PROGRESS:  11/18/2026 3:53:53 AM: Starting composition "Stylize_contact".
+
+PROGRESS:  Render Settings: Best Settings
+PROGRESS:  Quality: Best
+PROGRESS:  Resolution: Full
+PROGRESS:  Size: 1920 x 900
+PROGRESS:  Proxy Use: Use No Proxies
+PROGRESS:  Effects: Current Settings
+PROGRESS:  Disk Cache: Read Only
+PROGRESS:  Color Depth: Current Settings
+PROGRESS:  Frame Blending: On for Checked Layers
+PROGRESS:  Field Render: Off
+PROGRESS:  Pulldown: Off
+PROGRESS:  Motion Blur: On for Checked Layers
+PROGRESS:   
+PROGRESS:  Solos: Current Settings
+PROGRESS:   
+PROGRESS:  Time Span: Custom
+PROGRESS:  Start: 0:00:01:00
+PROGRESS:  End: 0:00:01:00
+PROGRESS:  Duration: 0:00:00:01
+PROGRESS:  Frame Rate: 30.00 (comp)
+PROGRESS:  Guide Layers: All Off
+PROGRESS:  Skip Existing Files: Off
+PROGRESS:  
+PROGRESS:  Output Module: PSD_to_PNG_Export
+PROGRESS:  Output To: D:\AI_ZONE\Commerical\AE_IDEAS\effectcraft-aep-corpus\reference\effects_sweep\fx_all_Stylize\Stylize_contact_t1s_[#####].png
+PROGRESS:  Format: PNG
+PROGRESS:  Output Info: -
+PROGRESS:  Start Frame: 30
+PROGRESS:  Output Audio: -
+PROGRESS:  Channels: RGB + Alpha
+PROGRESS:  Depth: Millions of Colors+
+PROGRESS:  Color: Straight
+PROGRESS:  Resize: -
+PROGRESS:  Crop: -
+PROGRESS:  Final Size: 1920 x 900
+PROGRESS:  Profile: Working Space - sRGB IEC61966-2.1
+PROGRESS:  Embed Profile: Off
+PROGRESS:   
+PROGRESS:  Post-Render Action: None
+PROGRESS:   
+PROGRESS:   
+PROGRESS:   
+PROGRESS:  
+PROGRESS:  0:00:01:00 (1): 0 Seconds
+PROGRESS:  11/18/2026 3:53:54 AM: Finished composition "Stylize_contact".
+
+
+PROGRESS:  11/18/2026 3:53:54 AM: Starting composition "Stylize_contact".
+
+PROGRESS:  Render Settings: Best Settings
+PROGRESS:  Quality: Best
+PROGRESS:  Resolution: Full
+PROGRESS:  Size: 1920 x 900
+PROGRESS:  Proxy Use: Use No Proxies
+PROGRESS:  Effects: Current Settings
+PROGRESS:  Disk Cache: Read Only
+PROGRESS:  Color Depth: Current Settings
+PROGRESS:  Frame Blending: On for Checked Layers
+PROGRESS:  Field Render: Off
+PROGRESS:  Pulldown: Off
+PROGRESS:  Motion Blur: On for Checked Layers
+PROGRESS:   
+PROGRESS:  Solos: Current Settings
+PROGRESS:   
+PROGRESS:  Time Span: Custom
+PROGRESS:  Start: 0:00:00:00
+PROGRESS:  End: 0:00:01:29
+PROGRESS:  Duration: 0:00:02:00
+PROGRESS:  Frame Rate: 30.00 (comp)
+PROGRESS:  Guide Layers: All Off
+PROGRESS:  Skip Existing Files: Off
+PROGRESS:  
+PROGRESS:  Output Module: H.264 - Match Render Settings - 15 Mbps
+PROGRESS:  Output To: D:\AI_ZONE\Commerical\AE_IDEAS\effectcraft-aep-corpus\reference\effects_sweep\fx_all_Stylize\Stylize_contact.mp4
+PROGRESS:  Format: H.264
+PROGRESS:  Output Info: VBR, Target 15 Mbps
+PROGRESS:  Include: Project Link
+PROGRESS:  Output Audio: On (if comp has audio)
+PROGRESS:  Channels: RGB
+PROGRESS:  Depth: Millions of Colors
+PROGRESS:  Color: Premultiplied
+PROGRESS:  Resize: -
+PROGRESS:  Crop: -
+PROGRESS:  Final Size: 1920 x 900
+PROGRESS:  Profile: Working Space - sRGB IEC61966-2.1
+PROGRESS:  Embed Profile: On
+PROGRESS:   
+PROGRESS:  Post-Render Action: None
+PROGRESS:   
+PROGRESS:   
+PROGRESS:   
+PROGRESS:  
+PROGRESS:  0:00:00:00 (1): 0 Seconds
+PROGRESS:  0:00:00:01 (2): 0 Seconds
+PROGRESS:  0:00:00:02 (3): 0 Seconds
+PROGRESS:  0:00:00:03 (4): 0 Seconds
+PROGRESS:  0:00:00:04 (5): 0 Seconds
+PROGRESS:  0:00:00:05 (6): 0 Seconds
+PROGRESS:  0:00:00:06 (7): 0 Seconds
+PROGRESS:  0:00:00:07 (8): 0 Seconds
+PROGRESS:  0:00:00:08 (9): 0 Seconds
+PROGRESS:  0:00:00:10 (11): 0 Seconds
+PROGRESS:  0:00:00:11 (12): 0 Seconds
+PROGRESS:  0:00:00:12 (13): 0 Seconds
+PROGRESS:  0:00:00:13 (14): 0 Seconds
+PROGRESS:  0:00:00:14 (15): 0 Seconds
+PROGRESS:  0:00:00:15 (16): 0 Seconds
+PROGRESS:  0:00:00:16 (17): 0 Seconds
+PROGRESS:  0:00:00:17 (18): 0 Seconds
+PROGRESS:  0:00:00:18 (19): 1 Seconds
+PROGRESS:  0:00:00:19 (20): 0 Seconds
+PROGRESS:  0:00:00:20 (21): 0 Seconds
+PROGRESS:  0:00:00:21 (22): 0 Seconds
+PROGRESS:  0:00:00:22 (23): 0 Seconds
+PROGRESS:  0:00:00:23 (24): 0 Seconds
+PROGRESS:  0:00:00:24 (25): 0 Seconds
+PROGRESS:  0:00:00:25 (26): 0 Seconds
+PROGRESS:  0:00:00:26 (27): 0 Seconds
+PROGRESS:  0:00:00:27 (28): 0 Seconds
+PROGRESS:  0:00:00:28 (29): 0 Seconds
+PROGRESS:  0:00:00:29 (30): 0 Seconds
+PROGRESS:  0:00:01:00 (31): 0 Seconds
+PROGRESS:  0:00:01:01 (32): 0 Seconds
+PROGRESS:  0:00:01:02 (33): 0 Seconds
+PROGRESS:  0:00:01:03 (34): 0 Seconds
+PROGRESS:  0:00:01:04 (35): 0 Seconds
+PROGRESS:  0:00:01:05 (36): 0 Seconds
+PROGRESS:  0:00:01:06 (37): 0 Seconds
+PROGRESS:  0:00:01:07 (38): 0 Seconds
+PROGRESS:  0:00:01:08 (39): 0 Seconds
+PROGRESS:  0:00:01:09 (40): 0 Seconds
+PROGRESS:  0:00:01:10 (41): 0 Seconds
+PROGRESS:  0:00:01:11 (42): 0 Seconds
+PROGRESS:  0:00:01:12 (43): 1 Seconds
+PROGRESS:  0:00:01:13 (44): 0 Seconds
+PROGRESS:  0:00:01:14 (45): 0 Seconds
+PROGRESS:  0:00:01:15 (46): 0 Seconds
+PROGRESS:  0:00:01:16 (47): 0 Seconds
+PROGRESS:  0:00:01:17 (48): 0 Seconds
+PROGRESS:  0:00:01:18 (49): 0 Seconds
+PROGRESS:  0:00:01:19 (50): 0 Seconds
+PROGRESS:  0:00:01:20 (51): 0 Seconds
+PROGRESS:  0:00:01:21 (52): 0 Seconds
+PROGRESS:  0:00:01:22 (53): 0 Seconds
+PROGRESS:  0:00:01:23 (54): 0 Seconds
+PROGRESS:  0:00:01:24 (55): 0 Seconds
+PROGRESS:  0:00:01:25 (56): 0 Seconds
+PROGRESS:  0:00:01:26 (57): 0 Seconds
+PROGRESS:  0:00:01:27 (58): 0 Seconds
+PROGRESS:  0:00:01:28 (59): 0 Seconds
+PROGRESS:  0:00:01:29 (60): 0 Seconds
+PROGRESS:  11/18/2026 3:53:56 AM: Finished composition "Stylize_contact".
+
+
+PROGRESS:  Total Time Elapsed: 3 Seconds

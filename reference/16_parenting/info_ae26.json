@@ -1,0 +1,1 @@
+{"main":"parenting","refs":[],"tests":["3-level chain with anchors and rotation","parent with non-uniform scale animation","negative scale parent (mirror)","2D child of 3D parent","text layer parented to animated layer"],"warnings":[],"aeVersion":"26.5x89","id":"16_parenting","queued":2}

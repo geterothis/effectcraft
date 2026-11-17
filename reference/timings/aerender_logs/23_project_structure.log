@@ -1,0 +1,110 @@
+aerender version 26.5x89
+PROGRESS: Launching After Effects...
+PROGRESS:  11/18/2026 3:49:37 AM: Starting composition "project_structure".
+
+PROGRESS:  Render Settings: Best Settings
+PROGRESS:  Quality: Best
+PROGRESS:  Resolution: Full
+PROGRESS:  Size: 960 x 540
+PROGRESS:  Proxy Use: Use No Proxies
+PROGRESS:  Effects: Current Settings
+PROGRESS:  Disk Cache: Read Only
+PROGRESS:  Color Depth: Current Settings
+PROGRESS:  Frame Blending: On for Checked Layers
+PROGRESS:  Field Render: Off
+PROGRESS:  Pulldown: Off
+PROGRESS:  Motion Blur: On for Checked Layers
+PROGRESS:   
+PROGRESS:  Solos: Current Settings
+PROGRESS:   
+PROGRESS:  Time Span: Custom
+PROGRESS:  Start: 0:00:00:00
+PROGRESS:  End: 0:00:01:29
+PROGRESS:  Duration: 0:00:02:00
+PROGRESS:  Frame Rate: 30.00 (comp)
+PROGRESS:  Guide Layers: All Off
+PROGRESS:  Skip Existing Files: Off
+PROGRESS:  
+PROGRESS:  Output Module: PSD_to_PNG_Export
+PROGRESS:  Output To: D:\AI_ZONE\Commerical\AE_IDEAS\effectcraft-aep-corpus\reference\23_project_structure\project_structure_png\project_structure_[#####].png
+PROGRESS:  Format: PNG
+PROGRESS:  Output Info: -
+PROGRESS:  Start Frame: 0
+PROGRESS:  Output Audio: -
+PROGRESS:  Channels: RGB + Alpha
+PROGRESS:  Depth: Millions of Colors+
+PROGRESS:  Color: Straight
+PROGRESS:  Resize: -
+PROGRESS:  Crop: -
+PROGRESS:  Final Size: 960 x 540
+PROGRESS:  Profile: Working Space - sRGB IEC61966-2.1
+PROGRESS:  Embed Profile: Off
+PROGRESS:   
+PROGRESS:  Post-Render Action: None
+PROGRESS:   
+PROGRESS:   
+PROGRESS:   
+PROGRESS:  
+PROGRESS:  An unexpected error occurred while exporting a composition.
+
+Error Code: 1
+
+Please restart After Effects and retry the export.
+PROGRESS:  11/18/2026 3:49:37 AM: Finished composition "project_structure".
+
+
+PROGRESS:  11/18/2026 3:49:37 AM: Starting composition "project_structure".
+
+PROGRESS:  Render Settings: Best Settings
+PROGRESS:  Quality: Best
+PROGRESS:  Resolution: Full
+PROGRESS:  Size: 960 x 540
+PROGRESS:  Proxy Use: Use No Proxies
+PROGRESS:  Effects: Current Settings
+PROGRESS:  Disk Cache: Read Only
+PROGRESS:  Color Depth: Current Settings
+PROGRESS:  Frame Blending: On for Checked Layers
+PROGRESS:  Field Render: Off
+PROGRESS:  Pulldown: Off
+PROGRESS:  Motion Blur: On for Checked Layers
+PROGRESS:   
+PROGRESS:  Solos: Current Settings
+PROGRESS:   
+PROGRESS:  Time Span: Custom
+PROGRESS:  Start: 0:00:00:00
+PROGRESS:  End: 0:00:01:29
+PROGRESS:  Duration: 0:00:02:00
+PROGRESS:  Frame Rate: 30.00 (comp)
+PROGRESS:  Guide Layers: All Off
+PROGRESS:  Skip Existing Files: Off
+PROGRESS:  
+PROGRESS:  Output Module: H.264 - Match Render Settings - 15 Mbps
+PROGRESS:  Output To: D:\AI_ZONE\Commerical\AE_IDEAS\effectcraft-aep-corpus\reference\23_project_structure\project_structure.mp4
+PROGRESS:  Format: H.264
+PROGRESS:  Output Info: VBR, Target 15 Mbps
+PROGRESS:  Include: Project Link
+PROGRESS:  Output Audio: On (if comp has audio)
+PROGRESS:  Channels: RGB
+PROGRESS:  Depth: Millions of Colors
+PROGRESS:  Color: Premultiplied
+PROGRESS:  Resize: -
+PROGRESS:  Crop: -
+PROGRESS:  Final Size: 960 x 540
+PROGRESS:  Profile: Working Space - sRGB IEC61966-2.1
+PROGRESS:  Embed Profile: On
+PROGRESS:   
+PROGRESS:  Post-Render Action: None
+PROGRESS:   
+PROGRESS:   
+PROGRESS:   
+PROGRESS:  
+PROGRESS:  An unexpected error occurred while exporting a composition.
+
+Error Code: 1
+
+Please restart After Effects and retry the export.
+PROGRESS:  11/18/2026 3:49:37 AM: Finished composition "project_structure".
+
+
+PROGRESS:  Total Time Elapsed: 
+WARNING:After Effects warning: logged 39 errors, please check log.  First error was "error: Unable to Render: File Not Found missing_placeholder"

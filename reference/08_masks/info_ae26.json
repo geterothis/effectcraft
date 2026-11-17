@@ -1,0 +1,1 @@
+{"main":"masks","refs":[],"tests":["mask modes add/subtract/intersect/difference/lighten/darken/none","feather, expansion, opacity, inverted","animated mask path (square->circle)","rotobezier open mask driving Stroke effect"],"warnings":[],"aeVersion":"26.5x89","id":"08_masks","queued":2}

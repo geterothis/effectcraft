@@ -1,0 +1,1 @@
+{"main":"track_mattes","refs":[],"tests":["alpha / alpha inverted matte (text matte)","luma / luma inverted matte (image matte)","one matte shared by two layers, matte not adjacent, animated"],"warnings":[],"aeVersion":"26.5x89","id":"09_track_mattes","queued":2}

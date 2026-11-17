@@ -1,0 +1,1 @@
+{"main":"footage_video_audio","refs":[],"tests":["H.264 MP4 1280x720 30fps (embedded AAC, audio switched off)","25fps clip in 30fps comp, startTime 0.5","ProRes 4444 with alpha","WAV stereo 48k with audio level fades","MP3 44.1k starting at 1s"],"warnings":[],"aeVersion":"26.5x89","id":"06_footage_video_audio","queued":2}

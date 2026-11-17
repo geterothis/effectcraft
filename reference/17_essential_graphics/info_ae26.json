@@ -1,0 +1,1 @@
+{"main":"essential_graphics","refs":["EGP_badge_template"],"tests":["Essential Properties on precomp: Title Text, Badge Color, Badge Scale, Icon Opacity, Icon Rotation","3 instances: defaults, static overrides (text/color/scale/opacity/rotation), keyframed overrides","motionGraphicsTemplateName"],"warnings":[],"aeVersion":"26.5x89","id":"17_essential_graphics","queued":3}

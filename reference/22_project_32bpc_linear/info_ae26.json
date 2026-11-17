@@ -1,0 +1,1 @@
+{"main":"project_32bpc_linear","refs":[],"tests":["project 32 bpc float","linear blending / linearized working space (if supported)","overbright exposure + glow, add blend"],"warnings":[],"aeVersion":"26.5x89","id":"22_project_32bpc_linear","queued":2,"bpc":32,"linearBlending":true,"ws":"sRGB IEC61966-2.1"}
