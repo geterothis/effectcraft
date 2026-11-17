@@ -1,0 +1,332 @@
+{
+ "tool": "effectcraft-cli 0.24.1 (upstream main build)",
+ "how": "file.importAep {allowLosses:true} then file.exportAep {allowLosses:true}; footage keeps the stored Windows paths (D:\\AI_ZONE\\...\\effectcraft-aep-corpus\\media\\...)",
+ "files": [
+  {
+   "source": "corpus/aep/ae2026_v26/01_solids_nulls_adjustment.aep",
+   "export": "exports/01_solids_nulls_adjustment.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/02_shapes_basic.aep",
+   "export": "exports/02_shapes_basic.effectcraft.aep",
+   "import_losses": {
+    "shape_layers": [
+     "shapes_basic: 'SHAPES_primitives': stroke dashes not imported"
+    ]
+   },
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/03_shapes_modifiers.aep",
+   "export": "exports/03_shapes_modifiers.effectcraft.aep",
+   "import_losses": {
+    "shape_layers": [
+     "shapes_modifiers: 'MOD_wiggle_transform': shape item ADBE Vector Filter - Wiggler not imported",
+     "shapes_modifiers: 'MOD_wiggle_paths_roughen': shape item ADBE Vector Filter - Roughen not imported",
+     "shapes_modifiers: 'MOD_pucker_bloat': shape item ADBE Vector Filter - PB not imported",
+     "shapes_modifiers: 'MOD_zigzag': shape item ADBE Vector Filter - Zigzag not imported",
+     "shapes_modifiers: 'MOD_twist': shape item ADBE Vector Filter - Twist not imported"
+    ]
+   },
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/04_text.aep",
+   "export": "exports/04_text.effectcraft.aep",
+   "import_losses": {
+    "text_layers": [
+     "text: 'TEXT_sourcetext_keys': Source Text keyframes are not imported (the first text document is)",
+     "text: 'Text on a mask path': Path Options are not imported",
+     "text: 'expression selector': animator 'Anim_tracking_expr': selector ADBE Text Expressible Selector not imported",
+     "text: 'Wiggly Selector': animator 'Anim_scale_rot_color': selector ADBE Text Wiggly Selector not imported"
+    ]
+   },
+   "export_losses": {
+    "masks": [
+     "text: 1 mask(s) on a text layer (the path unit on text layers is not verified) on 'Text on a mask path'"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/05_footage_images.aep",
+   "export": "exports/05_footage_images.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {
+    "footage_items": [
+     "footage 'Background/layered.psd': one layer of a layered file is not exported",
+     "footage 'Label/layered.psd': one layer of a layered file is not exported",
+     "footage 'Star/layered.psd': one layer of a layered file is not exported"
+    ],
+    "unsupported_layers": [
+     "layered: footage layer whose footage is not exported: 'Label'",
+     "layered: footage layer whose footage is not exported: 'Star'",
+     "layered: footage layer whose footage is not exported: 'Background'"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/06_footage_video_audio.aep",
+   "export": "exports/06_footage_video_audio.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {
+    "footage_items": [
+     "footage 'sweep_44k.mp3': Audio footage of type '.mp3' is not exported (no prototype)"
+    ],
+    "unsupported_layers": [
+     "footage_video_audio: footage layer whose footage is not exported: 'sweep_44k.mp3'"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/07_precomps_nesting.aep",
+   "export": "exports/07_precomps_nesting.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/08_masks.aep",
+   "export": "exports/08_masks.effectcraft.aep",
+   "import_losses": {
+    "effects": [
+     "masks: 'MASK_rotobezier_open_stroke_fx' has the effect 'Stroke' (ADBE Stroke), kept without rendering"
+    ]
+   },
+   "export_losses": {
+    "effects": [
+     "masks: 'MASK_rotobezier_open_stroke_fx' has the effect 'Stroke' (ADBE Stroke)"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/09_track_mattes.aep",
+   "export": "exports/09_track_mattes.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/10_blend_modes.aep",
+   "export": "exports/10_blend_modes.effectcraft.aep",
+   "import_losses": {
+    "blend_modes": [
+     "blend_modes: 'BM_DIVIDE' uses blend mode code 38",
+     "blend_modes: 'BM_SUBTRACT' uses blend mode code 37",
+     "blend_modes: 'BM_LIGHTER_COLOR' uses blend mode code 35",
+     "blend_modes: 'BM_DARKER_COLOR' uses blend mode code 36",
+     "blend_modes: 'BM_DISSOLVE' uses blend mode code 3"
+    ]
+   },
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/11_3d_camera_lights.aep",
+   "export": "exports/11_3d_camera_lights.effectcraft.aep",
+   "import_losses": {
+    "transform_properties": [
+     "threed_camera_lights: 'LIGHT_spot_shadows': ADBE Light Shadow Darkness not imported",
+     "threed_camera_lights: 'LIGHT_spot_shadows': ADBE Light Shadow Diffusion not imported"
+    ]
+   },
+   "export_losses": {
+    "lights": [
+     "threed_camera_lights: light 'LIGHT_parallel': a Parallel light is not written (not sampled)",
+     "threed_camera_lights: light 'LIGHT_ambient': a Ambient light is not written (not sampled)",
+     "threed_camera_lights: light 'LIGHT_spot_shadows': Casts Shadows is not written (not sampled)"
+    ],
+    "transform_properties": [
+     "threed_camera_lights: 'BOX_side_3D_xrot' Orientation",
+     "threed_camera_lights: 'CARD_3D_casts_shadow' Y Rotation",
+     "threed_camera_lights: 'FLOOR_3D' Orientation",
+     "threed_one_node_camera: 'SHAPE_3D' Y Rotation"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/12_keyframes_easing.aep",
+   "export": "exports/12_keyframes_easing.effectcraft.aep",
+   "import_losses": {
+    "transform_properties": [
+     "KEY_separate_dims_scale_opacity: ADBE Position_0",
+     "KEY_separate_dims_scale_opacity: ADBE Position_1"
+    ]
+   },
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/13_expressions.aep",
+   "export": "exports/13_expressions.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/14a_effects_blur_color.aep",
+   "export": "exports/14a_effects_blur_color.effectcraft.aep",
+   "import_losses": {
+    "effects": [
+     "fx_noise: 'SRC_noise' has the effect 'Noise' (ADBE Noise), kept without rendering",
+     "fx_posterize: 'SRC_posterize' has the effect 'Posterize' (ADBE Posterize), kept without rendering",
+     "fx_unsharp_mask: 'SRC_unsharp_mask' has the effect 'Unsharp Mask' (ADBE Unsharp Mask2), kept without rendering",
+     "fx_vibrance: 'SRC_vibrance' has the effect 'Vibrance' (ADBE Vibrance), kept without rendering"
+    ]
+   },
+   "export_losses": {
+    "effects": [
+     "fx_noise: 'SRC_noise' has the effect 'Noise' (ADBE Noise)",
+     "fx_posterize: 'SRC_posterize' has the effect 'Posterize' (ADBE Posterize)",
+     "fx_unsharp_mask: 'SRC_unsharp_mask' has the effect 'Unsharp Mask' (ADBE Unsharp Mask2)",
+     "fx_vibrance: 'SRC_vibrance' has the effect 'Vibrance' (ADBE Vibrance)"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/14b_effects_distort_generate.aep",
+   "export": "exports/14b_effects_distort_generate.effectcraft.aep",
+   "import_losses": {
+    "effects": [
+     "fx_bulge: 'SRC_bulge' has the effect 'Bulge' (ADBE Bulge), kept without rendering",
+     "fx_cell_pattern: 'SRC_cell_pattern' has the effect 'Cell Pattern' (ADBE Cell Pattern), kept without rendering",
+     "fx_checkerboard: 'SRC_checkerboard' has the effect 'Checkerboard' (ADBE Checkerboard), kept without rendering",
+     "fx_mirror: 'SRC_mirror' has the effect 'Mirror' (ADBE Mirror), kept without rendering",
+     "fx_polar_coordinates: 'SRC_polar_coordinates' has the effect 'Polar Coordinates' (ADBE Polar Coordinates), kept without rendering",
+     "fx_motion_tile: 'SRC_motion_tile' has the effect 'Motion Tile' (ADBE Tile), kept without rendering",
+     "fx_twirl: 'SRC_twirl' has the effect 'Twirl (Legacy)' (ADBE Twirl), kept without rendering",
+     "fx_wave_warp: 'SRC_wave_warp' has the effect 'Wave Warp' (ADBE Wave Warp), kept without rendering",
+     "fx_cc_vignette: 'SRC_cc_vignette' has the effect 'CC Vignette' (CS Vignette), kept without rendering",
+     "fx_cc_bend_it: 'SRC_cc_bend_it' effect 'CC Bend It' (CC Bend It): parameter Render Prestart (CC Bend It-0004): item 'Bend' has no counterpart, default used"
+    ]
+   },
+   "export_losses": {
+    "effects": [
+     "fx_bulge: 'SRC_bulge' has the effect 'Bulge' (ADBE Bulge)",
+     "fx_cc_vignette: 'SRC_cc_vignette' has the effect 'CC Vignette' (CS Vignette)",
+     "fx_cell_pattern: 'SRC_cell_pattern' has the effect 'Cell Pattern' (ADBE Cell Pattern)",
+     "fx_checkerboard: 'SRC_checkerboard' has the effect 'Checkerboard' (ADBE Checkerboard)",
+     "fx_fractal_noise_anim: 'SRC_fractal_noise_anim' effect 'Fractal Noise': parameter 'Evolution': keys on a popup, checkbox, angle or integer slider are not written (not sampled), the first key's value was written",
+     "fx_mirror: 'SRC_mirror' has the effect 'Mirror' (ADBE Mirror)",
+     "fx_motion_tile: 'SRC_motion_tile' has the effect 'Motion Tile' (ADBE Tile)",
+     "fx_offset: 'SRC_offset' has the effect 'Offset' (ec.distort.offset)",
+     "fx_polar_coordinates: 'SRC_polar_coordinates' has the effect 'Polar Coordinates' (ADBE Polar Coordinates)",
+     "fx_twirl: 'SRC_twirl' has the effect 'Twirl (Legacy)' (ADBE Twirl)",
+     "fx_wave_warp: 'SRC_wave_warp' has the effect 'Wave Warp' (ADBE Wave Warp)"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/14c_effects_stylize_transition.aep",
+   "export": "exports/14c_effects_stylize_transition.effectcraft.aep",
+   "import_losses": {
+    "effects": [
+     "fx_block_dissolve: 'SRC_block_dissolve' has the effect 'Block Dissolve' (ADBE Block Dissolve), kept without rendering",
+     "fx_color_key: 'SRC_color_key' has the effect 'Color Key' (ADBE Color Key), kept without rendering",
+     "fx_emboss: 'SRC_emboss' has the effect 'Emboss' (ADBE Emboss), kept without rendering",
+     "fx_find_edges: 'SRC_find_edges' has the effect 'Find Edges' (ADBE Find Edges), kept without rendering",
+     "fx_minimax: 'SRC_minimax' has the effect 'Minimax' (ADBE Minimax), kept without rendering",
+     "fx_mosaic: 'SRC_mosaic' has the effect 'Mosaic' (ADBE Mosaic), kept without rendering",
+     "fx_roughen_edges: 'SRC_roughen_edges' has the effect 'Roughen Edges' (ADBE Roughen Edges), kept without rendering",
+     "fx_set_channels: 'SRC_set_channels' has the effect 'Set Channels' (ADBE Set Channels), kept without rendering",
+     "fx_strobe_light: 'SRC_strobe_light' has the effect 'Strobe Light' (ADBE Strobe), kept without rendering",
+     "fx_stroke_on_mask: 'SRC_stroke_on_mask' has the effect 'Stroke' (ADBE Stroke), kept without rendering"
+    ]
+   },
+   "export_losses": {
+    "effects": [
+     "fx_block_dissolve: 'SRC_block_dissolve' has the effect 'Block Dissolve' (ADBE Block Dissolve)",
+     "fx_color_key: 'SRC_color_key' has the effect 'Color Key' (ADBE Color Key)",
+     "fx_echo: 'SRC_echo' has the effect 'Echo' (ec.time.echo)",
+     "fx_emboss: 'SRC_emboss' has the effect 'Emboss' (ADBE Emboss)",
+     "fx_find_edges: 'SRC_find_edges' has the effect 'Find Edges' (ADBE Find Edges)",
+     "fx_linear_wipe_anim: 'SRC_linear_wipe_anim' has the effect 'Linear Wipe' (ec.transition.linearwipe)",
+     "fx_minimax: 'SRC_minimax' has the effect 'Minimax' (ADBE Minimax)",
+     "fx_mosaic: 'SRC_mosaic' has the effect 'Mosaic' (ADBE Mosaic)",
+     "fx_roughen_edges: 'SRC_roughen_edges' has the effect 'Roughen Edges' (ADBE Roughen Edges)",
+     "fx_set_channels: 'SRC_set_channels' has the effect 'Set Channels' (ADBE Set Channels)",
+     "fx_strobe_light: 'SRC_strobe_light' has the effect 'Strobe Light' (ADBE Strobe)",
+     "fx_stroke_on_mask: 'SRC_stroke_on_mask' has the effect 'Stroke' (ADBE Stroke)"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/15_time_remap.aep",
+   "export": "exports/15_time_remap.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/16_parenting.aep",
+   "export": "exports/16_parenting.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {
+    "transform_properties": [
+     "parenting: 'NULL_3D_parent' Y Rotation"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/17_essential_graphics.aep",
+   "export": "exports/17_essential_graphics.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/18_markers_comp_settings.aep",
+   "export": "exports/18_markers_comp_settings.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {
+    "composition_settings": [
+     "'markers_comp_settings': start timecode written as 107891 frames"
+    ],
+    "rounded_times": [
+     "comp_par_anamorphic_23976: start, in or out point moved to the time base; layer 'circle_should_look_round'",
+     "comp_par_anamorphic_23976: start, in or out point moved to the time base; layer 'BG'",
+     "markers_comp_settings: start, in or out point moved to the time base; layer 'MB_off_same_motion'",
+     "markers_comp_settings: start, in or out point moved to the time base; layer 'MB_fast_motion_blur_on'",
+     "markers_comp_settings: start, in or out point moved to the time base; layer 'BG'"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/20_kitchen_sink.aep",
+   "export": "exports/20_kitchen_sink.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {
+    "transform_properties": [
+     "kitchen_sink: 'CARD_3D_precomp' Y Rotation"
+    ]
+   }
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/21_project_16bpc.aep",
+   "export": "exports/21_project_16bpc.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/22_project_32bpc_linear.aep",
+   "export": "exports/22_project_32bpc_linear.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {}
+  },
+  {
+   "source": "corpus/aep/ae2026_v26/23_project_structure.aep",
+   "export": "exports/23_project_structure.effectcraft.aep",
+   "import_losses": {},
+   "export_losses": {
+    "footage_items": [
+     "footage 'Footage': Video footage of type '.' is not exported (no prototype)"
+    ],
+    "unsupported_layers": [
+     "project_structure: footage layer whose footage is not exported: 'Footage'"
+    ]
+   }
+  },
+  {
+   "source": "EffectCraft-native: title.jsx (text + shapes + keyframes)",
+   "export": "exports/ec_title.effectcraft.aep"
+  },
+  {
+   "source": "EffectCraft-native: alleffects.jsx (every EffectCraft effect with an AE mapping)",
+   "export": "exports/ec_alleffects.effectcraft.aep"
+  }
+ ]
+}
