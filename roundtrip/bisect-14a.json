@@ -1,0 +1,170 @@
+{
+ "project": "exports/14a_effects_blur_color.effectcraft.aep",
+ "frames": "0-2",
+ "failed": [
+  "fx_invert"
+ ],
+ "results": [
+  {
+   "comp": "fx_black_white",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_brightness_contrast",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_curves_default",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_directional_blur",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_exposure",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_fast_box_blur",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_fill",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_gaussian_blur",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_glow",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_hue_saturation",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_invert",
+   "renders": false,
+   "frames": 0,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_levels_gamma",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_noise",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_posterize",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_radial_blur_zoom",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_sharpen",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_tint",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_tritone",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_unsharp_mask",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  },
+  {
+   "comp": "fx_vibrance",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error_code": null,
+   "messages": []
+  }
+ ],
+ "verdict": "Only fx_invert fails: the aerender process dies right after the render settings (log cut, no Total Time), i.e. a crash, which surfaces as Error Code 512 when the whole main comp is rendered. All other 19 sub-comps render frames 0-2."
+}

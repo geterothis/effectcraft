@@ -1,0 +1,61 @@
+{
+ "ae": "26.5x89",
+ "results": [
+  {
+   "file": "20_control_all_layers.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_no_kitchen_sink_0_CTRL_parent.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_no_kitchen_sink_1_chord_stereo_48k.wav.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_no_kitchen_sink_2_SPARKS_repeater_glow_add.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_no_kitchen_sink_3_CAM.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_no_kitchen_sink_4_CARD_3D_precomp.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_no_kitchen_sink_5_VIGNETTE_mask_feather_multiply.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_no_kitchen_sink_6_BG_plate_blurred.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_no_ks_card_0_underline_trim.aep",
+   "opens": true,
+   "items": 9
+  },
+  {
+   "file": "20_no_ks_card_1_Kitchen_Sink.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_no_ks_card_2_card_bg.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  }
+ ],
+ "verdict": "Only 20_no_ks_card_0_underline_trim.aep opens: removing the shape layer underline_trim (comp ks_card: open 2-point path, stroke, Trim Paths with eased End keys) fixes the damaged file; every other variant, incl. the control, is damaged (Invalid read length)."
+}
