@@ -26,8 +26,15 @@ jobs:
           # (this repo only: Contents + Workflows read/write) as secret SYNC_TOKEN.
           GH_TOKEN: ${{ secrets.SYNC_TOKEN || github.token }}
           REPO: ${{ github.repository }}
+          HAS_PAT: ${{ secrets.SYNC_TOKEN != '' }}
         run: |
           set -euo pipefail
+          if [ "$HAS_PAT" = "true" ]; then
+            echo "Token: SYNC_TOKEN"
+            gh api "repos/$REPO" --jq '"PAT can access " + .full_name' # fails fast if the PAT is broken
+          else
+            echo "Token: GITHUB_TOKEN (no SYNC_TOKEN; upstream workflow edits will fail to sync)"
+          fi
           result=$(gh api -X POST "repos/$REPO/merge-upstream" -f branch=main)
           echo "$result"
           echo "### Upstream sync" >> "$GITHUB_STEP_SUMMARY"
