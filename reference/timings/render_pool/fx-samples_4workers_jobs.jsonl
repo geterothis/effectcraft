@@ -1,0 +1,14 @@
+{"id":"fx-nondefault-01","worker":1,"attempt":1,"exit":0,"seconds":45.08,"status":"ok"}
+{"id":"fx-nondefault-02","worker":2,"attempt":2,"exit":0,"seconds":19.05,"status":"failed"}
+{"id":"fx-nondefault-03","worker":3,"attempt":2,"exit":0,"seconds":20.58,"status":"failed"}
+{"id":"fx-nondefault-04","worker":4,"attempt":1,"exit":0,"seconds":26.18,"status":"ok"}
+{"id":"fx-nondefault-05","worker":4,"attempt":2,"exit":0,"seconds":16.21,"status":"ok"}
+{"id":"fx-nondefault-06","worker":1,"attempt":1,"exit":0,"seconds":14.97,"status":"ok"}
+{"id":"fx-nondefault-07","worker":3,"attempt":1,"exit":0,"seconds":15.1,"status":"ok"}
+{"id":"fx-nondefault-08","worker":2,"attempt":1,"exit":0,"seconds":24.34,"status":"ok"}
+{"id":"fx-nondefault-09","worker":1,"attempt":2,"exit":0,"seconds":15.95,"status":"ok"}
+{"id":"fx-nondefault-10","worker":3,"attempt":1,"exit":0,"seconds":19.42,"status":"ok"}
+{"id":"fx-nondefault-11","worker":4,"attempt":2,"exit":0,"seconds":27.09,"status":"failed"}
+{"id":"fx-nondefault-12","worker":2,"attempt":2,"exit":0,"seconds":26.44,"status":"ok"}
+{"id":"fx-nondefault-13","worker":3,"attempt":1,"exit":0,"seconds":38.21,"status":"ok"}
+{"id":"fx-nondefault-14","worker":1,"attempt":1,"exit":0,"seconds":22.41,"status":"ok"}

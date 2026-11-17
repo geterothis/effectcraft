@@ -1,0 +1,13 @@
+{
+  "workers": 4,
+  "jobs": 14,
+  "ok": 11,
+  "failed": [
+    "fx-nondefault-02",
+    "fx-nondefault-03",
+    "fx-nondefault-11"
+  ],
+  "wall_seconds": 122.9,
+  "sum_job_seconds": 331.0,
+  "speedup_vs_sequential": 2.69
+}

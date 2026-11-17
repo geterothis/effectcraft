@@ -1,0 +1,344 @@
+01 0 ADBE AUX CHANNEL EXTRACT
+01 1 ADBE DEPTH FIELD
+01 2 ADBE DEPTH MATTE
+01 3 ADBE FOG_3D
+01 4 ADBE ID MATTE
+01 5 Cryptomatte
+01 6 EXtractoR
+01 7 IDentifier
+01 8 ADBE Aud BT
+01 9 ADBE Aud Compressor
+01 10 ADBE Aud Delay
+01 11 ADBE Aud Distortion
+01 12 ADBE Aud Gate
+01 13 ADBE Aud HiLo
+01 14 ADBE Aud Modulator
+01 15 ADBE Aud Reverb
+01 16 ADBE Aud Reverse
+01 17 ADBE Aud Stereo Mixer
+01 18 ADBE Aud Tone
+01 19 ADBE Aud_Flange
+01 20 ADBE Param EQ
+01 21 ADBE Mask Prompter 3
+01 22 ADBE Bilateral
+01 23 ADBE Box Blur2
+01 24 ADBE Camera Lens Blur
+FILE 01 DONE (25 effects), total files 14, total effects 330
+02 25 ADBE CameraShakeDeblur
+02 26 ADBE Channel Blur
+02 27 ADBE Compound Blur
+02 28 ADBE Gaussian Blur 2
+02 29 ADBE Motion Blur
+02 30 ADBE Radial Blur
+02 31 ADBE Sharpen
+02 32 ADBE Smart Blur
+02 33 ADBE Unsharp Mask2
+02 34 CC Radial Blur
+02 35 CC Radial Fast Blur
+02 36 CC Vector Blur
+02 37 CS CrossBlur
+02 38 mochaAECC
+02 39 ADBE Arithmetic
+02 40 ADBE Blend
+02 41 ADBE Calculations
+02 42 ADBE Channel Combiner
+02 43 ADBE Compound Arithmetic
+02 44 ADBE Invert
+02 45 ADBE Minimax
+02 46 ADBE Remove Color Matting
+02 47 ADBE Set Channels
+02 48 ADBE Set Matte3
+02 49 ADBE Shift Channels
+FILE 02 DONE (25 effects), total files 14, total effects 330
+03 50 ADBE Solid Composite
+03 51 CS Composite
+03 52 ADBE AutoColor
+03 53 ADBE AutoContrast
+03 54 ADBE AutoLevels
+03 55 ADBE Black&White
+03 56 ADBE Brightness & Contrast 2
+03 57 ADBE Broadcast Colors
+03 58 ADBE CHANNEL MIXER
+03 59 ADBE Change Color
+03 60 ADBE Change To Color
+03 61 ADBE Color Balance (HLS)
+03 62 ADBE Color Balance 2
+03 63 ADBE Color Link
+03 64 ADBE CurvesCustom
+03 65 ADBE Deflicker
+03 66 ADBE DigitalVideoLimiter
+03 67 ADBE Easy Levels2
+03 68 ADBE Equalize
+03 69 ADBE Exposure2
+03 70 ADBE Gamma/Pedestal/Gain2
+03 71 ADBE HUE SATURATION
+03 72 ADBE Leave Color
+03 73 ADBE Lumetri
+03 74 ADBE OCIO CDL Transform
+FILE 03 DONE (25 effects), total files 14, total effects 330
+04 75 ADBE OCIO Color Space Transform
+04 76 ADBE OCIO Display Transform
+04 77 ADBE OCIO FILE Transform
+04 78 ADBE OCIO Look Transform
+04 79 ADBE PS Arbitrary Map
+04 80 ADBE PhotoFilterPS
+04 81 ADBE Pro Levels2
+04 82 ADBE SelectiveColor
+04 83 ADBE ShadowHighlight
+04 84 ADBE Tint
+04 85 ADBE Tritone
+04 86 ADBE Vibrance
+04 87 APC Colorama
+04 88 CC Color Offset
+04 89 CC Toner
+04 90 CS Color Neutralizer
+04 91 CS Kernel
+04 92 ADBE BEZMESH
+04 93 ADBE Bulge
+04 94 ADBE Corner Pin
+04 95 ADBE Displacement Map
+04 96 ADBE Geometry2
+04 97 ADBE LIQUIFY
+04 98 ADBE MESH WARP
+04 99 ADBE Magnify
+FILE 04 DONE (25 effects), total files 14, total effects 330
+05 100 ADBE Mirror
+05 101 ADBE Offset
+05 102 ADBE Optics Compensation
+05 103 ADBE Polar Coordinates
+05 104 ADBE RESHAPE
+05 105 ADBE Ripple
+05 106 ADBE SCHMEAR
+05 107 ADBE Spherize
+05 108 ADBE Turbulent Displace
+05 109 ADBE Twirl
+05 110 ADBE Upscale
+05 111 ADBE WRPMESH
+05 112 ADBE Wave Warp
+05 113 CC Bend It
+05 114 CC Bender
+05 115 CC Blobbylize
+05 116 CC Flo Motion
+05 117 CC Griddler
+05 118 CC Lens
+05 119 CC Page Turn
+05 120 CC Power Pin
+05 121 CC Ripple Pulse
+05 122 CC Slant
+05 123 CC Smear
+05 124 CC Split
+FILE 05 DONE (25 effects), total files 14, total effects 330
+06 125 CC Split 2
+06 126 CC Tiler
+06 127 ADBE Angle Control
+06 128 ADBE Checkbox Control
+06 129 ADBE Color Control
+06 130 ADBE Dropdown Control
+06 131 ADBE Layer Control
+06 132 ADBE Point Control
+06 133 ADBE Point3D Control
+06 134 ADBE Slider Control
+06 135 ADBE 4ColorGradient
+06 136 ADBE AudSpect
+06 137 ADBE AudWave
+06 138 ADBE Cell Pattern
+06 139 ADBE Checkerboard
+06 140 ADBE Circle
+06 141 ADBE ELLIPSE
+06 142 ADBE Eyedropper Fill
+06 143 ADBE Fill
+06 144 ADBE Fractal
+06 145 ADBE Grid
+06 146 ADBE Laser
+06 147 ADBE Lens Flare
+06 148 ADBE Lightning 2
+06 149 ADBE Paint Bucket
+FILE 06 DONE (25 effects), total files 14, total effects 330
+07 150 ADBE Ramp
+07 151 ADBE Scribble Fill
+07 152 ADBE Stroke
+07 153 ADBE Write-on
+07 154 APC Radio Waves
+07 155 APC Vegas
+07 156 CC Glue Gun
+07 157 CC Light Burst 2.5
+07 158 CC Light Rays
+07 159 CC Light Sweep
+07 160 CS Threads
+07 161 Mettle SkyBox Blur
+07 162 Mettle SkyBox Chromatic Aberrat
+07 163 Mettle SkyBox Color Gradients
+07 164 Mettle SkyBox Converter
+07 165 Mettle SkyBox Denoise
+07 166 Mettle SkyBox Digital Glitch
+07 167 Mettle SkyBox Fractal Noise
+07 168 Mettle SkyBox Glow
+07 169 Mettle SkyBox Project 2D
+07 170 Mettle SkyBox Rotate Sphere
+07 171 Mettle SkyBox Sharpen
+07 172 Mettle SkyBox Viewer
+07 173 ADBE ATG Extract
+07 174 ADBE Color Difference Key
+FILE 07 DONE (25 effects), total files 14, total effects 330
+08 175 ADBE Color Range
+08 176 ADBE Difference Matte2
+08 177 ADBE Extract
+08 178 ADBE KeyCleaner
+08 179 ADBE Linear Color Key2
+08 180 ADBE Spill2
+08 181 ADBE Unmult
+08 182 CC Simple Wire Removal
+08 183 Keylight 906
+08 184 ADBE Matte Choker
+08 185 ADBE RefineMatte2
+08 186 ADBE RefineRBMatte
+08 187 ADBE Simple Choker
+08 188 ADBE AIF Perlin Noise 3D
+08 189 ADBE Curl Noise
+08 190 ADBE Dust & Scratches
+08 191 ADBE Fractal Noise
+08 192 ADBE Median
+08 193 ADBE Noise Alpha2
+08 194 ADBE Noise HLS Auto2
+08 195 ADBE Noise HLS2
+08 196 ADBE Noise2
+08 197 ADBE PS Median
+08 198 VISINF Grain Duplication
+08 199 VISINF Grain Implant
+FILE 08 DONE (25 effects), total files 14, total effects 330
+09 200 VISINF Grain Removal
+09 201 ADBE Basic 3D
+09 202 ADBE Color Key
+09 203 ADBE Gaussian Blur
+09 204 ADBE Lightning
+09 205 ADBE Luma Key
+09 206 ADBE Reduce Interlace Flicker
+09 207 ADBE Spill Suppressor
+09 208 ISL MochaShapeImporter
+09 209 ADBE 3D Glasses2
+09 210 ADBE Bevel Alpha
+09 211 ADBE Bevel Edges
+09 212 ADBE Drop Shadow
+09 213 ADBE Radial Shadow
+09 214 CC Cylinder
+09 215 CC Environment
+09 216 CC Sphere
+09 217 CC Spotlight
+09 218 ADBE Playgnd
+09 219 APC CardDanceCam
+09 220 APC Caustics
+09 221 APC Foam
+09 222 APC Shatter
+09 223 APC Wave World
+09 224 CC Ball Action
+FILE 09 DONE (25 effects), total files 14, total effects 330
+10 225 CC Bubbles
+10 226 CC Drizzle
+10 227 CC Hair
+10 228 CC Mr. Mercury
+10 229 CC Particle Systems II
+10 230 CC Particle World
+10 231 CC Pixel Polly
+10 232 CC Scatterize
+10 233 CC Star Burst
+10 234 CSRainfall
+10 235 CSSnowfall
+10 236 ADBE Brush Strokes
+10 237 ADBE Cartoonify
+10 238 ADBE Color Emboss
+10 239 ADBE Emboss
+10 240 ADBE Find Edges
+10 241 ADBE Glo2
+10 242 ADBE Mosaic
+10 243 ADBE Posterize
+10 244 ADBE Roughen Edges
+10 245 ADBE Scatter
+10 246 ADBE Strobe
+10 247 ADBE Texturize
+10 248 ADBE Threshold2
+10 249 ADBE Tile
+FILE 10 DONE (25 effects), total files 14, total effects 330
+11 250 CC Burn Film
+11 251 CC Glass
+11 252 CC Kaleida
+11 253 CC Mr. Smoothie
+11 254 CC Plastic
+11 255 CC RepeTile
+11 256 CC Threshold
+11 257 CC Threshold RGB
+11 258 CS BlockLoad
+11 259 CS HexTile
+11 260 CS Vignette
+11 261 ADBE Timecode
+11 262 ADBE Difference
+11 263 ADBE Echo
+11 264 ADBE OFMotionBlur
+11 265 ADBE Posterize Time
+11 266 ADBE Time Displacement
+11 267 ADBE Timewarp
+11 268 CC Force Motion Blur
+11 269 CC Wide Time
+11 270 ADBE Block Dissolve
+11 271 ADBE Gradient Wipe
+11 272 ADBE IRIS_WIPE
+11 273 ADBE Linear Wipe
+11 274 ADBE Radial Wipe
+FILE 11 DONE (25 effects), total files 14, total effects 330
+12 275 ADBE Venetian Blinds
+12 276 APC CardWipeCam
+12 277 CC Glass Wipe
+12 278 CC Grid Wipe
+12 279 CC Image Wipe
+12 280 CC Jaws
+12 281 CC Light Wipe
+12 282 CC Radial ScaleWipe
+12 283 CC Scale Wipe
+12 284 CC Twister
+12 285 CC WarpoMatic
+12 286 CS LineSweep
+12 287 ADBE Cineon Converter2
+12 288 ADBE Compander
+12 289 ADBE GROW BOUNDS
+12 290 ADBE HDR ToneMap
+12 291 ADBE ProfileToProfile
+12 292 CC Overbrights
+12 293 ADBE 3D Glasses
+12 294 ADBE Alpha Levels2
+12 295 ADBE Alpha Levels3
+12 296 ADBE Box Blur
+12 297 ADBE Brightness & Contrast
+12 298 ADBE Cineon Converter
+12 299 ADBE Color Balance
+FILE 12 DONE (25 effects), total files 14, total effects 330
+13 300 ADBE Easy Levels
+13 301 ADBE Exposure
+13 302 ADBE Fast Blur
+13 303 ADBE Geometry
+13 304 ADBE Noise
+13 305 ADBE Noise Alpha
+13 306 ADBE Noise HLS
+13 307 ADBE Noise HLS Auto
+13 308 ADBE PSL Bevel Emboss
+13 309 ADBE PSL Drop Shadow
+13 310 ADBE PSL Inner Glow
+13 311 ADBE PSL Inner Shadow
+13 312 ADBE PSL Outer Glow
+13 313 ADBE PSL Solid Fill
+13 314 ADBE Paint
+13 315 ADBE Photo Filter
+13 316 ADBE Pro Levels
+13 317 ADBE RefineMatte
+13 318 ADBE Samurai
+13 319 ADBE Set Matte2
+13 320 ADBE Three-Way Color Corrector
+13 321 ADBE Threshold
+13 322 ADBE Unsharp Mask
+13 323 CC Composite
+13 324 CC PS Classic
+FILE 13 DONE (25 effects), total files 14, total effects 330
+14 325 CC PS LE Classic
+14 326 CC Rain
+14 327 CC Snow
+14 328 CC Time Blend
+14 329 CC Time Blend FX
+FILE 14 DONE (5 effects), total files 14, total effects 330
