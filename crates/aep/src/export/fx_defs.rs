@@ -5,7 +5,10 @@
 //! effect itself (read-back e1-zpardfull).
 //!
 //! The rows were listed from our effect cases (356-397 and the later effect batches) through the
-//! reader; `effect_map` names the parameters the importer and exporter convert.
+//! reader; `effect_map` names the parameters the importer and exporter convert. HDR Highlight
+//! Compression, Echo, Linear Wipe, Offset and Color Stabilizer were listed from a project made by
+//! After Effects 26.5 with each effect at its defaults; they agree with the importer block of
+//! 2026-11-05 (`1100-quickwins.aep`, aep-format.md 3.7).
 
 /// The id of the `ADBE Effect Built In Params` entry, the last of every effect.
 pub(crate) const BUILT_IN: u16 = u16::MAX;
@@ -704,6 +707,42 @@ pub(crate) static FX_DEFS: &[FxDef] = &[
         p(2, 1, &[7.0], Some((1.0, 31.0)), Some(31.0), Some(1.0), 0x00000000),
         p(5, 1, &[8.0], Some((1.0, 10.0)), Some(10.0), Some(1.0), 0x00000000),
         p(4, 11, &[], None, None, None, 0x00000000),
+        p(BUILT_IN, 9, &[], None, None, None, 0x00000000),
+    ]),
+    fx("ADBE HDR ToneMap", "HDR Highlight Compression", &[
+        p(0, 0, &[], None, None, None, 0x00000000),
+        p(1, 10, &[100.0], Some((0.0, 100.0)), Some(100.0), Some(0.0), 0x00000001),
+        p(BUILT_IN, 9, &[], None, None, None, 0x00000000),
+    ]),
+    fx("ADBE Echo", "Echo", &[
+        p(0, 0, &[], None, None, None, 0x00000000),
+        p(1, 10, &[-0.03333333507180214], Some((-5.0, 5.0)), Some(30000.0), Some(-30000.0), 0x00030000),
+        p(2, 1, &[1.0], Some((0.0, 10.0)), Some(30000.0), Some(0.0), 0x00000000),
+        p(3, 10, &[1.0], Some((0.0, 1.0)), Some(1.0), Some(0.0), 0x00020000),
+        p(4, 10, &[1.0], Some((0.0, 1.0)), Some(100.0), Some(0.0), 0x00020000),
+        p(5, 7, &[1.0], None, None, None, 0x00000007),
+        p(BUILT_IN, 9, &[], None, None, None, 0x00000000),
+    ]),
+    fx("ADBE Linear Wipe", "Linear Wipe", &[
+        p(0, 0, &[], None, None, None, 0x00000000),
+        p(1, 2, &[0.0], Some((0.0, 100.0)), Some(100.0), Some(0.0), 0x00000001),
+        p(2, 3, &[90.0], None, None, None, 0x00000000),
+        p(3, 2, &[0.0], Some((0.0, 100.0)), Some(32000.0), Some(0.0), 0x00010000),
+        p(BUILT_IN, 9, &[], None, None, None, 0x00000000),
+    ]),
+    fx("ADBE Offset", "Offset", &[
+        p(0, 0, &[], None, None, None, 0x00000000),
+        p(1, 6, &[0.5, 0.5], None, None, None, 0x00000000),
+        p(2, 2, &[0.0], Some((0.0, 1.0)), Some(1.0), Some(0.0), 0x00010001),
+        p(BUILT_IN, 9, &[], None, None, None, 0x00000000),
+    ]),
+    fx("ADBE Deflicker", "Color Stabilizer", &[
+        p(0, 0, &[], None, None, None, 0x00000000),
+        p(1, 7, &[2.0], None, None, None, 0x00000003),
+        p(2, 6, &[0.1999969482421875, 0.5], None, None, None, 0x00000000),
+        p(3, 6, &[0.5, 0.5], None, None, None, 0x00000000),
+        p(4, 6, &[0.8000030517578125, 0.5], None, None, None, 0x00000000),
+        p(5, 2, &[3.0], Some((1.0, 5.0)), Some(50.0), Some(1.0), 0x00010000),
         p(BUILT_IN, 9, &[], None, None, None, 0x00000000),
     ]),
 ];
