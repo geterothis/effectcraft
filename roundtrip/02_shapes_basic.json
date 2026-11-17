@@ -1,0 +1,66 @@
+{
+ "id": "02_shapes_basic",
+ "export": "02_shapes_basic.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "import_losses": {
+   "shape_layers": [
+    "shapes_basic: 'SHAPES_primitives': stroke dashes not imported"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {},
+ "render": {
+  "status": "match",
+  "worst_pct_px_over_8": 0.13,
+  "frames_rendered": 90,
+  "frames_expected": 90,
+  "aerender_messages": [],
+  "seconds": 14.3,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 224,
+    "mean_abs": 0.12,
+    "pct_px_over_8": 0.13
+   },
+   {
+    "frame": 15,
+    "max_abs": 224,
+    "mean_abs": 0.12,
+    "pct_px_over_8": 0.13
+   },
+   {
+    "frame": 30,
+    "max_abs": 224,
+    "mean_abs": 0.12,
+    "pct_px_over_8": 0.13
+   },
+   {
+    "frame": 45,
+    "max_abs": 224,
+    "mean_abs": 0.12,
+    "pct_px_over_8": 0.13
+   },
+   {
+    "frame": 60,
+    "max_abs": 224,
+    "mean_abs": 0.12,
+    "pct_px_over_8": 0.13
+   },
+   {
+    "frame": 75,
+    "max_abs": 224,
+    "mean_abs": 0.12,
+    "pct_px_over_8": 0.13
+   },
+   {
+    "frame": 89,
+    "max_abs": 224,
+    "mean_abs": 0.12,
+    "pct_px_over_8": 0.13
+   }
+  ]
+ },
+ "silent_losses": []
+}

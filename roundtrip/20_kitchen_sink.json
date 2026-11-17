@@ -1,0 +1,23 @@
+{
+ "id": "20_kitchen_sink",
+ "export": "20_kitchen_sink.effectcraft.aep",
+ "opens_in_ae_2026": false,
+ "open_error": "Error: After Effects error: your project file is apparently damaged (Invalid read length).",
+ "effectcraft_reported_losses": {
+  "export_losses": {
+   "transform_properties": [
+    "kitchen_sink: 'CARD_3D_precomp' Y Rotation"
+   ]
+  }
+ },
+ "render": {
+  "status": "render failed",
+  "frames_rendered": 0,
+  "frames_expected": 150,
+  "aerender_messages": [
+   "WARNING:After Effects warning: your project file is apparently damaged (skipped sections: 1).  Please save using a different name."
+  ],
+  "seconds": 17.0
+ },
+ "silent_losses": []
+}

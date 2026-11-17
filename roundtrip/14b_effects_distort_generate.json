@@ -1,0 +1,93 @@
+{
+ "id": "14b_effects_distort_generate",
+ "export": "14b_effects_distort_generate.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "import_losses": {
+   "effects": [
+    "fx_bulge: 'SRC_bulge' has the effect 'Bulge' (ADBE Bulge), kept without rendering",
+    "fx_cell_pattern: 'SRC_cell_pattern' has the effect 'Cell Pattern' (ADBE Cell Pattern), kept without rendering",
+    "fx_checkerboard: 'SRC_checkerboard' has the effect 'Checkerboard' (ADBE Checkerboard), kept without rendering",
+    "fx_mirror: 'SRC_mirror' has the effect 'Mirror' (ADBE Mirror), kept without rendering",
+    "fx_polar_coordinates: 'SRC_polar_coordinates' has the effect 'Polar Coordinates' (ADBE Polar Coordinates), kept without rendering",
+    "fx_motion_tile: 'SRC_motion_tile' has the effect 'Motion Tile' (ADBE Tile), kept without rendering",
+    "fx_twirl: 'SRC_twirl' has the effect 'Twirl (Legacy)' (ADBE Twirl), kept without rendering",
+    "fx_wave_warp: 'SRC_wave_warp' has the effect 'Wave Warp' (ADBE Wave Warp), kept without rendering",
+    "fx_cc_vignette: 'SRC_cc_vignette' has the effect 'CC Vignette' (CS Vignette), kept without rendering",
+    "fx_cc_bend_it: 'SRC_cc_bend_it' effect 'CC Bend It' (CC Bend It): parameter Render Prestart (CC Bend It-0004): item 'Bend' has no counterpart, default used"
+   ]
+  },
+  "export_losses": {
+   "effects": [
+    "fx_bulge: 'SRC_bulge' has the effect 'Bulge' (ADBE Bulge)",
+    "fx_cc_vignette: 'SRC_cc_vignette' has the effect 'CC Vignette' (CS Vignette)",
+    "fx_cell_pattern: 'SRC_cell_pattern' has the effect 'Cell Pattern' (ADBE Cell Pattern)",
+    "fx_checkerboard: 'SRC_checkerboard' has the effect 'Checkerboard' (ADBE Checkerboard)",
+    "fx_fractal_noise_anim: 'SRC_fractal_noise_anim' effect 'Fractal Noise': parameter 'Evolution': keys on a popup, checkbox, angle or integer slider are not written (not sampled), the first key's value was written",
+    "fx_mirror: 'SRC_mirror' has the effect 'Mirror' (ADBE Mirror)",
+    "fx_motion_tile: 'SRC_motion_tile' has the effect 'Motion Tile' (ADBE Tile)",
+    "fx_offset: 'SRC_offset' has the effect 'Offset' (ec.distort.offset)",
+    "fx_polar_coordinates: 'SRC_polar_coordinates' has the effect 'Polar Coordinates' (ADBE Polar Coordinates)",
+    "fx_twirl: 'SRC_twirl' has the effect 'Twirl (Legacy)' (ADBE Twirl)",
+    "fx_wave_warp: 'SRC_wave_warp' has the effect 'Wave Warp' (ADBE Wave Warp)"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {
+  "missing_effects": [
+   "fx_bulge / SRC_bulge: ADBE Bulge",
+   "fx_cc_vignette / SRC_cc_vignette: CS Vignette",
+   "fx_cell_pattern / SRC_cell_pattern: ADBE Cell Pattern",
+   "fx_checkerboard / SRC_checkerboard: ADBE Checkerboard",
+   "fx_mirror / SRC_mirror: ADBE Mirror",
+   "fx_motion_tile / SRC_motion_tile: ADBE Tile",
+   "fx_offset / SRC_offset: ADBE Offset",
+   "fx_polar_coordinates / SRC_polar_coordinates: ADBE Polar Coordinates",
+   "fx_twirl / SRC_twirl: ADBE Twirl",
+   "fx_wave_warp / SRC_wave_warp: ADBE Wave Warp"
+  ]
+ },
+ "render": {
+  "status": "differs",
+  "worst_pct_px_over_8": 39.14,
+  "frames_rendered": 60,
+  "frames_expected": 60,
+  "aerender_messages": [],
+  "seconds": 21.8,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 255,
+    "mean_abs": 22.0,
+    "pct_px_over_8": 34.61
+   },
+   {
+    "frame": 15,
+    "max_abs": 255,
+    "mean_abs": 23.34,
+    "pct_px_over_8": 38.9
+   },
+   {
+    "frame": 30,
+    "max_abs": 255,
+    "mean_abs": 23.84,
+    "pct_px_over_8": 39.06
+   },
+   {
+    "frame": 45,
+    "max_abs": 255,
+    "mean_abs": 24.03,
+    "pct_px_over_8": 39.14
+   },
+   {
+    "frame": 59,
+    "max_abs": 255,
+    "mean_abs": 23.99,
+    "pct_px_over_8": 39.07
+   }
+  ]
+ },
+ "silent_losses": [
+  "effect fx_offset / SRC_offset: ADBE Offset"
+ ]
+}

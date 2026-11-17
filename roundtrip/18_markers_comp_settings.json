@@ -1,0 +1,75 @@
+{
+ "id": "18_markers_comp_settings",
+ "export": "18_markers_comp_settings.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "export_losses": {
+   "composition_settings": [
+    "'markers_comp_settings': start timecode written as 107891 frames"
+   ],
+   "rounded_times": [
+    "comp_par_anamorphic_23976: start, in or out point moved to the time base; layer 'circle_should_look_round'",
+    "comp_par_anamorphic_23976: start, in or out point moved to the time base; layer 'BG'",
+    "markers_comp_settings: start, in or out point moved to the time base; layer 'MB_off_same_motion'",
+    "markers_comp_settings: start, in or out point moved to the time base; layer 'MB_fast_motion_blur_on'",
+    "markers_comp_settings: start, in or out point moved to the time base; layer 'BG'"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {},
+ "render": {
+  "status": "close",
+  "worst_pct_px_over_8": 1.07,
+  "frames_rendered": 90,
+  "frames_expected": 90,
+  "aerender_messages": [
+   "WARNING:After Effects warning: timeSpanStart of 0 seconds will cause render to have frames outside of range defined by comp displayStartTime (3600) and end of comp duration (3603). Render will succeed, but may have blank frames."
+  ],
+  "seconds": 13.8,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 219,
+    "mean_abs": 0.12,
+    "pct_px_over_8": 0.43
+   },
+   {
+    "frame": 15,
+    "max_abs": 224,
+    "mean_abs": 0.41,
+    "pct_px_over_8": 1.07
+   },
+   {
+    "frame": 30,
+    "max_abs": 219,
+    "mean_abs": 0.17,
+    "pct_px_over_8": 0.64
+   },
+   {
+    "frame": 45,
+    "max_abs": 219,
+    "mean_abs": 0.16,
+    "pct_px_over_8": 0.79
+   },
+   {
+    "frame": 60,
+    "max_abs": 219,
+    "mean_abs": 0.18,
+    "pct_px_over_8": 0.67
+   },
+   {
+    "frame": 75,
+    "max_abs": 224,
+    "mean_abs": 0.37,
+    "pct_px_over_8": 1.04
+   },
+   {
+    "frame": 89,
+    "max_abs": 219,
+    "mean_abs": 0.16,
+    "pct_px_over_8": 0.83
+   }
+  ]
+ },
+ "silent_losses": []
+}

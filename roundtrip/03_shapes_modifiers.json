@@ -1,0 +1,70 @@
+{
+ "id": "03_shapes_modifiers",
+ "export": "03_shapes_modifiers.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "import_losses": {
+   "shape_layers": [
+    "shapes_modifiers: 'MOD_wiggle_transform': shape item ADBE Vector Filter - Wiggler not imported",
+    "shapes_modifiers: 'MOD_wiggle_paths_roughen': shape item ADBE Vector Filter - Roughen not imported",
+    "shapes_modifiers: 'MOD_pucker_bloat': shape item ADBE Vector Filter - PB not imported",
+    "shapes_modifiers: 'MOD_zigzag': shape item ADBE Vector Filter - Zigzag not imported",
+    "shapes_modifiers: 'MOD_twist': shape item ADBE Vector Filter - Twist not imported"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {},
+ "render": {
+  "status": "close",
+  "worst_pct_px_over_8": 3.55,
+  "frames_rendered": 90,
+  "frames_expected": 90,
+  "aerender_messages": [],
+  "seconds": 18.2,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 224,
+    "mean_abs": 2.82,
+    "pct_px_over_8": 3.5
+   },
+   {
+    "frame": 15,
+    "max_abs": 224,
+    "mean_abs": 2.46,
+    "pct_px_over_8": 3.07
+   },
+   {
+    "frame": 30,
+    "max_abs": 224,
+    "mean_abs": 2.11,
+    "pct_px_over_8": 2.67
+   },
+   {
+    "frame": 45,
+    "max_abs": 224,
+    "mean_abs": 1.73,
+    "pct_px_over_8": 2.13
+   },
+   {
+    "frame": 60,
+    "max_abs": 224,
+    "mean_abs": 2.16,
+    "pct_px_over_8": 2.7
+   },
+   {
+    "frame": 75,
+    "max_abs": 224,
+    "mean_abs": 2.49,
+    "pct_px_over_8": 3.09
+   },
+   {
+    "frame": 89,
+    "max_abs": 224,
+    "mean_abs": 2.9,
+    "pct_px_over_8": 3.55
+   }
+  ]
+ },
+ "silent_losses": []
+}

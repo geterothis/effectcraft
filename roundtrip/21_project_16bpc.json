@@ -1,0 +1,60 @@
+{
+ "id": "21_project_16bpc",
+ "export": "21_project_16bpc.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {},
+ "ae_structural_diff_vs_original": {},
+ "render": {
+  "status": "match",
+  "worst_pct_px_over_8": 0.0,
+  "frames_rendered": 90,
+  "frames_expected": 90,
+  "aerender_messages": [],
+  "seconds": 16.1,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 1,
+    "mean_abs": 0.0,
+    "pct_px_over_8": 0.0
+   },
+   {
+    "frame": 15,
+    "max_abs": 1,
+    "mean_abs": 0.0,
+    "pct_px_over_8": 0.0
+   },
+   {
+    "frame": 30,
+    "max_abs": 1,
+    "mean_abs": 0.0,
+    "pct_px_over_8": 0.0
+   },
+   {
+    "frame": 45,
+    "max_abs": 1,
+    "mean_abs": 0.0,
+    "pct_px_over_8": 0.0
+   },
+   {
+    "frame": 60,
+    "max_abs": 1,
+    "mean_abs": 0.0,
+    "pct_px_over_8": 0.0
+   },
+   {
+    "frame": 75,
+    "max_abs": 1,
+    "mean_abs": 0.0,
+    "pct_px_over_8": 0.0
+   },
+   {
+    "frame": 89,
+    "max_abs": 1,
+    "mean_abs": 0.0,
+    "pct_px_over_8": 0.0
+   }
+  ]
+ },
+ "silent_losses": []
+}

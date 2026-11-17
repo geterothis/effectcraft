@@ -1,0 +1,85 @@
+{
+ "id": "06_footage_video_audio",
+ "export": "06_footage_video_audio.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "export_losses": {
+   "footage_items": [
+    "footage 'sweep_44k.mp3': Audio footage of type '.mp3' is not exported (no prototype)"
+   ],
+   "unsupported_layers": [
+    "footage_video_audio: footage layer whose footage is not exported: 'sweep_44k.mp3'"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {
+  "missing_layers": [
+   "footage_video_audio / sweep_44k.mp3"
+  ]
+ },
+ "render": {
+  "status": "close",
+  "worst_pct_px_over_8": 3.02,
+  "frames_rendered": 120,
+  "frames_expected": 120,
+  "aerender_messages": [],
+  "seconds": 14.4,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 65,
+    "mean_abs": 0.15,
+    "pct_px_over_8": 1.39
+   },
+   {
+    "frame": 15,
+    "max_abs": 100,
+    "mean_abs": 0.32,
+    "pct_px_over_8": 2.7
+   },
+   {
+    "frame": 30,
+    "max_abs": 100,
+    "mean_abs": 0.33,
+    "pct_px_over_8": 2.78
+   },
+   {
+    "frame": 45,
+    "max_abs": 100,
+    "mean_abs": 0.34,
+    "pct_px_over_8": 2.9
+   },
+   {
+    "frame": 60,
+    "max_abs": 100,
+    "mean_abs": 0.32,
+    "pct_px_over_8": 2.67
+   },
+   {
+    "frame": 75,
+    "max_abs": 100,
+    "mean_abs": 0.33,
+    "pct_px_over_8": 2.85
+   },
+   {
+    "frame": 90,
+    "max_abs": 100,
+    "mean_abs": 0.35,
+    "pct_px_over_8": 3.02
+   },
+   {
+    "frame": 105,
+    "max_abs": 70,
+    "mean_abs": 0.19,
+    "pct_px_over_8": 1.94
+   },
+   {
+    "frame": 119,
+    "max_abs": 63,
+    "mean_abs": 0.2,
+    "pct_px_over_8": 1.99
+   }
+  ]
+ },
+ "silent_losses": []
+}

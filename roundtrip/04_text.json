@@ -1,0 +1,78 @@
+{
+ "id": "04_text",
+ "export": "04_text.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "import_losses": {
+   "text_layers": [
+    "text: 'TEXT_sourcetext_keys': Source Text keyframes are not imported (the first text document is)",
+    "text: 'Text on a mask path': Path Options are not imported",
+    "text: 'expression selector': animator 'Anim_tracking_expr': selector ADBE Text Expressible Selector not imported",
+    "text: 'Wiggly Selector': animator 'Anim_scale_rot_color': selector ADBE Text Wiggly Selector not imported"
+   ]
+  },
+  "export_losses": {
+   "masks": [
+    "text: 1 mask(s) on a text layer (the path unit on text layers is not verified) on 'Text on a mask path'"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {
+  "changed": [
+   "text / Text on a mask path: masks 1 -> 0"
+  ]
+ },
+ "render": {
+  "status": "differs",
+  "worst_pct_px_over_8": 6.88,
+  "frames_rendered": 90,
+  "frames_expected": 90,
+  "aerender_messages": [],
+  "seconds": 19.4,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 224,
+    "mean_abs": 4.61,
+    "pct_px_over_8": 6.68
+   },
+   {
+    "frame": 15,
+    "max_abs": 224,
+    "mean_abs": 4.49,
+    "pct_px_over_8": 6.77
+   },
+   {
+    "frame": 30,
+    "max_abs": 224,
+    "mean_abs": 4.49,
+    "pct_px_over_8": 6.76
+   },
+   {
+    "frame": 45,
+    "max_abs": 224,
+    "mean_abs": 4.57,
+    "pct_px_over_8": 6.78
+   },
+   {
+    "frame": 60,
+    "max_abs": 224,
+    "mean_abs": 4.62,
+    "pct_px_over_8": 6.85
+   },
+   {
+    "frame": 75,
+    "max_abs": 224,
+    "mean_abs": 4.7,
+    "pct_px_over_8": 6.88
+   },
+   {
+    "frame": 89,
+    "max_abs": 224,
+    "mean_abs": 4.64,
+    "pct_px_over_8": 6.85
+   }
+  ]
+ },
+ "silent_losses": []
+}

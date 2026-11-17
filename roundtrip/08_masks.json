@@ -1,0 +1,75 @@
+{
+ "id": "08_masks",
+ "export": "08_masks.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "import_losses": {
+   "effects": [
+    "masks: 'MASK_rotobezier_open_stroke_fx' has the effect 'Stroke' (ADBE Stroke), kept without rendering"
+   ]
+  },
+  "export_losses": {
+   "effects": [
+    "masks: 'MASK_rotobezier_open_stroke_fx' has the effect 'Stroke' (ADBE Stroke)"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {
+  "missing_effects": [
+   "masks / MASK_rotobezier_open_stroke_fx: ADBE Stroke"
+  ]
+ },
+ "render": {
+  "status": "close",
+  "worst_pct_px_over_8": 0.86,
+  "frames_rendered": 90,
+  "frames_expected": 90,
+  "aerender_messages": [],
+  "seconds": 16.6,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 0,
+    "mean_abs": 0.0,
+    "pct_px_over_8": 0.0
+   },
+   {
+    "frame": 15,
+    "max_abs": 254,
+    "mean_abs": 0.14,
+    "pct_px_over_8": 0.16
+   },
+   {
+    "frame": 30,
+    "max_abs": 255,
+    "mean_abs": 0.36,
+    "pct_px_over_8": 0.31
+   },
+   {
+    "frame": 45,
+    "max_abs": 255,
+    "mean_abs": 0.51,
+    "pct_px_over_8": 0.45
+   },
+   {
+    "frame": 60,
+    "max_abs": 255,
+    "mean_abs": 0.56,
+    "pct_px_over_8": 0.59
+   },
+   {
+    "frame": 75,
+    "max_abs": 255,
+    "mean_abs": 0.69,
+    "pct_px_over_8": 0.73
+   },
+   {
+    "frame": 89,
+    "max_abs": 255,
+    "mean_abs": 0.86,
+    "pct_px_over_8": 0.86
+   }
+  ]
+ },
+ "silent_losses": []
+}

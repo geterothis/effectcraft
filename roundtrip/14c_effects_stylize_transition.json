@@ -1,0 +1,97 @@
+{
+ "id": "14c_effects_stylize_transition",
+ "export": "14c_effects_stylize_transition.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "import_losses": {
+   "effects": [
+    "fx_block_dissolve: 'SRC_block_dissolve' has the effect 'Block Dissolve' (ADBE Block Dissolve), kept without rendering",
+    "fx_color_key: 'SRC_color_key' has the effect 'Color Key' (ADBE Color Key), kept without rendering",
+    "fx_emboss: 'SRC_emboss' has the effect 'Emboss' (ADBE Emboss), kept without rendering",
+    "fx_find_edges: 'SRC_find_edges' has the effect 'Find Edges' (ADBE Find Edges), kept without rendering",
+    "fx_minimax: 'SRC_minimax' has the effect 'Minimax' (ADBE Minimax), kept without rendering",
+    "fx_mosaic: 'SRC_mosaic' has the effect 'Mosaic' (ADBE Mosaic), kept without rendering",
+    "fx_roughen_edges: 'SRC_roughen_edges' has the effect 'Roughen Edges' (ADBE Roughen Edges), kept without rendering",
+    "fx_set_channels: 'SRC_set_channels' has the effect 'Set Channels' (ADBE Set Channels), kept without rendering",
+    "fx_strobe_light: 'SRC_strobe_light' has the effect 'Strobe Light' (ADBE Strobe), kept without rendering",
+    "fx_stroke_on_mask: 'SRC_stroke_on_mask' has the effect 'Stroke' (ADBE Stroke), kept without rendering"
+   ]
+  },
+  "export_losses": {
+   "effects": [
+    "fx_block_dissolve: 'SRC_block_dissolve' has the effect 'Block Dissolve' (ADBE Block Dissolve)",
+    "fx_color_key: 'SRC_color_key' has the effect 'Color Key' (ADBE Color Key)",
+    "fx_echo: 'SRC_echo' has the effect 'Echo' (ec.time.echo)",
+    "fx_emboss: 'SRC_emboss' has the effect 'Emboss' (ADBE Emboss)",
+    "fx_find_edges: 'SRC_find_edges' has the effect 'Find Edges' (ADBE Find Edges)",
+    "fx_linear_wipe_anim: 'SRC_linear_wipe_anim' has the effect 'Linear Wipe' (ec.transition.linearwipe)",
+    "fx_minimax: 'SRC_minimax' has the effect 'Minimax' (ADBE Minimax)",
+    "fx_mosaic: 'SRC_mosaic' has the effect 'Mosaic' (ADBE Mosaic)",
+    "fx_roughen_edges: 'SRC_roughen_edges' has the effect 'Roughen Edges' (ADBE Roughen Edges)",
+    "fx_set_channels: 'SRC_set_channels' has the effect 'Set Channels' (ADBE Set Channels)",
+    "fx_strobe_light: 'SRC_strobe_light' has the effect 'Strobe Light' (ADBE Strobe)",
+    "fx_stroke_on_mask: 'SRC_stroke_on_mask' has the effect 'Stroke' (ADBE Stroke)"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {
+  "missing_effects": [
+   "fx_block_dissolve / SRC_block_dissolve: ADBE Block Dissolve",
+   "fx_color_key / SRC_color_key: ADBE Color Key",
+   "fx_echo / SRC_echo: ADBE Echo",
+   "fx_emboss / SRC_emboss: ADBE Emboss",
+   "fx_find_edges / SRC_find_edges: ADBE Find Edges",
+   "fx_linear_wipe_anim / SRC_linear_wipe_anim: ADBE Linear Wipe",
+   "fx_minimax / SRC_minimax: ADBE Minimax",
+   "fx_mosaic / SRC_mosaic: ADBE Mosaic",
+   "fx_roughen_edges / SRC_roughen_edges: ADBE Roughen Edges",
+   "fx_set_channels / SRC_set_channels: ADBE Set Channels",
+   "fx_strobe_light / SRC_strobe_light: ADBE Strobe",
+   "fx_stroke_on_mask / SRC_stroke_on_mask: ADBE Stroke"
+  ]
+ },
+ "render": {
+  "status": "differs",
+  "worst_pct_px_over_8": 29.82,
+  "frames_rendered": 60,
+  "frames_expected": 60,
+  "aerender_messages": [],
+  "seconds": 19.8,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 255,
+    "mean_abs": 17.0,
+    "pct_px_over_8": 27.07
+   },
+   {
+    "frame": 15,
+    "max_abs": 255,
+    "mean_abs": 13.83,
+    "pct_px_over_8": 23.54
+   },
+   {
+    "frame": 30,
+    "max_abs": 255,
+    "mean_abs": 19.52,
+    "pct_px_over_8": 29.82
+   },
+   {
+    "frame": 45,
+    "max_abs": 255,
+    "mean_abs": 16.24,
+    "pct_px_over_8": 26.18
+   },
+   {
+    "frame": 59,
+    "max_abs": 255,
+    "mean_abs": 17.38,
+    "pct_px_over_8": 27.4
+   }
+  ]
+ },
+ "silent_losses": [
+  "effect fx_echo / SRC_echo: ADBE Echo",
+  "effect fx_linear_wipe_anim / SRC_linear_wipe_anim: ADBE Linear Wipe"
+ ]
+}

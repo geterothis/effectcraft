@@ -1,0 +1,85 @@
+{
+ "id": "11_3d_camera_lights",
+ "export": "11_3d_camera_lights.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "import_losses": {
+   "transform_properties": [
+    "threed_camera_lights: 'LIGHT_spot_shadows': ADBE Light Shadow Darkness not imported",
+    "threed_camera_lights: 'LIGHT_spot_shadows': ADBE Light Shadow Diffusion not imported"
+   ]
+  },
+  "export_losses": {
+   "lights": [
+    "threed_camera_lights: light 'LIGHT_parallel': a Parallel light is not written (not sampled)",
+    "threed_camera_lights: light 'LIGHT_ambient': a Ambient light is not written (not sampled)",
+    "threed_camera_lights: light 'LIGHT_spot_shadows': Casts Shadows is not written (not sampled)"
+   ],
+   "transform_properties": [
+    "threed_camera_lights: 'BOX_side_3D_xrot' Orientation",
+    "threed_camera_lights: 'CARD_3D_casts_shadow' Y Rotation",
+    "threed_camera_lights: 'FLOOR_3D' Orientation",
+    "threed_one_node_camera: 'SHAPE_3D' Y Rotation"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {
+  "missing_layers": [
+   "threed_camera_lights / LIGHT_parallel",
+   "threed_camera_lights / LIGHT_ambient"
+  ]
+ },
+ "render": {
+  "status": "differs",
+  "worst_pct_px_over_8": 92.14,
+  "frames_rendered": 90,
+  "frames_expected": 90,
+  "aerender_messages": [],
+  "seconds": 15.5,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 234,
+    "mean_abs": 28.05,
+    "pct_px_over_8": 87.87
+   },
+   {
+    "frame": 15,
+    "max_abs": 234,
+    "mean_abs": 28.34,
+    "pct_px_over_8": 87.16
+   },
+   {
+    "frame": 30,
+    "max_abs": 239,
+    "mean_abs": 29.24,
+    "pct_px_over_8": 86.47
+   },
+   {
+    "frame": 45,
+    "max_abs": 153,
+    "mean_abs": 29.92,
+    "pct_px_over_8": 87.81
+   },
+   {
+    "frame": 60,
+    "max_abs": 252,
+    "mean_abs": 30.21,
+    "pct_px_over_8": 89.39
+   },
+   {
+    "frame": 75,
+    "max_abs": 236,
+    "mean_abs": 30.08,
+    "pct_px_over_8": 90.88
+   },
+   {
+    "frame": 89,
+    "max_abs": 227,
+    "mean_abs": 29.77,
+    "pct_px_over_8": 92.14
+   }
+  ]
+ },
+ "silent_losses": []
+}

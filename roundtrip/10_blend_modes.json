@@ -1,0 +1,54 @@
+{
+ "id": "10_blend_modes",
+ "export": "10_blend_modes.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "import_losses": {
+   "blend_modes": [
+    "blend_modes: 'BM_DIVIDE' uses blend mode code 38",
+    "blend_modes: 'BM_SUBTRACT' uses blend mode code 37",
+    "blend_modes: 'BM_LIGHTER_COLOR' uses blend mode code 35",
+    "blend_modes: 'BM_DARKER_COLOR' uses blend mode code 36",
+    "blend_modes: 'BM_DISSOLVE' uses blend mode code 3"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {
+  "changed": [
+   "blend_modes / BM_DIVIDE: blend 5249 -> 5212",
+   "blend_modes / BM_SUBTRACT: blend 5248 -> 5212",
+   "blend_modes / BM_LIGHTER_COLOR: blend 5246 -> 5212",
+   "blend_modes / BM_DARKER_COLOR: blend 5247 -> 5212",
+   "blend_modes / BM_DISSOLVE: blend 5213 -> 5212"
+  ]
+ },
+ "render": {
+  "status": "differs",
+  "worst_pct_px_over_8": 8.21,
+  "frames_rendered": 30,
+  "frames_expected": 30,
+  "aerender_messages": [],
+  "seconds": 16.5,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 255,
+    "mean_abs": 7.46,
+    "pct_px_over_8": 8.21
+   },
+   {
+    "frame": 15,
+    "max_abs": 255,
+    "mean_abs": 7.46,
+    "pct_px_over_8": 8.21
+   },
+   {
+    "frame": 29,
+    "max_abs": 255,
+    "mean_abs": 7.46,
+    "pct_px_over_8": 8.21
+   }
+  ]
+ },
+ "silent_losses": []
+}

@@ -1,0 +1,26 @@
+{
+ "id": "23_project_structure",
+ "export": "23_project_structure.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "export_losses": {
+   "footage_items": [
+    "footage 'Footage': Video footage of type '.' is not exported (no prototype)"
+   ],
+   "unsupported_layers": [
+    "project_structure: footage layer whose footage is not exported: 'Footage'"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {
+  "missing_layers": [
+   "project_structure / missing_placeholder"
+  ]
+ },
+ "render": {
+  "status": "no reference"
+ },
+ "silent_losses": [
+  "layer project_structure / missing_placeholder"
+ ]
+}

@@ -1,0 +1,79 @@
+{
+ "id": "12_keyframes_easing",
+ "export": "12_keyframes_easing.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "import_losses": {
+   "transform_properties": [
+    "KEY_separate_dims_scale_opacity: ADBE Position_0",
+    "KEY_separate_dims_scale_opacity: ADBE Position_1"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {},
+ "render": {
+  "status": "close",
+  "worst_pct_px_over_8": 1.82,
+  "frames_rendered": 120,
+  "frames_expected": 120,
+  "aerender_messages": [],
+  "seconds": 15.6,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 224,
+    "mean_abs": 0.82,
+    "pct_px_over_8": 1.01
+   },
+   {
+    "frame": 15,
+    "max_abs": 224,
+    "mean_abs": 1.46,
+    "pct_px_over_8": 1.58
+   },
+   {
+    "frame": 30,
+    "max_abs": 224,
+    "mean_abs": 1.55,
+    "pct_px_over_8": 1.74
+   },
+   {
+    "frame": 45,
+    "max_abs": 224,
+    "mean_abs": 0.95,
+    "pct_px_over_8": 1.3
+   },
+   {
+    "frame": 60,
+    "max_abs": 224,
+    "mean_abs": 0.91,
+    "pct_px_over_8": 1.34
+   },
+   {
+    "frame": 75,
+    "max_abs": 224,
+    "mean_abs": 1.6,
+    "pct_px_over_8": 1.82
+   },
+   {
+    "frame": 90,
+    "max_abs": 224,
+    "mean_abs": 1.31,
+    "pct_px_over_8": 1.71
+   },
+   {
+    "frame": 105,
+    "max_abs": 224,
+    "mean_abs": 0.35,
+    "pct_px_over_8": 1.11
+   },
+   {
+    "frame": 119,
+    "max_abs": 224,
+    "mean_abs": 0.25,
+    "pct_px_over_8": 1.02
+   }
+  ]
+ },
+ "silent_losses": []
+}

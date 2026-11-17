@@ -1,0 +1,39 @@
+{
+ "id": "14a_effects_blur_color",
+ "export": "14a_effects_blur_color.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {
+  "import_losses": {
+   "effects": [
+    "fx_noise: 'SRC_noise' has the effect 'Noise' (ADBE Noise), kept without rendering",
+    "fx_posterize: 'SRC_posterize' has the effect 'Posterize' (ADBE Posterize), kept without rendering",
+    "fx_unsharp_mask: 'SRC_unsharp_mask' has the effect 'Unsharp Mask' (ADBE Unsharp Mask2), kept without rendering",
+    "fx_vibrance: 'SRC_vibrance' has the effect 'Vibrance' (ADBE Vibrance), kept without rendering"
+   ]
+  },
+  "export_losses": {
+   "effects": [
+    "fx_noise: 'SRC_noise' has the effect 'Noise' (ADBE Noise)",
+    "fx_posterize: 'SRC_posterize' has the effect 'Posterize' (ADBE Posterize)",
+    "fx_unsharp_mask: 'SRC_unsharp_mask' has the effect 'Unsharp Mask' (ADBE Unsharp Mask2)",
+    "fx_vibrance: 'SRC_vibrance' has the effect 'Vibrance' (ADBE Vibrance)"
+   ]
+  }
+ },
+ "ae_structural_diff_vs_original": {
+  "missing_effects": [
+   "fx_noise / SRC_noise: ADBE Noise",
+   "fx_posterize / SRC_posterize: ADBE Posterize",
+   "fx_unsharp_mask / SRC_unsharp_mask: ADBE Unsharp Mask2",
+   "fx_vibrance / SRC_vibrance: ADBE Vibrance"
+  ]
+ },
+ "render": {
+  "status": "render failed",
+  "frames_rendered": 0,
+  "frames_expected": 60,
+  "aerender_messages": [],
+  "seconds": 25.1
+ },
+ "silent_losses": []
+}

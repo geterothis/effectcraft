@@ -1,0 +1,60 @@
+{
+ "id": "01_solids_nulls_adjustment",
+ "export": "01_solids_nulls_adjustment.effectcraft.aep",
+ "opens_in_ae_2026": true,
+ "effectcraft_reported_losses": {},
+ "ae_structural_diff_vs_original": {},
+ "render": {
+  "status": "close",
+  "worst_pct_px_over_8": 2.14,
+  "frames_rendered": 90,
+  "frames_expected": 90,
+  "aerender_messages": [],
+  "seconds": 14.3,
+  "frames": [
+   {
+    "frame": 0,
+    "max_abs": 243,
+    "mean_abs": 1.66,
+    "pct_px_over_8": 2.14
+   },
+   {
+    "frame": 15,
+    "max_abs": 243,
+    "mean_abs": 1.7,
+    "pct_px_over_8": 2.14
+   },
+   {
+    "frame": 30,
+    "max_abs": 243,
+    "mean_abs": 1.72,
+    "pct_px_over_8": 2.14
+   },
+   {
+    "frame": 45,
+    "max_abs": 243,
+    "mean_abs": 1.72,
+    "pct_px_over_8": 2.14
+   },
+   {
+    "frame": 60,
+    "max_abs": 243,
+    "mean_abs": 1.72,
+    "pct_px_over_8": 2.14
+   },
+   {
+    "frame": 75,
+    "max_abs": 243,
+    "mean_abs": 1.72,
+    "pct_px_over_8": 2.14
+   },
+   {
+    "frame": 89,
+    "max_abs": 243,
+    "mean_abs": 1.73,
+    "pct_px_over_8": 2.14
+   }
+  ]
+ },
+ "silent_losses": []
+}
