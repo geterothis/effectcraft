@@ -1,0 +1,44 @@
+{
+ "ae": "26.5x89",
+ "results": [
+  {
+   "file": "20_control_patched_path_word5_4.aep",
+   "opens": true,
+   "items": 9
+  },
+  {
+   "file": "20_underline_3_vertices.aep",
+   "opens": true,
+   "items": 9
+  },
+  {
+   "file": "20_underline_ease_filled.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_underline_no_trim.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  },
+  {
+   "file": "20_underline_static_end.aep",
+   "opens": false,
+   "error": "Error: After Effects error: your project file is apparently damaged (Invalid read length)."
+  }
+ ],
+ "verdict": "Opens: control with path list header word 5 patched 2->4, and the 3-vertex variant. Still damaged: no_trim, static_end, ease_filled. So the damage is the 2-point path list header (word 5 = 2), not Trim Paths or eases.",
+ "patched_control_render": {
+  "comp": "kitchen_sink",
+  "frames": 150,
+  "compared_at_reference_frames": {
+   "0": 10.65,
+   "15": 10.25,
+   "30": 4.68,
+   "45": 0.59,
+   "60..149": 0.0
+  },
+  "unit": "% px with |diff|>8/255",
+  "note": "differences only during 0-1.5 s: CARD_3D_precomp Y Rotation keys lost (reported by EffectCraft); after the rotation ends it matches exactly"
+ }
+}
