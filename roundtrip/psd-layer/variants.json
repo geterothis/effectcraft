@@ -1,0 +1,151 @@
+{
+ "ae": "26.5",
+ "variants": {
+  "psd_layers.effectcraft.v1_opti_header.aep": {
+   "footage": [
+    {
+     "name": "Background fill/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    },
+    {
+     "name": "Blue box/layers_200x100.psd",
+     "width": 60,
+     "height": 50,
+     "footageMissing": true
+    },
+    {
+     "name": "Green bar/layers_200x100.psd",
+     "width": 90,
+     "height": 15,
+     "footageMissing": true
+    },
+    {
+     "name": "layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Background fill/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    },
+    {
+     "name": "Blue box/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    },
+    {
+     "name": "Green bar/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    }
+   ],
+   "opened": true,
+   "allFound": false
+  },
+  "psd_layers.effectcraft.v2_opti_dims_only.aep": {
+   "footage": [
+    {
+     "name": "Background fill/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    },
+    {
+     "name": "Blue box/layers_200x100.psd",
+     "width": 60,
+     "height": 50,
+     "footageMissing": true
+    },
+    {
+     "name": "Green bar/layers_200x100.psd",
+     "width": 90,
+     "height": 15,
+     "footageMissing": true
+    },
+    {
+     "name": "layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Background fill/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    },
+    {
+     "name": "Blue box/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    },
+    {
+     "name": "Green bar/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    }
+   ],
+   "opened": true,
+   "allFound": false
+  },
+  "psd_layers.effectcraft.v3_opti_header_and_sspc.aep": {
+   "footage": [
+    {
+     "name": "Background fill/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    },
+    {
+     "name": "Blue box/layers_200x100.psd",
+     "width": 60,
+     "height": 50,
+     "footageMissing": true
+    },
+    {
+     "name": "Green bar/layers_200x100.psd",
+     "width": 90,
+     "height": 15,
+     "footageMissing": true
+    },
+    {
+     "name": "layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Background fill/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    },
+    {
+     "name": "Blue box/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    },
+    {
+     "name": "Green bar/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": true
+    }
+   ],
+   "opened": true,
+   "allFound": false
+  }
+ },
+ "rendered": null,
+ "verdict": "All three variants open, but in each one all six PSD layer items are still footageMissing; only the merged item resolves. So neither the opti Photoshop header block (12..49), nor the document size alone (32..39), nor the header plus those sspc bytes is what AE needs. No variant resolved, so nothing was rendered. Note: AE's own psd_layers_zeroed.aep (part 2 of lab/psd-layers) does resolve, so the missing field is something the zeroed AE file keeps and the export lacks (outside the opti header and those sspc bytes)."
+}
