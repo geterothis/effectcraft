@@ -1,6 +1,5 @@
 Branch: geterothis:effectcraft:feat/effect-opacity (1 commit, 9efb9496, on upstream main cd9ee1e4; not stacked)
 Compare: https://github.com/storytold/effectcraft/compare/main...geterothis:effectcraft:feat/effect-opacity
-Status: DRAFT until the After Effects read-back (test-corpus exports/effect-opacity/) is in.
 
 Title: Effect Opacity on every effect, with .aep import and export
 
@@ -23,3 +22,4 @@ After Effects blends each effect's result with its input by Compositing Options 
 - `aep` `tests/it/export/effect_opacity.rs`: 37 % is written inside Compositing Options before its end with After Effects' `tdb4` header and imported back; 100 % writes no record; keys and an expression come back. The first and third fail without the `aep` change. `export::effects` now counts four properties on the Tint (its three plus Effect Opacity).
 - `cargo test` for effects, render, engine, aep and project passes with the pinned corpus. gpu passes on lavapipe except `opengl_adapters_get_cpu_compositing_at_once`, which needs an OpenGL adapter the machine doesn't have. `cargo clippy --all-targets -D warnings` (effects, render, aep, ui-egui) and `cargo fmt` are clean. I didn't run the full `cargo xtask ci`.
 - Against After Effects' frames of 63 effects saved at Effect Opacity 37 %: with the setting now imported, 48 render within 1.5/255 mean without modelling the opacity. The rest differ for reasons in those effects, not in the blend.
+- After Effects 26.5 read-back of exported Tint, Gradient Ramp, Gaussian Blur and Drop Shadow samples: all open without warnings, Effect Opacity reads 37 %, and each renders within 4/255 of After Effects' render of the original project.
