@@ -500,6 +500,9 @@ fn decode_frame(sample: &[u8], width: u32, height: u32, depth: u16, rgba: &mut [
         return Err("frame buffer is short".into());
     }
     let data = chunk_body(sample);
+    if data.is_empty() {
+        return Ok(());
+    }
     if data.len() < 2 {
         return Err("Animation frame is truncated".into());
     }
@@ -569,11 +572,17 @@ fn decode_frame(sample: &[u8], width: u32, height: u32, depth: u16, rgba: &mut [
     Ok(())
 }
 
+/// The chunk inside a sample: after its 4-byte size, up to that size. The size's top two bits
+/// are not part of it (files from After Effects set 0x40 in the top byte). A sample may be longer
+/// than its chunk (padding after it), and a chunk of under 8 bytes changes nothing (empty body).
 fn chunk_body(sample: &[u8]) -> &[u8] {
-    if sample.len() >= 6 {
-        let size = u32::from_be_bytes([sample[0], sample[1], sample[2], sample[3]]) as usize;
-        if size == sample.len() {
-            return &sample[4..];
+    if let Some(head) = sample.get(..4) {
+        let size = (u32::from_be_bytes([head[0], head[1], head[2], head[3]]) & 0x3fff_ffff) as usize;
+        if size < 8 && size <= sample.len() {
+            return &[];
+        }
+        if let Some(body) = sample.get(4..size) {
+            return body;
         }
     }
     sample
@@ -778,6 +787,56 @@ mod tests {
         let b = src.video_frame(FrameRequest::full(filmcraft_time::Tick(Tick::from_units(1, 30).0))).unwrap();
         assert_eq!(pixel(&b, 0, 0), [255, 255, 255, 255]);
         assert_eq!(pixel(&b, 0, 1), [0, 255, 0, 255], "the line the second frame does not write stays");
+        let _ = std::fs::remove_file(&path);
+    }
+
+    #[test]
+    fn a_padded_sample_and_an_empty_chunk_are_read_by_their_chunk_size() {
+        // A sample longer than its chunk (bytes after the chunk's own size) is read up to the
+        // chunk's size, and a chunk of only its size (4 bytes) leaves the frame as it was.
+        let red = [0xff, 0xff, 0x00, 0x00];
+        let blue = [0xff, 0x00, 0x00, 0xff];
+        let mut full = vec![0, 0];
+        full.extend(line32(&[red, red]));
+        full.extend(line32(&[red, red]));
+        let mut padded = vec![0, 0];
+        padded.extend(line32(&[blue, blue]));
+        padded.extend(line32(&[blue, blue]));
+        let mut padded = chunk(&padded);
+        padded.extend_from_slice(&[0x55; 37]);
+        let bytes = mov(2, 2, 32, &[chunk(&full), padded, chunk(&[])]);
+        let path = std::env::temp_dir().join(format!("ec-anim-padded-{}.mov", std::process::id()));
+        std::fs::write(&path, &bytes).unwrap();
+        let src = open(&path).unwrap().expect("open");
+        let at = |n: i64| src.video_frame(FrameRequest::full(filmcraft_time::Tick(Tick::from_units(n, 30).0))).unwrap();
+        assert_eq!(pixel(&at(0), 1, 1), [255, 0, 0, 255]);
+        assert_eq!(pixel(&at(1), 1, 1), [0, 0, 255, 255]);
+        assert_eq!(pixel(&at(2), 0, 0), [0, 0, 255, 255], "an empty chunk keeps the previous frame");
+        let _ = std::fs::remove_file(&path);
+    }
+
+    #[test]
+    fn flag_bits_in_the_chunk_size_are_not_part_of_it() {
+        // After Effects writes 0x40 in the chunk size's top byte. Read as part of the size, the
+        // chunk did not match its sample: its size bytes were taken as the header, and the frame
+        // was left unchanged or painted wrong.
+        let red = [0xff, 0xff, 0x00, 0x00];
+        let blue = [0xff, 0x00, 0x00, 0xff];
+        let flagged = |argb: [u8; 4]| {
+            let mut body = vec![0, 0];
+            body.extend(line32(&[argb, argb]));
+            body.extend(line32(&[argb, argb]));
+            let mut c = chunk(&body);
+            c[0] |= 0x40;
+            c
+        };
+        let bytes = mov(2, 2, 32, &[flagged(red), flagged(blue)]);
+        let path = std::env::temp_dir().join(format!("ec-anim-flagged-{}.mov", std::process::id()));
+        std::fs::write(&path, &bytes).unwrap();
+        let src = open(&path).unwrap().expect("open");
+        let at = |n: i64| src.video_frame(FrameRequest::full(filmcraft_time::Tick(Tick::from_units(n, 30).0))).unwrap();
+        assert_eq!(pixel(&at(0), 1, 1), [255, 0, 0, 255]);
+        assert_eq!(pixel(&at(1), 1, 1), [0, 0, 255, 255]);
         let _ = std::fs::remove_file(&path);
     }
 
