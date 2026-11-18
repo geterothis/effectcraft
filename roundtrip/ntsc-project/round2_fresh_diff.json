@@ -1,0 +1,12 @@
+{
+ "O1_no_gpuG": {
+  "vsOrig_max": 128,
+  "vsOrig_pctPx_gt2": 10.87,
+  "vsEC_max": 0
+ },
+ "O2_ec_xmp": {
+  "vsOrig_max": 0,
+  "vsOrig_pctPx_gt2": 0.0,
+  "vsEC_max": 128
+ }
+}
