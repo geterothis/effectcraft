@@ -1,6 +1,6 @@
 For storytold/effectcraft#2051 (QuickTime Animation decoder). Suggested as a comment to its author, with the patch attached or as a branch they can pull.
 
-Fork branch: geterothis:fix/qtrle-pr2051-on-main. Commit 7c1d7bfa on top of #2051 rebased onto main (f1b12414). Patch: chunk-size.patch.
+Fork branch: geterothis:fix/qtrle-pr2051-on-main. Commit 7c1d7bfa on top of #2051 rebased onto main (f1b12414). Patch: qtrle-chunk-size.patch.
 
 Comment draft:
 

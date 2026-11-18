@@ -1,6 +1,6 @@
 Title: aep import: keep the in and out points of a stretched layer with large time denominators
 
-Branch: geterothis:fix/aep-import-stretched-layer-times (one commit on main cd9ee1e4).
+Branch: geterothis:fix/aep-import-stretched-layer-times (two commits on main cd9ee1e4: the fix, then a test added after review).
 
 ## Problem
 
@@ -16,6 +16,7 @@ The layer stores start 16050557/524288 s, in and out points over 110729625, and 
 ## Tests
 
 - New `import::synthetic::a_stretched_layer_with_large_time_denominators_keeps_its_in_and_out_points`: a layer at 29 s with a stretch of 1431655765/2147483647. Before, both layers of the synthetic project were reported as out of range and set to 0. Now in = 29 s exactly, and the solid's out point is within a tick of `29 + stretch`.
-- New `import::synthetic::a_layer_time_that_reduces_past_i64_is_rounded_to_ticks`: the template layer's own values, within a tick of the exact times.
-- Both fail without the change. `cargo test -p effectcraft-aep` (420 + 90 passed), clippy (`-D warnings`) and fmt pass for the crate. I did not run the full `cargo xtask ci`.
+- New `import::synthetic::a_layer_time_with_the_template_values_is_kept`: the template layer's own values, within a tick of the exact times. Unreduced they pass `i64`; reduced they fit.
+- New `import::synthetic::a_layer_time_that_reduces_past_i64_is_rounded_to_ticks`: start, in/out and stretch over three different primes near 2^32, so even the reduced denominator (about 2^96) doesn't fit and the round-to-tick branch runs. Within a tick of the exact times.
+- All three fail without the change. `cargo test -p effectcraft-aep` (420 + 90 passed), clippy (`-D warnings`) and fmt pass for the crate. I did not run the full `cargo xtask ci`.
 - After Effects 2026 lab project (odd stretches of 33.3 % and 77.7 % on a solid, a 25 fps clip and a 25 fps precomposition in a 29.97 fps composition, plus a solid at -77.7 %): every start, in and out point imports within 0.00001 s of After Effects' read-back. The one exception is the reversed solid, at 0.0003 s. No time in the lab overflows, so this change leaves those values as they were. No damaged-data loss.
