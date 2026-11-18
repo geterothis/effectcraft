@@ -1,0 +1,157 @@
+{
+ "ae": "26.5",
+ "source": "exports/fix4 (commit 470ebcb)",
+ "open": {
+  "12_keyframes_easing.fix4.aep": {
+   "opens": true,
+   "items": 5
+  },
+  "20_kitchen_sink.fix4.aep": {
+   "opens": true,
+   "items": 9
+  },
+  "lhd3_counts.fix4.aep": {
+   "opens": true,
+   "items": 8
+  }
+ },
+ "lhd3_structure_vs_original": {
+  "layers": 20,
+  "diffs": []
+ },
+ "render": {
+  "20_kitchen_sink": {
+   "renders": true,
+   "frames": 150,
+   "aerender_exit": 0,
+   "vs_reference": {
+    "0": {
+     "max_abs": 255,
+     "pct_px_over_8": 10.65
+    },
+    "15": {
+     "max_abs": 255,
+     "pct_px_over_8": 10.25
+    },
+    "30": {
+     "max_abs": 254,
+     "pct_px_over_8": 4.68
+    },
+    "45": {
+     "max_abs": 254,
+     "pct_px_over_8": 0.59
+    },
+    "60": {
+     "max_abs": 9,
+     "pct_px_over_8": 0.0
+    },
+    "75": {
+     "max_abs": 9,
+     "pct_px_over_8": 0.0
+    },
+    "90": {
+     "max_abs": 9,
+     "pct_px_over_8": 0.0
+    },
+    "105": {
+     "max_abs": 9,
+     "pct_px_over_8": 0.0
+    },
+    "120": {
+     "max_abs": 9,
+     "pct_px_over_8": 0.0
+    },
+    "135": {
+     "max_abs": 9,
+     "pct_px_over_8": 0.0
+    },
+    "149": {
+     "max_abs": 9,
+     "pct_px_over_8": 0.0
+    }
+   },
+   "worst_pct_px_over_8": 10.65
+  },
+  "12_keyframes_easing": {
+   "renders": true,
+   "frames": 120,
+   "aerender_exit": 0,
+   "vs_reference": {
+    "0": {
+     "max_abs": 224,
+     "pct_px_over_8": 1.01
+    },
+    "15": {
+     "max_abs": 224,
+     "pct_px_over_8": 1.58
+    },
+    "30": {
+     "max_abs": 224,
+     "pct_px_over_8": 1.74
+    },
+    "45": {
+     "max_abs": 224,
+     "pct_px_over_8": 1.3
+    },
+    "60": {
+     "max_abs": 224,
+     "pct_px_over_8": 1.34
+    },
+    "75": {
+     "max_abs": 224,
+     "pct_px_over_8": 1.82
+    },
+    "90": {
+     "max_abs": 224,
+     "pct_px_over_8": 1.71
+    },
+    "105": {
+     "max_abs": 224,
+     "pct_px_over_8": 1.11
+    },
+    "119": {
+     "max_abs": 224,
+     "pct_px_over_8": 1.02
+    }
+   },
+   "worst_pct_px_over_8": 1.82
+  },
+  "lhd3_counts": {
+   "renders": true,
+   "frames": 90,
+   "aerender_exit": 0,
+   "vs_original_render": {
+    "0": {
+     "max_abs": 0,
+     "pct_px_over_8": 0.0
+    },
+    "15": {
+     "max_abs": 0,
+     "pct_px_over_8": 0.0
+    },
+    "30": {
+     "max_abs": 0,
+     "pct_px_over_8": 0.0
+    },
+    "45": {
+     "max_abs": 0,
+     "pct_px_over_8": 0.0
+    },
+    "60": {
+     "max_abs": 0,
+     "pct_px_over_8": 0.0
+    },
+    "75": {
+     "max_abs": 0,
+     "pct_px_over_8": 0.0
+    },
+    "89": {
+     "max_abs": 0,
+     "pct_px_over_8": 0.0
+    }
+   },
+   "worst_pct_px_over_8": 0.0
+  }
+ },
+ "verdict": "All 3 open in AE 2026 without errors. 20_kitchen_sink is fixed: it opens and renders. It matches the reference from 1.5 s on; the first 1.5 s differ by up to 10.65 % px from the lost CARD_3D_precomp Y Rotation, which EffectCraft already reports. lhd3_counts keeps every vertex count (paths 1-40, masks 2/5/13) and all Position keys (5/9/17, same frames, values and bezier) and renders identically to the original. 12_keyframes_easing worst diff is 1.82 % px, the same as batch 1, so there is no regression."
+}
