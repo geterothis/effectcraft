@@ -12,3 +12,17 @@ both layer comps each layer's name, source name, position and anchor. Render fra
 comps to PNG (`export_cropped.png`, `export_document.png`) and compare with `orig_cropped.png` /
 `orig_document.png` from part 2 (max channel difference). Result in
 `roundtrip/psd-layer/result.json` with the PNGs.
+
+## Part 2: which stored field After Effects needs (after the footageMissing result)
+
+Three copies of the export, each with fields copied into the six layer items from After Effects'
+own items (`lab/psd-layers/psd_layers_zeroed.aep`):
+- `psd_layers.effectcraft.v1_opti_header.aep`: `opti` bytes 12..49 (the Photoshop header block:
+  signature, channels, document size, depth, mode).
+- `psd_layers.effectcraft.v2_opti_dims_only.aep`: only `opti` 32..39 (the document size).
+- `psd_layers.effectcraft.v3_opti_header_and_sspc.aep`: v1 plus `sspc` 63, 64, 65, 73, 79, 201, 212.
+
+For each, open it (no Save As) and print `footageMissing` of every footage item; render frame 0 of
+both layer comps for the first variant whose layer items are all found
+(`<variant>_cropped.png`, `<variant>_document.png`) and compare with the originals. Results in
+`roundtrip/psd-layer/variants.json`.
