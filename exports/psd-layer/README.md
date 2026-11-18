@@ -36,3 +36,9 @@ v1-v3 did not help. After Effects' layer items also store the layer's name in th
   Effects' items (looks like the file's modification time).
 Same as part 2: `footageMissing` per item, render the first variant whose layer items resolve and
 compare with the originals. Results in `roundtrip/psd-layer/variants2.json`.
+
+## Part 4: final
+
+`psd_layers.effectcraft.final.aep`: exported by the branch with the Pin name written (commit
+after e210f189). Same checks as part 1: `footageMissing` per item, render both layer comps and
+compare with the originals. Results in `roundtrip/psd-layer/final.json` with the PNGs.
