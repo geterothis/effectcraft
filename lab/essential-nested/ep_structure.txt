@@ -1,0 +1,14 @@
+== comp item id 1 layers [{'id': 19, 'source_id': 18}, {'id': 17, 'source_id': 16}, {'id': 15, 'source_id': 14}]
+   control {"n": 1, "CTyp": 5, "chunks": ["CpS2", "CapS", "Utf8", "CTyp", "CVal", "CDef", "CprC", "CPrp"], "props": [{"CCId": 1, "CLId": 19, "path": [["ADBE Transform Group", 4294967295], ["ADBE Anchor Point", 4294967295]]}]}
+   control {"n": 2, "CTyp": 5, "chunks": ["CpS2", "CapS", "Utf8", "CTyp", "CVal", "CDef", "CprC", "CPrp"], "props": [{"CCId": 1, "CLId": 17, "path": [["ADBE Transform Group", 4294967295], ["ADBE Anchor Point", 4294967295]]}]}
+   control {"n": 3, "CTyp": 9, "chunks": ["CpS2", "CapS", "Utf8", "CTyp", "CVal", "CDef", "CSLk", "CDim", "CprC", "CPrp"], "props": [{"CCId": 1, "CLId": 15, "path": [["ADBE Transform Group", 4294967295], ["ADBE Scale", 4294967295]]}]}
+   control {"n": 4, "CTyp": 5, "chunks": ["CpS2", "CapS", "Utf8", "CTyp", "CVal", "CDef", "CprC", "CPrp"], "props": [{"CCId": 1, "CLId": 15, "path": [["ADBE Transform Group", 4294967295], ["ADBE Position", 4294967295]]}]}
+== comp item id 20 layers [{'id': 32, 'source_id': 1}]
+   control {"n": 1, "CTyp": 5, "chunks": ["CpS2", "CapS", "Utf8", "CTyp", "CVal", "CDef", "CprC", "CPrp"], "props": [{"CCId": 1, "CLId": 15, "path": [["ADBE Transform Group", 4294967295], ["ADBE Position", 4294967295]]}]}
+   control {"n": 2, "CTyp": 9, "chunks": ["CpS2", "CapS", "Utf8", "CTyp", "CVal", "CDef", "CSLk", "CDim", "CprC", "CPrp"], "props": [{"CCId": 1, "CLId": 15, "path": [["ADBE Transform Group", 4294967295], ["ADBE Scale", 4294967295]]}]}
+   control {"n": 3, "CTyp": 5, "chunks": ["CpS2", "CapS", "Utf8", "CTyp", "CVal", "CDef", "CprC", "CPrp"], "props": [{"CCId": 1, "CLId": 17, "path": [["ADBE Transform Group", 4294967295], ["ADBE Anchor Point", 4294967295]]}]}
+   control {"n": 4, "CTyp": 5, "chunks": ["CpS2", "CapS", "Utf8", "CTyp", "CVal", "CDef", "CprC", "CPrp"], "props": [{"CCId": 1, "CLId": 19, "path": [["ADBE Transform Group", 4294967295], ["ADBE Anchor Point", 4294967295]]}]}
+   layer 32 overrides {"OvG2_controls": 4, "group": ["tdsb", "tdsn", "tdmn ADBE Anchor Point", "LIST tdbs tdsb=1", "tdmn ADBE Anchor Point", "LIST tdbs tdsb=0", "tdmn ADBE Scale", "LIST tdbs tdsb=0", "tdmn ADBE Position", "LIST tdbs tdsb=0", "tdmn ADBE Group End"]}
+== comp item id 33 layers [{'id': 46, 'source_id': 20}, {'id': 45, 'source_id': 20}]
+   layer 46 overrides {"OvG2_controls": 4, "group": ["tdsb", "tdsn", "tdmn ADBE Position", "LIST tdbs tdsb=1", "tdmn ADBE Scale", "LIST tdbs tdsb=1", "tdmn ADBE Anchor Point", "LIST tdbs tdsb=1", "tdmn ADBE Anchor Point", "LIST tdbs tdsb=1", "tdmn ADBE Group End"]}
+   layer 45 overrides {"OvG2_controls": 4, "group": ["tdsb", "tdsn", "tdmn ADBE Position", "LIST tdbs tdsb=0", "tdmn ADBE Scale", "LIST tdbs tdsb=0", "tdmn ADBE Anchor Point", "LIST tdbs tdsb=0", "tdmn ADBE Anchor Point", "LIST tdbs tdsb=0", "tdmn ADBE Group End"]}
