@@ -1,0 +1,7 @@
+# Batch 3 (CC) AE read-back: aerender comp 'fx|<matchName>' frame 0, compare with the reference PNG, and check every effect parameter against the fx-nondefault JSON (that check matters most: for Threshold RGB, Toner, Tiler, Scale Wipe the sample frame barely changes).
+CC_Color_Offset.aep	comp=fx|CC Color Offset	ref=fx-nondefault-04-14.png
+CC_Threshold_RGB.aep	comp=fx|CC Threshold RGB	ref=fx-nondefault-11-8.png
+CC_Toner.aep	comp=fx|CC Toner	ref=fx-nondefault-04-15.png
+CC_Tiler.aep	comp=fx|CC Tiler	ref=fx-nondefault-06-2.png
+CC_Grid_Wipe.aep	comp=fx|CC Grid Wipe	ref=fx-nondefault-12-4.png
+CC_Scale_Wipe.aep	comp=fx|CC Scale Wipe	ref=fx-nondefault-12-9.png
