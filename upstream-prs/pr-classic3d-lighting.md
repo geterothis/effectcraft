@@ -1,6 +1,6 @@
 # render: Classic 3D specular exponent and spot feather as After Effects renders them
 
-Branch: `fix/render-classic3d-lighting` (one commit on main)
+Branch: `fix/render-classic3d-lighting` (on main)
 
 ## Problem
 
@@ -25,7 +25,7 @@ Two terms differ:
 
 - `Material::exponent` returns the Shininess percentage, at least 1.
 - `LightState::attenuation` interpolates the feather between the cosines of the inner and outer angles, divided by that interval itself (it is never empty inside the feather branch, however narrow the cone).
-- The same two changes are made in `classic3d.wgsl`, which takes the exponent from `Material::exponent`.
+- The same two changes are made in `classic3d.wgsl`, which takes the exponent from `Material::exponent`. In f32 a cosine near 1 rounds to 1, so the shader writes the same smoothstep with 1 − cos: half the squared distance between the unit vectors for the point, and 2·sin²(angle / 2) for the inner and outer angles.
 
 ## Results
 
@@ -36,4 +36,5 @@ Two terms differ:
 
 - New `three_d::tests::spot_feather_falls_off_over_the_cosine_of_the_angle` and `three_d::tests::specular_shininess_is_the_exponent`, using the lab values (the 40 % highlight is checked against 0.866^40 = 0.00317 on both sides). Both fail without the fix.
 - New `three_d::tests::a_very_narrow_spot_still_feathers_over_its_own_cone`: a 0.004° cone at feather 100 leaves under 1 % of the light at 99 % of its half-angle.
+- New GPU parity test `tests::three_d::narrow_spot_feather`: a 0.2° spot at feather 100, 30 000 px from the plane, matches the CPU at 8 and 32 bpc. With the cosine form in the shader it fails (4560 of 16000 pixels off, max 0.075).
 - `cargo test -p effectcraft-render`, the GPU `tests::three_d` CPU/GPU parity tests (lavapipe, `EFFECTCRAFT_REQUIRE_GPU=1`), the engine `tests::three_d` / `rig3d` tests, clippy (`-D warnings`) and fmt pass for the touched crates. I did not run the full `cargo xtask ci`.

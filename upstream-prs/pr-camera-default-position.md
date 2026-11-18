@@ -1,6 +1,6 @@
 Title: aep import: a camera without a Position record stands back from its point of interest by the zoom
 
-Branch: geterothis:fix/aep-import-camera-default-position (based on upstream main cd9ee1e4, one commit)
+Branch: geterothis:fix/aep-import-camera-default-position (based on upstream main cd9ee1e4)
 
 ## What
 
@@ -15,6 +15,7 @@ A second lab project has 23 such cameras. After Effects renders them at `[w/2, h
 ## Change
 
 - `import/camera.rs`: new `import_camera` imports the Camera Options as before, then sets Position to the point of interest minus the zoom along z when the transform has no `ADBE Position` record.
+- When the point of interest or the zoom is keyframed or has an expression, or the zoom is not positive, the Position cannot be derived: it stays at the default and the import reports a Transform properties loss. A derived Position that is not a sane coordinate is reported as damaged data.
 - `import/build.rs` calls it for cameras.
 - Docs: aep-format (camera Position, absent) and aep-import (Cameras and lights).
 
@@ -23,4 +24,5 @@ Only sampled with the point of interest at z = 0.
 ## Tests
 
 - New `export::objects::a_camera_without_a_position_record_stands_back_from_its_point_of_interest_by_the_zoom`: exports a camera, removes its Position record, imports it again and checks the Position. It fails without the change.
+- New `export::objects::a_camera_position_that_cannot_be_derived_is_reported`: a negative zoom, and a point of interest so far back that the Position is not sane, are both reported, and a strict import refuses them.
 - `cargo test -p effectcraft-aep` (90 + 419 passed), clippy (`-D warnings`) and fmt pass. I did not run the full `cargo xtask ci`.
