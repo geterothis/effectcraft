@@ -28,7 +28,7 @@ pub enum LossCategory {
     ShapeLayers,
     /// Parts of text layers that are not imported: wiggly and expression selectors and the other
     /// animator entries outside the imported set, Path Options and More Options
-    /// with set values, Source Text keyframes and expressions, undecoded character and paragraph
+    /// with set values, Source Text keyframes without a document and expressions with unreadable flags, undecoded character and paragraph
     /// fields that differ from the default, unknown capitalisation or justification codes, control
     /// characters of unknown meaning. (The layers themselves are imported.)
     TextLayers,

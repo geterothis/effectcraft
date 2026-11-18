@@ -363,11 +363,6 @@ pub(crate) fn import_source_text_expression(layer: &AepLayer<'_, '_>, target: Op
 
 /// The parts of a text layer besides its first text document that are not imported.
 pub(crate) fn report_text_extras(layer: &AepLayer<'_, '_>, what: &str, col: &mut Collector) {
-    if let Some(st) = layer.source_text_property()
-        && (st.is_animated() || layer.text_document_count() > 1)
-    {
-        col.lose(LossCategory::TextLayers, format!("{what}: Source Text keyframes are not imported (the first text document is)"));
-    }
     let Some(PropNode::Group(text)) = layer.properties().and_then(|p| p.get("ADBE Text Properties")) else { return };
     for e in text.entries() {
         let PropNode::Group(g) = e.node else { continue };

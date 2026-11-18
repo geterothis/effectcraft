@@ -9,7 +9,7 @@ use crate::{
 };
 use crate::{MatteMode, Quality as AepQuality, Rational, Renderer as AepRenderer, TrackMatte as AepMatte};
 use effectcraft_color::{BlendMode, Label};
-use effectcraft_keyframe::Value;
+use effectcraft_keyframe::{Keyframe, Value};
 use effectcraft_project::build::{self, Ids};
 use effectcraft_project::{
     AutoOrient, Comp, Footage, FootageKind, ItemId, ItemKind, Layer, LayerId, LayerSource, LightKind, MatteKind, Project, Quality, Solid, SourceLayer,
@@ -665,7 +665,7 @@ fn build_layers(project: &mut Project, cx: &mut Ctx<'_>, defs: &EffectDefinition
             import_shapes(&layer, &what, &tm, &mut Ids(&mut project.next_id), contents, &mut cx.col);
         }
         if is_text {
-            import_source_text(&mut l, &layer, &what, cx);
+            import_source_text(&mut l, &layer, &what, &tm, cx);
             import_text_animators(&mut l, &layer, &what, &tm, &mut Ids(&mut project.next_id), &mut cx.col);
         }
         if let Some(masks) = l.props.sub_mut("masks") {
@@ -722,7 +722,7 @@ fn build_layers(project: &mut Project, cx: &mut Ctx<'_>, defs: &EffectDefinition
 
 /// The Source Text of a text layer from its text document and its expression, and the reports
 /// of what is not imported.
-fn import_source_text(l: &mut Layer, layer: &AepLayer<'_, '_>, what: &str, cx: &mut Ctx<'_>) {
+fn import_source_text(l: &mut Layer, layer: &AepLayer<'_, '_>, what: &str, tm: &TimeMap, cx: &mut Ctx<'_>) {
     match layer.text_document() {
         Some(doc) => {
             let value = text_doc(&doc, what, cx.options.has_font, &mut cx.col);
@@ -733,8 +733,39 @@ fn import_source_text(l: &mut Layer, layer: &AepLayer<'_, '_>, what: &str, cx: &
         }
         None => cx.col.lose_with(LossCategory::DamagedData, || format!("{what}: the text document is unreadable, the layer is imported with empty text")),
     }
+    import_source_text_keys(l, layer, what, tm, cx);
     import_source_text_expression(layer, l.props.prop_mut("text/sourceText"), what, &mut cx.col);
     report_text_extras(layer, what, &mut cx.col);
+}
+
+/// The keyframes of a keyed Source Text: key `i` of the property's key list (its time; Source Text
+/// keys always hold) shows text document `i` of the layer's `btdk` (lab sample, After Effects
+/// 2026). A key without a readable document, or more keys than documents, is reported and left
+/// out; the first document stays the value.
+fn import_source_text_keys(l: &mut Layer, layer: &AepLayer<'_, '_>, what: &str, tm: &TimeMap, cx: &mut Ctx<'_>) {
+    let Some(st) = layer.source_text_property() else { return };
+    let Some(list) = st.keys() else { return };
+    let docs = layer.text_documents();
+    let scale = st.time_scale().filter(|s| *s != 0).unwrap_or(tm.timescale);
+    let mut keys = vec![];
+    for (i, rec) in list.keyframes().enumerate() {
+        let (Some(units), Some(Some(doc))) = (rec.time_units(), docs.get(i)) else {
+            cx.col.lose_with(LossCategory::TextLayers, || {
+                format!("{what}: Source Text keyframe {} has no readable text document, not imported", i.saturating_add(1))
+            });
+            continue;
+        };
+        let value = text_doc(doc, what, cx.options.has_font, &mut cx.col);
+        keys.push(Keyframe::new(tm.units(i64::from(units), scale), Value::Text(Box::new(value))).hold());
+    }
+    if keys.is_empty() {
+        return;
+    }
+    keys.sort_by_key(|k| k.time);
+    match l.props.prop_mut("text/sourceText") {
+        Some(p) => p.keys = keys,
+        None => cx.col.lose_with(LossCategory::DamagedData, || format!("{what}: the text layer has no Source Text property, its keyframes are not imported")),
+    }
 }
 
 /// The text animators of a text layer into its `text/animators` group.

@@ -129,3 +129,96 @@ fn a_source_text_expression_with_unreadable_flags_stays_reported() {
     assert_eq!(text.iter().filter(|d| d.contains("the Source Text expression is not imported")).count(), 2, "{text:?}");
     assert_eq!(source_text(layer(&p, &r, "T")), ("Hi".to_string(), None));
 }
+
+/// The end (one past the closing `>>`) of the dictionary starting at `start` in a `btdk` body,
+/// skipping strings (which hold UTF-16 bytes and backslash escapes).
+fn dict_end(body: &[u8], start: usize) -> usize {
+    let (mut i, mut depth, mut parens) = (start, 0usize, 0usize);
+    while i < body.len() {
+        let c = body[i];
+        if parens > 0 {
+            match c {
+                b'\\' => i += 1,
+                b'(' => parens += 1,
+                b')' => parens -= 1,
+                _ => {}
+            }
+        } else if c == b'(' {
+            parens = 1;
+        } else if body[i..].starts_with(b"<<") {
+            depth += 1;
+            i += 1;
+        } else if body[i..].starts_with(b">>") {
+            depth -= 1;
+            i += 1;
+            if depth == 0 {
+                return i + 1;
+            }
+        }
+        i += 1;
+    }
+    panic!("unclosed dictionary")
+}
+
+/// Layer `Off` with keyed Source Text, as After Effects 2026 stores it (lab sample): the key list
+/// in the Source Text `tdbs` (16-byte records: the time, then 3 / 3 for hold) and one `btdk` whose
+/// `/1/1` holds one document per key. Here: "Off" at 0 s and "End" at 1 s (25600 units: 25 fps x 1024).
+fn with_source_text_keys() -> Vec<u8> {
+    let mut file: AepFile<'_> = parse(TEXT_SYNTHETIC).expect("parse");
+    visit(&mut file.chunks, &mut |layer| {
+        if !layer.is_list(b"Layr") || !layer.children().iter().any(|c| c.is(b"Utf8") && c.bytes() == Some(b"Off".as_slice())) {
+            return;
+        }
+        visit(layer.children_mut(), &mut |c| {
+            if c.is_list(b"btds") {
+                for tdbs in c.children_mut().iter_mut().filter(|k| k.is_list(b"tdbs")) {
+                    let mut lhd3 = vec![0u8; 52];
+                    lhd3[8..12].copy_from_slice(&2u32.to_be_bytes());
+                    lhd3[16..20].copy_from_slice(&16u32.to_be_bytes());
+                    let mut ldat = vec![0u8; 32];
+                    ldat[4..6].copy_from_slice(&[3, 3]);
+                    ldat[16..20].copy_from_slice(&25_600i32.to_be_bytes());
+                    ldat[20..22].copy_from_slice(&[3, 3]);
+                    if let Body::List { children, .. } = &mut tdbs.body {
+                        children.push(Chunk::list(*b"list", vec![Chunk::data(*b"lhd3", lhd3), Chunk::data(*b"ldat", ldat)]));
+                    }
+                }
+            }
+            if let Body::OpaqueList { list_type, data } = &mut c.body
+                && list_type == b"btdk"
+            {
+                let body = data.to_vec();
+                let off: &[u8] = b"<< /0 << /0 (\xfe\xff\x00O\x00f\x00f\x00\r)";
+                let start = body.windows(off.len()).position(|w| w == off).expect("the run of Off");
+                let end = dict_end(&body, start);
+                let copy: Vec<u8> = body[start..end].to_vec();
+                let at = copy.windows(6).position(|w| w == b"\x00O\x00f\x00f").expect("the text");
+                let mut copy = copy;
+                copy[at..at + 6].copy_from_slice(b"\x00E\x00n\x00d");
+                *data = [&body[..end], b" ".as_slice(), &copy, &body[end..]].concat().into();
+            }
+        });
+    });
+    write(&file).expect("write")
+}
+
+/// Keyed Source Text arrives as hold keys, one text document per key, without a loss.
+#[test]
+fn source_text_keyframes_are_imported_with_their_documents() {
+    let (p, r) = run(&with_source_text_keys());
+    let text = losses(&r, LossCategory::TextLayers);
+    assert!(!text.iter().any(|d| d.contains("Source Text keyframe")), "{text:?}");
+    let st = layer(&p, &r, "Off").props.prop("text/sourceText").expect("Source Text");
+    let keys: Vec<(Tick, String, bool)> = st
+        .keys
+        .iter()
+        .map(|k| {
+            let Value::Text(d) = &k.value else { panic!("{:?}", k.value) };
+            (k.time, d.text.clone(), k.in_interp == effectcraft_keyframe::Interp::Hold && k.out_interp == effectcraft_keyframe::Interp::Hold)
+        })
+        .collect();
+    assert_eq!(keys, [(Tick::ZERO, "Off".to_string(), true), (Tick(TICKS_PER_SECOND), "End".to_string(), true)]);
+    // The expression is kept next to the keys, and the other layer is unchanged.
+    assert_eq!(st.expr, Some(Expression { text: "\"X\"".into(), enabled: false }));
+    assert!(layer(&p, &r, "T").props.prop("text/sourceText").unwrap().keys.is_empty());
+}
