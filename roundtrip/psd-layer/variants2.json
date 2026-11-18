@@ -1,0 +1,111 @@
+{
+ "ae": "26.5",
+ "variants": {
+  "psd_layers.effectcraft.v4_pin_name.aep": {
+   "footage": [
+    {
+     "name": "Background fill/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Blue box/layers_200x100.psd",
+     "width": 60,
+     "height": 50,
+     "footageMissing": false
+    },
+    {
+     "name": "Green bar/layers_200x100.psd",
+     "width": 90,
+     "height": 15,
+     "footageMissing": false
+    },
+    {
+     "name": "layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Background fill/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Blue box/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Green bar/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    }
+   ],
+   "opened": true,
+   "allFound": true
+  },
+  "psd_layers.effectcraft.v5_pin_name_and_mtime.aep": {
+   "footage": [
+    {
+     "name": "Background fill/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Blue box/layers_200x100.psd",
+     "width": 60,
+     "height": 50,
+     "footageMissing": false
+    },
+    {
+     "name": "Green bar/layers_200x100.psd",
+     "width": 90,
+     "height": 15,
+     "footageMissing": false
+    },
+    {
+     "name": "layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Background fill/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Blue box/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    },
+    {
+     "name": "Green bar/layers_200x100.psd",
+     "width": 200,
+     "height": 100,
+     "footageMissing": false
+    }
+   ],
+   "opened": true,
+   "allFound": true
+  }
+ },
+ "rendered": "v4_pin_name (first variant that resolves): v4_pin_name_cropped.png, v4_pin_name_document.png, frame 0 by the AE bridge plugin",
+ "v4_vs_originals": {
+  "cropped": {
+   "max_abs": 0
+  },
+  "document": {
+   "max_abs": 0
+  }
+ },
+ "verdict": "The Pin layer name is the missing field. In v4, with only the first Utf8 of Pin set to the layer name, all six PSD layer items resolve, and both layer comps render identically to the AE originals (max diff 0). v5 (plus the sspc mtime) also resolves, so the mtime is not needed."
+}
