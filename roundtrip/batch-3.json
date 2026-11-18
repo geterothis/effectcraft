@@ -1,0 +1,205 @@
+{
+ "ae": "26.5",
+ "source": "exports/batch-3",
+ "note": "Every file opens without errors; every effect parameter matches the fx-nondefault JSON except Compositing Options (Effect Opacity 37->100, GPU Rendering 1.74->1). CC Grid Wipe differs on every pixel only because of that reset: the reference keeps alpha 161 = 255*(1-0.37), the export (100 %) is fully wiped (alpha 0).",
+ "results": [
+  {
+   "file": "CC_Color_Offset.aep",
+   "opens": true,
+   "effect_found": true,
+   "params_checked": 6,
+   "param_mismatches": [
+    {
+     "idx": "5.2",
+     "matchName": "ADBE Effect Mask Opacity",
+     "name": "Effect Opacity",
+     "expected": 37,
+     "got": 100
+    },
+    {
+     "idx": "5.3",
+     "matchName": "ADBE Force CPU GPU",
+     "name": "GPU Rendering",
+     "expected": 1.74000000953674,
+     "got": 1
+    }
+   ],
+   "render": {
+    "file": "CC_Color_Offset.aep",
+    "comp": "fx|CC Color Offset",
+    "ref": "fx-nondefault-04-14.png",
+    "exit": 0,
+    "renders": true,
+    "max_abs": 2,
+    "mean_abs": 0.75,
+    "pct_px_over_2": 0.0,
+    "pct_px_over_8": 0.0
+   }
+  },
+  {
+   "file": "CC_Threshold_RGB.aep",
+   "opens": true,
+   "effect_found": true,
+   "params_checked": 9,
+   "param_mismatches": [
+    {
+     "idx": "8.2",
+     "matchName": "ADBE Effect Mask Opacity",
+     "name": "Effect Opacity",
+     "expected": 37,
+     "got": 100
+    },
+    {
+     "idx": "8.3",
+     "matchName": "ADBE Force CPU GPU",
+     "name": "GPU Rendering",
+     "expected": 1.74000000953674,
+     "got": 1
+    }
+   ],
+   "render": {
+    "file": "CC_Threshold_RGB.aep",
+    "comp": "fx|CC Threshold RGB",
+    "ref": "fx-nondefault-11-8.png",
+    "exit": 0,
+    "renders": true,
+    "max_abs": 1,
+    "mean_abs": 0.001,
+    "pct_px_over_2": 0.0,
+    "pct_px_over_8": 0.0
+   }
+  },
+  {
+   "file": "CC_Toner.aep",
+   "opens": true,
+   "effect_found": true,
+   "params_checked": 9,
+   "param_mismatches": [
+    {
+     "idx": "8.2",
+     "matchName": "ADBE Effect Mask Opacity",
+     "name": "Effect Opacity",
+     "expected": 37,
+     "got": 100
+    },
+    {
+     "idx": "8.3",
+     "matchName": "ADBE Force CPU GPU",
+     "name": "GPU Rendering",
+     "expected": 1.74000000953674,
+     "got": 1
+    }
+   ],
+   "render": {
+    "file": "CC_Toner.aep",
+    "comp": "fx|CC Toner",
+    "ref": "fx-nondefault-04-15.png",
+    "exit": 0,
+    "renders": true,
+    "max_abs": 1,
+    "mean_abs": 0.001,
+    "pct_px_over_2": 0.0,
+    "pct_px_over_8": 0.0
+   }
+  },
+  {
+   "file": "CC_Tiler.aep",
+   "opens": true,
+   "effect_found": true,
+   "params_checked": 5,
+   "param_mismatches": [
+    {
+     "idx": "4.2",
+     "matchName": "ADBE Effect Mask Opacity",
+     "name": "Effect Opacity",
+     "expected": 37,
+     "got": 100
+    },
+    {
+     "idx": "4.3",
+     "matchName": "ADBE Force CPU GPU",
+     "name": "GPU Rendering",
+     "expected": 1.74000000953674,
+     "got": 1
+    }
+   ],
+   "render": {
+    "file": "CC_Tiler.aep",
+    "comp": "fx|CC Tiler",
+    "ref": "fx-nondefault-06-2.png",
+    "exit": 0,
+    "renders": true,
+    "max_abs": 1,
+    "mean_abs": 0.001,
+    "pct_px_over_2": 0.0,
+    "pct_px_over_8": 0.0
+   }
+  },
+  {
+   "file": "CC_Grid_Wipe.aep",
+   "opens": true,
+   "effect_found": true,
+   "params_checked": 9,
+   "param_mismatches": [
+    {
+     "idx": "8.2",
+     "matchName": "ADBE Effect Mask Opacity",
+     "name": "Effect Opacity",
+     "expected": 37,
+     "got": 100
+    },
+    {
+     "idx": "8.3",
+     "matchName": "ADBE Force CPU GPU",
+     "name": "GPU Rendering",
+     "expected": 1.74000000953674,
+     "got": 1
+    }
+   ],
+   "render": {
+    "file": "CC_Grid_Wipe.aep",
+    "comp": "fx|CC Grid Wipe",
+    "ref": "fx-nondefault-12-4.png",
+    "exit": 0,
+    "renders": true,
+    "max_abs": 255,
+    "mean_abs": 135.816,
+    "pct_px_over_2": 100.0,
+    "pct_px_over_8": 100.0
+   }
+  },
+  {
+   "file": "CC_Scale_Wipe.aep",
+   "opens": true,
+   "effect_found": true,
+   "params_checked": 5,
+   "param_mismatches": [
+    {
+     "idx": "4.2",
+     "matchName": "ADBE Effect Mask Opacity",
+     "name": "Effect Opacity",
+     "expected": 37,
+     "got": 100
+    },
+    {
+     "idx": "4.3",
+     "matchName": "ADBE Force CPU GPU",
+     "name": "GPU Rendering",
+     "expected": 1.74000000953674,
+     "got": 1
+    }
+   ],
+   "render": {
+    "file": "CC_Scale_Wipe.aep",
+    "comp": "fx|CC Scale Wipe",
+    "ref": "fx-nondefault-12-9.png",
+    "exit": 0,
+    "renders": true,
+    "max_abs": 2,
+    "mean_abs": 0.058,
+    "pct_px_over_2": 0.0,
+    "pct_px_over_8": 0.0
+   }
+  }
+ ]
+}
