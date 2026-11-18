@@ -8,3 +8,9 @@ Text has three keys (0 s "Alpha" 60 px red, 1 s "Beta two" 90 px green, 2.5 s th
 blue), a static text layer and a layer with one Source Text key. It saves `source_text_keys.aep`
 and `source_text_keys.json` next to the script. Please also render frames 0, 25 and 70 of `C` to PNG
 here (`frame_000.png`, `frame_025.png`, `frame_070.png`). Commit everything here on test-corpus.
+
+## Part 2 (after the first run)
+
+Run `source_text_keys_2.jsx` twice, each time in a new empty project: first with `PART = "a"`
+(saves `source_text_one_layer.aep`), then with `PART = "b"` (saves `source_text_two_layers.aep`).
+Commit both here. No renders needed.
