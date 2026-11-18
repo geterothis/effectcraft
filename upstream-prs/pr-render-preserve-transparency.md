@@ -1,0 +1,35 @@
+Title: render: Preserve Transparency keeps the alpha below
+
+Branch: geterothis:fix/render-preserve-transparency-atop (based on upstream main cd9ee1e4, one commit)
+Compare: https://github.com/storytold/effectcraft/compare/main...geterothis:effectcraft:fix/render-preserve-transparency-atop
+
+## What
+
+A layer with Preserve Transparency on raises the alpha of semi-transparent pixels below it. After Effects keeps that alpha. In an After Effects 2026 lab render, an opaque layer with Preserve Transparency over a 30 % background comes out in the layer's colour at alpha 77 (30 %). EffectCraft gives 131 (51 %), with the layer's colour mixed with the background.
+
+The cause: the renderer multiplies the layer by the alpha below and then lays the result over the canvas. For an opaque layer over alpha `a`, that gives `a + a(1 - a)`, not `a`. The fix blends the layer onto the colour below as if that were opaque, with the layer's blend mode and opacity, and then multiplies by the alpha below. Where nothing lies below, the pixel stays as it is.
+
+## Change
+
+- `color/src/blend.rs`: new `blend_pixel_preserve` (exported from the crate).
+- `raster/src/lib.rs`: `Image::blend_from_preserve`. It shares its loop with `blend_from` through a private `blend_with`.
+- `render/src/layers.rs` (`composite_iso_with`, the 2D path): uses `blend_from_preserve` instead of multiplying the isolated layer by the alpha below.
+- `render/src/three_d/compose.rs` (Classic 3D): uses `blend_pixel_preserve` for a plane with Preserve Transparency, instead of multiplying its opacity by the alpha below.
+- GPU, to keep matching the CPU:
+  - `kernels.wgsl`: new `opaque` kernel. `preserve` now multiplies the blended result by the alpha below and keeps a transparent pixel below as it is.
+  - `ops.rs`: new `opaque` op. `preserve` is documented as the second step.
+  - `context.rs`: registers `opaque`.
+  - `walk.rs` (`composite_iso_with`): opaque, then `blend_full`, then `preserve`.
+  - `classic3d.wgsl`: the same rule as the CPU's Classic 3D.
+
+## Tests
+
+- New render tests in `render/src/tests.rs`:
+  - `preserve_transparency_keeps_the_alpha_below`: 2D and with both layers 3D. An opaque red layer over a 30 % blue background gives `[0.3, 0, 0, 0.3]`, and nothing where no pixels lie below.
+  - `preserve_transparency_mixes_by_the_layer_opacity`: a 50 % layer over a 40 % background gives `[0.2, 0, 0.2, 0.4]`.
+- Both fail without the change: the 2D case gives `[0.3, 0, 0.21, 0.51]`. With only `compose.rs` reverted, the 3D case gives the same wrong value.
+- New unit test `preserve_keeps_the_alpha_below` in `color` (Normal, Multiply, nothing below).
+- `cargo test -p effectcraft-color -p effectcraft-raster -p effectcraft-render`: all passed.
+- `cargo test -p effectcraft-gpu` with `EFFECTCRAFT_REQUIRE_GPU=1` on lavapipe (Mesa software Vulkan): 322 passed, and 1 failed only because no OpenGL adapter exists on that machine (`opengl_adapters_get_cpu_compositing_at_once`). The GPU-vs-CPU test `masks_mattes_and_preserve_transparency` fails when only the GPU part of this change is reverted, so the GPU and CPU paths change together.
+- Clippy (`-D warnings`) on the four crates and `cargo fmt --check` are clean.
+- I did not run the full `cargo xtask ci` and did not test on a hardware GPU.
