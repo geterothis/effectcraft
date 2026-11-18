@@ -1,0 +1,61 @@
+{
+ "ae": "26.5",
+ "file": "lab/psd-layers/psd_layers_zeroed.aep",
+ "opened": true,
+ "warning_dialogs": "none",
+ "footage_zeroed": [
+  {
+   "name": "Background fill/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false
+  },
+  {
+   "name": "Blue box/layers_200x100.psd",
+   "width": 60,
+   "height": 50,
+   "footageMissing": false
+  },
+  {
+   "name": "Green bar/layers_200x100.psd",
+   "width": 90,
+   "height": 15,
+   "footageMissing": false
+  },
+  {
+   "name": "Background fill/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false
+  },
+  {
+   "name": "Blue box/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false
+  },
+  {
+   "name": "Green bar/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false
+  },
+  {
+   "name": "layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false
+  }
+ ],
+ "footage_original_same_sizes": true,
+ "renders": "frame 0 by the AE bridge plugin (8 bpc RGBA): zeroed_cropped.png, zeroed_document.png, orig_cropped.png, orig_document.png",
+ "zeroed_vs_original": {
+  "cropped": {
+   "max_abs": 0
+  },
+  "document": {
+   "max_abs": 0
+  }
+ },
+ "verdict": "AE opens the zeroed file without warnings; every footage item keeps its size (cropped 200x100 / 60x50 / 90x15, document-size 200x100) and both comps render identically to the original."
+}
