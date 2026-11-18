@@ -1,0 +1,22 @@
+{
+ "renderer": "ae-harness plugin AEGP render, 8 bpc, straight alpha, 320x180",
+ "time": 1.5015015,
+ "frames": [
+  {
+   "comp": "C_t2997",
+   "frame": 45,
+   "maxAbsDiff": 128,
+   "meanAbsDiff": 1.461232638888889,
+   "pixelsChanged_gt2": 6260,
+   "pixels": 57600
+  },
+  {
+   "comp": "C_t23976",
+   "frame": 36,
+   "maxAbsDiff": 131,
+   "meanAbsDiff": 1.465681423611111,
+   "pixelsChanged_gt2": 6113,
+   "pixels": 57600
+  }
+ ]
+}
