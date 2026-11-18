@@ -35,3 +35,17 @@ If O7 still renders like the original, the cause is not a project-level chunk. T
 comp side: in each project make a NEW comp (same settings), add the footage item, and render f45.
 If both new comps match each other, the difference is in EC's comp or layer records, not the
 project.
+
+## Round 3: gpuG candidates (fresh AE process per file)
+
+- E1_gpuG_7ee0.aep: ntsc_ec.aep + `LIST gpuG / Utf8 "7ee0ab59-822d-44cc-ac10-16279d041016"` after `qtlg`
+  (the value in every AE file saved on this PC and in the upstream corpus).
+- E2_gpuG_f330.aep: the same with `f33089e2-1ede-47c1-8a9e-b232bb1cc1a4` (the value in the upstream
+  test fixtures, saved by another contributor's AE).
+
+Please report for each: dialogs on open, `app.project.gpuAccelType`, and max diff of C_t2997 f45
+against the original.
+
+And the mapping: in a new project, set `app.project.gpuAccelType` to each type this PC offers
+(CUDA, OpenCL/Vulkan if listed, SOFTWARE), save, and give the `gpuG` GUID of each saved file (or
+"no gpuG"). This decides what EffectCraft writes by default.
