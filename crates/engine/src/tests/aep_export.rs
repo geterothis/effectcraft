@@ -210,4 +210,17 @@ fn export_aep_writes_footage_relative_to_the_aep() {
     assert!(json.starts_with(r#"{"ascendcount_base":1,"ascendcount_target":2,"fullpath":""#), "{json}");
     let path = item.footage().and_then(|f| f.path).unwrap();
     assert!(path.as_bytes().get(1) == Some(&b':') && path.ends_with(r"\assets\a.png"), "{path}");
+
+    // EffectCraft's import looks there too: the same machine finds the file again.
+    std::fs::create_dir_all(root.join("assets")).unwrap();
+    std::fs::write(root.join("assets").join("a.png"), b"png").unwrap();
+    let mut back = Session::default();
+    back.execute_checked("file.importAep", json!({"path": out, "allowLosses": true})).unwrap();
+    let f = back.project.items.values().find_map(|i| match &i.kind {
+        ItemKind::Footage(f) if f.path.ends_with("a.png") => Some(f.clone()),
+        _ => None,
+    });
+    let f = f.expect("imported footage");
+    assert!(!f.missing, "{f:?}");
+    assert_eq!(std::path::Path::new(&f.path), root.join("assets").join("a.png"));
 }

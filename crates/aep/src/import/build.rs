@@ -290,7 +290,21 @@ fn import_footage(project: &mut Project, cx: &mut Ctx<'_>, item: &AepItem<'_, '_
         // The alias is a folder, but the file names could not be read: the item links the folder.
         cx.col.lose_with(LossCategory::DamagedData, || format!("footage '{name}': image sequence naming not read, linked to its folder"));
     }
-    let present = !path.is_empty() && (cx.options.exists)(&path);
+    let mut present = !path.is_empty() && (cx.options.exists)(&path);
+    // After Effects looks for footage it does not find at the stored path relative to the project
+    // file (the alias's ascend counts); so does the import, and keeps the relative path, which the
+    // caller takes from the project file's folder.
+    if !present && let Some(rel) = relative_alias(item, f.path.as_deref().unwrap_or_default(), f.is_sequence) {
+        let alias = f.path.as_deref().unwrap_or_default().trim_end_matches(['\\', '/']);
+        let rebase = |p: &str| p.strip_prefix(alias).map(|rest| format!("{rel}{}", rest.replace('\\', "/")));
+        if let (Some(moved), Some(files)) = (rebase(&path), sequence.iter().map(|p| rebase(p)).collect::<Option<Vec<_>>>())
+            && (cx.options.exists)(&moved)
+        {
+            path = moved;
+            sequence = files;
+            present = true;
+        }
+    }
     if !present {
         let shown = if path.is_empty() { format!("{name} (no path stored)") } else { path.clone() };
         cx.col.missing_footage.push(shown);
@@ -380,6 +394,30 @@ fn source_layer(f: &crate::Footage, name: &str, col: &mut Collector) -> Option<S
 
 /// The name After Effects shows for a footage item that stores none: the file's name, or for a
 /// sequence the name with the frame range (`shot_[0101-0103].exr`).
+/// The footage's path relative to the project file from the alias's ascend counts, as After
+/// Effects searches for footage it does not find at the stored path: `ascendcount_base` - 1 levels
+/// up from the project's folder, then the last `ascendcount_target` names of the stored path (one
+/// fewer for a folder: 1 / 1 is a file next to the project, 1 / 2 a sequence folder next to it,
+/// f1). `None` without counts, for counts beyond the path, or for a name that is not one.
+fn relative_alias(item: &AepItem<'_, '_>, alias: &str, folder: bool) -> Option<String> {
+    let json = item.chunk().child_list(b"Pin ")?.child_list(b"Als2")?.child(b"alas")?.bytes()?;
+    let count = |key: &str| -> Option<usize> {
+        let pattern = format!("\"{key}\":");
+        let at = json.windows(pattern.len()).position(|w| w == pattern.as_bytes())?.checked_add(pattern.len())?;
+        let digits: Vec<u8> = json.get(at..)?.iter().take_while(|b| b.is_ascii_digit()).take(4).copied().collect();
+        std::str::from_utf8(&digits).ok()?.parse().ok()
+    };
+    let (base, target) = (count("ascendcount_base")?, count("ascendcount_target")?);
+    let names: Vec<&str> = alias.split(['/', '\\']).filter(|n| !n.is_empty()).collect();
+    let keep = target.checked_sub(usize::from(folder)).filter(|k| (1..=names.len()).contains(k))?;
+    let up = base.checked_sub(1).filter(|u| *u <= 64)?;
+    let tail = names.get(names.len().checked_sub(keep)?..)?;
+    if tail.iter().any(|n| *n == "." || *n == ".." || n.contains(':')) {
+        return None;
+    }
+    Some(format!("{}{}", "../".repeat(up), tail.join("/")))
+}
+
 fn default_footage_name(item: &AepItem<'_, '_>, f: &crate::Footage) -> Option<String> {
     if let Some(s) = item.sequence_info() {
         // A listed sequence (Force alphabetical order) has no numbering: its first file names it.

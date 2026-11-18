@@ -227,6 +227,47 @@ fn a_posix_path_is_written_as_a_windows_path_relative_to_the_aep() {
     assert!(plain.iter().any(|(p, _)| p == "assets/c.png"), "a relative path without the .aep's path stays: {plain:?}");
 }
 
+/// The import looks for footage it does not find at the stored path where After Effects looks:
+/// relative to the project file, by the alias's ascend counts. Re-importing an export from Linux
+/// (stored on `C:`) finds an `assets` folder next to the `.aep`, sequences included, and keeps
+/// the relative path (the caller takes it from the project file's folder).
+#[test]
+fn the_import_finds_footage_relative_to_the_aep() {
+    let mut p = Project::default();
+    let c = add_comp(&mut p, "C", 640, 360, FrameRate::new(25, 1), 1.0, None);
+    add_footage(&mut p, c, "a.png", still("/home/u/proj/assets/a.png", 8, 8));
+    add_footage(&mut p, c, "gone.png", still("/home/u/proj/assets/gone.png", 8, 8));
+    let files: Vec<String> = (1..=3).map(|k| format!("/home/u/proj/assets/seq/s_{k:03}.png")).collect();
+    let mut s = Footage { kind: FootageKind::Sequence, frame_rate: FrameRate::new(25, 1), sequence: files.clone(), ..still(&files[0], 8, 8) };
+    s.sync_sequence_duration();
+    add_footage(&mut p, c, "s_[001-003].png", s);
+    let opts = effectcraft_aep::export::ExportOptions { allow_losses: true };
+    let footage_of = |aep: &str, on_disk: &[&str]| {
+        let bytes = effectcraft_aep::export::export_at(&p, &opts, Some(aep), &|_| None).expect("export").bytes;
+        let exists = |path: &str| on_disk.contains(&path);
+        let mut back = Project::default();
+        import(&mut back, &bytes, &ImportOptions { allow_losses: true, ..ImportOptions::new(&exists) }).expect("import");
+        let mut all: Vec<Footage> = back.items.values().filter_map(|i| if let ItemKind::Footage(f) = &i.kind { Some(f.clone()) } else { None }).collect();
+        all.sort_by(|a, b| a.path.cmp(&b.path));
+        all
+    };
+    let seq_files = ["assets/seq/s_001.png", "assets/seq/s_002.png", "assets/seq/s_003.png"];
+    let mut disk = vec!["assets/a.png"];
+    disk.extend(seq_files);
+    let next_to = footage_of("/home/u/proj/FM.aep", &disk);
+    let a = next_to.iter().find(|f| f.path.ends_with("a.png")).expect("a.png");
+    assert_eq!((a.path.as_str(), a.missing), ("assets/a.png", false));
+    let s = next_to.iter().find(|f| f.kind == FootageKind::Sequence).expect("sequence");
+    assert_eq!((s.path.as_str(), s.missing), ("assets/seq/s_001.png", false));
+    assert_eq!(s.sequence, seq_files);
+    let gone = next_to.iter().find(|f| f.path.ends_with("gone.png")).expect("gone.png");
+    assert_eq!((gone.path.as_str(), gone.missing), (r"C:\home\u\proj\assets\gone.png", true), "not found either way: the stored path stays");
+
+    let below = footage_of("/home/u/proj/out/FM.aep", &["../assets/a.png"]);
+    let a = below.iter().find(|f| f.path.ends_with("a.png")).expect("a.png");
+    assert_eq!((a.path.as_str(), a.missing), ("../assets/a.png", false));
+}
+
 #[test]
 fn footage_survives_import_export_import() {
     for name in [
