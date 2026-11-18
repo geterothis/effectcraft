@@ -16,4 +16,4 @@ Branch: geterothis:fix/aep-import-still-with-frame-rate (based on upstream main 
 - New `export::footage::a_still_with_a_stored_frame_rate_stays_a_still`: three stills (`.jpg`, `.PNG`, `.tif`) are exported, their items' native frame rate (`sspc@56`) is set to 25, and the file is imported and exported again. Without the change the three arrive as video and the export drops them. With it they are stills and are exported without a loss.
 - The `footage_kind` unit test adds a `.JPG` with rate 25.
 - `cargo test -p effectcraft-aep` (419 + 90 passed), clippy (`-D warnings`) and fmt pass for the crate. I did not run the full `cargo xtask ci`.
-- The real project that showed this is private, so it is not attached. Its export report lines are quoted above.
+- Checked on the real project, which is private and not attached: with this change its export dry run no longer reports the two JPEG items or their layers, and no new loss appears.
