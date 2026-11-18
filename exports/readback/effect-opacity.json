@@ -1,0 +1,119 @@
+{
+ "ae": "26.5",
+ "source": "exports/effect-opacity (branch feat/effect-opacity 9efb9496)",
+ "verdict": "All 4 open without warnings and Effect Opacity reads 37 % in all 4 (GPU Rendering reads 1, the default). The AE render of every export matches the original AE fx-samples render (max diff 1-4/255), so the Effect Opacity round-trip is fixed. Against EffectCraft's own render (.ec.png): Tint (max 2) and Ramp (max 1) match. Gaussian Blur 2 differs on 0.72 % of px (max 45). Drop Shadow differs on every pixel (max 94). Both are differences in EffectCraft's renderer, not in the export.",
+ "results": [
+  {
+   "file": "ADBE_Tint.aep",
+   "matchName": "ADBE Tint",
+   "opens": true,
+   "compFound": true,
+   "effects": [
+    "ADBE Ramp",
+    "ADBE Tint"
+   ],
+   "effectOpacity": 37,
+   "gpu": 1,
+   "render": {
+    "file": "ADBE_Tint.aep",
+    "comp": "fx|ADBE Tint",
+    "ref": "fx-nondefault-04-10.png",
+    "exit": 0,
+    "renders": true,
+    "max_abs": 1,
+    "mean_abs": 0.001,
+    "pct_px_over_2": 0.0,
+    "pct_px_over_8": 0.0,
+    "vs_ec_png": {
+     "max_abs": 2,
+     "pct_px_over_2": 0.0,
+     "pct_px_over_8": 0.0
+    }
+   }
+  },
+  {
+   "file": "ADBE_Gaussian_Blur_2.aep",
+   "matchName": "ADBE Gaussian Blur 2",
+   "opens": true,
+   "compFound": true,
+   "effects": [
+    "ADBE Ramp",
+    "ADBE Gaussian Blur 2"
+   ],
+   "effectOpacity": 37,
+   "gpu": 1,
+   "render": {
+    "file": "ADBE_Gaussian_Blur_2.aep",
+    "comp": "fx|ADBE Gaussian Blur 2",
+    "ref": "fx-nondefault-02-4.png",
+    "exit": 0,
+    "renders": true,
+    "max_abs": 1,
+    "mean_abs": 0.001,
+    "pct_px_over_2": 0.0,
+    "pct_px_over_8": 0.0,
+    "vs_ec_png": {
+     "max_abs": 45,
+     "pct_px_over_2": 1.04,
+     "pct_px_over_8": 0.72
+    }
+   }
+  },
+  {
+   "file": "ADBE_Drop_Shadow.aep",
+   "matchName": "ADBE Drop Shadow",
+   "opens": true,
+   "compFound": true,
+   "effects": [
+    "ADBE Ramp",
+    "ADBE Drop Shadow"
+   ],
+   "effectOpacity": 37,
+   "gpu": 1,
+   "render": {
+    "file": "ADBE_Drop_Shadow.aep",
+    "comp": "fx|ADBE Drop Shadow",
+    "ref": "fx-nondefault-09-13.png",
+    "exit": 0,
+    "renders": true,
+    "max_abs": 4,
+    "mean_abs": 0.006,
+    "pct_px_over_2": 0.0,
+    "pct_px_over_8": 0.0,
+    "vs_ec_png": {
+     "max_abs": 94,
+     "pct_px_over_2": 100.0,
+     "pct_px_over_8": 100.0
+    }
+   }
+  },
+  {
+   "file": "ADBE_Ramp.aep",
+   "matchName": "ADBE Ramp",
+   "opens": true,
+   "compFound": true,
+   "effects": [
+    "ADBE Ramp",
+    "ADBE Ramp"
+   ],
+   "effectOpacity": 37,
+   "gpu": 1,
+   "render": {
+    "file": "ADBE_Ramp.aep",
+    "comp": "fx|ADBE Ramp",
+    "ref": "fx-nondefault-07-1.png",
+    "exit": 0,
+    "renders": true,
+    "max_abs": 1,
+    "mean_abs": 0.001,
+    "pct_px_over_2": 0.0,
+    "pct_px_over_8": 0.0,
+    "vs_ec_png": {
+     "max_abs": 1,
+     "pct_px_over_2": 0.0,
+     "pct_px_over_8": 0.0
+    }
+   }
+  }
+ ]
+}
