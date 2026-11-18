@@ -12,3 +12,13 @@ merged footage, as a composition with cropped layers and as a composition with d
 layers, then saves `psd_layers.aep` and `psd_layers.json` next to the script. If an import mode
 opens a dialog or fails, note it in the JSON (the script catches errors) and keep the rest.
 Commit both files here on test-corpus.
+
+## Part 2: what After Effects needs
+
+`psd_layers_zeroed.aep` is `psd_layers.aep` with, in the six layer items only, the fields EffectCraft
+may not know zeroed: `opti` bounds (78..94), byte 340, and `sspc` bytes 191 and 208..211. The
+index, name, sizes (`sspc` 32 / 36) and the Retain Layer Sizes byte (`sspc` 199) are kept.
+Please open it (no Save As) and print, for every footage item: name, width, height,
+`footageMissing`; then render frame 0 of both layer comps to PNG (`zeroed_cropped.png`,
+`zeroed_document.png`) and the same frames of the original `psd_layers.aep` (`orig_cropped.png`,
+`orig_document.png`). Note any warning dialog. Result in `psd_layers_zeroed.json` here.
