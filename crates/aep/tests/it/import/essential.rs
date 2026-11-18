@@ -42,7 +42,8 @@ fn path(steps: &[(&str, Option<u32>)]) -> String {
     format!("{{{}}}", parts.join(","))
 }
 
-/// A control (`LIST CCtl`) driving `json` on layer `layer`.
+/// A control (`LIST CCtl`) driving `json` on layer `layer` of composition `C` (`CCId`: the
+/// composition that holds the layer).
 fn control(name: &str, uuid: &str, ctyp: u32, layer: u32, json: &str) -> Chunk<'static> {
     Chunk::list(
         *b"CCtl",
@@ -51,7 +52,7 @@ fn control(name: &str, uuid: &str, ctyp: u32, layer: u32, json: &str) -> Chunk<'
             utf8(uuid),
             u32be(b"CTyp", ctyp),
             u32be(b"CprC", 1),
-            Chunk::list(*b"CPrp", vec![u32be(b"CCId", 1), u32be(b"CLId", layer), utf8(json)]),
+            Chunk::list(*b"CPrp", vec![u32be(b"CCId", COMP_C), u32be(b"CLId", layer), utf8(json)]),
         ],
     )
 }
@@ -101,8 +102,13 @@ fn set_u32(c: &mut Chunk<'_>, at: usize, v: u32) {
 /// The synthetic project with `controls` on `C` and, when `layer_overrides` is given, a
 /// composition `Main` whose solid layer is turned into a precomp layer of `C` carrying them.
 fn project(controls: Vec<Chunk<'static>>, layer_overrides: Option<Vec<Chunk<'static>>>) -> Vec<u8> {
+    project_nested(controls, layer_overrides, vec![])
+}
+
+/// [`project`], with `main_controls` on `Main` itself.
+fn project_nested(controls: Vec<Chunk<'static>>, layer_overrides: Option<Vec<Chunk<'static>>>, main_controls: Vec<Chunk<'static>>) -> Vec<u8> {
     let mut file: AepFile<'_> = parse(SYNTHETIC).unwrap();
-    fn walk(chunks: &mut Vec<Chunk<'_>>, controls: &[Chunk<'static>], over: &Option<Vec<Chunk<'static>>>) {
+    fn walk(chunks: &mut Vec<Chunk<'_>>, controls: &[Chunk<'static>], over: &Option<Vec<Chunk<'static>>>, main_controls: &[Chunk<'static>]) {
         let at = chunks.iter().position(|c| c.list_type() == Some(*b"Item") && idta_id(c) == Some(COMP_C));
         if let Some(at) = at {
             let mut main = chunks[at].clone();
@@ -120,6 +126,10 @@ fn project(controls: Vec<Chunk<'static>>, layer_overrides: Option<Vec<Chunk<'sta
                 for c in children.iter_mut() {
                     match (c.id, c.list_type()) {
                         (id, _) if id == *b"idta" => set_u32(c, 16, MAIN),
+                        (_, Some(t)) if t == *b"CIF3" => {
+                            let Body::List { children, .. } = &mut c.body else { continue };
+                            children.extend(main_controls.iter().cloned());
+                        }
                         (id, _) if id == *b"Utf8" => *c = utf8("Main"),
                         (_, Some(t)) if t == *b"Layr" => {
                             let Body::List { children: layer, .. } = &mut c.body else { continue };
@@ -147,11 +157,11 @@ fn project(controls: Vec<Chunk<'static>>, layer_overrides: Option<Vec<Chunk<'sta
         }
         for c in chunks.iter_mut() {
             if let Body::List { children, .. } = &mut c.body {
-                walk(children, controls, over);
+                walk(children, controls, over, main_controls);
             }
         }
     }
-    walk(&mut file.chunks, &controls, &layer_overrides);
+    walk(&mut file.chunks, &controls, &layer_overrides, &main_controls);
     write(&file).unwrap()
 }
 
@@ -222,8 +232,8 @@ fn a_precomp_layer_keeps_the_values_it_overrides() {
 #[test]
 fn what_cannot_be_imported_is_reported() {
     let mut controls = opacity_and_scale();
-    // An effect parameter (not supported yet), a layer that does not exist, a control without a
-    // property, and a shape item on a solid layer.
+    // An effect without a parameter step, a layer that does not exist, a panel comment (no property
+    // list), and a shape item on a solid layer.
     controls.push(control("Amount", "u-3", 2, SOLID_LAYER, &path(&[("ADBE Effect Parade", None), ("ADBE Slider Control", Some(0))])));
     controls.push(control("Gone", "u-4", 2, 999, &path(&[("ADBE Transform Group", None), ("ADBE Opacity", None)])));
     controls.push(Chunk::list(*b"CCtl", vec![names("Note"), utf8("u-5"), u32be(b"CTyp", 2)]));
@@ -242,11 +252,12 @@ fn what_cannot_be_imported_is_reported() {
     ]);
     let (p, r) = run(&project(controls, Some(over)));
     let lost = losses(&r);
-    assert_eq!(lost.len(), 5, "{lost:#?}");
+    // A control without a property list (a comment or group of the panel) has nothing to import.
+    assert_eq!(lost.len(), 4, "{lost:#?}");
+    assert!(!lost.iter().any(|l| l.contains("'Note'")), "{lost:#?}");
     for (needle, why) in [
         ("'Amount'", "not supported"),
         ("'Gone'", "its layer was not imported"),
-        ("'Note'", "drives no property"),
         ("'Fill'", "no shape contents"),
         ("Main: ", "a control that was not imported"),
     ] {
@@ -301,4 +312,67 @@ fn controls_on_effect_parameters_and_their_overrides_are_imported() {
     assert_eq!(prop(1).value, Value::Scalar(25.0));
     let GroupKind::Essential { overridden } = &group.kind else { panic!() };
     assert_eq!(overridden.len(), 2);
+}
+
+#[test]
+fn a_control_passed_up_from_a_nested_instance_drives_its_essential_property() {
+    // FM resize projects: the outer composition's control names the innermost layer, `CCId` the
+    // composition that holds it; here the instance of `C` in `Main` shows it as its Essential
+    // Property, which the control drives.
+    let main_controls = vec![control("Main Opacity", "m-1", 2, SOLID_LAYER, &path(&[("ADBE Transform Group", None), ("ADBE Opacity", None)]))];
+    let over = overrides(&[(OPACITY, "ADBE Opacity", record("Box Opacity", 1, &[0.3])), (SCALE, "ADBE Scale", record("Box Scale", 0, &[0.5, 0.5, 1.0]))]);
+    let (p, r) = run(&project_nested(opacity_and_scale(), Some(over), main_controls));
+    assert_eq!(losses(&r), Vec::<String>::new());
+    let inner = comp_named(&p, "C").essential.clone().unwrap();
+    let main = comp_named(&p, "Main");
+    let inst = main.layers.iter().find(|l| matches!(l.source, LayerSource::Comp { .. })).expect("the precomp layer");
+    let group = essential::group(inst).expect("its Essential Properties");
+    let child = group.children.iter().filter_map(|n| n.as_prop()).find(|p| p.match_id == essential::match_id(inner.controls[0].id)).unwrap();
+    let eg = main.essential.as_ref().expect("Main's Essential Properties");
+    assert_eq!(eg.controls.len(), 1);
+    let EgKind::Property { layer, prop, .. } = &eg.controls[0].kind else { panic!("{:?}", eg.controls[0]) };
+    assert_eq!((*layer, *prop), (inst.id, child.uid));
+    assert_eq!(r.report.imported.essential_properties, 3);
+}
+
+#[test]
+fn a_panel_comment_has_no_override_entry() {
+    // FM resize projects: a comment (`CTyp` 10, no `CPrp`) is listed in `OvG2` but has no entry in
+    // the override group; the other entries pair with the controls after it.
+    let mut controls = vec![Chunk::list(*b"CCtl", vec![names("Note"), utf8("n-1"), u32be(b"CTyp", 10)])];
+    controls.extend(opacity_and_scale());
+    let mut over = overrides(&[(OPACITY, "ADBE Opacity", record("Box Opacity", 1, &[0.3])), (SCALE, "ADBE Scale", record("Box Scale", 1, &[0.5, 0.5, 1.0]))]);
+    let Body::List { children, .. } = &mut over[1].body else { panic!() };
+    children.insert(1, Chunk::list(*b"CPrp", vec![utf8("n-1")]));
+    let (p, r) = run(&project(controls, Some(over)));
+    assert_eq!(losses(&r), Vec::<String>::new());
+    let eg = comp_named(&p, "C").essential.clone().unwrap();
+    let main = comp_named(&p, "Main");
+    let inst = main.layers.iter().find(|l| matches!(l.source, LayerSource::Comp { .. })).expect("the precomp layer");
+    let group = essential::group(inst).expect("its Essential Properties");
+    let prop = |i: usize| group.children.iter().filter_map(|n| n.as_prop()).find(|p| p.match_id == essential::match_id(eg.controls[i].id)).unwrap();
+    assert_eq!(prop(0).value, Value::Scalar(30.0));
+    assert_eq!(prop(1).value, Value::Vec3([50.0, 50.0, 100.0]));
+}
+
+#[test]
+fn an_anchor_point_control_takes_the_layers_unit() {
+    // Lab essential-nested: an Anchor Point control (`CTyp` 5) and its override are stored as the
+    // layer's own Anchor Point record, a fraction of the solid's size.
+    let controls = vec![control("Pivot", "a-1", 5, SOLID_LAYER, &path(&[("ADBE Transform Group", None), ("ADBE Anchor Point", None)]))];
+    let over = overrides(&[("a-1", "ADBE Anchor Point", record("Pivot", 1, &[0.25, 0.5, 0.0]))]);
+    let (p, r) = run(&project(controls, Some(over)));
+    assert_eq!(losses(&r), Vec::<String>::new());
+    let c = comp_named(&p, "C");
+    let solid = c.layers.iter().find(|l| matches!(l.source, LayerSource::Solid { .. })).unwrap();
+    let LayerSource::Solid { item } = solid.source else { unreachable!() };
+    let effectcraft_project::ItemKind::Solid(s) = &p.item(item).unwrap().kind else { panic!("solid") };
+    let eg = c.essential.clone().unwrap();
+    let EgKind::Property { prop, .. } = &eg.controls[0].kind else { panic!() };
+    assert_eq!(*prop, solid.props.prop("transform/anchor").unwrap().uid);
+    let main = comp_named(&p, "Main");
+    let inst = main.layers.iter().find(|l| matches!(l.source, LayerSource::Comp { .. })).expect("the precomp layer");
+    let group = essential::group(inst).expect("its Essential Properties");
+    let v = &group.children.iter().filter_map(|n| n.as_prop()).find(|p| p.match_id == essential::match_id(eg.controls[0].id)).unwrap().value;
+    assert_eq!(*v, Value::Vec3([0.25 * f64::from(s.width), 0.5 * f64::from(s.height), 0.0]));
 }

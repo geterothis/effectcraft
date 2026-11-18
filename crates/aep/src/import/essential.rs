@@ -23,7 +23,7 @@
 use effectcraft_project::{GroupKind, Layer, PropGroup, Uid};
 
 use crate::container::Node;
-use crate::import::props::Kind;
+use crate::import::props::{AnchorUnit, Kind};
 
 /// The JSON `index` of a named (not indexed) step.
 const NO_INDEX: u64 = 4_294_967_295;
@@ -31,6 +31,8 @@ const NO_INDEX: u64 = 4_294_967_295;
 const MAX_STEPS: usize = 64;
 /// Controls of one composition, at most.
 const MAX_CONTROLS: usize = 4096;
+/// Compositions an Essential Property is passed up through, at most.
+pub(crate) const MAX_NESTING: usize = 16;
 
 /// One step of a property path: a match name, and the place of an indexed item.
 #[derive(Clone, Debug, PartialEq)]
@@ -42,6 +44,9 @@ pub(crate) struct Step {
 /// A property a control drives: the layer (After Effects id) and the path from it.
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct Target {
+    /// `CCId`: the After Effects id of the composition that holds the layer (the control's own
+    /// composition, or one nested in it).
+    pub(crate) comp: Option<u32>,
     pub(crate) layer: u32,
     pub(crate) path: Vec<Step>,
 }
@@ -55,6 +60,8 @@ pub(crate) struct Control {
     pub(crate) kind: u32,
     /// The properties it drives; the first is the main one.
     pub(crate) targets: Vec<Target>,
+    /// How many `LIST CPrp` it has: none for a comment or group of the panel.
+    pub(crate) property_lists: usize,
 }
 
 /// A composition's Essential Properties.
@@ -98,10 +105,11 @@ fn read_control(c: Node<'_, '_>) -> Control {
         .filter_map(|p| {
             let layer = p.child(b"CLId").and_then(be_u32)?;
             let path = parse_path(&p.children().find_map(utf8)?)?;
-            Some(Target { layer, path })
+            Some(Target { comp: p.child(b"CCId").and_then(be_u32), layer, path })
         })
         .collect();
     Control {
+        property_lists: c.children().filter(|p| p.is_list(b"CPrp")).count(),
         name: display_name(c).unwrap_or_default(),
         uuid: c.children().find_map(utf8).unwrap_or_default(),
         kind: c.child(b"CTyp").and_then(be_u32).unwrap_or(0),
@@ -138,7 +146,8 @@ pub(crate) enum Conv {
 }
 
 /// The project property a control drives on `layer`; why not when it can't be found.
-pub(crate) fn resolve(layer: &Layer, path: &[Step]) -> Result<(Uid, Conv), String> {
+/// `anchor` says how the layer's Anchor Point is stored (as the layer's own record is read).
+pub(crate) fn resolve(layer: &Layer, path: &[Step], anchor: Option<AnchorUnit>) -> Result<(Uid, Conv), String> {
     let names: Vec<&str> = path.iter().map(|s| s.match_name.as_str()).collect();
     let found = match names.as_slice() {
         ["ADBE Transform Group", p] => {
@@ -149,6 +158,14 @@ pub(crate) fn resolve(layer: &Layer, path: &[Step]) -> Result<(Uid, Conv), Strin
                 "ADBE Rotate X" => ("rotationX", Kind::Rotation),
                 "ADBE Rotate Y" => ("rotationY", Kind::Rotation),
                 "ADBE Opacity" => ("opacity", Kind::Opacity),
+                // Lab essential-nested: stored as the layer's Anchor Point record is (a fraction of a
+                // source, pixels on text and shape layers). A camera's or light's is its point of
+                // interest, not sampled.
+                "ADBE Anchor Point" => match anchor {
+                    Some(AnchorUnit::Source(w, h) | AnchorUnit::Null(w, h)) => ("anchor", Kind::Anchor(f64::from(w), f64::from(h))),
+                    Some(AnchorUnit::Pixels) => ("anchor", Kind::Anchor(1.0, 1.0)),
+                    _ => return Err("the Anchor Point of a camera or light is not supported".into()),
+                },
                 _ => return Err(format!("the Transform property {p} is not supported")),
             };
             layer.props.sub("transform").and_then(|t| t.prop(id)).map(|p| (p.uid, Conv::Value(kind)))
@@ -287,8 +304,14 @@ fn until_nul(b: &[u8]) -> &[u8] {
 }
 
 /// The overrides of a precomp layer (its `LIST Layr`), by control UUID; `None` when it has
-/// none, `Some(Err)` when they can't be paired with their controls.
-pub(crate) fn read_overrides<'f, 'a>(layer: Node<'f, 'a>) -> Option<Result<Vec<(String, OverrideRecord<'f, 'a>)>, String>> {
+/// none, `Some(Err)` when they can't be paired with their controls. The group holds one entry (a
+/// `tdmn` and its record) per control in the controls' order, none for a control in `no_record`
+/// (a comment or group of the panel: FM resize projects list its UUID in `OvG2` but store no
+/// entry). An entry whose record is not a `LIST tdbs` or `LIST btds` is paired with `None`.
+pub(crate) fn read_overrides<'f, 'a>(
+    layer: Node<'f, 'a>,
+    no_record: &std::collections::HashSet<String>,
+) -> Option<Result<Vec<(String, Option<OverrideRecord<'f, 'a>>)>, String>> {
     let root = layer.child_list(b"tdgp")?;
     let kids: Vec<Node<'f, 'a>> = root.children().collect();
     let at = kids.iter().position(|c| c.is(b"tdmn") && c.bytes().map(until_nul) == Some(b"ADBE Layer Overrides".as_slice()))?;
@@ -301,21 +324,30 @@ pub(crate) fn read_overrides<'f, 'a>(layer: Node<'f, 'a>) -> Option<Result<Vec<(
         .find(|c| c.is_list(b"OvG2"))
         .map(|g| g.children().filter(|c| c.is_list(b"CPrp")).filter_map(|c| c.children().find_map(utf8)).take(MAX_CONTROLS).collect())
         .unwrap_or_default();
+    let uuids: Vec<String> = uuids.into_iter().filter(|u| !no_record.contains(u)).collect();
     let Some(group) = own.iter().find(|c| c.is_list(b"tdgp")) else { return Some(Ok(vec![])) };
-    let mut records = vec![];
-    let mut pending_name = false;
+    let mut entries: Vec<Option<OverrideRecord<'f, 'a>>> = vec![];
+    let mut open = false;
     for c in group.children() {
         if c.is(b"tdmn") {
-            pending_name = c.bytes().map(until_nul) != Some(b"ADBE Group End".as_slice());
-        } else if pending_name && (c.is_list(b"tdbs") || c.is_list(b"btds")) {
-            records.push(OverrideRecord { record: c });
-            pending_name = false;
+            open = c.bytes().map(until_nul) != Some(b"ADBE Group End".as_slice());
+            if open {
+                entries.push(None);
+            }
+        } else if open && (c.is_list(b"tdbs") || c.is_list(b"btds")) {
+            if let Some(last) = entries.last_mut() {
+                *last = Some(OverrideRecord { record: c });
+            }
+            open = false;
+        }
+        if entries.len() > MAX_CONTROLS {
+            break;
         }
     }
-    if records.len() != uuids.len() {
-        return Some(Err(format!("{} override values for {} controls", records.len(), uuids.len())));
+    if entries.len() != uuids.len() {
+        return Some(Err(format!("{} override values for {} controls", entries.len(), uuids.len())));
     }
-    Some(Ok(uuids.into_iter().zip(records).collect()))
+    Some(Ok(uuids.into_iter().zip(entries).collect()))
 }
 
 #[cfg(test)]
