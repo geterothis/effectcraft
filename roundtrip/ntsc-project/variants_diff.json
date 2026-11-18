@@ -1,0 +1,62 @@
+{
+ "reference": "roundtrip/ntsc-export/frames/orig_*.png (original ntsc_footage.aep)",
+ "renderer": "ae-harness plugin AEGP render, 8 bpc",
+ "variants": {
+  "A_nnhd": {
+   "C_t2997_f45": {
+    "vsOrig_max": 128,
+    "vsOrig_pctPx_gt2": 10.87,
+    "vsEC_max": 0,
+    "vsEC_pctPx_gt2": 0.0
+   },
+   "C_t23976_f36": {
+    "vsOrig_max": 131,
+    "vsOrig_pctPx_gt2": 10.61,
+    "vsEC_max": 0,
+    "vsEC_pctPx_gt2": 0.0
+   }
+  },
+  "B_rhed": {
+   "C_t2997_f45": {
+    "vsOrig_max": 128,
+    "vsOrig_pctPx_gt2": 10.87,
+    "vsEC_max": 0,
+    "vsEC_pctPx_gt2": 0.0
+   },
+   "C_t23976_f36": {
+    "vsOrig_max": 131,
+    "vsOrig_pctPx_gt2": 10.61,
+    "vsEC_max": 0,
+    "vsEC_pctPx_gt2": 0.0
+   }
+  },
+  "C_version": {
+   "C_t2997_f45": {
+    "vsOrig_max": 128,
+    "vsOrig_pctPx_gt2": 10.87,
+    "vsEC_max": 0,
+    "vsEC_pctPx_gt2": 0.0
+   },
+   "C_t23976_f36": {
+    "vsOrig_max": 131,
+    "vsOrig_pctPx_gt2": 10.61,
+    "vsEC_max": 0,
+    "vsEC_pctPx_gt2": 0.0
+   }
+  },
+  "D_all": {
+   "C_t2997_f45": {
+    "vsOrig_max": 128,
+    "vsOrig_pctPx_gt2": 10.87,
+    "vsEC_max": 0,
+    "vsEC_pctPx_gt2": 0.0
+   },
+   "C_t23976_f36": {
+    "vsOrig_max": 131,
+    "vsOrig_pctPx_gt2": 10.61,
+    "vsEC_max": 0,
+    "vsEC_pctPx_gt2": 0.0
+   }
+  }
+ }
+}
