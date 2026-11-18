@@ -13,8 +13,13 @@
 //! the line (`-1`). Pixels a frame does not write stay as they were, so a later frame can update
 //! only the lines that moved.
 //!
-//! FilmCraft's MOV reader does not know this fourcc, so a file whose video sample is `rle ` is
-//! opened here instead. Audio in the same file is not decoded.
+//! PNG (`png `) inside a `.mov` is read here too: each sample is a complete PNG image
+//! (QTFF, "Video sample description": the compression type `png ` stores one PNG file per
+//! sample), decoded on its own. After Effects writes it for the QuickTime PNG output module, with
+//! or without alpha.
+//!
+//! FilmCraft's MOV reader does not know these fourccs, so a file whose video sample is `rle ` or
+//! `png ` is opened here instead. Audio in the same file is not decoded.
 
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, PoisonError};
@@ -29,6 +34,30 @@ const MAX_EDGE: u32 = 16_384;
 const MAX_SAMPLES: usize = 1_000_000;
 const MAX_SAMPLE: usize = 64 << 20;
 
+/// The compression of the video samples.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Codec {
+    /// `rle `: each frame patches the previous one.
+    Animation,
+    /// `png `: each frame is a whole PNG image.
+    Png,
+}
+
+impl Codec {
+    /// Whether frames at this sample-description depth carry alpha (32: 8-bit RGBA / ARGB; 64:
+    /// 16-bit RGBA, which only PNG has).
+    fn has_alpha(self, depth: u16) -> bool {
+        depth == 32 || (self == Codec::Png && depth == 64)
+    }
+
+    fn label(self, depth: u16) -> String {
+        match self {
+            Codec::Animation => format!("Animation ({depth}-bit)"),
+            Codec::Png => format!("PNG ({depth}-bit)"),
+        }
+    }
+}
+
 struct Sample {
     offset: u64,
     size: usize,
@@ -42,6 +71,7 @@ struct Movie {
     width: u32,
     height: u32,
     depth: u16,
+    codec: Codec,
     rate: FrameRate,
     samples: Vec<Sample>,
     info: MediaInfo,
@@ -54,7 +84,8 @@ struct Decoded {
     rgba: Vec<u8>,
 }
 
-/// `Some` when `path` is a QuickTime movie whose video is Animation. `Ok(None)` for anything else.
+/// `Some` when `path` is a QuickTime movie whose video is Animation or PNG. `Ok(None)` for
+/// anything else.
 pub(crate) fn probe(path: &Path) -> Result<Option<Footage>> {
     let Some(movie) = read_movie(path)? else { return Ok(None) };
     Ok(Some(footage_of(path, &movie)))
@@ -78,10 +109,10 @@ fn footage_of(path: &Path, movie: &Movie) -> Footage {
         duration,
         has_video: true,
         has_audio: false,
-        alpha: if movie.depth == 32 { AlphaMode::Straight } else { AlphaMode::Ignore },
+        alpha: if movie.codec.has_alpha(movie.depth) { AlphaMode::Straight } else { AlphaMode::Ignore },
         premul_color: [0.0; 3],
         loop_count: 1,
-        codec: format!("Animation ({}-bit)", movie.depth),
+        codec: movie.codec.label(movie.depth),
         missing: false,
         sequence: Vec::new(),
         color_profile: None,
@@ -109,9 +140,16 @@ impl MediaSource for Movie {
                 let n = (self.width as usize).saturating_mul(self.height as usize).saturating_mul(4);
                 guard.rgba = vec![0; n];
             }
+            // A PNG frame is whole: only the wanted one is decoded.
+            let from = if self.codec == Codec::Png { index } else { from };
             for i in from..=index {
-                let sample = read_sample(&self.path, &self.samples[i]).map_err(filmcraft_media::MediaError::Decode)?;
-                decode_frame(&sample, self.width, self.height, self.depth, &mut guard.rgba).map_err(filmcraft_media::MediaError::Decode)?;
+                let at = self.samples.get(i).ok_or_else(|| filmcraft_media::MediaError::Decode("sample index out of range".into()))?;
+                let sample = read_sample(&self.path, at).map_err(filmcraft_media::MediaError::Decode)?;
+                match self.codec {
+                    Codec::Animation => decode_frame(&sample, self.width, self.height, self.depth, &mut guard.rgba),
+                    Codec::Png => decode_png(&sample, self.width, self.height, &mut guard.rgba),
+                }
+                .map_err(filmcraft_media::MediaError::Decode)?;
             }
             guard.index = Some(index);
         }
@@ -141,9 +179,9 @@ fn read_movie(path: &Path) -> Result<Option<Movie>> {
     let Some(parsed) = parse_animation(&file, len).map_err(|e| MediaError::Decode(format!("{}: {e}", path.display())))? else {
         return Ok(None);
     };
-    let (width, height, depth, timescale, samples) = parsed;
+    let (width, height, depth, codec, timescale, samples) = parsed;
     if samples.is_empty() {
-        return Err(MediaError::Decode(format!("{}: Animation movie has no frames", path.display())));
+        return Err(MediaError::Decode(format!("{}: QuickTime movie has no frames", path.display())));
     }
     let dur = samples.first().map(|s| s.duration.0).filter(|d| *d > 0).unwrap_or(Tick::from_units(1, 30).0);
     let rate = rate_of(timescale, samples.first().map(|s| s.duration).unwrap_or(Tick(dur)));
@@ -157,10 +195,14 @@ fn read_movie(path: &Path) -> Result<Option<Movie>> {
             height,
             frame_rate: filmcraft_time::FrameRate::from_f64(rate.num as f64 / rate.den.max(1) as f64),
             par: (1, 1),
-            codec: format!("Animation ({}-bit)", depth),
-            pixel_format: if depth == 32 { "ARGB 8-bit".into() } else { format!("RGB {depth}-bit") },
+            codec: codec.label(depth),
+            pixel_format: match (codec, depth) {
+                (Codec::Animation, 32) => "ARGB 8-bit".into(),
+                (Codec::Png, 32) => "RGBA 8-bit".into(),
+                _ => format!("RGB {depth}-bit"),
+            },
             color: filmcraft_color::ColorInfo::SRGB_FULL,
-            has_alpha: depth == 32,
+            has_alpha: codec.has_alpha(depth),
             bitrate: None,
             hdr: None,
             color_assumed: None,
@@ -170,7 +212,17 @@ fn read_movie(path: &Path) -> Result<Option<Movie>> {
         start_timecode: None,
         file_size: Some(len),
     };
-    Ok(Some(Movie { path: path.to_path_buf(), width, height, depth, rate, samples, info, decoded: Mutex::new(Decoded { index: None, rgba: Vec::new() }) }))
+    Ok(Some(Movie {
+        path: path.to_path_buf(),
+        width,
+        height,
+        depth,
+        codec,
+        rate,
+        samples,
+        info,
+        decoded: Mutex::new(Decoded { index: None, rgba: Vec::new() }),
+    }))
 }
 
 fn rate_of(timescale: u32, sample: Tick) -> FrameRate {
@@ -208,7 +260,7 @@ fn read_at(file: &std::fs::File, offset: u64, buf: &mut [u8]) -> std::io::Result
 
 fn read_sample(path: &Path, sample: &Sample) -> std::result::Result<Vec<u8>, String> {
     if sample.size > MAX_SAMPLE {
-        return Err("Animation frame is larger than 64 MiB".into());
+        return Err("QuickTime frame is larger than 64 MiB".into());
     }
     let file = std::fs::File::open(path).map_err(|e| e.to_string())?;
     let mut buf = vec![0u8; sample.size];
@@ -216,17 +268,17 @@ fn read_sample(path: &Path, sample: &Sample) -> std::result::Result<Vec<u8>, Str
     Ok(buf)
 }
 
-fn parse_animation(file: &std::fs::File, len: u64) -> std::result::Result<Option<(u32, u32, u16, u32, Vec<Sample>)>, String> {
+fn parse_animation(file: &std::fs::File, len: u64) -> std::result::Result<Option<(u32, u32, u16, Codec, u32, Vec<Sample>)>, String> {
     let Some(moov) = read_moov(file, len) else { return Ok(None) };
-    let Some((width, height, depth, timescale, chunks, stsc, sizes, durations)) = parse_moov(&moov)? else { return Ok(None) };
-    if depth != 16 && depth != 24 && depth != 32 {
+    let Some((width, height, (depth, codec), timescale, chunks, stsc, sizes, durations)) = parse_moov(&moov)? else { return Ok(None) };
+    if codec == Codec::Animation && depth != 16 && depth != 24 && depth != 32 {
         return Err(format!("Animation at {depth} bits per pixel is paletted; 16, 24 and 32-bit are the depths this reads"));
     }
     if width == 0 || height == 0 || width > MAX_EDGE || height > MAX_EDGE {
-        return Err(format!("Animation frame size {width}×{height} is outside 1…{MAX_EDGE}"));
+        return Err(format!("{} frame size {width}×{height} is outside 1…{MAX_EDGE}", codec.label(depth)));
     }
     let samples = layout_samples(timescale, &chunks, &stsc, &sizes, &durations)?;
-    Ok(Some((width, height, depth, timescale, samples)))
+    Ok(Some((width, height, depth, codec, timescale, samples)))
 }
 
 /// The `moov` payload, or `None` when this is not a QuickTime / ISO-BMFF file.
@@ -265,7 +317,7 @@ fn read_moov(file: &std::fs::File, len: u64) -> Option<Vec<u8>> {
     None
 }
 
-fn parse_moov(moov: &[u8]) -> std::result::Result<Option<(u32, u32, u16, u32, Vec<u64>, Vec<Stsc>, Vec<usize>, Vec<(u32, u32)>)>, String> {
+fn parse_moov(moov: &[u8]) -> std::result::Result<Option<(u32, u32, (u16, Codec), u32, Vec<u64>, Vec<Stsc>, Vec<usize>, Vec<(u32, u32)>)>, String> {
     let mut video = None;
     for (kind, payload) in boxes(moov) {
         if kind == *b"trak"
@@ -278,7 +330,7 @@ fn parse_moov(moov: &[u8]) -> std::result::Result<Option<(u32, u32, u16, u32, Ve
     Ok(video)
 }
 
-fn parse_trak(trak: &[u8]) -> std::result::Result<Option<(u32, u32, u16, u32, Vec<u64>, Vec<Stsc>, Vec<usize>, Vec<(u32, u32)>)>, String> {
+fn parse_trak(trak: &[u8]) -> std::result::Result<Option<(u32, u32, (u16, Codec), u32, Vec<u64>, Vec<Stsc>, Vec<usize>, Vec<(u32, u32)>)>, String> {
     let mut timescale = 0u32;
     let mut stsd = None;
     let mut stts = None;
@@ -312,12 +364,12 @@ fn parse_trak(trak: &[u8]) -> std::result::Result<Option<(u32, u32, u16, u32, Ve
         }
     }
     let Some(stsd) = stsd else { return Ok(None) };
-    let Some((w, h, depth)) = animation_entry(stsd)? else { return Ok(None) };
+    let Some((w, h, depth, codec)) = animation_entry(stsd)? else { return Ok(None) };
     let chunks = chunks.ok_or("Animation track has no chunk offsets")?;
     let stsc = parse_stsc(stsc.ok_or("Animation track has no sample-to-chunk table")?)?;
     let sizes = parse_stsz(stsz.ok_or("Animation track has no sample sizes")?)?;
     let durations = parse_stts(stts.ok_or("Animation track has no time-to-sample table")?)?;
-    Ok(Some((w, h, depth, timescale.max(1), chunks, stsc, sizes, durations)))
+    Ok(Some((w, h, (depth, codec), timescale.max(1), chunks, stsc, sizes, durations)))
 }
 
 fn mdhd_timescale(p: &[u8]) -> std::result::Result<u32, String> {
@@ -326,7 +378,7 @@ fn mdhd_timescale(p: &[u8]) -> std::result::Result<u32, String> {
     Ok(u32b(p, at).unwrap_or(1).max(1))
 }
 
-fn animation_entry(stsd: &[u8]) -> std::result::Result<Option<(u32, u32, u16)>, String> {
+fn animation_entry(stsd: &[u8]) -> std::result::Result<Option<(u32, u32, u16, Codec)>, String> {
     let count = u32b(stsd, 4).unwrap_or(0) as usize;
     let mut at = 8usize;
     for _ in 0..count.min(32) {
@@ -336,13 +388,18 @@ fn animation_entry(stsd: &[u8]) -> std::result::Result<Option<(u32, u32, u16)>, 
         }
         let entry = stsd.get(at..at + size).ok_or("truncated sample description")?;
         let fourcc = entry.get(4..8).ok_or("truncated sample description")?;
-        if fourcc == b"rle " {
+        let codec = match fourcc {
+            b"rle " => Some(Codec::Animation),
+            b"png " => Some(Codec::Png),
+            _ => None,
+        };
+        if let Some(codec) = codec {
             // Video sample description: after the 16-byte entry header, width is at byte 32 and
             // height at 34, depth at 82, of the entry (Apple QTFF image description).
-            let width = u16b(entry, 32).ok_or("Animation sample description has no width")? as u32;
-            let height = u16b(entry, 34).ok_or("Animation sample description has no height")? as u32;
+            let width = u16b(entry, 32).ok_or("video sample description has no width")? as u32;
+            let height = u16b(entry, 34).ok_or("video sample description has no height")? as u32;
             let depth = u16b(entry, 82).unwrap_or(32);
-            return Ok(Some((width, height, depth)));
+            return Ok(Some((width, height, depth, codec)));
         }
         at += size;
     }
@@ -575,6 +632,19 @@ fn decode_frame(sample: &[u8], width: u32, height: u32, depth: u16, rgba: &mut [
 /// The chunk inside a sample: after its 4-byte size, up to that size. The size's top two bits
 /// are not part of it (files from After Effects set 0x40 in the top byte). A sample may be longer
 /// than its chunk (padding after it), and a chunk of under 8 bytes changes nothing (empty body).
+/// Decodes a PNG sample into `rgba` (`width` × `height`, straight RGBA). A PNG of another size
+/// is refused rather than stretched.
+fn decode_png(sample: &[u8], width: u32, height: u32, rgba: &mut [u8]) -> std::result::Result<(), String> {
+    let image = image::load_from_memory_with_format(sample, image::ImageFormat::Png).map_err(|e| format!("PNG frame: {e}"))?;
+    if image.width() != width || image.height() != height {
+        return Err(format!("PNG frame is {}×{}, the track is {width}×{height}", image.width(), image.height()));
+    }
+    let pixels = image.into_rgba8().into_raw();
+    let out = rgba.get_mut(..pixels.len()).ok_or("PNG frame does not fit the picture")?;
+    out.copy_from_slice(&pixels);
+    Ok(())
+}
+
 fn chunk_body(sample: &[u8]) -> &[u8] {
     if let Some(head) = sample.get(..4) {
         let size = (u32::from_be_bytes([head[0], head[1], head[2], head[3]]) & 0x3fff_ffff) as usize;
@@ -845,6 +915,52 @@ mod tests {
         let path = std::env::temp_dir().join(format!("ec-not-anim-{}.mov", std::process::id()));
         std::fs::write(&path, b"not a quicktime file at all!!").unwrap();
         assert!(probe(&path).unwrap().is_none());
+        let _ = std::fs::remove_file(&path);
+    }
+
+    fn png_of(w: u32, h: u32, px: &[[u8; 4]]) -> Vec<u8> {
+        let raw: Vec<u8> = px.iter().flatten().copied().collect();
+        let img = image::RgbaImage::from_raw(w, h, raw).unwrap();
+        let mut out = std::io::Cursor::new(Vec::new());
+        img.write_to(&mut out, image::ImageFormat::Png).unwrap();
+        out.into_inner()
+    }
+
+    /// QuickTime PNG (`png `, the codec of After Effects' PNG output module): each sample is a
+    /// whole PNG image with its alpha. The file was not recognised and the footage was missing.
+    #[test]
+    fn png_frames_are_decoded_one_by_one_with_alpha() {
+        let a = png_of(2, 1, &[[255, 0, 0, 255], [0, 0, 255, 128]]);
+        let b = png_of(2, 1, &[[0, 255, 0, 0], [255, 255, 255, 255]]);
+        let mut bytes = mov(2, 1, 32, &[a, b]);
+        let at = bytes.windows(4).position(|w| w == b"rle ").unwrap();
+        bytes[at..at + 4].copy_from_slice(b"png ");
+        let path = std::env::temp_dir().join(format!("ec-qtpng-{}.mov", std::process::id()));
+        std::fs::write(&path, &bytes).unwrap();
+        let footage = probe(&path).unwrap().expect("PNG movie");
+        assert_eq!(footage.codec, "PNG (32-bit)");
+        assert_eq!(footage.alpha, AlphaMode::Straight);
+        let src = open(&path).unwrap().expect("open");
+        let at = |n: i64| src.video_frame(FrameRequest::full(filmcraft_time::Tick(Tick::from_units(n, 30).0))).unwrap();
+        // Frame 1 first: a PNG frame needs no earlier frame.
+        assert_eq!(pixel(&at(1), 0, 0), [0, 255, 0, 0]);
+        assert_eq!(pixel(&at(1), 1, 0), [255, 255, 255, 255]);
+        assert_eq!(pixel(&at(0), 1, 0), [0, 0, 255, 128]);
+        let _ = std::fs::remove_file(&path);
+    }
+
+    #[test]
+    fn a_png_frame_of_another_size_is_an_error() {
+        let bytes = {
+            let mut b = mov(2, 2, 32, &[png_of(1, 1, &[[1, 2, 3, 4]])]);
+            let at = b.windows(4).position(|w| w == b"rle ").unwrap();
+            b[at..at + 4].copy_from_slice(b"png ");
+            b
+        };
+        let path = std::env::temp_dir().join(format!("ec-qtpng-size-{}.mov", std::process::id()));
+        std::fs::write(&path, &bytes).unwrap();
+        let src = open(&path).unwrap().expect("open");
+        assert!(src.video_frame(FrameRequest::full(filmcraft_time::Tick::ZERO)).is_err());
         let _ = std::fs::remove_file(&path);
     }
 }
