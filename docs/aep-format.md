@@ -972,6 +972,19 @@ switch group per style, `<style>/enabled` (`dropShadow`, `innerShadow`, `outerGl
 At 32 bpc After Effects renders the modes 6, 7, 11, 12, 16-22 and 25 of a style as Normal (978);
 at 16 bpc as their formulas. API: `effectcraft_aep::style_map` (table shared by importer and exporter).
 
+### 3.12c Essential Properties (`Item/LIST CIF3`, precomp layers' `ADBE Layer Overrides`)
+
+After Effects 26.5, the corpus file `17_essential_graphics` (five properties on three layers of a
+composition, three instances) and synthetic variants (`tests/it/import/essential.rs`).
+
+| What | Where | Stored as | Verified |
+|---|---|---|---|
+| control lists | the composition item: `LIST CIFO`, `LIST CIF2`, `LIST CIF3` | each starts with `LIST CpS2` (`CsCt`, `Utf8` template name, `Utf8` locale), `LIST CapS`, `CPTm`, `CROI`, `CcCt` (count), then one `LIST CCtl` per control; `CIF2` and `CIF3` hold all five controls, `CIFO` three (in another order); a composition without controls has the lists with only their names | V |
+| control | `LIST CCtl` | `LIST CpS2` (first `Utf8`: the name), `LIST CapS`, a direct 36-byte `Utf8` UUID, `CTyp` (u32: 2 slider or opacity, 3 angle, 4 colour, 6 text, 9 scale), the value and default (`CVal`/`CDef`, f64, colours four f32), `Smin`/`Smax` for sliders, text fields for text, `CprC` (count) and one `LIST CPrp` per property | V |
+| driven property | `LIST CPrp` | `CCId`, `CLId` (u32, the layer id of `ldta`), a `Utf8` JSON path from the layer: `{"0":{"index":4294967295,"matchName":"ADBE Transform Group"},"1":{...,"matchName":"ADBE Opacity"}}`; `index` is the 0-based place of an indexed item (a shape group, a fill) and 4294967295 for a named group or property | V |
+| instance overrides | a precomp layer's root group: `tdmn "ADBE Layer Overrides"`, `LIST OvG2`, `LIST tdgp` (every layer has them, empty when the source has no controls) | `OvG2`: `CprC`, then one `LIST CPrp` per control with its UUID in a `Utf8`; the `tdgp`: per control, in the same order, `tdmn` (the property's match name, `ADBE EP Text Document` for Source Text) and a `LIST tdbs` (Source Text: `LIST btds` holding the `tdbs` and `LIST btdk`), then `LIST btgu`, `btov` and `ADBE Group End` | V |
+| override state | the record's `tdsb` | 1 when the instance overrides the value, 0 when it follows the composition (the stored value is then the composition's); values in the property's own units (opacity and scale as fractions, colours ARGB 0..255), static (`cdat`) or keyed (`LIST list`) | V |
+
 ### 3.13 What the tests cover
 
 `tests/header.rs`, `values.rs`, `keyframes.rs`, `layer_switches.rs`, `effects.rs`, `effects_batch4.rs`, `effects_exposure.rs`, `masks.rs`,

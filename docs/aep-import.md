@@ -338,6 +338,16 @@ parameter gets the file's value:
   reported, and once that is spent a later effect without a counterpart arrives without a
   placeholder (reported). A placeholder is still reported in `effects` and counted in
   `imported.placeholderEffects`; .aep export reports it and leaves it out.
+- **Essential Properties** (format: `aep-format.md` 3.12c). A composition's controls become its
+  Essential Graphics (template name and control names kept, in panel order) when they drive Position,
+  Scale, Rotation (X, Y, Z) or Opacity in Transform, Source Text, or a shape property (fill and stroke
+  colour and opacity, stroke width, group transform, rectangle and ellipse size and position,
+  roundness); a Scale control becomes a uniform Scale control, and a control driving several
+  properties keeps the others as links. Each precomp layer of such a composition gets its Essential
+  Properties group, and the values it overrides (static, keyed, or with an expression; Source Text with
+  its text document) are imported as overrides; the others follow the composition. Counted in
+  `imported.essentialProperties`. Effect parameters, Anchor Point and Orientation are not yet mapped
+  (reported).
 
 ## What is reported
 
@@ -367,7 +377,7 @@ for the `unlisted` ones. The categories:
 | `unsupported_layers` | an unknown layer type, a layer without a usable source, a precomposition loop (the layer is cut) |
 | `unsupported_items` | a project item of an unknown kind; an item made from a Photoshop layer without pixels (it shows the merged image), or from one as big as the document but not at its corner (shown at its own size), or an item as big as neither the layer nor the document (shown on the document) |
 | `damaged_data` | a header, key or value that could not be read, numbers that are not finite or beyond ±1e9 (default used); an unreadable text document (the text layer is imported with empty text), damaged style runs |
-| `essential_graphics` ("Essential Graphics") | per composition with Essential Properties (`LIST CCtl` in its `LIST CIFO` / `CIF2` / `CIF3`), how many: they and the values precomp layers override them with are not imported, so every instance shows the composition's own values |
+| `essential_graphics` ("Essential Graphics") | each Essential Properties control that is not imported (it drives an effect parameter, Anchor Point, Orientation or another property not yet supported, its layer was not imported, a shape item is not found at its place, or it drives no property), with its name and why; the overrides of a precomp layer that cannot be paired with imported controls; Source Text keyframes of an override (its first text is imported) |
 
 `limitations` states what the reader cannot see at all, so it can be neither imported nor counted:
 frame blending, 3D material options, audio levels, guides, the mask colour, lock, feather falloff, motion blur and RotoBezier switches, and for text per-character 3D, text on a path and style slots of unknown meaning (stored values of these that differ from the default are reported as text layer features). They are listed in every report.

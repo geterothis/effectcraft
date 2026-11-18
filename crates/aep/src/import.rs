@@ -28,6 +28,7 @@
 pub(crate) mod build;
 mod camera;
 mod effects;
+mod essential;
 mod lumetri;
 mod markers;
 mod masks;

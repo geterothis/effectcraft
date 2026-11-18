@@ -66,9 +66,9 @@ pub enum LossCategory {
     /// sRGB and Rec. 709) or stored as an unknown code (colour depth, time display, frames per
     /// foot, frame count start).
     ProjectSettings,
-    /// Essential Graphics: a composition's Essential Properties (the `LIST CCtl` controls in its
-    /// `LIST CIFO` / `CIF2` / `CIF3`) and the values precomp layers override them with. Not
-    /// imported, so every instance shows the composition's own values.
+    /// Essential Graphics: an Essential Properties control that is not imported (its property is
+    /// not supported, e.g. an effect parameter, or cannot be found), and the overrides of precomp
+    /// layers that cannot be paired with an imported control.
     EssentialGraphics,
 }
 
@@ -203,6 +203,9 @@ pub struct Imported {
     /// Layer styles (Drop Shadow, Stroke, ...), one per style on a layer.
     #[serde(default)]
     pub layer_styles: usize,
+    /// Essential Properties controls of compositions (each instance's overrides come with them).
+    #[serde(default)]
+    pub essential_properties: usize,
 }
 
 /// The result of reading an `.aep`: counts of what was imported, the losses per category, the
@@ -419,7 +422,7 @@ mod tests {
         let json = serde_json::to_string(&collected()).unwrap();
         assert_eq!(
             json,
-            r#"{"imported":{"folders":0,"compositions":0,"solids":0,"footage":0,"layers":2,"solidLayers":0,"nullLayers":0,"adjustmentLayers":0,"footageLayers":0,"precompLayers":0,"textLayers":0,"keyframes":0,"expressions":0,"masks":0,"trackMattes":0,"markers":0,"timeRemaps":0,"shapeLayers":0,"shapeItems":0,"cameras":0,"lights":0,"textAnimators":0,"effects":0,"placeholderEffects":0,"layerStyles":0},"losses":[{"category":"effects","count":2,"details":["fx 1","fx 2"],"unlisted":0},{"category":"masks","count":1,"details":["mask 1"],"unlisted":0}],"missingFootage":["a.png"],"missingFonts":[],"limitations":["Frame blending, 3D material options, audio levels, guides are not decoded and not imported."],"aeVersion":{"fileVersion":"unknown","savedBy":"unknown","tested":false}}"#
+            r#"{"imported":{"folders":0,"compositions":0,"solids":0,"footage":0,"layers":2,"solidLayers":0,"nullLayers":0,"adjustmentLayers":0,"footageLayers":0,"precompLayers":0,"textLayers":0,"keyframes":0,"expressions":0,"masks":0,"trackMattes":0,"markers":0,"timeRemaps":0,"shapeLayers":0,"shapeItems":0,"cameras":0,"lights":0,"textAnimators":0,"effects":0,"placeholderEffects":0,"layerStyles":0,"essentialProperties":0},"losses":[{"category":"effects","count":2,"details":["fx 1","fx 2"],"unlisted":0},{"category":"masks","count":1,"details":["mask 1"],"unlisted":0}],"missingFootage":["a.png"],"missingFonts":[],"limitations":["Frame blending, 3D material options, audio levels, guides are not decoded and not imported."],"aeVersion":{"fileVersion":"unknown","savedBy":"unknown","tested":false}}"#
         );
         let back: ImportReport = serde_json::from_str(&json).unwrap();
         assert_eq!(back, collected());

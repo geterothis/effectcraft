@@ -11,18 +11,20 @@ use crate::{MatteMode, Quality as AepQuality, Rational, Renderer as AepRenderer,
 use effectcraft_color::{BlendMode, Label};
 use effectcraft_keyframe::Value;
 use effectcraft_project::build::{self, Ids};
+use effectcraft_project::essential::{ControlType, EgControl, EgKind, EgLink, EssentialGraphics};
 use effectcraft_project::{
-    AutoOrient, Comp, Footage, FootageKind, ItemId, ItemKind, Layer, LayerId, LayerSource, LightKind, MatteKind, Project, Quality, Solid, SourceLayer,
-    TrackMatte,
+    AutoOrient, Comp, Footage, FootageKind, GroupKind, ItemId, ItemKind, Layer, LayerId, LayerSource, LightKind, MatteKind, Project, Property, Quality, Solid,
+    SourceLayer, TrackMatte, Uid,
 };
 use effectcraft_time::Tick;
 
 use crate::import::ImportOptions;
 use crate::import::camera::{import_camera_options, import_light_options};
 use crate::import::effects::{LayerCtx, PendingLayerRef, import_effects, resolve_layer_refs};
+use crate::import::essential;
 use crate::import::markers::{import_markers, import_time_remap, insert_time_remap};
 use crate::import::masks::{MaskLayer, import_masks};
-use crate::import::props::{AnchorUnit, import_transform};
+use crate::import::props::{AnchorUnit, import_expression, import_keys, import_transform};
 use crate::import::report::{Collector, ImportReport, LossCategory};
 use crate::import::shapes::import_shapes;
 use crate::import::styles::import_layer_styles;
@@ -127,7 +129,6 @@ pub(crate) fn run(project: &mut Project, view: &AepProject<'_, '_>, options: &Im
                 };
                 let map = TimeMap { timescale: tb.timescale, frame_duration: tb.frame_duration, rate };
                 let comp = new_comp(&header, comp_view.renderer(), &map, &name, &mut cx.col);
-                report_essential_graphics(&item, &name, &mut cx.col);
                 let id = project.add_item(&name, label, Some(parent), ItemKind::Comp(Arc::new(comp)));
                 cx.created.push(id);
                 cx.col.imported.compositions += 1;
@@ -147,32 +148,189 @@ pub(crate) fn run(project: &mut Project, view: &AepProject<'_, '_>, options: &Im
     // Pass 2: the layers. The effect definitions are indexed once for every layer of every comp.
     cx.precomps = Precomps::new(&precomp_candidates(&cx.sources, &pending));
     let defs = view.effect_definition_index();
+    let mut layer_ids = HashMap::new();
     for p in &pending {
-        build_layers(project, &mut cx, &defs, p);
+        layer_ids.insert(p.id, build_layers(project, &mut cx, &defs, p));
     }
+
+    // Pass 3: Essential Properties, once every layer they name exists, then the values each
+    // precomp layer overrides.
+    import_essential_graphics(project, &pending, &layer_ids, &mut cx);
 
     let Ctx { created, col, .. } = cx;
     (root, order, created, col.finish())
 }
 
-/// Reports a composition's Essential Properties, which are not imported: each is a `LIST CCtl`
-/// in the composition item's `LIST CIFO` / `CIF2` / `CIF3` (After Effects 26.5, a file made for
-/// these tests with five properties: CIF2 and CIF3 hold all five, CIFO three of them; a
-/// composition without Essential Properties has those lists with only their `LIST CpS2` name).
-/// The largest list gives the count.
-fn report_essential_graphics(item: &AepItem<'_, '_>, name: &str, col: &mut Collector) {
-    let controls = item
-        .chunk()
-        .children()
-        .filter(|c| matches!(c.list_type(), Some(t) if t.starts_with(b"CIF")))
-        .map(|cif| cif.children().filter(|c| c.is_list(b"CCtl")).count())
-        .max()
-        .unwrap_or(0);
-    if controls > 0 {
-        col.lose_with(LossCategory::EssentialGraphics, || {
-            format!("composition '{name}': {controls} Essential Properties, not imported (instances show the composition's own values)")
-        });
+/// Essential Properties (see `essential.rs`): each composition's controls, the Essential
+/// Properties groups of its precomp layers, and the values those layers override. A control whose
+/// property can't be found or isn't supported is reported and left out.
+fn import_essential_graphics(project: &mut Project, pending: &[PendingComp<'_, '_>], layer_ids: &HashMap<ItemId, HashMap<u32, LayerId>>, cx: &mut Ctx<'_>) {
+    // Control UUID -> (control id, how its override values are read), per composition.
+    let mut by_uuid: HashMap<ItemId, HashMap<String, (u64, essential::Conv)>> = HashMap::new();
+    for p in pending {
+        let Some(t) = essential::read_template(p.item.chunk()) else { continue };
+        let (Some(comp), Some(ids)) = (project.comp(p.id), layer_ids.get(&p.id)) else { continue };
+        let comp_name = project.item(p.id).map(|i| i.name.clone()).unwrap_or_default();
+        let mut controls = vec![];
+        let mut uuids = HashMap::new();
+        let mut next = project.next_id;
+        for c in &t.controls {
+            let lost = |why: &str| format!("composition '{comp_name}': Essential Property '{}' not imported ({why})", c.name);
+            let Some(main) = c.targets.first() else {
+                cx.col.lose(LossCategory::EssentialGraphics, lost("it drives no property"));
+                continue;
+            };
+            let found = |t: &essential::Target| -> Result<(LayerId, Uid, essential::Conv), String> {
+                let lid = *ids.get(&t.layer).ok_or("its layer was not imported")?;
+                let layer = comp.layer(lid).ok_or("its layer was not imported")?;
+                let (uid, conv) = essential::resolve(layer, &t.path)?;
+                Ok((lid, uid, conv))
+            };
+            let (layer, prop, conv) = match found(main) {
+                Ok(f) => f,
+                Err(why) => {
+                    cx.col.lose(LossCategory::EssentialGraphics, lost(&why));
+                    continue;
+                }
+            };
+            let mut links = vec![];
+            for t in c.targets.get(1..).unwrap_or_default() {
+                match found(t) {
+                    Ok((layer, prop, _)) => links.push(EgLink { layer, prop }),
+                    Err(why) => cx.col.lose(
+                        LossCategory::EssentialGraphics,
+                        format!("composition '{comp_name}': Essential Property '{}' drives a property that is not imported ({why})", c.name),
+                    ),
+                }
+            }
+            let shown_as_scale = c.kind == essential::CTYP_SCALE
+                && comp.layer(layer).and_then(|l| l.props.find(prop)).is_some_and(|p| effectcraft_project::essential::can_show_as(p, ControlType::Scale));
+            let id = next;
+            next = next.saturating_add(1);
+            controls.push(EgControl {
+                id,
+                name: c.name.clone(),
+                kind: EgKind::Property { layer, prop, links },
+                as_type: shown_as_scale.then_some(ControlType::Scale),
+            });
+            if !c.uuid.is_empty() {
+                uuids.insert(c.uuid.clone(), (id, conv));
+            }
+        }
+        project.next_id = next;
+        if controls.is_empty() {
+            continue;
+        }
+        cx.col.imported.essential_properties = cx.col.imported.essential_properties.saturating_add(controls.len());
+        if let Some(comp) = project.comp_mut(p.id) {
+            comp.essential = Some(EssentialGraphics { name: t.name.clone(), controls });
+        }
+        by_uuid.insert(p.id, uuids);
     }
+    if by_uuid.is_empty() {
+        return;
+    }
+    // The precomp layers' Essential Properties groups, with the composition's values.
+    let before = project.clone();
+    effectcraft_project::essential::sync_project(&before, project);
+
+    for p in pending {
+        let (Some(comp_view), Some(ids)) = (p.item.comp(), layer_ids.get(&p.id)) else { continue };
+        let comp_name = project.item(p.id).map(|i| i.name.clone()).unwrap_or_default();
+        for layer in comp_view.layers() {
+            let Some(lid) = layer.header().and_then(|h| ids.get(&h.id)).copied() else { continue };
+            let Some(records) = essential::read_overrides(layer.chunk()) else { continue };
+            let Some(source) = project.comp(p.id).and_then(|c| c.layer(lid)).and_then(|l| match l.source {
+                LayerSource::Comp { item } => Some(item),
+                _ => None,
+            }) else {
+                continue;
+            };
+            let layer_name = project.comp(p.id).and_then(|c| c.layer(lid)).map(|l| l.name.clone()).unwrap_or_default();
+            let what = format!("{comp_name}: '{layer_name}'");
+            let records = match records {
+                Ok(r) => r,
+                Err(why) => {
+                    cx.col.lose(LossCategory::EssentialGraphics, format!("{what}: Essential Properties overrides not imported ({why})"));
+                    continue;
+                }
+            };
+            let Some(uuids) = by_uuid.get(&source) else {
+                if records.iter().any(|(_, r)| r.overridden()) {
+                    cx.col.lose(
+                        LossCategory::EssentialGraphics,
+                        format!("{what}: Essential Properties overrides not imported (the composition's controls were not imported)"),
+                    );
+                }
+                continue;
+            };
+            for (uuid, rec) in records {
+                if !rec.overridden() {
+                    continue;
+                }
+                let Some((control, conv)) = uuids.get(&uuid).copied() else {
+                    cx.col.lose(LossCategory::EssentialGraphics, format!("{what}: an Essential Properties override of a control that was not imported"));
+                    continue;
+                };
+                let Some(value) = override_value(&rec, conv, &what, &p.map, cx) else { continue };
+                let Some(l) = project.comp_mut(p.id).and_then(|c| c.layer_mut(lid)) else { continue };
+                let Some(group) = l.props.sub_mut(effectcraft_project::essential::GROUP) else { continue };
+                let m = effectcraft_project::essential::match_id(control);
+                let mut uid = None;
+                group.walk_mut(&mut |prop| {
+                    if prop.match_id == m {
+                        prop.value = value.value.clone();
+                        prop.keys = value.keys.clone();
+                        prop.expr = value.expr.clone();
+                        uid = Some(prop.uid);
+                    }
+                });
+                if let (Some(uid), GroupKind::Essential { overridden }) = (uid, &mut group.kind)
+                    && !overridden.contains(&uid)
+                {
+                    overridden.push(uid);
+                }
+            }
+        }
+    }
+}
+
+/// An override record's value, keys and expression as a property (only those fields are used).
+fn override_value(rec: &essential::OverrideRecord<'_, '_>, conv: essential::Conv, what: &str, tm: &TimeMap, cx: &mut Ctx<'_>) -> Option<Property> {
+    let node = rec.property()?;
+    let name = node.user_name().unwrap_or_default();
+    let mut out = Property::new(0, "", &name, Value::Scalar(0.0));
+    match conv {
+        essential::Conv::Text => {
+            let Some(doc) = rec.text() else {
+                cx.col.lose(LossCategory::EssentialGraphics, format!("{what}: the text of Essential Property '{name}' is unreadable, not imported"));
+                return None;
+            };
+            out.value = Value::Text(Box::new(text_doc(&doc, what, cx.options.has_font, &mut cx.col)));
+            if rec.text_keyed() {
+                cx.col.lose(
+                    LossCategory::EssentialGraphics,
+                    format!("{what}: Source Text keyframes of Essential Property '{name}' are not imported (the first text is)"),
+                );
+            }
+        }
+        essential::Conv::Value(kind) => {
+            if node.is_animated() {
+                import_keys(&node, kind, what, &name, tm, &mut out, &mut cx.col);
+                if out.keys.is_empty() {
+                    return None;
+                }
+            } else {
+                let Some(v) = node.static_value().and_then(|v| kind.value(&v)) else {
+                    cx.col.lose(LossCategory::EssentialGraphics, format!("{what}: Essential Property '{name}' holds a value that is not valid, not imported"));
+                    return None;
+                };
+                out.value = v;
+            }
+        }
+    }
+    import_expression(&node, &mut out, &mut cx.col);
+    Some(out)
 }
 
 fn item_label(item: &AepItem<'_, '_>) -> Label {
@@ -537,9 +695,10 @@ fn anchor_unit(camera_or_light: bool, text_or_shape: bool, null: bool, size: (u3
     }
 }
 
-fn build_layers(project: &mut Project, cx: &mut Ctx<'_>, defs: &EffectDefinitions<'_, '_>, p: &PendingComp<'_, '_>) {
-    let Some(comp_view) = p.item.comp() else { return };
-    let Some(mut comp) = project.comp(p.id).cloned() else { return };
+/// The layers of a composition. Returns the project layer of each After Effects layer id.
+fn build_layers(project: &mut Project, cx: &mut Ctx<'_>, defs: &EffectDefinitions<'_, '_>, p: &PendingComp<'_, '_>) -> HashMap<u32, LayerId> {
+    let Some(comp_view) = p.item.comp() else { return HashMap::new() };
+    let Some(mut comp) = project.comp(p.id).cloned() else { return HashMap::new() };
     let comp_name = project.item(p.id).map(|i| i.name.clone()).unwrap_or_default();
     let tm = p.map;
     let comp_size = (comp.width, comp.height);
@@ -739,6 +898,7 @@ fn build_layers(project: &mut Project, cx: &mut Ctx<'_>, defs: &EffectDefinition
     if let Some(item) = project.item_mut(p.id) {
         item.kind = ItemKind::Comp(Arc::new(comp));
     }
+    ids
 }
 
 /// The Source Text of a text layer from its text document and its expression, and the reports
