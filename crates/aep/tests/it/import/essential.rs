@@ -13,6 +13,8 @@ const SYNTHETIC: &[u8] = include_bytes!("../../fixtures/synthetic.aep");
 /// The item id of composition `C` and the layer id of its solid layer.
 const COMP_C: u32 = 2;
 const SOLID_LAYER: u32 = 16;
+/// The layer id of the image sequence layer, which holds Levels (first) and Glow (second).
+const SEQUENCE_LAYER: u32 = 17;
 /// The item id of the added composition `Main`.
 const MAIN: u32 = 40;
 
@@ -259,4 +261,44 @@ fn a_composition_without_controls_has_no_essential_properties() {
     assert_eq!(losses(&r), Vec::<String>::new());
     assert_eq!(r.report.imported.essential_properties, 0);
     assert!(comp_named(&p, "C").essential.is_none());
+}
+
+#[test]
+fn controls_on_effect_parameters_and_their_overrides_are_imported() {
+    // Lab essential-props: an effect parameter's control names the effect by its 0-based place on
+    // the layer and the parameter by its `parT` index; the override is stored as the parameter's
+    // own record (a colour as ARGB 0..255).
+    let glow = |param: &str, index: u32| path(&[("ADBE Effect Parade", None), ("ADBE Glo2", Some(1)), (param, Some(index))]);
+    let controls = vec![
+        control("Glow colour", "e-1", 4, SEQUENCE_LAYER, &glow("ADBE Glo2-0012", 12)),
+        control("Glow radius", "e-2", 2, SEQUENCE_LAYER, &glow("ADBE Glo2-0003", 3)),
+        // A popup is not supported yet, and Glow is not the first effect.
+        control("Glow based on", "e-3", 2, SEQUENCE_LAYER, &glow("ADBE Glo2-0001", 1)),
+        control("Wrong place", "e-4", 2, SEQUENCE_LAYER, &path(&[("ADBE Effect Parade", None), ("ADBE Glo2", Some(0)), ("ADBE Glo2-0003", Some(3))])),
+    ];
+    let over = overrides(&[
+        ("e-1", "ADBE Glo2-0012", record("Glow colour", 1, &[255.0, 255.0, 229.5, 25.5])),
+        ("e-2", "ADBE Glo2-0003", record("Glow radius", 1, &[25.0])),
+    ]);
+    let (p, r) = run(&project(controls, Some(over)));
+    let lost = losses(&r);
+    assert_eq!(lost.len(), 2, "{lost:#?}");
+    assert!(lost.iter().any(|l| l.contains("'Glow based on'") && l.contains("not supported")), "{lost:#?}");
+    assert!(lost.iter().any(|l| l.contains("'Wrong place'") && l.contains("not found")), "{lost:#?}");
+    let c = comp_named(&p, "C");
+    let eg = c.essential.as_ref().expect("Essential Properties");
+    let seq = c.layers.iter().find(|l| l.effects().is_some_and(|e| e.groups().count() == 2)).expect("the sequence layer");
+    let glow_fx = seq.effects().unwrap().groups().nth(1).unwrap();
+    for (ctl, id) in eg.controls.iter().zip(["colorA", "radius"]) {
+        let EgKind::Property { layer, prop, .. } = &ctl.kind else { panic!("{ctl:?}") };
+        assert_eq!((*layer, *prop), (seq.id, glow_fx.prop(id).unwrap().uid), "{}", ctl.name);
+    }
+    let main = comp_named(&p, "Main");
+    let inst = main.layers.iter().find(|l| matches!(l.source, LayerSource::Comp { .. })).expect("the precomp layer");
+    let group = essential::group(inst).expect("its Essential Properties");
+    let prop = |i: usize| group.children.iter().filter_map(|n| n.as_prop()).find(|p| p.match_id == essential::match_id(eg.controls[i].id)).unwrap();
+    assert_eq!(prop(0).value, Value::Color([1.0, 0.9, 0.1, 1.0]));
+    assert_eq!(prop(1).value, Value::Scalar(25.0));
+    let GroupKind::Essential { overridden } = &group.kind else { panic!() };
+    assert_eq!(overridden.len(), 2);
 }

@@ -20,7 +20,7 @@
 //!   follows the composition. Values are stored as the property stores them (opacity and scale as
 //!   fractions, colours as ARGB 0..255), static or keyed.
 
-use effectcraft_project::{Layer, PropGroup, Uid};
+use effectcraft_project::{GroupKind, Layer, PropGroup, Uid};
 
 use crate::container::Node;
 use crate::import::props::Kind;
@@ -155,6 +155,7 @@ pub(crate) fn resolve(layer: &Layer, path: &[Step]) -> Result<(Uid, Conv), Strin
         }
         ["ADBE Text Properties", "ADBE Text Document"] => layer.props.prop("text/sourceText").map(|p| (p.uid, Conv::Text)),
         ["ADBE Root Vectors Group", ..] => return shape_property(layer, path.get(1..).unwrap_or_default()),
+        ["ADBE Effect Parade", _, _] => return effect_property(layer, path.get(1..).unwrap_or_default()),
         _ => return Err(format!("the property {} is not supported", names.join(" > "))),
     };
     found.ok_or_else(|| "the layer has no such property".to_string())
@@ -212,6 +213,43 @@ fn shape_property(layer: &Layer, path: &[Step]) -> Result<(Uid, Conv), String> {
     }
     let (id, kind) = shape_prop(&last.match_name).ok_or_else(|| format!("the shape property {} is not supported", last.match_name))?;
     let p = cur.children.iter().filter_map(|n| n.as_prop()).find(|p| p.match_id == id).ok_or("the shape item has no such property")?;
+    Ok((p.uid, Conv::Value(kind)))
+}
+
+/// An effect parameter, by the steps after `ADBE Effect Parade`: the effect (its match name and
+/// 0-based place on the layer) and the parameter (its match name and `parT` index, as the effect
+/// table numbers them). Stored as the effect's own record stores it, so the table's conversion
+/// applies (lab essential-props: a Fill colour, a Slider and a Checkbox Control).
+fn effect_property(layer: &Layer, path: &[Step]) -> Result<(Uid, Conv), String> {
+    let [fx, param] = path else { return Err("the effect path is not an effect and a parameter".into()) };
+    let map =
+        crate::effect_map::EFFECTS.iter().find(|m| m.match_name == fx.match_name).ok_or_else(|| format!("the effect {} is not supported", fx.match_name))?;
+    let place = fx.index.ok_or("the effect has no place")?;
+    // Effects the import skips shift the places; the type check catches that.
+    let group = layer
+        .props
+        .sub("effects")
+        .and_then(|e| e.children.get(place as usize))
+        .and_then(|n| n.as_group())
+        .filter(|g| matches!(&g.kind, GroupKind::Effect { effect } if effect == map.effect))
+        .ok_or_else(|| format!("effect {} ({}) not found", place.saturating_add(1), fx.match_name))?;
+    let index = param.index.ok_or("the parameter has no index")?;
+    let m = map
+        .params
+        .iter()
+        .find(|m| m.index == index as usize)
+        .ok_or_else(|| format!("the parameter {} of {} is not imported", param.match_name, fx.match_name))?;
+    use crate::effect_map::Conv as E;
+    let kind = match m.conv {
+        E::Color => Kind::EffectColor,
+        E::Checkbox => Kind::EffectBool,
+        E::Angle => Kind::EffectNumber(1.0),
+        E::Percent { .. } | E::Plain { .. } | E::Factor { .. } => Kind::EffectNumber(m.conv.number_scale().ok_or("no number scale")?),
+        E::Point | E::Popup { .. } | E::LayerRef { .. } | E::Skip => {
+            return Err(format!("the parameter {} of {} is not supported (a point, popup or layer)", param.match_name, fx.match_name));
+        }
+    };
+    let p = group.prop(m.target).ok_or("the effect has no such parameter")?;
     Ok((p.uid, Conv::Value(kind)))
 }
 
