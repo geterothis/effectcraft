@@ -1,0 +1,247 @@
+{
+ "ae": "26.5x89",
+ "source": "solid 400x200 + 4-Color Gradient, then Motion Tile (Output 200x200)",
+ "cases": [
+  {
+   "comp": "A_600x900_default",
+   "compId": 1,
+   "compSize": [
+    600,
+    900
+   ],
+   "layerSize": [
+    400,
+    200
+   ],
+   "layerScale": [
+    100,
+    100,
+    100
+   ],
+   "layerPosition": [
+    300,
+    450,
+    0
+   ],
+   "anchor": [
+    200,
+    100,
+    0
+   ],
+   "tileCenterSet": "default",
+   "tileCenterValue": [
+    200,
+    100
+   ],
+   "tileWidthTag": 41,
+   "frame": "A_600x900_default_f0.png",
+   "binary": {
+    "tileCenter_cdat": "no tdbs cdat stored (default)",
+    "tileCenter_tdb4": null,
+    "pard_TileCenter_hex": "0000000000000000000000000000000654696c652043656e74657200000000000000000000000000000000000000000000000000000000000000800000008000000000000032000000320000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "tileWidth_cdat_doubles": [
+     41.0
+    ]
+   }
+  },
+  {
+   "comp": "B_600x900_set",
+   "compId": 16,
+   "compSize": [
+    600,
+    900
+   ],
+   "layerSize": [
+    400,
+    200
+   ],
+   "layerScale": [
+    100,
+    100,
+    100
+   ],
+   "layerPosition": [
+    300,
+    450,
+    0
+   ],
+   "anchor": [
+    200,
+    100,
+    0
+   ],
+   "tileCenterSet": [
+    300,
+    50
+   ],
+   "tileCenterValue": [
+    300,
+    50
+   ],
+   "tileWidthTag": 42,
+   "frame": "B_600x900_set_f0.png",
+   "binary": {
+    "tileCenter_cdat": {
+     "cdat_hex": "3fe80000000000003fd00000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "doubles": [
+      0.75,
+      0.25,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "tileCenter_tdb4": "db990002000f0003ffffffff000064003d9b7cdfd9d7bdbc40000000000000003ff00000000000003ff00000000000003ff00000000000000000000406000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "pard_TileCenter_hex": null,
+    "tileWidth_cdat_doubles": [
+     42.0
+    ]
+   }
+  },
+  {
+   "comp": "C_300x300_default",
+   "compId": 30,
+   "compSize": [
+    300,
+    300
+   ],
+   "layerSize": [
+    400,
+    200
+   ],
+   "layerScale": [
+    100,
+    100,
+    100
+   ],
+   "layerPosition": [
+    150,
+    150,
+    0
+   ],
+   "anchor": [
+    200,
+    100,
+    0
+   ],
+   "tileCenterSet": "default",
+   "tileCenterValue": [
+    200,
+    100
+   ],
+   "tileWidthTag": 43,
+   "frame": "C_300x300_default_f0.png",
+   "binary": {
+    "tileCenter_cdat": "no tdbs cdat stored (default)",
+    "tileCenter_tdb4": null,
+    "pard_TileCenter_hex": null,
+    "tileWidth_cdat_doubles": [
+     43.0
+    ]
+   }
+  },
+  {
+   "comp": "D_300x300_scaled_offset_default",
+   "compId": 44,
+   "compSize": [
+    300,
+    300
+   ],
+   "layerSize": [
+    400,
+    200
+   ],
+   "layerScale": [
+    50,
+    50,
+    100
+   ],
+   "layerPosition": [
+    100,
+    200,
+    0
+   ],
+   "anchor": [
+    200,
+    100,
+    0
+   ],
+   "tileCenterSet": "default",
+   "tileCenterValue": [
+    200,
+    100
+   ],
+   "tileWidthTag": 44,
+   "frame": "D_300x300_scaled_offset_default_f0.png",
+   "binary": {
+    "tileCenter_cdat": "no tdbs cdat stored (default)",
+    "tileCenter_tdb4": null,
+    "pard_TileCenter_hex": null,
+    "tileWidth_cdat_doubles": [
+     44.0
+    ]
+   }
+  },
+  {
+   "comp": "E_300x300_scaled_offset_set",
+   "compId": 58,
+   "compSize": [
+    300,
+    300
+   ],
+   "layerSize": [
+    400,
+    200
+   ],
+   "layerScale": [
+    50,
+    50,
+    100
+   ],
+   "layerPosition": [
+    100,
+    200,
+    0
+   ],
+   "anchor": [
+    200,
+    100,
+    0
+   ],
+   "tileCenterSet": [
+    100,
+    150
+   ],
+   "tileCenterValue": [
+    100,
+    150
+   ],
+   "tileWidthTag": 45,
+   "frame": "E_300x300_scaled_offset_set_f0.png",
+   "binary": {
+    "tileCenter_cdat": {
+     "cdat_hex": "3fd00000000000003fe80000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "doubles": [
+      0.25,
+      0.75,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "tileCenter_tdb4": "db990002000f0003ffffffff000064003d9b7cdfd9d7bdbc40000000000000003ff00000000000003ff00000000000003ff00000000000000000000406000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "pard_TileCenter_hex": null,
+    "tileWidth_cdat_doubles": [
+     45.0
+    ]
+   }
+  }
+ ],
+ "notes": [
+  "Tile Center in ExtendScript is in LAYER pixels; the default is the layer centre [200,100] for a 400x200 solid, independent of comp size, scale and position.",
+  "Each case has a unique Tile Width (41..45), used to match the binary instance.",
+  "Renderer: ae-harness plugin AEGP render, 8 bpc."
+ ]
+}
