@@ -1,0 +1,222 @@
+From dd0c1def9b559b6a8b9216bfa4f2b21f23754971 Mon Sep 17 00:00:00 2001
+From: geterothis <geterothis@users.noreply.github.com>
+Date: Wed, 18 Nov 2026 19:48:28 +0000
+Subject: [PATCH] aep: read every text document of keyed Source Text
+
+---
+ crates/aep/docs/aep-format.md                |  2 +-
+ crates/aep/src/lib.rs                        |  3 +-
+ crates/aep/src/textdoc.rs                    | 67 ++++++++++++++------
+ crates/aep/tests/it/container/text_fields.rs | 55 ++++++++++++++++
+ 4 files changed, 105 insertions(+), 22 deletions(-)
+
+diff --git a/crates/aep/docs/aep-format.md b/crates/aep/docs/aep-format.md
+index 3582276d7..39c04a0ca 100644
+--- a/crates/aep/docs/aep-format.md
++++ b/crates/aep/docs/aep-format.md
+@@ -859,7 +859,7 @@ verified paths from the top level (keys `/98 /0 /1`; `RUN` = `/1/1[0]/0`):
+ | **stroke colour** | `.../6/54/0/1` = `[A R G B]`, the fill's layout; white in the untouched samples, red `[1 1 0 0]` in 574, blue in 595. The stroke switch, width and order are slots `/57`, `/63`, `/58` (see "character settings") | 110, 113, 574, 595 | V |
+ | **automatic leading** | style slot `.../6/4`: `true` = automatic leading (lines advance by 1.2 x the size; `/5` is then not used), `false` = `/5` is the leading. **243: `/4` false, `/5` 98, the second line's baseline is stored 98 px below the first (`/1/1[0]/1/2[0]/6[0]/6[0]/6[0]/6[1]/0/0[1]`)**. **400 (Auto Leading switched on for `A` CR `B`, size 100, leading 98; against its unedited save 399): the run style changes in `/4` (false -> true) and `/5` (98 -> 0.01) only, the stored second baseline moves from 98 to 120 px below the first (1.2 x 100), and After Effects measures the same 120 px (`text.measure`)**; the rest of the diff is save noise (`head`, the comp's modification time, the text's `btgu/pgui`). That `/5` holds 0.01 under automatic leading is seen in 400 only | 243, 339 (`/5`); 400 (`/4`); test `automatic_leading_is_slot_4` | V |
+ | **undecoded slots** | the run style and paragraph dictionaries of an untouched document (244; 110 stores the same bytes) are the reference: a slot that is not decoded and differs from it is listed (`TextDocument::undecoded_style_fields`, `undecoded_paragraph_fields`); a slot the reference lacks is listed only when it is not 0, `false`, empty or `/nil` (a neutral value is taken to carry nothing, so it is not reported as a loss; `/nil` is how 244 stores its paragraph slots `/27`, `/28` and `/36`). Decoded style slots: `/0 /1 /2 /3 /4 /5 /6 /7 /8 /9 /11 /12 /13 /18 /35 /36 /52 /53 /54 /56 /57 /58 /62 /63 /70`; paragraph slots: `/0 /1 /2 /3 /4 /5 /8 /9 /21 /29 /33`. Not found by any scriptable setting (none of the `text.set_style` attributes tried in S17 changes them): style `/20 /38 /78 /87 /88`, paragraph `/31 /32`. **Paragraph `/24`, `/35` and style `/68`** (1, 1 and 0 in a scripted text) were edited in place in the wrapping box text 517 (732: `/24` 0, 733: `/35` 0, 734: `/68` 1, same length); After Effects opens each without a dialog, keeps the value on a re-save and composes the same four lines, baselines and bounds (`text.measure`, `layer.bounds`; 734 renders like 517), so 0 and 1 are not listed (`NEUTRAL_PARAGRAPH_VALUES`, `NEUTRAL_STYLE_VALUES`; their meaning stays unknown, Latin text only). **Paragraph `/34`** is 0 in a scripted text and 7 after Reset Paragraph (727: the only slot that changes); a justified 600 px box text of 88 characters composes the same four lines, baselines and bounds with both values (S18), so 0 and 7 are not listed (`NEUTRAL_PARAGRAPH_VALUES`), other values are | every text sample lists none; 725, 727 | V (reference), E (/34) |
+-| **Source Text record** | the `tdbs` in `btds[ADBE Text Document]` (next to the `btdk`) has no keys and no expression in every sample; Source Text keyframes (presumably one `btdk` per key) and expressions were not sampled, the reader only reports them (`Layer::source_text_property`, `Layer::text_document_count`) | 110-114, 243-248, 334-340 | E |
++| **Source Text record** | the `tdbs` in `btds[ADBE Text Document]` (next to the `btdk`) has no keys and no expression for static text. Keyed Source Text (lab sample, After Effects 2026: one layer with three keys, layers with one, two and three) still has one `btdk`; its `/1/1` list holds one document per key, in key order, and `/0/8/0` one frame per document. The key list in the `tdbs` holds the times. `TextDocument::parse_all` and `Layer::text_documents` read every document; `parse` and `Layer::text_document` the first. Checked against the lab files' values; the corpus has no keyed sample yet, so the test is synthetic (`every_document_of_keyed_source_text_is_read_in_key_order`) | 110-114, 243-248, 334-340; lab sample outside the corpus | E |
+ 
+ API: `TextDocument` (`paragraphs`, `style_runs`, `text_box`, `paragraph_texts`, `font_of`,
+ `incomplete_runs`, `undecoded_style_fields`, `undecoded_paragraph_fields`, `kerning`,
+diff --git a/crates/aep/src/lib.rs b/crates/aep/src/lib.rs
+index 3e5dc2ceb..2cc2e5311 100644
+--- a/crates/aep/src/lib.rs
++++ b/crates/aep/src/lib.rs
+@@ -57,7 +57,8 @@ pub use read::{Limits, parse, parse_with_limits};
+ pub use settings::{ProjectSettings, TimeDisplay, WorkingSpace};
+ pub use shapes::{GradientType, PolystarType, ShapeDetail, ShapeGroup, ShapeItem, Stroke, StrokeCap, StrokeJoin};
+ pub use textdoc::{
+-    AutoKern, Caps, CueType, FontBaseline, Justification, KernRun, Marker, ParagraphRun, StyleRun, TextBox, TextDocument, TextValue, parse_text_dict,
++    AutoKern, Caps, CueType, FontBaseline, Justification, KernRun, MAX_TEXT_DOCUMENTS, Marker, ParagraphRun, StyleRun, TextBox, TextDocument,
++    TextValue, parse_text_dict,
+ };
+ pub use typed::{Comp, Item, ItemKind, KeyLayout, KeyList, Keyframe, Layer, ListHeader, Project, PropEntry, PropGroup, PropNode, Property, TimeBase};
+ pub use values::{Orientation, OrientationKey, TimeRemap, TimeRemapKey, Tracked, Transform, ValueSource};
+diff --git a/crates/aep/src/textdoc.rs b/crates/aep/src/textdoc.rs
+index 1e7569b67..2a7bd26e1 100644
+--- a/crates/aep/src/textdoc.rs
++++ b/crates/aep/src/textdoc.rs
+@@ -493,6 +493,9 @@ pub const NEUTRAL_STYLE_VALUES: &[(&str, &[i64])] = &[("68", &[0, 1])];
+ /// the duplicate check quadratic nor the line unbounded.
+ pub const MAX_UNDECODED_FIELDS: usize = 64;
+ 
++/// The most text documents [`TextDocument::parse_all`] reads from one body.
++pub const MAX_TEXT_DOCUMENTS: usize = 65_536;
++
+ /// Adds to `out` the slots of `actual` that are not decoded and differ from `sampled`, each once
+ /// and at most [`MAX_UNDECODED_FIELDS`] in all.
+ fn undecoded_fields(actual: &V<'_>, sampled: Option<&V<'_>>, decoded: &[&str], neutral: &[(&str, &[i64])], out: &mut Vec<String>) {
+@@ -938,10 +941,17 @@ fn style_runs(run: &V<'_>, notes: &mut RunNotes) -> Vec<StyleRun> {
+     out
+ }
+ 
+-/// The box of paragraph text from the frame dictionary `/0/8/0[0]/0`: key `/1/0` holds 16 x, y pairs
++/// The frame dictionary of text document `index`, `/0/8/0[index]/0`: a keyed Source Text stores one
++/// frame per document (lab sample, After Effects 2026); a body with fewer frames shares the first.
++fn frame_of<'v, 'b>(top: &'v V<'b>, index: usize) -> Option<&'v V<'b>> {
++    let frames = top.get("0")?.get("8")?.get("0")?;
++    frames.at(index).or_else(|| frames.at(0))?.get("0")
++}
++
++/// The box of paragraph text from the frame dictionary `/0/8/0[i]/0`: key `/1/0` holds 16 x, y pairs
+ /// that trace the rectangle, and `/2/0` is 1; both keys are absent for point text.
+-fn text_box(top: &V<'_>) -> Option<TextBox> {
+-    let frame = top.get("0")?.get("8")?.get("0")?.at(0)?.get("0")?;
++fn text_box(top: &V<'_>, index: usize) -> Option<TextBox> {
++    let frame = frame_of(top, index)?;
+     if frame.get("2")?.get("0")?.as_i64()? != 1 {
+         return None;
+     }
+@@ -958,10 +968,28 @@ fn text_box(top: &V<'_>) -> Option<TextBox> {
+ }
+ 
+ impl TextDocument {
+-    /// Decodes the body of a `btdk` list.
++    /// Decodes the body of a `btdk` list: its first text document.
+     pub fn parse(body: &[u8]) -> Option<Self> {
++        Self::from_top(&parse_dict(body), 0)
++    }
++
++    /// Decodes every text document of the body of a `btdk` list, in order: the entries of `/1/1`.
++    /// A keyed Source Text stores one document per keyframe there, key `i` showing document `i`
++    /// (lab sample, After Effects 2026: three keys, three entries; a layer with one key, one). An
++    /// entry that can't be decoded is `None`, so the places still match the keys. At most
++    /// [`MAX_TEXT_DOCUMENTS`] are read.
++    pub fn parse_all(body: &[u8]) -> Vec<Option<Self>> {
+         let top = parse_dict(body);
+-        let run = top.get("1")?.get("1")?.at(0)?.get("0")?;
++        let count = match top.get("1").and_then(|v| v.get("1")) {
++            Some(V::Array(runs)) => runs.len().min(MAX_TEXT_DOCUMENTS),
++            _ => 0,
++        };
++        (0..count).map(|i| Self::from_top(&top, i)).collect()
++    }
++
++    /// Text document `index` of a parsed `btdk` body.
++    fn from_top(top: &V<'_>, index: usize) -> Option<Self> {
++        let run = top.get("1")?.get("1")?.at(index)?.get("0")?;
+         let raw_text = run.get("0")?.string()?;
+         let style = run.get("6")?.get("0")?.at(0)?.get("0")?.get("0")?.get("6")?;
+         let fill_argb = colour_of(style, "53")?;
+@@ -984,20 +1012,12 @@ impl TextDocument {
+             fonts,
+             paragraphs,
+             style_runs,
+-            text_box: text_box(&top),
++            text_box: text_box(top, index),
+             incomplete_runs: notes.incomplete,
+             undecoded_style_fields: notes.style_fields,
+             undecoded_paragraph_fields: notes.paragraph_fields,
+             kerning: kern_runs(run),
+-            line_orientation: top
+-                .get("0")
+-                .and_then(|v| v.get("8"))
+-                .and_then(|v| v.get("0"))
+-                .and_then(|v| v.at(0))
+-                .and_then(|v| v.get("0"))
+-                .and_then(|v| v.get("2"))
+-                .and_then(|v| v.get("1"))
+-                .and_then(V::as_i64),
++            line_orientation: frame_of(top, index).and_then(|v| v.get("2")).and_then(|v| v.get("1")).and_then(V::as_i64),
+         })
+     }
+ 
+@@ -1036,15 +1056,22 @@ impl<'f, 'a> Layer<'f, 'a> {
+         TextDocument::parse(self.source_text_record()?.find_list(b"btdk")?.bytes()?)
+     }
+ 
+-    /// The Source Text property record: the `tdbs` in `btds[ADBE Text Document]` (a placeholder
+-    /// in every sample: no keys, no expression). Source Text keyframes and expressions were not
+-    /// sampled; a `list` (keys) or an expression in it marks them.
++    /// Every text document of a text layer, in order ([`TextDocument::parse_all`] of the first
++    /// `LIST btdk`): one per Source Text keyframe when the property is keyed, key `i` showing
++    /// document `i`; one for static text.
++    pub fn text_documents(&self) -> Vec<Option<TextDocument>> {
++        self.source_text_record().and_then(|r| r.find_list(b"btdk")).and_then(|b| b.bytes()).map_or_else(Vec::new, TextDocument::parse_all)
++    }
++
++    /// The Source Text property record: the `tdbs` in `btds[ADBE Text Document]`. When Source Text
++    /// is keyed, its key list holds the key times, and the documents are
++    /// [`Layer::text_documents`].
+     pub fn source_text_property(&self) -> Option<Property<'f, 'a>> {
+         Property::from_chunk(self.source_text_record()?.child_list(b"tdbs")?)
+     }
+ 
+-    /// The number of text documents (`LIST btdk`) in the Source Text record: 1 in every sample;
+-    /// more would be one per Source Text keyframe (not sampled).
++    /// The number of `LIST btdk` in the Source Text record: 1 in every sample, keyed or not (the
++    /// documents of the keys are entries of that one list, see [`Layer::text_documents`]).
+     pub fn text_document_count(&self) -> usize {
+         self.source_text_record().map_or(0, |btds| btds.descendants().filter(|(_, c)| c.is_list(b"btdk")).count())
+     }
+diff --git a/crates/aep/tests/it/container/text_fields.rs b/crates/aep/tests/it/container/text_fields.rs
+index 29bd9c9a2..7ed917c49 100644
+--- a/crates/aep/tests/it/container/text_fields.rs
++++ b/crates/aep/tests/it/container/text_fields.rs
+@@ -208,3 +208,58 @@ fn hostile_documents_never_panic() {
+     let deep = [b"/1 ".as_slice(), &b"<< /0 ".repeat(10_000), &b">> ".repeat(10_000)].concat();
+     assert!(TextDocument::parse(&deep).is_none());
+ }
++
++/// `text` and a carriage return as a `btdk` string: UTF-16BE after its byte order mark.
++fn utf16_string(text: &str) -> Vec<u8> {
++    let mut out = b"(".to_vec();
++    out.extend_from_slice(&[0xfe, 0xff]);
++    out.extend(text.encode_utf16().chain([u16::from(b'\r')]).flat_map(u16::to_be_bytes));
++    out.push(b')');
++    out
++}
++
++/// A run of the `/1/1` list: `text` in one style of `size` and fill `rgb`, font index 0.
++fn keyed_run(text: &str, size: f64, rgb: [f64; 3]) -> Vec<u8> {
++    let [r, g, b] = rgb;
++    let style = format!(
++        " /6 << /0 [ << /0 << /0 << /6 << /0 0 /1 {size:.1} /53 << /99 /SimplePaint /0 << /0 1 /1 [ 1.0 {r:.1} {g:.1} {b:.1} ] >> >> >> >> >> /1 {} >> ] >> >> >>",
++        text.len() + 1
++    );
++    [b"<< /0 << /0 ".as_slice(), &utf16_string(text), style.as_bytes()].concat()
++}
++
++#[test]
++fn every_document_of_keyed_source_text_is_read_in_key_order() {
++    // Lab sample (After Effects 2026): a Source Text with three keys ("Alpha" 60 px red, "Beta two"
++    // 90 px green, three lines 40 px blue) stores one `btdk` whose `/1/1` holds the three documents
++    // in key order, with one frame per document in `/0/8/0`. `parse` reads only the first.
++    let body = |runs: &[Vec<u8>]| {
++        [
++            b"/0 << /1 << /0 [ << /0 << /0 << /0 ".as_slice(),
++            &utf16_string("Sans"),
++            b" >> >> >> ] >> /8 << /0 [ << /0 << /2 << /1 0 >> >> >> << /0 << /2 << /1 1 >> >> >> << /0 << /2 << /1 0 >> >> >> ] >> >> /1 << /1 [ ",
++            &runs.join(&b' '),
++            b" ] >>",
++        ]
++        .concat()
++    };
++    let runs = [keyed_run("Alpha", 60.0, [1.0, 0.0, 0.0]), keyed_run("Beta two", 90.0, [0.0, 1.0, 0.0]), keyed_run("Gamma", 40.0, [0.0, 0.0, 1.0])];
++    let all = body(&runs);
++    let docs = TextDocument::parse_all(&all);
++    let seen: Vec<(String, f64, [f64; 3], Option<i64>)> =
++        docs.iter().map(|d| d.as_ref().map(|d| (d.text.clone(), d.font_size, d.fill_rgb(), d.line_orientation)).unwrap()).collect();
++    assert_eq!(
++        seen,
++        [
++            ("Alpha".into(), 60.0, [1.0, 0.0, 0.0], Some(0)),
++            ("Beta two".into(), 90.0, [0.0, 1.0, 0.0], Some(1)),
++            ("Gamma".into(), 40.0, [0.0, 0.0, 1.0], Some(0)),
++        ]
++    );
++    assert_eq!(TextDocument::parse(&all), docs[0]);
++    // An entry that can't be read keeps its place; a body without documents has none.
++    let broken = [runs[0].clone(), b"<< /7 1 >>".to_vec(), runs[2].clone()];
++    let docs = TextDocument::parse_all(&body(&broken));
++    assert_eq!(docs.iter().map(Option::is_some).collect::<Vec<_>>(), [true, false, true]);
++    assert!(TextDocument::parse_all(b"/0 1 /1 2").is_empty());
++}
+-- 
+2.43.0
+
