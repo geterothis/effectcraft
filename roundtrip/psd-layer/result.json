@@ -1,0 +1,124 @@
+{
+ "ae": "26.5",
+ "file": "exports/psd-layer/psd_layers.effectcraft.aep",
+ "opened": true,
+ "warning_dialogs": "none seen (dialogs suppressed by the background instance)",
+ "footage": [
+  {
+   "name": "Background fill/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": true,
+   "file": "D:\\AI_ZONE\\Commerical\\AE_IDEAS\\effectcraft-test-corpus\\lab\\psd-layers\\layers_200x100.psd"
+  },
+  {
+   "name": "Blue box/layers_200x100.psd",
+   "width": 60,
+   "height": 50,
+   "footageMissing": true,
+   "file": "D:\\AI_ZONE\\Commerical\\AE_IDEAS\\effectcraft-test-corpus\\lab\\psd-layers\\layers_200x100.psd"
+  },
+  {
+   "name": "Green bar/layers_200x100.psd",
+   "width": 90,
+   "height": 15,
+   "footageMissing": true,
+   "file": "D:\\AI_ZONE\\Commerical\\AE_IDEAS\\effectcraft-test-corpus\\lab\\psd-layers\\layers_200x100.psd"
+  },
+  {
+   "name": "layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false,
+   "file": "D:\\AI_ZONE\\Commerical\\AE_IDEAS\\effectcraft-test-corpus\\lab\\psd-layers\\layers_200x100.psd"
+  },
+  {
+   "name": "Background fill/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": true,
+   "file": "D:\\AI_ZONE\\Commerical\\AE_IDEAS\\effectcraft-test-corpus\\lab\\psd-layers\\layers_200x100.psd"
+  },
+  {
+   "name": "Blue box/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": true,
+   "file": "D:\\AI_ZONE\\Commerical\\AE_IDEAS\\effectcraft-test-corpus\\lab\\psd-layers\\layers_200x100.psd"
+  },
+  {
+   "name": "Green bar/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": true,
+   "file": "D:\\AI_ZONE\\Commerical\\AE_IDEAS\\effectcraft-test-corpus\\lab\\psd-layers\\layers_200x100.psd"
+  }
+ ],
+ "comps": {
+  "layers_200x100": {
+   "id": 29,
+   "size": [
+    200,
+    100
+   ],
+   "layers": [
+    {
+     "name": "Green bar",
+     "source": "Green bar/layers_200x100.psd",
+     "position": "145,47.5,0",
+     "anchor": "45,7.5,0"
+    },
+    {
+     "name": "Blue box",
+     "source": "Blue box/layers_200x100.psd",
+     "position": "50,35,0",
+     "anchor": "30,25,0"
+    },
+    {
+     "name": "Background fill",
+     "source": "Background fill/layers_200x100.psd",
+     "position": "100,50,0",
+     "anchor": "100,50,0"
+    }
+   ]
+  },
+  "layers_200x101": {
+   "id": 46,
+   "size": [
+    200,
+    100
+   ],
+   "layers": [
+    {
+     "name": "Green bar",
+     "source": "Green bar/layers_200x100.psd",
+     "position": "100,50,0",
+     "anchor": "100,50,0"
+    },
+    {
+     "name": "Blue box",
+     "source": "Blue box/layers_200x100.psd",
+     "position": "100,50,0",
+     "anchor": "100,50,0"
+    },
+    {
+     "name": "Background fill",
+     "source": "Background fill/layers_200x100.psd",
+     "position": "100,50,0",
+     "anchor": "100,50,0"
+    }
+   ]
+  }
+ },
+ "renders_vs_part2_originals": {
+  "cropped": {
+   "max_abs": 225,
+   "pct_px_over_8": 100.0
+  },
+  "document": {
+   "max_abs": 225,
+   "pct_px_over_8": 100.0
+  }
+ },
+ "verdict": "The six PSD layer items and their layers are back, with the right names, sizes, positions and anchors, but AE marks all six as footageMissing even though the PSD exists at the stored path (the merged item from the same file resolves fine). Both layer comps therefore render as missing-footage placeholders instead of the PSD layers. AE does not find the layer inside the PSD, so the layer reference (layer id / index) in the exported item is probably wrong or missing."
+}
