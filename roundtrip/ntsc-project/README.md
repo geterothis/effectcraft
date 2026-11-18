@@ -49,3 +49,9 @@ against the original.
 And the mapping: in a new project, set `app.project.gpuAccelType` to each type this PC offers
 (CUDA, OpenCL/Vulkan if listed, SOFTWARE), save, and give the `gpuG` GUID of each saved file (or
 "no gpuG"). This decides what EffectCraft writes by default.
+
+## Round 4: the fix (fresh AE process)
+
+F_ec_gpug.aep: `lab/ntsc-footage/ntsc_footage.aep` imported and exported by EffectCraft with
+fix/aep-export-ntsc-footage + fix/aep-project-renderer (gpuG written: CUDA for GPU acceleration).
+Wanted: no dialog, `gpuAccelType` 1813, C_t2997 f45 and C_t23976 f36 diff 0 against the original.
