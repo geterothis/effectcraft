@@ -13,3 +13,25 @@ AE project's bytes (same lengths, from `project_chunk_diff.txt`):
 For each: open, render C_t2997 f45 (and C_t23976 f36) as before, and give the max diff against the
 original frames. Wanted: which one renders like the original (diff 0 or near).
 If none does, the remaining suspects are `gpuG/Utf8`, `wsnm`/`Utf8` "Default" and the XMP block.
+
+## Round 2: the original with EC's project chunks (O1–O7)
+
+Each file is `lab/ntsc-footage/ntsc_footage.aep` (the original) with one project-level chunk made
+as in `ntsc_ec.aep`:
+
+| file | changed in the original |
+|---|---|
+| O1_no_gpuG.aep | `gpuG` list removed |
+| O2_ec_xmp.aep | XMP trailer replaced by EC's (358 B) |
+| O3_ws_default.aep | `wsns`, `wsnm` and the following `Utf8` set to EC's "Default" |
+| O4_no_PTRE.aep | `PTRE` list removed |
+| O5_ec_AFsi.aep | `LSIf/AFsi` replaced by EC's |
+| O6_ec_sfid.aep | `sfnm/sfid` = EC's `19000000` |
+| O7_all.aep | all of O1–O6 |
+
+Render C_t2997 f45 and C_t23976 f36 as before; wanted: which of them renders like ntsc_ec.
+
+If O7 still renders like the original, the cause is not a project-level chunk. Then please check the
+comp side: in each project make a NEW comp (same settings), add the footage item, and render f45.
+If both new comps match each other, the difference is in EC's comp or layer records, not the
+project.
