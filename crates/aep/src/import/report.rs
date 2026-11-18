@@ -43,7 +43,7 @@ pub enum LossCategory {
     /// Blend mode codes outside the known ones (906, 907; the layer keeps Normal).
     BlendModes,
     /// Stored transform properties other than Anchor Point, Position, Scale, Rotation and Opacity
-    /// (3D rotations, orientation, separated position dimensions).
+    /// (3D rotations, orientation).
     TransformProperties,
     /// Time remapping that is not imported: a Time Remap property without a readable keyframe.
     TimeRemapping,

@@ -8,7 +8,8 @@
 
 use crate::{Interpolation, Keyframe as AepKey, KeyframeKind, Layer as AepLayer, PropGroup, PropNode, Property as AepProp, ValueSource};
 use effectcraft_keyframe::{Ease, Interp, Keyframe, Value};
-use effectcraft_project::{Expression, PropGroup as EcGroup, Property as EcProp};
+use effectcraft_project::build::Ids;
+use effectcraft_project::{Expression, Node, ParamUi, PropGroup as EcGroup, Property as EcProp};
 
 use crate::import::report::{Collector, LossCategory};
 use crate::import::time::TimeMap;
@@ -133,6 +134,16 @@ const SPECS: [(&str, &str); 5] =
 /// state (the separated position dimensions and the reflection switch).
 const IGNORED: [&str; 4] = ["ADBE Position_0", "ADBE Position_1", "ADBE Position_2", "ADBE Envir Appear in Reflect"];
 
+/// The separated position dimensions: stored match name, project property id, name. They are
+/// the properties Separate Dimensions adds after Position (`prop.separateDimensions`).
+const DIMENSIONS: [(&str, &str, &str); 3] =
+    [("ADBE Position_0", "positionX", "X Position"), ("ADBE Position_1", "positionY", "Y Position"), ("ADBE Position_2", "positionZ", "Z Position")];
+
+/// Position's `tdsb` bit that says its dimensions are separated: After Effects 2026 stores
+/// `0x803` in a separated Position and `1` otherwise (lab `sepdim`: layers A and B separated,
+/// C not).
+const SEPARATED: u32 = 0x800;
+
 /// How the stored Anchor Point becomes pixels.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum AnchorUnit {
@@ -249,7 +260,58 @@ pub(crate) fn import_transform(
             _ => col.lose_with(LossCategory::TransformProperties, || format!("{layer_name}: ADBE Orientation")),
         }
     }
-    report_other_properties(&group, layer_name, col);
+    // The separated dimensions are imported by `import_separated_position`.
+    report_other_properties(&group, layer_name, is_separated(&group), col);
+}
+
+/// Whether the Position of a Transform group has its dimensions separated.
+fn is_separated(group: &PropGroup<'_, '_>) -> bool {
+    matches!(group.get("ADBE Position"), Some(PropNode::Property(p)) if p.flags().is_some_and(|f| f & SEPARATED != 0))
+}
+
+/// The X, Y and Z Position of a Position whose dimensions are separated (its `tdsb` has the
+/// [`SEPARATED`] bit), inserted into `target` (the layer's `transform` group) after Position as
+/// Separate Dimensions does; the renderer then reads Position from them. Runs after
+/// [`import_transform`], which leaves these records to it.
+pub(crate) fn import_separated_position(
+    layer: &AepLayer<'_, '_>,
+    layer_name: &str,
+    tm: &TimeMap,
+    target: &mut EcGroup,
+    ids: &mut Ids<'_>,
+    col: &mut Collector,
+) {
+    let Some(PropNode::Group(group)) = layer.properties().and_then(|p| p.get("ADBE Transform Group")) else { return };
+    if !is_separated(&group) {
+        return;
+    }
+    let at = target.get("position").map(|p| p.uid).and_then(|uid| target.children.iter().position(|c| c.uid() == uid));
+    let (Some(at), None) = (at, target.get("positionX")) else {
+        col.lose_with(LossCategory::TransformProperties, || format!("{layer_name}: separated ADBE Position dimensions"));
+        return;
+    };
+    let base = target.get("position").map(|p| p.value.components()).unwrap_or_default();
+    let at = at + 1;
+    let mut props = Vec::with_capacity(DIMENSIONS.len());
+    for (d, (match_name, id, name)) in DIMENSIONS.iter().enumerate() {
+        let mut prop = EcProp::new(ids.alloc(), id, name, Value::Scalar(base.get(d).copied().unwrap_or(0.0))).with_ui(ParamUi::Number);
+        prop.three_d_only = d == 2;
+        if let Some(PropNode::Property(node)) = group.get(match_name) {
+            if node.is_animated() {
+                import_keys(&node, Kind::Number, layer_name, match_name, tm, &mut prop, col);
+            } else if let Some(v) = node.static_value().and_then(|v| v.first().copied()) {
+                let value = Value::Scalar(v);
+                if sane(&value) {
+                    prop.value = value;
+                } else {
+                    col.lose_with(LossCategory::DamagedData, || format!("{layer_name}: {match_name} holds a number that is not valid, default used"));
+                }
+            }
+            import_expression(&node, &mut prop, col);
+        }
+        props.push(Node::Prop(prop));
+    }
+    target.children.splice(at..at, props);
 }
 
 /// The keys of a keyed Orientation (703). Linear and hold sides arrive as they are; the ease of a
@@ -298,10 +360,13 @@ fn import_orientation_keys(layer: &AepLayer<'_, '_>, layer_name: &str, tm: &Time
 }
 
 /// Stored transform properties that are not imported are reported.
-fn report_other_properties(group: &PropGroup<'_, '_>, layer_name: &str, col: &mut Collector) {
+fn report_other_properties(group: &PropGroup<'_, '_>, layer_name: &str, separated: bool, col: &mut Collector) {
     for entry in group.entries() {
         let name = entry.match_name.as_str();
         if SPECS.iter().chain(ROTATIONS.iter()).any(|(m, _)| *m == name) || name == "ADBE Group End" {
+            continue;
+        }
+        if separated && DIMENSIONS.iter().any(|(m, _, _)| *m == name) {
             continue;
         }
         let PropNode::Property(p) = entry.node else { continue };
