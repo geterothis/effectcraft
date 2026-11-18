@@ -17,7 +17,7 @@ Emboss had two differences from After Effects 26.5:
 
 ## Tests
 
-- `stylize2::tests::emboss_direction_is_clockwise_from_up_and_channels_are_apart`: an 80 px-style square with Relief 3, Contrast 100, Direction 0. It checks a dark top edge, a light bottom edge and grey sides, and the per-channel edges of a red square on blue. It fails without the change, because the top edge comes out grey.
+- `stylize2::tests::emboss_direction_is_clockwise_from_up_and_channels_are_apart`: a 20 px square in a 40 px image with Relief 3, Contrast 100, Direction 0. It checks a dark top edge, a light bottom edge and grey sides, and the per-channel edges of a red square on blue. It fails without the change, because the top edge comes out grey.
 - The `effectcraft-gpu` emboss tests compare the GPU with the CPU. They pass on llvmpipe.
 
 ## Checked against After Effects
