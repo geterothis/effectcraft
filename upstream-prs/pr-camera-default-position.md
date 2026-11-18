@@ -15,7 +15,8 @@ A second lab project has 23 such cameras. After Effects renders them at `[w/2, h
 ## Change
 
 - `import/camera.rs`: new `import_camera` imports the Camera Options as before, then sets Position to the point of interest minus the zoom along z when the transform has no `ADBE Position` record.
-- When the point of interest or the zoom is keyframed or has an expression, or the zoom is not positive, the Position cannot be derived: it stays at the default and the import reports a Transform properties loss. A derived Position that is not a sane coordinate is reported as damaged data.
+- When the point of interest or the zoom is keyframed (also when the file declares keys it cannot decode) or has an expression, the zoom is not positive, or the transform group is missing, the Position cannot be derived: the camera gets a new camera's default Position and the import reports a Transform properties loss. A derived Position that is not a sane coordinate gets the same default and is reported as damaged data.
+- `import/build.rs` keeps the new camera's Position from before the transform import for that fallback.
 - `import/build.rs` calls it for cameras.
 - Docs: aep-format (camera Position, absent) and aep-import (Cameras and lights).
 
@@ -24,5 +25,5 @@ Only sampled with the point of interest at z = 0.
 ## Tests
 
 - New `export::objects::a_camera_without_a_position_record_stands_back_from_its_point_of_interest_by_the_zoom`: exports a camera, removes its Position record, imports it again and checks the Position. It fails without the change.
-- New `export::objects::a_camera_position_that_cannot_be_derived_is_reported`: a negative zoom, and a point of interest so far back that the Position is not sane, are both reported, and a strict import refuses them.
-- `cargo test -p effectcraft-aep` (90 + 419 passed), clippy (`-D warnings`) and fmt pass. I did not run the full `cargo xtask ci`.
+- New `export::objects::a_camera_position_that_cannot_be_derived_is_reported`: a negative zoom, a point of interest so far back that the Position is not sane, and point-of-interest keys whose data is missing. Each gives a refused strict import with the expected loss category and detail, and the new camera's default Position (all three coordinates).
+- `cargo test -p effectcraft-aep` (90 + 420 passed), clippy (`-D warnings`) and fmt pass. I did not run the full `cargo xtask ci`.
