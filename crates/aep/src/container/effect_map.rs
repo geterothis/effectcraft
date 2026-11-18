@@ -385,6 +385,13 @@ pub const STABILIZE: &[&str] = &["Brightness", "Levels", "Curves"];
 pub const IDENTIFIER_DISPLAY: &[&str] = &["Colors", "Luma Matte", "Alpha Matte", "Raw"];
 
 /// The effects the importer converts.
+/// CC Color Offset 4 Overflow.
+pub const CC_COLOR_OFFSET_OVERFLOW: &[&str] = &["Wrap", "Solarize", "Polarize"];
+/// CC Toner 1 Tones.
+pub const CC_TONER_TONES: &[&str] = &["Duotone", "Tritone", "Pentone", "(-", "Solid"];
+/// CC Grid Wipe 6 Shape.
+pub const CC_GRID_WIPE_SHAPE: &[&str] = &["Doors", "Radial", "Rectangular"];
+
 pub const EFFECTS: &[EffectMap] = &[
     // Tint (356-364): Map Black To, Map White To, Amount to Tint; 4 = Swap Colors (a button).
     fx(
@@ -1193,6 +1200,79 @@ pub const EFFECTS: &[EffectMap] = &[
         "ADBE Vibrance",
         "ec.color.vibrance",
         &[pm(1, K::FloatSlider, "vibrance", Conv::Plain { valid_max: 100.0 }), pm(2, K::FloatSlider, "saturation", Conv::Plain { valid_max: 100.0 })],
+    ),
+    // CC effects, batch of 2026-11-18 (After Effects 26.5 projects as above). 0..1 fractions
+    // shown as percents here are `Percent { valid_max: 1.0 }`; parameters EffectCraft's effect
+    // lacks are left out and reported on import.
+    fx(
+        "CC Color Offset",
+        "ec.color.cccoloroffset",
+        &[
+            pm(1, K::Angle, "redPhase", Conv::Angle),
+            pm(2, K::Angle, "greenPhase", Conv::Angle),
+            pm(3, K::Angle, "bluePhase", Conv::Angle),
+            pm(4, K::Popup, "overflow", Conv::Popup { default: 2, items: CC_COLOR_OFFSET_OVERFLOW }),
+        ],
+    ),
+    // CC Threshold RGB: thresholds a 0..1 fraction of EffectCraft's 0..255.
+    fx(
+        "CC Threshold RGB",
+        "ec.stylize.ccthresholdrgb",
+        &[
+            pm(1, K::FixedSlider, "redThreshold", Conv::Factor { valid_max: 1.0, factor: 255.0 }),
+            pm(2, K::FixedSlider, "greenThreshold", Conv::Factor { valid_max: 1.0, factor: 255.0 }),
+            pm(3, K::FixedSlider, "blueThreshold", Conv::Factor { valid_max: 1.0, factor: 255.0 }),
+            pm(4, K::Checkbox, "invertRed", Conv::Checkbox),
+            pm(5, K::Checkbox, "invertGreen", Conv::Checkbox),
+            pm(6, K::Checkbox, "invertBlue", Conv::Checkbox),
+            pm(7, K::FixedSlider, "blend", Conv::Percent { valid_max: 1.0 }),
+        ],
+    ),
+    // CC Toner: the parameter order differs from the ids (1 Tones is id 5).
+    fx(
+        "CC Toner",
+        "ec.color.cctoner",
+        &[
+            pm(1, K::Popup, "tones", Conv::Popup { default: 2, items: CC_TONER_TONES }),
+            pm(2, K::Color, "highlights", Conv::Color),
+            pm(3, K::Color, "brights", Conv::Color),
+            pm(4, K::Color, "midtones", Conv::Color),
+            pm(5, K::Color, "darktones", Conv::Color),
+            pm(6, K::Color, "shadows", Conv::Color),
+            pm(7, K::FixedSlider, "blend", Conv::Percent { valid_max: 1.0 }),
+        ],
+    ),
+    fx(
+        "CC Tiler",
+        "ec.distort.cctiler",
+        &[
+            pm_limited(1, K::FixedSlider, "scale", Conv::Percent { valid_max: 1.0 }, 1.0, 10000.0),
+            pm(2, K::Point, "center", Conv::Point),
+            pm(3, K::FixedSlider, "blendWithOriginal", Conv::Percent { valid_max: 1.0 }),
+        ],
+    ),
+    fx(
+        "CC Grid Wipe",
+        "ec.transition.ccgridwipe",
+        &[
+            pm(1, K::FixedSlider, "completion", Conv::Percent { valid_max: 1.0 }),
+            pm(2, K::Point, "center", Conv::Point),
+            pm(3, K::Angle, "rotation", Conv::Angle),
+            pm_limited(4, K::FixedSlider, "border", Conv::Plain { valid_max: 200.0 }, 0.0, 100.0),
+            pm(5, K::FixedSlider, "tiles", Conv::Plain { valid_max: 25.0 }),
+            pm(6, K::Popup, "shape", Conv::Popup { default: 2, items: CC_GRID_WIPE_SHAPE }),
+            pm(7, K::Checkbox, "reverse", Conv::Checkbox),
+        ],
+    ),
+    // CC Scale Wipe: Stretch valid -100..100, EffectCraft's 0..1 000.
+    fx(
+        "CC Scale Wipe",
+        "ec.transition.ccscalewipe",
+        &[
+            pm_limited(1, K::FixedSlider, "stretch", Conv::Plain { valid_max: 100.0 }, 0.0, 1000.0),
+            pm(2, K::Point, "center", Conv::Point),
+            pm(3, K::Angle, "direction", Conv::Angle),
+        ],
     ),
 ];
 

@@ -27,6 +27,12 @@ const MAPPED_FROM_SAMPLES: &[&str] = &[
     "ec.stylize.findedges",
     "ec.distort.mirror",
     "ec.color.vibrance",
+    "ec.color.cccoloroffset",
+    "ec.stylize.ccthresholdrgb",
+    "ec.color.cctoner",
+    "ec.distort.cctiler",
+    "ec.transition.ccgridwipe",
+    "ec.transition.ccscalewipe",
 ];
 
 /// Every effect these tests cover.
