@@ -1,4 +1,4 @@
-Branch: geterothis:effectcraft:fix/fill-all-masks (1 commit, ad4b8f9a, on upstream main 67942cda; not stacked)
+Branch: geterothis:effectcraft:fix/fill-all-masks (2 commits, ad4b8f9a and the review fix 64b4b667, on upstream main 67942cda; not stacked)
 Compare: https://github.com/storytold/effectcraft/compare/main...geterothis:effectcraft:fix/fill-all-masks
 
 Title: Fill: All Masks on a layer without masks fills nothing
@@ -16,5 +16,5 @@ Fill without masks otherwise already matched After Effects (Opacity sets the lay
 ## Tests
 
 - `effects` `fill_all_masks_without_masks_leaves_the_layer`: All Masks alone, and All Masks with Invert at Opacity 0, leave the pixels unchanged. Fails without the change.
-- `gpu` `fill_all_masks_without_masks_matches_cpu`: a GPU frame with that Fill matches the CPU frame. Fails without the `gpu` change.
+- `gpu` `fill_all_masks_without_masks_matches_cpu`: a GPU frame with that Fill matches the CPU frame with no pixel over the 32 bpc tolerance. Fails without the `gpu` change.
 - `cargo test -p effectcraft-effects` passes. `cargo test -p effectcraft-gpu` passes on lavapipe except `opengl_adapters_get_cpu_compositing_at_once`, which needs an OpenGL adapter the machine doesn't have. `cargo clippy --all-targets -D warnings` (effects, gpu) and `cargo fmt` are clean. I didn't run the full `cargo xtask ci`.
