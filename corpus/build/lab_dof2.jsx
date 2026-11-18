@@ -41,7 +41,7 @@
             co.property("ADBE Camera Depth of Field").setValue(1);
             co.property("ADBE Camera Focus Distance").setValue(z);
             co.property("ADBE Camera Aperture").setValue(k[4]);
-            co.property("ADBE Camera Blur Level").setValue(k[5]);
+            if (k[5] !== 100) { try { co.property("ADBE Camera Blur Level").setValue(k[5]); } catch (eb) { cam.cameraOption.blurLevel.setValue(k[5]); } }
             var rqi = app.project.renderQueue.items.add(c);
             rqi.applyTemplate("Best Settings"); rqi.timeSpanStart = 0; rqi.timeSpanDuration = c.frameDuration;
             pngTemplate(rqi.outputModule(1));
