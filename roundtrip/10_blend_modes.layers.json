@@ -1,0 +1,530 @@
+{
+ "ae": "26.5x89",
+ "source": "exports/blend-codes/10_blend_modes.effectcraft.aep",
+ "opens": true,
+ "error": null,
+ "layers": {
+  "blend_modes": [
+   {
+    "index": 1,
+    "name": "blend_stencil_precomp",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": false
+   },
+   {
+    "index": 2,
+    "name": "BM_LUMINOSITY",
+    "blendingMode": 5239,
+    "blendingModeName": "LUMINOSITY",
+    "preserveTransparency": false
+   },
+   {
+    "index": 3,
+    "name": "BM_COLOR",
+    "blendingMode": 5238,
+    "blendingModeName": "COLOR",
+    "preserveTransparency": false
+   },
+   {
+    "index": 4,
+    "name": "BM_SATURATION",
+    "blendingMode": 5237,
+    "blendingModeName": "SATURATION",
+    "preserveTransparency": false
+   },
+   {
+    "index": 5,
+    "name": "BM_HUE",
+    "blendingMode": 5236,
+    "blendingModeName": "HUE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 6,
+    "name": "BM_DIVIDE",
+    "blendingMode": 5249,
+    "blendingModeName": "DIVIDE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 7,
+    "name": "BM_SUBTRACT",
+    "blendingMode": 5248,
+    "blendingModeName": "SUBTRACT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 8,
+    "name": "BM_EXCLUSION",
+    "blendingMode": 5235,
+    "blendingModeName": "EXCLUSION",
+    "preserveTransparency": false
+   },
+   {
+    "index": 9,
+    "name": "BM_CLASSIC_DIFFERENCE",
+    "blendingMode": 5234,
+    "blendingModeName": "CLASSIC_DIFFERENCE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 10,
+    "name": "BM_DIFFERENCE",
+    "blendingMode": 5233,
+    "blendingModeName": "DIFFERENCE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 11,
+    "name": "BM_HARD_MIX",
+    "blendingMode": 5232,
+    "blendingModeName": "HARD_MIX",
+    "preserveTransparency": false
+   },
+   {
+    "index": 12,
+    "name": "BM_PIN_LIGHT",
+    "blendingMode": 5231,
+    "blendingModeName": "PIN_LIGHT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 13,
+    "name": "BM_VIVID_LIGHT",
+    "blendingMode": 5230,
+    "blendingModeName": "VIVID_LIGHT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 14,
+    "name": "BM_LINEAR_LIGHT",
+    "blendingMode": 5229,
+    "blendingModeName": "LINEAR_LIGHT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 15,
+    "name": "BM_HARD_LIGHT",
+    "blendingMode": 5228,
+    "blendingModeName": "HARD_LIGHT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 16,
+    "name": "BM_SOFT_LIGHT",
+    "blendingMode": 5227,
+    "blendingModeName": "SOFT_LIGHT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 17,
+    "name": "BM_OVERLAY",
+    "blendingMode": 5226,
+    "blendingModeName": "OVERLAY",
+    "preserveTransparency": false
+   },
+   {
+    "index": 18,
+    "name": "BM_LIGHTER_COLOR",
+    "blendingMode": 5246,
+    "blendingModeName": "LIGHTER_COLOR",
+    "preserveTransparency": false
+   },
+   {
+    "index": 19,
+    "name": "BM_LINEAR_DODGE",
+    "blendingMode": 5223,
+    "blendingModeName": "LINEAR_DODGE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 20,
+    "name": "BM_CLASSIC_COLOR_DODGE",
+    "blendingMode": 5225,
+    "blendingModeName": "CLASSIC_COLOR_DODGE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 21,
+    "name": "BM_COLOR_DODGE",
+    "blendingMode": 5224,
+    "blendingModeName": "COLOR_DODGE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 22,
+    "name": "BM_SCREEN",
+    "blendingMode": 5222,
+    "blendingModeName": "SCREEN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 23,
+    "name": "BM_LIGHTEN",
+    "blendingMode": 5221,
+    "blendingModeName": "LIGHTEN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 24,
+    "name": "BM_ADD",
+    "blendingMode": 5220,
+    "blendingModeName": "ADD",
+    "preserveTransparency": false
+   },
+   {
+    "index": 25,
+    "name": "BM_DARKER_COLOR",
+    "blendingMode": 5247,
+    "blendingModeName": "DARKER_COLOR",
+    "preserveTransparency": false
+   },
+   {
+    "index": 26,
+    "name": "BM_LINEAR_BURN",
+    "blendingMode": 5217,
+    "blendingModeName": "LINEAR_BURN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 27,
+    "name": "BM_CLASSIC_COLOR_BURN",
+    "blendingMode": 5219,
+    "blendingModeName": "CLASSIC_COLOR_BURN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 28,
+    "name": "BM_COLOR_BURN",
+    "blendingMode": 5218,
+    "blendingModeName": "COLOR_BURN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 29,
+    "name": "BM_MULTIPLY",
+    "blendingMode": 5216,
+    "blendingModeName": "MULTIPLY",
+    "preserveTransparency": false
+   },
+   {
+    "index": 30,
+    "name": "BM_DARKEN",
+    "blendingMode": 5215,
+    "blendingModeName": "DARKEN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 31,
+    "name": "BM_DISSOLVE",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": false
+   },
+   {
+    "index": 32,
+    "name": "BM_NORMAL",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": false
+   },
+   {
+    "index": 33,
+    "name": "BASE_plate",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": false
+   }
+  ],
+  "blend_stencil_precomp": [
+   {
+    "index": 1,
+    "name": "preserve_transparency_stripe",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": true
+   },
+   {
+    "index": 2,
+    "name": "under",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": false
+   }
+  ]
+ },
+ "original_layers": {
+  "blend_modes": [
+   {
+    "index": 1,
+    "name": "blend_stencil_precomp",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": false
+   },
+   {
+    "index": 2,
+    "name": "BM_LUMINOSITY",
+    "blendingMode": 5239,
+    "blendingModeName": "LUMINOSITY",
+    "preserveTransparency": false
+   },
+   {
+    "index": 3,
+    "name": "BM_COLOR",
+    "blendingMode": 5238,
+    "blendingModeName": "COLOR",
+    "preserveTransparency": false
+   },
+   {
+    "index": 4,
+    "name": "BM_SATURATION",
+    "blendingMode": 5237,
+    "blendingModeName": "SATURATION",
+    "preserveTransparency": false
+   },
+   {
+    "index": 5,
+    "name": "BM_HUE",
+    "blendingMode": 5236,
+    "blendingModeName": "HUE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 6,
+    "name": "BM_DIVIDE",
+    "blendingMode": 5249,
+    "blendingModeName": "DIVIDE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 7,
+    "name": "BM_SUBTRACT",
+    "blendingMode": 5248,
+    "blendingModeName": "SUBTRACT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 8,
+    "name": "BM_EXCLUSION",
+    "blendingMode": 5235,
+    "blendingModeName": "EXCLUSION",
+    "preserveTransparency": false
+   },
+   {
+    "index": 9,
+    "name": "BM_CLASSIC_DIFFERENCE",
+    "blendingMode": 5234,
+    "blendingModeName": "CLASSIC_DIFFERENCE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 10,
+    "name": "BM_DIFFERENCE",
+    "blendingMode": 5233,
+    "blendingModeName": "DIFFERENCE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 11,
+    "name": "BM_HARD_MIX",
+    "blendingMode": 5232,
+    "blendingModeName": "HARD_MIX",
+    "preserveTransparency": false
+   },
+   {
+    "index": 12,
+    "name": "BM_PIN_LIGHT",
+    "blendingMode": 5231,
+    "blendingModeName": "PIN_LIGHT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 13,
+    "name": "BM_VIVID_LIGHT",
+    "blendingMode": 5230,
+    "blendingModeName": "VIVID_LIGHT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 14,
+    "name": "BM_LINEAR_LIGHT",
+    "blendingMode": 5229,
+    "blendingModeName": "LINEAR_LIGHT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 15,
+    "name": "BM_HARD_LIGHT",
+    "blendingMode": 5228,
+    "blendingModeName": "HARD_LIGHT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 16,
+    "name": "BM_SOFT_LIGHT",
+    "blendingMode": 5227,
+    "blendingModeName": "SOFT_LIGHT",
+    "preserveTransparency": false
+   },
+   {
+    "index": 17,
+    "name": "BM_OVERLAY",
+    "blendingMode": 5226,
+    "blendingModeName": "OVERLAY",
+    "preserveTransparency": false
+   },
+   {
+    "index": 18,
+    "name": "BM_LIGHTER_COLOR",
+    "blendingMode": 5246,
+    "blendingModeName": "LIGHTER_COLOR",
+    "preserveTransparency": false
+   },
+   {
+    "index": 19,
+    "name": "BM_LINEAR_DODGE",
+    "blendingMode": 5223,
+    "blendingModeName": "LINEAR_DODGE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 20,
+    "name": "BM_CLASSIC_COLOR_DODGE",
+    "blendingMode": 5225,
+    "blendingModeName": "CLASSIC_COLOR_DODGE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 21,
+    "name": "BM_COLOR_DODGE",
+    "blendingMode": 5224,
+    "blendingModeName": "COLOR_DODGE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 22,
+    "name": "BM_SCREEN",
+    "blendingMode": 5222,
+    "blendingModeName": "SCREEN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 23,
+    "name": "BM_LIGHTEN",
+    "blendingMode": 5221,
+    "blendingModeName": "LIGHTEN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 24,
+    "name": "BM_ADD",
+    "blendingMode": 5220,
+    "blendingModeName": "ADD",
+    "preserveTransparency": false
+   },
+   {
+    "index": 25,
+    "name": "BM_DARKER_COLOR",
+    "blendingMode": 5247,
+    "blendingModeName": "DARKER_COLOR",
+    "preserveTransparency": false
+   },
+   {
+    "index": 26,
+    "name": "BM_LINEAR_BURN",
+    "blendingMode": 5217,
+    "blendingModeName": "LINEAR_BURN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 27,
+    "name": "BM_CLASSIC_COLOR_BURN",
+    "blendingMode": 5219,
+    "blendingModeName": "CLASSIC_COLOR_BURN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 28,
+    "name": "BM_COLOR_BURN",
+    "blendingMode": 5218,
+    "blendingModeName": "COLOR_BURN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 29,
+    "name": "BM_MULTIPLY",
+    "blendingMode": 5216,
+    "blendingModeName": "MULTIPLY",
+    "preserveTransparency": false
+   },
+   {
+    "index": 30,
+    "name": "BM_DARKEN",
+    "blendingMode": 5215,
+    "blendingModeName": "DARKEN",
+    "preserveTransparency": false
+   },
+   {
+    "index": 31,
+    "name": "BM_DISSOLVE",
+    "blendingMode": 5213,
+    "blendingModeName": "DISSOLVE",
+    "preserveTransparency": false
+   },
+   {
+    "index": 32,
+    "name": "BM_NORMAL",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": false
+   },
+   {
+    "index": 33,
+    "name": "BASE_plate",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": false
+   }
+  ],
+  "blend_stencil_precomp": [
+   {
+    "index": 1,
+    "name": "preserve_transparency_stripe",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": true
+   },
+   {
+    "index": 2,
+    "name": "under",
+    "blendingMode": 5212,
+    "blendingModeName": "NORMAL",
+    "preserveTransparency": false
+   }
+  ]
+ },
+ "diffs_vs_original": [
+  "blend_modes/BM_DISSOLVE: blend DISSOLVE->NORMAL PT false->false"
+ ],
+ "frames_vs_reference": {
+  "0": {
+   "max_abs": 221,
+   "pct_px_over_8": 0.03
+  },
+  "15": {
+   "max_abs": 221,
+   "pct_px_over_8": 0.03
+  },
+  "29": {
+   "max_abs": 221,
+   "pct_px_over_8": 0.03
+  }
+ },
+ "notes": [
+  "The export references footage at /home/user/tc/corpus/media/plate_1280x720.jpg (AE reads it as UNC \\\\\\\\home\\\\user\\\\...), so aerender failed: File Not Found, Error Code 1.",
+  "I relinked the plate to the PC corpus media in a copy and rendered frames 0/15/29 with the AE bridge plugin (8 bpc, same as the reference). The copy was not saved.",
+  "Saving the exported project crashes AE 2026 (reproduced 3 times, also with no changes and on a plain copy of the file). Opening and rendering work."
+ ]
+}
