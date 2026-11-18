@@ -13,7 +13,7 @@ I checked this in After Effects 2026: a 32 bpc project with an sRGB working spac
 |---|---|---|---|
 | Exposure +2 | 4.0, 2.4, 0.8 | 1.878, 1.127, 0.376 | 4.0, 2.4, 0.8 |
 | Exposure +2, Bypass on | 4.0, 2.4, 0.8 | 4.0, 2.4, 0.8 | 4.0, 2.4, 0.8 |
-| Exposure +1, Offset 0.05 | 2.05, 1.25, 0.45 | 1.386, 0.851, 0.364 | 2.05, 1.25, 0.45 |
+| Exposure +1, Offset 0.05 | 2.05, 1.25, 0.45 | 1.386, 0.850, 0.364 | 2.05, 1.25, 0.45 |
 
 In a linear working space, Bypass Linear Light Conversion makes no difference in After Effects. The same project with Linearize off renders exactly as EffectCraft does now (8 bpc and 32 bpc, PNG values match), so non-linear projects are unchanged.
 
