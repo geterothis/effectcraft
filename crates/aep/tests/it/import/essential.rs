@@ -336,14 +336,43 @@ fn a_control_passed_up_from_a_nested_instance_drives_its_essential_property() {
 }
 
 #[test]
-fn a_panel_comment_has_no_override_entry() {
-    // FM resize projects: a comment (`CTyp` 10, no `CPrp`) is listed in `OvG2` but has no entry in
-    // the override group; the other entries pair with the controls after it.
-    let mut controls = vec![Chunk::list(*b"CCtl", vec![names("Note"), utf8("n-1"), u32be(b"CTyp", 10)])];
+fn a_control_on_a_nested_layer_is_passed_up_when_the_nested_composition_has_no_controls() {
+    // Lab essential-direct and FM resize projects: the outer composition's control names a layer
+    // of a nested composition that has no controls of its own. A control on that layer is added
+    // to the nested composition, and the outer control drives its instance's Essential Property.
+    let main_controls = vec![control("Main Opacity", "m-1", 2, SOLID_LAYER, &path(&[("ADBE Transform Group", None), ("ADBE Opacity", None)]))];
+    let (p, r) = run(&project_nested(vec![], Some(overrides(&[])), main_controls));
+    assert_eq!(losses(&r), Vec::<String>::new());
+    let c = comp_named(&p, "C");
+    let inner = c.essential.clone().expect("the passed control");
+    let solid = c.layers.iter().find(|l| matches!(l.source, LayerSource::Solid { .. })).unwrap();
+    let EgKind::Property { layer, prop, .. } = &inner.controls[0].kind else { panic!("{:?}", inner.controls[0]) };
+    assert_eq!((inner.controls.len(), inner.controls[0].name.as_str()), (1, "Main Opacity"));
+    assert_eq!((*layer, *prop), (solid.id, solid.props.prop("transform/opacity").unwrap().uid));
+    let main = comp_named(&p, "Main");
+    let inst = main.layers.iter().find(|l| matches!(l.source, LayerSource::Comp { .. })).expect("the precomp layer");
+    let child =
+        essential::group(inst).unwrap().children.iter().filter_map(|n| n.as_prop()).find(|p| p.match_id == essential::match_id(inner.controls[0].id)).unwrap();
+    let eg = main.essential.as_ref().expect("Main's Essential Properties");
+    let EgKind::Property { layer, prop, .. } = &eg.controls[0].kind else { panic!("{:?}", eg.controls[0]) };
+    assert_eq!((*layer, *prop), (inst.id, child.uid));
+    // Only the file's own control counts as imported.
+    assert_eq!(r.report.imported.essential_properties, 1);
+}
+
+#[test]
+fn a_panel_group_holds_the_entries_of_its_controls() {
+    // FM resize projects: a group of the panel (`CTyp` 10, no `CPrp`) is listed in `OvG2`, and its
+    // entry in the override group is a `LIST tdgp` holding the entries of the controls in it
+    // (here Opacity); the entries after it pair with the controls after the group.
+    let mut controls = vec![Chunk::list(*b"CCtl", vec![names("Group"), utf8("n-1"), u32be(b"CTyp", 10)])];
     controls.extend(opacity_and_scale());
-    let mut over = overrides(&[(OPACITY, "ADBE Opacity", record("Box Opacity", 1, &[0.3])), (SCALE, "ADBE Scale", record("Box Scale", 1, &[0.5, 0.5, 1.0]))]);
+    let mut over =
+        overrides(&[("n-1", "ADBE Layer Overrides Group", Chunk::list(*b"tdgp", vec![])), (SCALE, "ADBE Scale", record("Box Scale", 1, &[0.5, 0.5, 1.0]))]);
     let Body::List { children, .. } = &mut over[1].body else { panic!() };
-    children.insert(1, Chunk::list(*b"CPrp", vec![utf8("n-1")]));
+    children.insert(2, Chunk::list(*b"CPrp", vec![utf8(OPACITY)]));
+    let Body::List { children, .. } = &mut over[2].body else { panic!() };
+    children[2] = Chunk::list(*b"tdgp", vec![u32be(b"tdsb", 1), tdmn("ADBE Opacity"), record("Box Opacity", 1, &[0.3]), tdmn("ADBE Group End")]);
     let (p, r) = run(&project(controls, Some(over)));
     assert_eq!(losses(&r), Vec::<String>::new());
     let eg = comp_named(&p, "C").essential.clone().unwrap();

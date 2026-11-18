@@ -174,20 +174,28 @@ fn import_essential_graphics(project: &mut Project, pending: &[PendingComp<'_, '
         return;
     }
     let aep_ids: HashMap<ItemId, u32> = pending.iter().filter_map(|p| Some((p.id, p.item.id()?))).collect();
+    let by_aep: HashMap<u32, ItemId> = aep_ids.iter().map(|(k, v)| (*v, *k)).collect();
     // Control UUID -> (control id, how its override values are read), per composition.
     let mut by_uuid: HashMap<ItemId, HashMap<String, (u64, essential::Conv)>> = HashMap::new();
     // What a composition's imported controls drive, as the file names it (the composition's After
     // Effects id, the layer id, the path) -> (control id, conversion): an outer composition's
     // control on a nested instance's Essential Property names the innermost layer (FM resize
     // projects: `CCId` is the composition that holds `CLId`).
-    let mut driven: HashMap<ItemId, HashMap<(u32, u32, String), (u64, essential::Conv)>> = HashMap::new();
+    let mut driven: Driven = HashMap::new();
     // The imported controls of each composition, in panel order (`None`: not resolved yet).
     let mut slots: HashMap<ItemId, Vec<Option<EgControl>>> = HashMap::new();
+    // Controls added to nested compositions so that a template can drive one of their layers
+    // directly (FM resize projects: the nested compositions have no controls of their own).
+    let mut passed: HashMap<ItemId, Vec<EgControl>> = HashMap::new();
     let mut reasons: HashMap<(ItemId, usize), String> = HashMap::new();
     // A control on a nested instance resolves once that instance's Essential Properties group
-    // exists, which needs the inner composition's controls: one round per nesting level.
-    for round in 0..essential::MAX_NESTING {
+    // exists, which needs the inner composition's controls: one round per nesting level. A
+    // control with a target that may still resolve waits; the last round takes what resolved.
+    let mut last = false;
+    for round in 0..=essential::MAX_NESTING {
+        last = last || round == essential::MAX_NESTING;
         let mut progress = false;
+        let mut wanted: Vec<(ItemId, essential::Target, String)> = vec![];
         for (comp_id, t) in &templates {
             let (Some(comp), Some(ids)) = (project.comp(*comp_id), layer_ids.get(comp_id)) else { continue };
             let own = aep_ids.get(comp_id).copied();
@@ -197,43 +205,52 @@ fn import_essential_graphics(project: &mut Project, pending: &[PendingComp<'_, '
                 if slot.get(i).is_some_and(Option::is_some) {
                     continue;
                 }
-                let Some(main) = c.targets.first() else {
+                if c.targets.is_empty() {
                     reasons.insert((*comp_id, i), "it drives no property".into());
                     continue;
-                };
-                let found = |t: &essential::Target| -> Result<(LayerId, Uid, essential::Conv), String> {
+                }
+                let found = |t: &essential::Target| -> Result<Vec<(LayerId, Uid, essential::Conv)>, String> {
                     if t.comp.is_none() || t.comp == own {
                         let lid = *ids.get(&t.layer).ok_or("its layer was not imported")?;
                         let layer = comp.layer(lid).ok_or("its layer was not imported")?;
                         let (uid, conv) = essential::resolve(layer, &t.path, cx.anchors.get(&lid).copied())?;
-                        return Ok((lid, uid, conv));
+                        return Ok(vec![(lid, uid, conv)]);
                     }
-                    // A property of a nested composition's layer: the instance of a composition here
-                    // whose controls drive it, and that instance's Essential Property.
-                    let key = (t.comp.unwrap_or_default(), t.layer, format!("{:?}", t.path));
-                    for l in comp.layers.iter() {
-                        let LayerSource::Comp { item } = l.source else { continue };
-                        let Some((control, conv)) = driven.get(&item).and_then(|d| d.get(&key)).copied() else { continue };
-                        let m = effectcraft_project::essential::match_id(control);
-                        let uid = effectcraft_project::essential::group(l)
-                            .and_then(|g| g.children.iter().filter_map(|n| n.as_prop()).find(|p| p.match_id == m).map(|p| p.uid));
-                        if let Some(uid) = uid {
-                            return Ok((l.id, uid, conv));
+                    // A property of a nested composition's layer: the instances here whose
+                    // Essential Property drives it.
+                    let hits = instances_driving(comp, &driven, &target_key(t, own));
+                    if hits.is_empty() { Err(NOT_PASSED.into()) } else { Ok(hits) }
+                };
+                let results: Vec<_> = c.targets.iter().map(|t| (t, found(t))).collect();
+                if !last && results.iter().any(|(_, r)| r.as_ref().is_err_and(|e| e == NOT_PASSED)) {
+                    for (t, r) in &results {
+                        if let Err(e) = r
+                            && e == NOT_PASSED
+                        {
+                            wanted.push((*comp_id, (*t).clone(), c.name.clone()));
                         }
                     }
-                    Err("its layer is in a nested composition whose instance here does not pass it on".into())
-                };
-                let (layer, prop, conv) = match found(main) {
-                    Ok(f) => f,
-                    Err(why) => {
+                    if let Some((_, Err(why))) = results.first() {
+                        reasons.insert((*comp_id, i), why.clone());
+                    }
+                    continue;
+                }
+                let mut results = results.into_iter();
+                let (layer, prop, conv, mut links) = match results.next() {
+                    Some((_, Ok(hits))) => {
+                        let mut hits = hits.into_iter();
+                        let Some((layer, prop, conv)) = hits.next() else { continue };
+                        (layer, prop, conv, hits.map(|(layer, prop, _)| EgLink { layer, prop }).collect::<Vec<_>>())
+                    }
+                    Some((_, Err(why))) => {
                         reasons.insert((*comp_id, i), why);
                         continue;
                     }
+                    None => continue,
                 };
-                let mut links = vec![];
-                for t in c.targets.get(1..).unwrap_or_default() {
-                    match found(t) {
-                        Ok((layer, prop, _)) => links.push(EgLink { layer, prop }),
+                for (_, r) in results {
+                    match r {
+                        Ok(hits) => links.extend(hits.into_iter().map(|(layer, prop, _)| EgLink { layer, prop })),
                         Err(why) => {
                             let comp_name = project.item(*comp_id).map(|i| i.name.clone()).unwrap_or_default();
                             cx.col.lose(
@@ -262,24 +279,32 @@ fn import_essential_graphics(project: &mut Project, pending: &[PendingComp<'_, '
                 }
                 let d = driven.entry(*comp_id).or_default();
                 for t in &c.targets {
-                    d.insert((t.comp.or(own).unwrap_or_default(), t.layer, format!("{:?}", t.path)), (id, conv));
+                    d.insert(target_key(t, own), (id, conv));
                 }
             }
             project.next_id = next;
-            let controls: Vec<EgControl> = slot.iter().flatten().cloned().collect();
-            if !controls.is_empty()
-                && let Some(comp) = project.comp_mut(*comp_id)
-            {
-                comp.essential = Some(EssentialGraphics { name: t.name.clone(), controls });
-            }
         }
+        // The nested compositions that pass a directly named property up, one level a round.
+        for (comp_id, t, name) in &wanted {
+            let Some(inner) = t.comp.and_then(|a| by_aep.get(&a)).copied() else { continue };
+            let key = target_key(t, None);
+            let mut pass = PassUp { project, layer_ids, anchors: &cx.anchors, driven: &mut driven, passed: &mut passed, next: project.next_id, added: false };
+            pass.through(*comp_id, inner, t, &key, name, 0, &mut HashSet::new());
+            let (next, added) = (pass.next, pass.added);
+            project.next_id = next;
+            progress |= added;
+        }
+        install_controls(project, &templates, &slots, &passed);
         // The precomp layers' Essential Properties groups, with the composition's values.
         if progress || round == 0 {
             let before = project.clone();
             effectcraft_project::essential::sync_project(&before, project);
         }
         if !progress {
-            break;
+            if last {
+                break;
+            }
+            last = true;
         }
     }
     for (comp_id, t) in &templates {
@@ -296,6 +321,18 @@ fn import_essential_graphics(project: &mut Project, pending: &[PendingComp<'_, '
         }
     }
     cx.col.imported.essential_properties = cx.col.imported.essential_properties.saturating_add(slots.values().map(|s| s.iter().flatten().count()).sum());
+    import_instance_overrides(project, pending, layer_ids, &templates, &by_uuid, cx);
+}
+
+/// The values each precomp layer overrides, by the UUIDs of its composition's imported controls.
+fn import_instance_overrides(
+    project: &mut Project,
+    pending: &[PendingComp<'_, '_>],
+    layer_ids: &HashMap<ItemId, HashMap<u32, LayerId>>,
+    templates: &[(ItemId, essential::Template)],
+    by_uuid: &HashMap<ItemId, HashMap<String, (u64, essential::Conv)>>,
+    cx: &mut Ctx<'_>,
+) {
     if by_uuid.is_empty() {
         return;
     }
@@ -373,6 +410,126 @@ fn import_essential_graphics(project: &mut Project, pending: &[PendingComp<'_, '
     // composition (a nested control): the groups take the overridden values in.
     let before = project.clone();
     effectcraft_project::essential::sync_project(&before, project);
+}
+
+/// Sets each composition's Essential Properties: its imported controls in panel order, then the
+/// controls added to pass a nested layer's property up.
+fn install_controls(
+    project: &mut Project,
+    templates: &[(ItemId, essential::Template)],
+    slots: &HashMap<ItemId, Vec<Option<EgControl>>>,
+    passed: &HashMap<ItemId, Vec<EgControl>>,
+) {
+    let with_controls: HashSet<ItemId> = slots.keys().chain(passed.keys()).copied().collect();
+    for comp_id in with_controls {
+        let mut controls: Vec<EgControl> = slots.get(&comp_id).map(|s| s.iter().flatten().cloned().collect()).unwrap_or_default();
+        controls.extend(passed.get(&comp_id).cloned().unwrap_or_default());
+        let name = templates
+            .iter()
+            .find(|(id, _)| *id == comp_id)
+            .map(|(_, t)| t.name.clone())
+            .or_else(|| project.item(comp_id).map(|i| i.name.clone()))
+            .unwrap_or_default();
+        if !controls.is_empty()
+            && let Some(comp) = project.comp_mut(comp_id)
+        {
+            comp.essential = Some(EssentialGraphics { name, controls });
+        }
+    }
+}
+
+/// Per composition: what its controls drive, as the file names it (see `import_essential_graphics`).
+type Driven = HashMap<ItemId, HashMap<(u32, u32, String), (u64, essential::Conv)>>;
+
+const NOT_PASSED: &str = "its layer is in a nested composition whose instance here does not pass it on";
+
+/// The key of a target in `Driven`: the After Effects id of the composition holding its layer
+/// (`own` when the file leaves it out), the layer and the path.
+fn target_key(t: &essential::Target, own: Option<u32>) -> (u32, u32, String) {
+    (t.comp.or(own).unwrap_or_default(), t.layer, format!("{:?}", t.path))
+}
+
+/// The precomp layers of `comp` whose composition has a control driving `key`, with that
+/// control's Essential Property on the layer.
+fn instances_driving(comp: &Comp, driven: &Driven, key: &(u32, u32, String)) -> Vec<(LayerId, Uid, essential::Conv)> {
+    let mut out = vec![];
+    for l in comp.layers.iter() {
+        let LayerSource::Comp { item } = l.source else { continue };
+        let Some((control, conv)) = driven.get(&item).and_then(|d| d.get(key)).copied() else { continue };
+        let m = effectcraft_project::essential::match_id(control);
+        let uid = effectcraft_project::essential::group(l).and_then(|g| g.children.iter().filter_map(|n| n.as_prop()).find(|p| p.match_id == m).map(|p| p.uid));
+        if let Some(uid) = uid {
+            out.push((l.id, uid, conv));
+        }
+    }
+    out
+}
+
+/// Whether composition `from` is `to` or holds an instance of it, at most `MAX_NESTING` deep.
+fn reaches(project: &Project, from: ItemId, to: ItemId, depth: usize, seen: &mut HashSet<ItemId>) -> bool {
+    if from == to {
+        return true;
+    }
+    if depth >= essential::MAX_NESTING || !seen.insert(from) {
+        return false;
+    }
+    let Some(comp) = project.comp(from) else { return false };
+    comp.layers.iter().any(|l| matches!(l.source, LayerSource::Comp { item } if reaches(project, item, to, depth.saturating_add(1), seen)))
+}
+
+/// Adds controls to the compositions between a template and the nested composition holding a
+/// layer it names directly, so the property is passed up the usual way: the innermost
+/// composition gets a control on the layer's property, each composition above one on its
+/// instance's Essential Property. One level is added per call, as an instance's Essential
+/// Properties group exists only once the projects are synced.
+struct PassUp<'p> {
+    project: &'p Project,
+    layer_ids: &'p HashMap<ItemId, HashMap<u32, LayerId>>,
+    anchors: &'p HashMap<LayerId, AnchorUnit>,
+    driven: &'p mut Driven,
+    passed: &'p mut HashMap<ItemId, Vec<EgControl>>,
+    next: u64,
+    added: bool,
+}
+
+impl PassUp<'_> {
+    #[allow(clippy::too_many_arguments)]
+    fn through(&mut self, at: ItemId, inner: ItemId, t: &essential::Target, key: &(u32, u32, String), name: &str, depth: usize, seen: &mut HashSet<ItemId>) {
+        if depth >= essential::MAX_NESTING || !seen.insert(at) {
+            return;
+        }
+        let Some(comp) = self.project.comp(at) else { return };
+        let sources: Vec<ItemId> = comp
+            .layers
+            .iter()
+            .filter_map(|l| match l.source {
+                LayerSource::Comp { item } => Some(item),
+                _ => None,
+            })
+            .collect();
+        for s in sources {
+            if self.driven.get(&s).is_some_and(|d| d.contains_key(key)) || !reaches(self.project, s, inner, 0, &mut HashSet::new()) {
+                continue;
+            }
+            let control = if s == inner {
+                let Some(lid) = self.layer_ids.get(&s).and_then(|ids| ids.get(&t.layer)).copied() else { continue };
+                let Some(layer) = self.project.comp(s).and_then(|c| c.layer(lid)) else { continue };
+                let Ok((prop, conv)) = essential::resolve(layer, &t.path, self.anchors.get(&lid).copied()) else { continue };
+                Some((lid, prop, conv, vec![]))
+            } else {
+                self.through(s, inner, t, key, name, depth.saturating_add(1), seen);
+                let Some(c) = self.project.comp(s) else { continue };
+                let mut hits = instances_driving(c, self.driven, key).into_iter();
+                hits.next().map(|(lid, prop, conv)| (lid, prop, conv, hits.map(|(layer, prop, _)| EgLink { layer, prop }).collect()))
+            };
+            let Some((layer, prop, conv, links)) = control else { continue };
+            let id = self.next;
+            self.next = self.next.saturating_add(1);
+            self.passed.entry(s).or_default().push(EgControl { id, name: name.to_string(), kind: EgKind::Property { layer, prop, links }, as_type: None });
+            self.driven.entry(s).or_default().insert(key.clone(), (id, conv));
+            self.added = true;
+        }
+    }
 }
 
 /// An override record's value, keys and expression as a property (only those fields are used).

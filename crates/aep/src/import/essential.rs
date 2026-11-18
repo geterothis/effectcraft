@@ -306,8 +306,8 @@ fn until_nul(b: &[u8]) -> &[u8] {
 /// The overrides of a precomp layer (its `LIST Layr`), by control UUID; `None` when it has
 /// none, `Some(Err)` when they can't be paired with their controls. The group holds one entry (a
 /// `tdmn` and its record) per control in the controls' order, none for a control in `no_record`
-/// (a comment or group of the panel: FM resize projects list its UUID in `OvG2` but store no
-/// entry). An entry whose record is not a `LIST tdbs` or `LIST btds` is paired with `None`.
+/// (a group of the panel: FM resize projects list its UUID in `OvG2`, and its entry holds the
+/// entries of the controls in it, see `override_entries`). An entry whose record is not a `LIST tdbs` or `LIST btds` is paired with `None`.
 pub(crate) fn read_overrides<'f, 'a>(
     layer: Node<'f, 'a>,
     no_record: &std::collections::HashSet<String>,
@@ -327,27 +327,40 @@ pub(crate) fn read_overrides<'f, 'a>(
     let uuids: Vec<String> = uuids.into_iter().filter(|u| !no_record.contains(u)).collect();
     let Some(group) = own.iter().find(|c| c.is_list(b"tdgp")) else { return Some(Ok(vec![])) };
     let mut entries: Vec<Option<OverrideRecord<'f, 'a>>> = vec![];
-    let mut open = false;
-    for c in group.children() {
-        if c.is(b"tdmn") {
-            open = c.bytes().map(until_nul) != Some(b"ADBE Group End".as_slice());
-            if open {
-                entries.push(None);
-            }
-        } else if open && (c.is_list(b"tdbs") || c.is_list(b"btds")) {
-            if let Some(last) = entries.last_mut() {
-                *last = Some(OverrideRecord { record: c });
-            }
-            open = false;
-        }
-        if entries.len() > MAX_CONTROLS {
-            break;
-        }
-    }
+    override_entries(*group, 0, &mut entries);
     if entries.len() != uuids.len() {
         return Some(Err(format!("{} override values for {} controls", entries.len(), uuids.len())));
     }
     Some(Ok(uuids.into_iter().zip(entries).collect()))
+}
+
+/// The entries of an override group, in order, into `out`. A group of the panel stores a `tdmn`
+/// and a `LIST tdgp` holding the entries of its controls (FM resize projects): those entries take
+/// the group's place, and the group has none of its own.
+fn override_entries<'f, 'a>(group: Node<'f, 'a>, depth: usize, out: &mut Vec<Option<OverrideRecord<'f, 'a>>>) {
+    let mut open = false;
+    for c in group.children() {
+        if out.len() > MAX_CONTROLS {
+            return;
+        }
+        if c.is(b"tdmn") {
+            open = c.bytes().map(until_nul) != Some(b"ADBE Group End".as_slice());
+            if open {
+                out.push(None);
+            }
+        } else if open && (c.is_list(b"tdbs") || c.is_list(b"btds")) {
+            if let Some(last) = out.last_mut() {
+                *last = Some(OverrideRecord { record: c });
+            }
+            open = false;
+        } else if open && c.is_list(b"tdgp") {
+            out.pop();
+            if depth < MAX_NESTING {
+                override_entries(c, depth.saturating_add(1), out);
+            }
+            open = false;
+        }
+    }
 }
 
 #[cfg(test)]
