@@ -1,0 +1,1023 @@
+{
+ "ae": "26.5",
+ "part1": {
+  "file": "exports/camlight-keys/camlight_keys.effectcraft.aep",
+  "dump": {
+   "comp": "C",
+   "id": 28,
+   "layers": [
+    {
+     "index": 1,
+     "name": "Spot",
+     "props": {
+      "ADBE Light Intensity": {
+       "matchName": "ADBE Light Intensity",
+       "numKeys": 2,
+       "value": 100,
+       "valueAtTime_0_5": 140,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 100,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 80,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": 180,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 80,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Light Color": {
+       "matchName": "ADBE Light Color",
+       "numKeys": 2,
+       "value": [
+        1,
+        1,
+        1,
+        1
+       ],
+       "valueAtTime_0_5": [
+        1,
+        0.875,
+        0.8,
+        1
+       ],
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": [
+          1,
+          1,
+          1,
+          1
+         ],
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 120.283259433722,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 2,
+         "keyValue": [
+          1,
+          0.5,
+          0.2,
+          1
+         ],
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 120.283259433722,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Light Cone Angle": {
+       "matchName": "ADBE Light Cone Angle",
+       "numKeys": 2,
+       "value": 90,
+       "valueAtTime_0_5": 78.75,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 90,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": -22.5,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 2,
+         "keyValue": 45,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": -22.5,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Light Cone Feather 2": {
+       "matchName": "ADBE Light Cone Feather 2",
+       "numKeys": 0,
+       "value": 50,
+       "valueAtTime_0_5": 50,
+       "keys": []
+      },
+      "ADBE Casts Shadows": {
+       "matchName": "ADBE Casts Shadows",
+       "numKeys": 0,
+       "value": 0,
+       "valueAtTime_0_5": 0,
+       "keys": []
+      },
+      "ADBE Light Shadow Darkness": {
+       "matchName": "ADBE Light Shadow Darkness",
+       "numKeys": 0,
+       "value": 100,
+       "valueAtTime_0_5": 100,
+       "keys": []
+      },
+      "ADBE Light Shadow Diffusion": {
+       "matchName": "ADBE Light Shadow Diffusion",
+       "numKeys": 0,
+       "value": 0,
+       "valueAtTime_0_5": 0,
+       "keys": []
+      },
+      "ADBE Light Falloff Type": {
+       "matchName": "ADBE Light Falloff Type",
+       "numKeys": 0,
+       "value": 1,
+       "valueAtTime_0_5": 1,
+       "keys": []
+      }
+     },
+     "kind": "light",
+     "lightType": "4413"
+    },
+    {
+     "index": 2,
+     "name": "Cam",
+     "props": {
+      "ADBE Camera Zoom": {
+       "matchName": "ADBE Camera Zoom",
+       "numKeys": 3,
+       "value": 2666.7,
+       "valueAtTime_0_5": 2114.55720361847,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 2666.7,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": -866.7,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": 1800,
+         "inInterp": "BEZIER",
+         "outInterp": "BEZIER",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 33.3333333333333
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 75
+          }
+         ]
+        },
+        {
+         "keyTime": 2,
+         "keyValue": 3000,
+         "inInterp": "HOLD",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Camera Depth of Field": {
+       "matchName": "ADBE Camera Depth of Field",
+       "numKeys": 2,
+       "value": 0,
+       "valueAtTime_0_5": 0,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 0,
+         "inInterp": "HOLD",
+         "outInterp": "HOLD",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": 1,
+         "inInterp": "HOLD",
+         "outInterp": "HOLD",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Camera Focus Distance": {
+       "matchName": "ADBE Camera Focus Distance",
+       "numKeys": 0,
+       "value": 2666.66666666667,
+       "valueAtTime_0_5": 2666.66666666667,
+       "keys": []
+      },
+      "ADBE Camera Aperture": {
+       "matchName": "ADBE Camera Aperture",
+       "numKeys": 2,
+       "value": 25.3,
+       "valueAtTime_0_5": 48.975,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 25.3,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 47.35,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 2,
+         "keyValue": 120,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 47.35,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Camera Blur Level": {
+       "matchName": "ADBE Camera Blur Level",
+       "numKeys": 2,
+       "value": 100,
+       "valueAtTime_0_5": 175,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 100,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 150,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": 250,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 150,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      }
+     },
+     "kind": "camera"
+    }
+   ]
+  },
+  "vs_readme": {
+   "matches": "Spot Intensity/Color/Cone Angle, Cam DOF (hold), Aperture (v0.5=48.975), Blur Level (v0.5=175), Zoom key times/values/interpolations",
+   "mismatch": {
+    "Cam Zoom key 1s out ease": "expected speed -50 influence 75; got [{\"speed\": 0, \"influence\": 75}]"
+   }
+  }
+ },
+ "part2": {
+  "file": "exports/camlight-keys/camlight_keys.ae_ec_ae.aep",
+  "dump_K": {
+   "comp": "K",
+   "id": 29,
+   "layers": [
+    {
+     "index": 1,
+     "name": "point",
+     "props": {
+      "ADBE Light Intensity": {
+       "matchName": "ADBE Light Intensity",
+       "numKeys": 2,
+       "value": 40,
+       "valueAtTime_0_5": 66.6666666666667,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 40,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 53.3333333333333,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 1.5,
+         "keyValue": 120,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 53.3333333333333,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Light Color": {
+       "matchName": "ADBE Light Color",
+       "numKeys": 0,
+       "value": [
+        1,
+        1,
+        1,
+        1
+       ],
+       "valueAtTime_0_5": [
+        1,
+        1,
+        1,
+        1
+       ],
+       "keys": []
+      },
+      "ADBE Light Cone Angle": {
+       "matchName": "ADBE Light Cone Angle",
+       "numKeys": 0,
+       "value": 90,
+       "valueAtTime_0_5": 90,
+       "keys": []
+      },
+      "ADBE Light Cone Feather 2": {
+       "matchName": "ADBE Light Cone Feather 2",
+       "numKeys": 0,
+       "value": 50,
+       "valueAtTime_0_5": 50,
+       "keys": []
+      },
+      "ADBE Casts Shadows": {
+       "matchName": "ADBE Casts Shadows",
+       "numKeys": 0,
+       "value": 0,
+       "valueAtTime_0_5": 0,
+       "keys": []
+      },
+      "ADBE Light Shadow Darkness": {
+       "matchName": "ADBE Light Shadow Darkness",
+       "numKeys": 0,
+       "value": 100,
+       "valueAtTime_0_5": 100,
+       "keys": []
+      },
+      "ADBE Light Shadow Diffusion": {
+       "matchName": "ADBE Light Shadow Diffusion",
+       "numKeys": 0,
+       "value": 0,
+       "valueAtTime_0_5": 0,
+       "keys": []
+      },
+      "ADBE Light Falloff Type": {
+       "matchName": "ADBE Light Falloff Type",
+       "numKeys": 0,
+       "value": 1,
+       "valueAtTime_0_5": 1,
+       "keys": []
+      }
+     },
+     "kind": "light",
+     "lightType": "4414"
+    },
+    {
+     "index": 2,
+     "name": "spot",
+     "props": {
+      "ADBE Light Intensity": {
+       "matchName": "ADBE Light Intensity",
+       "numKeys": 3,
+       "value": 100,
+       "valueAtTime_0_5": 180,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 100,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 160,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 0.5,
+         "keyValue": 180,
+         "inInterp": "BEZIER",
+         "outInterp": "BEZIER",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 33.3
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 75
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": 60,
+         "inInterp": "BEZIER",
+         "outInterp": "BEZIER",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 0.1
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 33.3333333333333
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Light Color": {
+       "matchName": "ADBE Light Color",
+       "numKeys": 2,
+       "value": [
+        1,
+        1,
+        1,
+        1
+       ],
+       "valueAtTime_0_5": [
+        1,
+        0.75,
+        0.60000000149012,
+        1
+       ],
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": [
+          1,
+          1,
+          1,
+          1
+         ],
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 240.566518222999,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": [
+          1,
+          0.5,
+          0.20000000298023,
+          1
+         ],
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 240.566518222999,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Light Cone Angle": {
+       "matchName": "ADBE Light Cone Angle",
+       "numKeys": 2,
+       "value": 90,
+       "valueAtTime_0_5": 67.5,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 90,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": -45,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": 45,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": -45,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Light Cone Feather 2": {
+       "matchName": "ADBE Light Cone Feather 2",
+       "numKeys": 2,
+       "value": 50,
+       "valueAtTime_0_5": 30,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 50,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": -40,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": 10,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": -40,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Casts Shadows": {
+       "matchName": "ADBE Casts Shadows",
+       "numKeys": 0,
+       "value": 0,
+       "valueAtTime_0_5": 0,
+       "keys": []
+      },
+      "ADBE Light Shadow Darkness": {
+       "matchName": "ADBE Light Shadow Darkness",
+       "numKeys": 0,
+       "value": 100,
+       "valueAtTime_0_5": 100,
+       "keys": []
+      },
+      "ADBE Light Shadow Diffusion": {
+       "matchName": "ADBE Light Shadow Diffusion",
+       "numKeys": 0,
+       "value": 0,
+       "valueAtTime_0_5": 0,
+       "keys": []
+      },
+      "ADBE Light Falloff Type": {
+       "matchName": "ADBE Light Falloff Type",
+       "numKeys": 0,
+       "value": 1,
+       "valueAtTime_0_5": 1,
+       "keys": []
+      }
+     },
+     "kind": "light",
+     "lightType": "4413"
+    },
+    {
+     "index": 3,
+     "name": "cam",
+     "props": {
+      "ADBE Camera Zoom": {
+       "matchName": "ADBE Camera Zoom",
+       "numKeys": 4,
+       "value": 2666.69995117188,
+       "valueAtTime_0_5": 1800,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 2666.69995117188,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": -1733.39990234375,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 0.5,
+         "keyValue": 1800,
+         "inInterp": "BEZIER",
+         "outInterp": "BEZIER",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 33.3
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 75
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": 3000,
+         "inInterp": "BEZIER",
+         "outInterp": "BEZIER",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 0.1
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 0.1
+          }
+         ]
+        },
+        {
+         "keyTime": 1.5,
+         "keyValue": 2200,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": -1600,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Camera Depth of Field": {
+       "matchName": "ADBE Camera Depth of Field",
+       "numKeys": 0,
+       "value": 0,
+       "valueAtTime_0_5": 0,
+       "keys": []
+      },
+      "ADBE Camera Focus Distance": {
+       "matchName": "ADBE Camera Focus Distance",
+       "numKeys": 2,
+       "value": 2666.69995117188,
+       "valueAtTime_0_5": 2242.07602791031,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 2666.69995117188,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": -666.699951171875,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": 2000,
+         "inInterp": "BEZIER",
+         "outInterp": "BEZIER",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 33.3
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 33.3333333333333
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Camera Aperture": {
+       "matchName": "ADBE Camera Aperture",
+       "numKeys": 2,
+       "value": 25.2999992370605,
+       "valueAtTime_0_5": 72.6499996185303,
+       "keys": [
+        {
+         "keyTime": 0,
+         "keyValue": 25.2999992370605,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 94.7000007629395,
+           "influence": 16.666666667
+          }
+         ]
+        },
+        {
+         "keyTime": 1,
+         "keyValue": 120,
+         "inInterp": "LINEAR",
+         "outInterp": "LINEAR",
+         "inEase": [
+          {
+           "speed": 94.7000007629395,
+           "influence": 16.666666667
+          }
+         ],
+         "outEase": [
+          {
+           "speed": 0,
+           "influence": 16.666666667
+          }
+         ]
+        }
+       ]
+      },
+      "ADBE Camera Blur Level": {
+       "matchName": "ADBE Camera Blur Level",
+       "numKeys": 0,
+       "value": 100,
+       "valueAtTime_0_5": 100,
+       "keys": []
+      }
+     },
+     "kind": "camera"
+    },
+    {
+     "index": 4,
+     "name": "box",
+     "props": {},
+     "kind": "av"
+    },
+    {
+     "index": 5,
+     "name": "wall",
+     "props": {},
+     "kind": "av"
+    }
+   ]
+  },
+  "diffs_vs_lab_original": [
+   "spot/ADBE Light Intensity key3 inEase speed/infl 0/0 -> 0/0.1",
+   "spot/ADBE Light Intensity key3 outEase speed/infl 0/0 -> 0/33.3",
+   "cam/ADBE Camera Zoom key3 inEase speed/infl 0/0 -> 0/0.1",
+   "cam/ADBE Camera Zoom key3 outEase speed/infl 0/0 -> 0/0.1",
+   "cam/ADBE Camera Depth of Field: numKeys 3 -> 0",
+   "cam/ADBE Camera Focus Distance key2 outEase speed/infl 0/75 -> 0/33.3",
+   "cam/ADBE Camera Blur Level: numKeys 2 -> 0"
+  ],
+  "frames_vs_lab": {
+   "K_00000": {
+    "max_abs": 0,
+    "pct_px_over_8": 0.0
+   },
+   "K_00015": {
+    "max_abs": 255,
+    "pct_px_over_8": 0.64
+   },
+   "K_00030": {
+    "max_abs": 176,
+    "pct_px_over_8": 3.52
+   },
+   "K_00045": {
+    "max_abs": 0,
+    "pct_px_over_8": 0.0
+   },
+   "S_00000": {
+    "max_abs": 61,
+    "pct_px_over_8": 36.73
+   }
+  }
+ }
+}
