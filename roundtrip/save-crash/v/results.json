@@ -1,0 +1,10 @@
+{
+ "ae": "26.5",
+ "method": "one background AE instance; open, then app.project.save(new File('roundtrip/save-crash/v/<name>.resaved.aep'))",
+ "results": [
+  {"file": "v1_opti_header.effectcraft.aep", "opened": true, "items": 3, "saved": "yes"},
+  {"file": "v2_mnfo.effectcraft.aep", "opened": true, "items": 3, "saved": "crash", "error": "AE process died during save (crash reporter closed unsent)"},
+  {"file": "v3_both.effectcraft.aep", "opened": true, "items": 3, "saved": "yes"}
+ ],
+ "verdict": "The opti header fix alone (v1) stops the save crash, and v3 (both) saves too. The mnfo fix alone (v2) still crashes, so the solid item's opti header is the cause."
+}
