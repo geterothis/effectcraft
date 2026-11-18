@@ -24,7 +24,7 @@ Two terms differ:
 ## Fix
 
 - `Material::exponent` returns the Shininess percentage, at least 1.
-- `LightState::attenuation` interpolates the feather between the cosines of the inner and outer angles.
+- `LightState::attenuation` interpolates the feather between the cosines of the inner and outer angles, divided by that interval itself (it is never empty inside the feather branch, however narrow the cone).
 - The same two changes are made in `classic3d.wgsl`, which takes the exponent from `Material::exponent`.
 
 ## Results
@@ -34,5 +34,6 @@ Two terms differ:
 
 ## Tests
 
-- New `three_d::tests::spot_feather_falls_off_over_the_cosine_of_the_angle` and `three_d::tests::specular_shininess_is_the_exponent`, using the lab values. Both fail without the fix.
+- New `three_d::tests::spot_feather_falls_off_over_the_cosine_of_the_angle` and `three_d::tests::specular_shininess_is_the_exponent`, using the lab values (the 40 % highlight is checked against 0.866^40 = 0.00317 on both sides). Both fail without the fix.
+- New `three_d::tests::a_very_narrow_spot_still_feathers_over_its_own_cone`: a 0.004° cone at feather 100 leaves under 1 % of the light at 99 % of its half-angle.
 - `cargo test -p effectcraft-render`, the GPU `tests::three_d` CPU/GPU parity tests (lavapipe, `EFFECTCRAFT_REQUIRE_GPU=1`), the engine `tests::three_d` / `rig3d` tests, clippy (`-D warnings`) and fmt pass for the touched crates. I did not run the full `cargo xtask ci`.
