@@ -1,0 +1,15 @@
+{
+ "ae": "26.5",
+ "method": "one background AE instance; open the file, then app.project.save(new File('roundtrip/save-crash/<name>.resaved.aep'))",
+ "results": [
+  {"file": "s1_empty.effectcraft.aep", "opened": true, "items": 1, "saved": "yes"},
+  {"file": "s2_comp.effectcraft.aep", "opened": true, "items": 2, "saved": "yes"},
+  {"file": "s3_solid.effectcraft.aep", "opened": true, "items": 3, "saved": "crash", "error": "AE process died during save (no error text; no crash report window)"},
+  {"file": "s4_text.effectcraft.aep", "opened": true, "items": 2, "saved": "yes"},
+  {"file": "s5_shape.effectcraft.aep", "opened": true, "items": 2, "saved": "yes"},
+  {"file": "s6_3d.effectcraft.aep", "opened": true, "items": 3, "saved": "crash", "error": "AE process died during save (Adobe crash reporter opened, closed unsent)"},
+  {"file": "s7_corpus01.effectcraft.aep", "opened": true, "items": 15, "saved": "crash", "error": "AE process died during save (Adobe crash reporter opened, closed unsent)"}
+ ],
+ "verdict": "Save crashes only in files that contain a solid (s3, s6, s7; 10_blend_modes also has solids). The files without a solid footage item (empty, comp only, text, shape) save fine. The solid source item, or the layer that uses it, is the suspect.",
+ "dissolve_pair": "roundtrip/save-crash/dissolve_pair.aep: comp dissolve_pair 320x180, solid 'dissolve' (BlendingMode.DISSOLVE = 5213) and solid 'dancing_dissolve' (BlendingMode.DANCING_DISSOLVE = 5214), both at 50 % opacity, saved by AE 26.5."
+}
