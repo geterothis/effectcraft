@@ -1,5 +1,5 @@
-Branch: geterothis:effectcraft:fix/fill-all-masks-without-masks (1 commit, 1631a0c9, on upstream main 91367ced; not stacked)
-Compare: https://github.com/storytold/effectcraft/compare/main...geterothis:effectcraft:fix/fill-all-masks-without-masks
+Branch: geterothis:effectcraft:fix/fill-all-masks (1 commit, ad4b8f9a, on upstream main 67942cda; not stacked)
+Compare: https://github.com/storytold/effectcraft/compare/main...geterothis:effectcraft:fix/fill-all-masks
 
 Title: Fill: All Masks on a layer without masks fills nothing
 
