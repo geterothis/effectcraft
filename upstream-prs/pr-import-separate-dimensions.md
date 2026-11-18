@@ -1,3 +1,5 @@
+**DO NOT OPEN. Superseded by upstream #3684 (open since 2026-11-14, by another contributor), which imports Separate Dimensions the same way (positionX/Y/Z, keys, expressions). The branch stays in the fork build only.**
+
 Title: aep import: Separate Dimensions arrive as X, Y and Z Position
 
 Branch: geterothis:fix/aep-import-separate-dimensions (one commit on main cd9ee1e4).
