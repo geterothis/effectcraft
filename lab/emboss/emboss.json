@@ -1,0 +1,868 @@
+{
+ "ae": "26.5x89",
+ "errors": [],
+ "comps": {
+  "E1": {
+   "id": 18,
+   "w": 200,
+   "h": 200,
+   "fps": 25,
+   "duration": 1,
+   "source": {
+    "precomp": "SRC_E1",
+    "background": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "square": {
+     "color": [
+      1,
+      1,
+      1
+     ],
+     "size": [
+      80,
+      80
+     ],
+     "center": [
+      100,
+      100
+     ]
+    }
+   },
+   "emboss": {
+    "ADBE Emboss-0001": {
+     "name": "Direction",
+     "value": 0
+    },
+    "ADBE Emboss-0002": {
+     "name": "Relief",
+     "value": 3
+    },
+    "ADBE Emboss-0003": {
+     "name": "Contrast",
+     "value": 100
+    },
+    "ADBE Emboss-0004": {
+     "name": "Blend With Original",
+     "value": 0
+    }
+   },
+   "frame": "E1_f0.png",
+   "samples_rgba_xy": {
+    "center": {
+     "xy": [
+      100,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "left_edge": {
+     "xy": [
+      60,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "right_edge": {
+     "xy": [
+      139,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "top_edge": {
+     "xy": [
+      100,
+      60
+     ],
+     "rgba": [
+      1,
+      1,
+      1,
+      255
+     ]
+    },
+    "bottom_edge": {
+     "xy": [
+      100,
+      139
+     ],
+     "rgba": [
+      255,
+      255,
+      255,
+      255
+     ]
+    },
+    "background": {
+     "xy": [
+      10,
+      10
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    }
+   }
+  },
+  "E2": {
+   "id": 47,
+   "w": 200,
+   "h": 200,
+   "fps": 25,
+   "duration": 1,
+   "source": {
+    "precomp": "SRC_E2",
+    "background": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "square": {
+     "color": [
+      1,
+      1,
+      1
+     ],
+     "size": [
+      80,
+      80
+     ],
+     "center": [
+      100,
+      100
+     ]
+    }
+   },
+   "emboss": {
+    "ADBE Emboss-0001": {
+     "name": "Direction",
+     "value": 90
+    },
+    "ADBE Emboss-0002": {
+     "name": "Relief",
+     "value": 3
+    },
+    "ADBE Emboss-0003": {
+     "name": "Contrast",
+     "value": 100
+    },
+    "ADBE Emboss-0004": {
+     "name": "Blend With Original",
+     "value": 0
+    }
+   },
+   "frame": "E2_f0.png",
+   "samples_rgba_xy": {
+    "center": {
+     "xy": [
+      100,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "left_edge": {
+     "xy": [
+      60,
+      100
+     ],
+     "rgba": [
+      255,
+      255,
+      255,
+      255
+     ]
+    },
+    "right_edge": {
+     "xy": [
+      139,
+      100
+     ],
+     "rgba": [
+      1,
+      1,
+      1,
+      255
+     ]
+    },
+    "top_edge": {
+     "xy": [
+      100,
+      60
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "bottom_edge": {
+     "xy": [
+      100,
+      139
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "background": {
+     "xy": [
+      10,
+      10
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    }
+   }
+  },
+  "E3": {
+   "id": 76,
+   "w": 200,
+   "h": 200,
+   "fps": 25,
+   "duration": 1,
+   "source": {
+    "precomp": "SRC_E3",
+    "background": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "square": {
+     "color": [
+      1,
+      1,
+      1
+     ],
+     "size": [
+      80,
+      80
+     ],
+     "center": [
+      100,
+      100
+     ]
+    }
+   },
+   "emboss": {
+    "ADBE Emboss-0001": {
+     "name": "Direction",
+     "value": 120
+    },
+    "ADBE Emboss-0002": {
+     "name": "Relief",
+     "value": 3
+    },
+    "ADBE Emboss-0003": {
+     "name": "Contrast",
+     "value": 100
+    },
+    "ADBE Emboss-0004": {
+     "name": "Blend With Original",
+     "value": 0
+    }
+   },
+   "frame": "E3_f0.png",
+   "samples_rgba_xy": {
+    "center": {
+     "xy": [
+      100,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "left_edge": {
+     "xy": [
+      60,
+      100
+     ],
+     "rgba": [
+      255,
+      255,
+      255,
+      255
+     ]
+    },
+    "right_edge": {
+     "xy": [
+      139,
+      100
+     ],
+     "rgba": [
+      1,
+      1,
+      1,
+      255
+     ]
+    },
+    "top_edge": {
+     "xy": [
+      100,
+      60
+     ],
+     "rgba": [
+      255,
+      255,
+      255,
+      255
+     ]
+    },
+    "bottom_edge": {
+     "xy": [
+      100,
+      139
+     ],
+     "rgba": [
+      1,
+      1,
+      1,
+      255
+     ]
+    },
+    "background": {
+     "xy": [
+      10,
+      10
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    }
+   }
+  },
+  "E4": {
+   "id": 105,
+   "w": 200,
+   "h": 200,
+   "fps": 25,
+   "duration": 1,
+   "source": {
+    "precomp": "SRC_E4",
+    "background": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "square": {
+     "color": [
+      1,
+      1,
+      1
+     ],
+     "size": [
+      80,
+      80
+     ],
+     "center": [
+      100,
+      100
+     ]
+    }
+   },
+   "emboss": {
+    "ADBE Emboss-0001": {
+     "name": "Direction",
+     "value": 0
+    },
+    "ADBE Emboss-0002": {
+     "name": "Relief",
+     "value": 4.5
+    },
+    "ADBE Emboss-0003": {
+     "name": "Contrast",
+     "value": 250
+    },
+    "ADBE Emboss-0004": {
+     "name": "Blend With Original",
+     "value": 0
+    }
+   },
+   "frame": "E4_f0.png",
+   "samples_rgba_xy": {
+    "center": {
+     "xy": [
+      100,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "left_edge": {
+     "xy": [
+      60,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "right_edge": {
+     "xy": [
+      139,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "top_edge": {
+     "xy": [
+      100,
+      60
+     ],
+     "rgba": [
+      0,
+      0,
+      0,
+      255
+     ]
+    },
+    "bottom_edge": {
+     "xy": [
+      100,
+      139
+     ],
+     "rgba": [
+      255,
+      255,
+      255,
+      255
+     ]
+    },
+    "background": {
+     "xy": [
+      10,
+      10
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    }
+   }
+  },
+  "E5": {
+   "id": 134,
+   "w": 200,
+   "h": 200,
+   "fps": 25,
+   "duration": 1,
+   "source": {
+    "precomp": "SRC_E5",
+    "background": [
+     0,
+     0,
+     1
+    ],
+    "square": {
+     "color": [
+      1,
+      0,
+      0
+     ],
+     "size": [
+      80,
+      80
+     ],
+     "center": [
+      100,
+      100
+     ]
+    }
+   },
+   "emboss": {
+    "ADBE Emboss-0001": {
+     "name": "Direction",
+     "value": 120
+    },
+    "ADBE Emboss-0002": {
+     "name": "Relief",
+     "value": 3
+    },
+    "ADBE Emboss-0003": {
+     "name": "Contrast",
+     "value": 100
+    },
+    "ADBE Emboss-0004": {
+     "name": "Blend With Original",
+     "value": 0
+    }
+   },
+   "frame": "E5_f0.png",
+   "samples_rgba_xy": {
+    "center": {
+     "xy": [
+      100,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "left_edge": {
+     "xy": [
+      60,
+      100
+     ],
+     "rgba": [
+      255,
+      128,
+      0,
+      255
+     ]
+    },
+    "right_edge": {
+     "xy": [
+      139,
+      100
+     ],
+     "rgba": [
+      0,
+      128,
+      255,
+      255
+     ]
+    },
+    "top_edge": {
+     "xy": [
+      100,
+      60
+     ],
+     "rgba": [
+      255,
+      128,
+      0,
+      255
+     ]
+    },
+    "bottom_edge": {
+     "xy": [
+      100,
+      139
+     ],
+     "rgba": [
+      0,
+      128,
+      255,
+      255
+     ]
+    },
+    "background": {
+     "xy": [
+      10,
+      10
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    }
+   }
+  },
+  "E6": {
+   "id": 163,
+   "w": 200,
+   "h": 200,
+   "fps": 25,
+   "duration": 1,
+   "source": {
+    "precomp": "SRC_E6",
+    "background": [
+     0,
+     0,
+     1
+    ],
+    "square": {
+     "color": [
+      1,
+      0,
+      0
+     ],
+     "size": [
+      80,
+      80
+     ],
+     "center": [
+      100,
+      100
+     ]
+    }
+   },
+   "emboss": {
+    "ADBE Emboss-0001": {
+     "name": "Direction",
+     "value": 120
+    },
+    "ADBE Emboss-0002": {
+     "name": "Relief",
+     "value": 3
+    },
+    "ADBE Emboss-0003": {
+     "name": "Contrast",
+     "value": 100
+    },
+    "ADBE Emboss-0004": {
+     "name": "Blend With Original",
+     "value": 30
+    }
+   },
+   "frame": "E6_f0.png",
+   "samples_rgba_xy": {
+    "center": {
+     "xy": [
+      100,
+      100
+     ],
+     "rgba": [
+      165,
+      90,
+      90,
+      255
+     ]
+    },
+    "left_edge": {
+     "xy": [
+      60,
+      100
+     ],
+     "rgba": [
+      255,
+      90,
+      0,
+      255
+     ]
+    },
+    "right_edge": {
+     "xy": [
+      139,
+      100
+     ],
+     "rgba": [
+      75,
+      90,
+      179,
+      255
+     ]
+    },
+    "top_edge": {
+     "xy": [
+      100,
+      60
+     ],
+     "rgba": [
+      255,
+      90,
+      0,
+      255
+     ]
+    },
+    "bottom_edge": {
+     "xy": [
+      100,
+      139
+     ],
+     "rgba": [
+      75,
+      90,
+      179,
+      255
+     ]
+    },
+    "background": {
+     "xy": [
+      10,
+      10
+     ],
+     "rgba": [
+      90,
+      90,
+      165,
+      255
+     ]
+    }
+   }
+  },
+  "E7": {
+   "id": 190,
+   "w": 200,
+   "h": 200,
+   "fps": 25,
+   "duration": 1,
+   "source": {
+    "precomp": "SRC_E7",
+    "background": "transparent (no background layer)",
+    "square": {
+     "color": [
+      1,
+      1,
+      1
+     ],
+     "size": [
+      80,
+      80
+     ],
+     "center": [
+      100,
+      100
+     ]
+    }
+   },
+   "emboss": {
+    "ADBE Emboss-0001": {
+     "name": "Direction",
+     "value": 0
+    },
+    "ADBE Emboss-0002": {
+     "name": "Relief",
+     "value": 3
+    },
+    "ADBE Emboss-0003": {
+     "name": "Contrast",
+     "value": 100
+    },
+    "ADBE Emboss-0004": {
+     "name": "Blend With Original",
+     "value": 0
+    }
+   },
+   "frame": "E7_f0.png",
+   "samples_rgba_xy": {
+    "center": {
+     "xy": [
+      100,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "left_edge": {
+     "xy": [
+      60,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "right_edge": {
+     "xy": [
+      139,
+      100
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      255
+     ]
+    },
+    "top_edge": {
+     "xy": [
+      100,
+      60
+     ],
+     "rgba": [
+      0,
+      0,
+      0,
+      255
+     ]
+    },
+    "bottom_edge": {
+     "xy": [
+      100,
+      139
+     ],
+     "rgba": [
+      255,
+      255,
+      255,
+      255
+     ]
+    },
+    "background": {
+     "xy": [
+      10,
+      10
+     ],
+     "rgba": [
+      128,
+      128,
+      128,
+      0
+     ]
+    }
+   }
+  }
+ },
+ "notes": [
+  "Square 80x80 centred: x,y 60..139. Samples are the outermost square pixels (inside edge).",
+  "Renderer: ae-harness plugin AEGP render, 8 bpc, straight alpha. E7 background alpha stays 0.",
+  "Emboss in AE works per channel: on coloured edges (E5/E6) the result is coloured, not grey."
+ ]
+}
