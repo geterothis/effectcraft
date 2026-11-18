@@ -153,7 +153,78 @@ fn the_alias_holds_the_path_escaped() {
     let view = effectcraft_aep::Project::new(&file).expect("project");
     let paths: Vec<String> = view.all_items().iter().filter_map(|i| i.footage()).filter_map(|f| f.path).collect();
     assert!(paths.contains(&"C:\\a \"quoted\" dir\\Ünïcödé\\x.png".to_string()), "{paths:?}");
-    assert!(paths.contains(&"/Volumes/Media/a.jpg".to_string()), "{paths:?}");
+    assert!(paths.contains(&"C:\\Volumes\\Media\\a.jpg".to_string()), "{paths:?}");
+}
+
+/// The alias JSON (`Pin /Als2/alas`) of every footage item, by the path it stores.
+fn aliases(bytes: &[u8]) -> Vec<(String, String)> {
+    let file = parse(bytes).expect("parse");
+    let view = effectcraft_aep::Project::new(&file).expect("project");
+    view.all_items()
+        .iter()
+        .filter_map(|i| {
+            let path = i.footage()?.path?;
+            let alas = i.chunk().child_list(b"Pin ")?.child_list(b"Als2")?.child(b"alas")?.bytes()?;
+            Some((path, String::from_utf8_lossy(alas).into_owned()))
+        })
+        .collect()
+}
+
+fn ascend(json: &str) -> (u32, u32) {
+    let num = |key: &str| {
+        let at = json.find(key).expect(key) + key.len();
+        json[at..].chars().take_while(char::is_ascii_digit).collect::<String>().parse().expect("number")
+    };
+    (num("\"ascendcount_base\":"), num("\"ascendcount_target\":"))
+}
+
+/// The alias says `platform` 1 (Windows), and After Effects resolved every alias of the read-backs,
+/// all Windows paths with a drive. An export on Linux wrote the project's POSIX paths into it, and
+/// After Effects for Windows opened every footage item as a "Placeholder" without its file. A POSIX
+/// path is written on drive `C:`, and the ascend counts lead from the `.aep` to the file, so After
+/// Effects finds an `assets` folder next to the project wherever the two are moved together.
+#[test]
+fn a_posix_path_is_written_as_a_windows_path_relative_to_the_aep() {
+    let mut p = Project::default();
+    let c = add_comp(&mut p, "C", 640, 360, FrameRate::new(25, 1), 1.0, None);
+    add_footage(&mut p, c, "a.png", still("/home/u/proj/assets/a.png", 8, 8));
+    add_footage(&mut p, c, "b.png", still("/home/u/proj/assets/./sub/../b.png", 8, 8));
+    add_footage(&mut p, c, "c.png", still("assets/c.png", 8, 8));
+    add_footage(&mut p, c, "d.png", still(r"D:\media\d.png", 8, 8));
+    let files: Vec<String> = (1..=3).map(|k| format!("/home/u/proj/assets/seq/s_{k:03}.png")).collect();
+    let mut s = Footage { kind: FootageKind::Sequence, frame_rate: FrameRate::new(25, 1), sequence: files.clone(), ..still(&files[0], 8, 8) };
+    s.sync_sequence_duration();
+    add_footage(&mut p, c, "s_[001-003].png", s);
+    let opts = effectcraft_aep::export::ExportOptions { allow_losses: true };
+
+    let at = |aep: &str| effectcraft_aep::export::export_at(&p, &opts, Some(aep), &|_| None).expect("export").bytes;
+    let next_to = aliases(&at("/home/u/proj/FM.aep"));
+    let expect = [
+        (r"C:\home\u\proj\assets\a.png", (1, 2)),
+        (r"C:\home\u\proj\assets\b.png", (1, 2)),
+        (r"C:\home\u\proj\assets\c.png", (1, 2)),
+        (r"D:\media\d.png", (1, 1)),
+        (r"C:\home\u\proj\assets\seq", (1, 3)),
+    ];
+    for (path, counts) in expect {
+        let (_, json) = next_to.iter().find(|(p, _)| p == path).unwrap_or_else(|| panic!("{path} in {next_to:?}"));
+        assert!(json.contains("\"platform\":1"), "{json}");
+        assert_eq!(ascend(json), counts, "{path}: {json}");
+    }
+    assert!(next_to.iter().all(|(p, _)| !p.starts_with('/')), "no POSIX path is left: {next_to:?}");
+
+    let below = aliases(&at("/home/u/proj/out/FM.aep"));
+    let (_, json) = below.iter().find(|(p, _)| p.ends_with(r"\a.png")).expect("a.png");
+    assert_eq!(ascend(json), (2, 2), "{json}");
+
+    let win = effectcraft_aep::export::export_at(&p, &opts, Some(r"d:\Work\FM.aep"), &|_| None).expect("export").bytes;
+    let (_, json) = aliases(&win).into_iter().find(|(p, _)| p == r"D:\media\d.png").expect("d.png");
+    assert_eq!(ascend(&json), (2, 2), "the same drive in another case: {json}");
+
+    let plain = aliases(&export_all(&p).bytes);
+    let (_, json) = plain.iter().find(|(p, _)| p == r"C:\home\u\proj\assets\a.png").expect("a.png without the .aep's path");
+    assert_eq!(ascend(json), (1, 1), "{json}");
+    assert!(plain.iter().any(|(p, _)| p == "assets/c.png"), "a relative path without the .aep's path stays: {plain:?}");
 }
 
 #[test]

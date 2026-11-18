@@ -110,6 +110,125 @@ pub(crate) struct FootagePlan {
     /// A sequence's folder modification time as stored (`sspc@118`, seconds since 1904, UTC; 860),
     /// when the caller supplied it ([`crate::export::export_with`]).
     pub folder_time: Option<u32>,
+    /// The alias's `ascendcount_base` and `ascendcount_target` ([`locate`]).
+    pub ascend: (u32, u32),
+}
+
+/// Writes every footage alias in `root` (folders included) as a Windows path, the platform the
+/// alias names (`platform` 1), with the ascend counts that lead from the `.aep` at `aep` to it.
+///
+/// After Effects resolved every alias of the read-backs (f1, f3), all Windows paths with a drive;
+/// an alias holding a POSIX path (an export on Linux or macOS) opened in After Effects for Windows
+/// as a "Placeholder" item without its file, every item of the project. A POSIX path is
+/// therefore written on drive `C:`; it is not found there, and After Effects looks for the file
+/// relative to the project: `ascendcount_base` levels up from the project file, then the last
+/// `ascendcount_target` levels of the stored path (1 / 1 for a file next to the project and 1 / 2
+/// for a sequence folder next to it, as f1 stores them; one more on the target per subfolder, so an
+/// `assets` folder beside the `.aep` is found wherever the two are moved together). A relative
+/// footage path is taken from the `.aep`'s folder. Without `aep`, or for paths on different
+/// drives, the counts stay at a file next to the project.
+pub(crate) fn locate(root: &mut [crate::export::plan::Entry], aep: Option<&str>) {
+    use crate::export::plan::ItemPlan;
+    let aep = aep.and_then(absolute);
+    let mut stack: Vec<&mut [crate::export::plan::Entry]> = vec![root];
+    while let Some(entries) = stack.pop() {
+        for e in entries.iter_mut() {
+            match &mut e.plan {
+                ItemPlan::Folder(kids) => stack.push(kids),
+                ItemPlan::Footage(fp) => locate_one(fp, aep.as_ref()),
+                _ => {}
+            }
+        }
+    }
+}
+
+/// An absolute path split into its root (`C:`, `\\\\server\\share`, or empty for POSIX) and its
+/// names, `.` and `..` applied.
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct AbsPath {
+    root: String,
+    names: Vec<String>,
+}
+
+impl AbsPath {
+    fn windows(&self) -> bool {
+        !self.root.is_empty()
+    }
+
+    /// As After Effects for Windows stores it; a POSIX path on drive `C:`.
+    fn to_windows(&self) -> String {
+        let root = if self.windows() { self.root.as_str() } else { "C:" };
+        let mut out = root.to_string();
+        for n in &self.names {
+            out.push('\\');
+            out.push_str(n);
+        }
+        if self.names.is_empty() {
+            out.push('\\');
+        }
+        out
+    }
+}
+
+fn push_names(names: &mut Vec<String>, rest: &str) {
+    for n in rest.split(['/', '\\']) {
+        match n {
+            "" | "." => {}
+            ".." => {
+                names.pop();
+            }
+            n => names.push(n.to_string()),
+        }
+    }
+}
+
+fn absolute(path: &str) -> Option<AbsPath> {
+    let mut names = Vec::new();
+    if let [d, b':', b'/' | b'\\', ..] = path.as_bytes()
+        && d.is_ascii_alphabetic()
+    {
+        push_names(&mut names, path.get(2..)?);
+        return Some(AbsPath { root: path.get(..2)?.to_ascii_uppercase(), names });
+    }
+    if let Some(unc) = path.strip_prefix("\\\\").or_else(|| path.strip_prefix("//")) {
+        let mut parts = unc.splitn(3, ['/', '\\']);
+        let (server, share) = (parts.next().filter(|s| !s.is_empty())?, parts.next().filter(|s| !s.is_empty())?);
+        push_names(&mut names, parts.next().unwrap_or_default());
+        return Some(AbsPath { root: format!("\\\\{server}\\{share}"), names });
+    }
+    if path.starts_with('/') {
+        push_names(&mut names, path);
+        return Some(AbsPath { root: String::new(), names });
+    }
+    None
+}
+
+fn locate_one(fp: &mut FootagePlan, aep: Option<&AbsPath>) {
+    let folder = u32::from(fp.kind.is_sequence());
+    fp.ascend = (1, 1 + folder);
+    let target = match (absolute(&fp.alias), aep) {
+        (Some(t), _) => t,
+        (None, Some(a)) => {
+            let mut names = a.names.clone();
+            names.pop();
+            push_names(&mut names, &fp.alias);
+            AbsPath { root: a.root.clone(), names }
+        }
+        (None, None) => return,
+    };
+    fp.alias = target.to_windows();
+    let Some(aep) = aep.filter(|a| a.root.eq_ignore_ascii_case(&target.root)) else {
+        return;
+    };
+    let dir = aep.names.len().saturating_sub(1);
+    let same = |a: &String, b: &String| if target.windows() { a.eq_ignore_ascii_case(b) } else { a == b };
+    let common = aep.names.iter().take(dir).zip(&target.names).take_while(|(a, b)| same(a, b)).count();
+    let common = common.min(target.names.len().saturating_sub(1));
+    let up = u32::try_from(aep.names.len().saturating_sub(common)).unwrap_or(u32::MAX);
+    let down = u32::try_from(target.names.len().saturating_sub(common)).unwrap_or(u32::MAX);
+    if up > 0 && down > 0 {
+        fp.ascend = (up, down.saturating_add(folder));
+    }
 }
 
 /// Seconds between 1904-01-01 (the stored time's epoch) and 1970-01-01.
@@ -241,6 +360,7 @@ pub(crate) fn plan_footage(name: &str, f: &Footage, col: &mut Collector) -> Opti
         numbering: None,
         seconds: 0.0,
         folder_time: None,
+        ascend: (1, 1),
     };
     match kind {
         FtKind::PngSeq | FtKind::ExrSeq | FtKind::JpegSeq => {
@@ -349,9 +469,9 @@ pub(crate) fn alias_json(p: &FootagePlan) -> Vec<u8> {
         }
     }
     let folder = p.kind.is_sequence();
+    let (base, target) = p.ascend;
     format!(
-        "{{\"ascendcount_base\":1,\"ascendcount_target\":{},\"fullpath\":\"{path}\",\"platform\":1,\"server_name\":\"\",\"server_volume_name\":\"\",\"target_is_folder\":{folder}}}",
-        if folder { 2 } else { 1 }
+        "{{\"ascendcount_base\":{base},\"ascendcount_target\":{target},\"fullpath\":\"{path}\",\"platform\":1,\"server_name\":\"\",\"server_volume_name\":\"\",\"target_is_folder\":{folder}}}"
     )
     .into_bytes()
 }
@@ -631,6 +751,18 @@ pub(crate) fn build_footage(protos: &FtProtos, id: u32, label: u8, name: &str, p
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn absolute_paths_are_split_and_hostile_ones_refused() {
+        let abs = |p: &str| absolute(p).map(|a| (a.root, a.names.join("|")));
+        assert_eq!(abs(r"c:\a/b\\c.png"), Some(("C:".into(), "a|b|c.png".into())));
+        assert_eq!(abs(r"\\srv\share\x\y.png"), Some((r"\\srv\share".into(), "x|y.png".into())));
+        assert_eq!(abs("/a/../../b/./c"), Some((String::new(), "b|c".into())));
+        for p in ["", "C:", "C:x", r"\\", r"\\srv", "//", "rel/x.png", "é:/x", "\u{0}"] {
+            assert_eq!(abs(p), None, "{p:?}");
+        }
+        assert_eq!(absolute("/").map(|a| a.to_windows()).as_deref(), Some(r"C:\"));
+    }
 
     /// Every kind's item has the chunks After Effects refuses it without (`CLRS`, `ftgi`: read-backs
     /// u-noclrs, u-noftgi) and the f-records after it; `opti` has its header and its size.

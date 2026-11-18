@@ -121,7 +121,8 @@ fn export_aep(s: &mut Session, p: &Value) -> Result<Value> {
         let dir = file.get(..file.rfind(['/', '\\'])?).filter(|d| !d.is_empty())?;
         services.stamp(dir).and_then(|(_, ns)| u64::try_from(ns / 1_000_000_000).ok())
     };
-    let res = effectcraft_aep::export::export_with(&s.project, &ExportOptions { allow_losses }, &folder_time).map_err(|e| match e {
+    let at = std::path::absolute(&path).ok().and_then(|p| p.to_str().map(str::to_string));
+    let res = effectcraft_aep::export::export_at(&s.project, &ExportOptions { allow_losses }, at.as_deref(), &folder_time).map_err(|e| match e {
         AepExportError::Refused(_) => {
             EngineError::Refused { losses: e.to_string(), advice: "nothing was written: pass `allowLosses` to export anyway, or `dryRun` for the full report" }
         }

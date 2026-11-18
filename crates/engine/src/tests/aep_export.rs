@@ -185,3 +185,29 @@ fn a_sequence_folder_is_looked_at_only_through_the_document_path_policy() {
     assert_eq!(sequence_folder_time(&std::fs::read(&out).unwrap()), 0xe6fb_443a);
     let _ = std::fs::remove_dir_all(&root);
 }
+
+/// The aliases lead from where the `.aep` is written to the footage, so After Effects finds an
+/// `assets` folder next to the project wherever the two are moved together; a POSIX path is
+/// written as a Windows path, the platform the alias names (After Effects for Windows opened every
+/// item of an export from Linux as a "Placeholder" without its file).
+#[test]
+fn export_aep_writes_footage_relative_to_the_aep() {
+    use effectcraft_project::{Footage, FootageKind, ItemKind};
+    let dir = tempfile::tempdir().unwrap();
+    let root = std::path::absolute(dir.path()).unwrap();
+    let png = root.join("assets").join("a.png").to_string_lossy().into_owned();
+    let out = root.join("FM.aep").to_string_lossy().into_owned();
+    let mut s = session();
+    let f = Footage { path: png, kind: FootageKind::Still, width: 8, height: 8, has_video: true, ..Default::default() };
+    std::sync::Arc::make_mut(&mut s.project).add_item("a.png", Default::default(), None, ItemKind::Footage(f));
+    s.execute_checked("file.exportAep", json!({"path": out, "allowLosses": true})).unwrap();
+    let bytes = std::fs::read(&out).unwrap();
+    let file = effectcraft_aep::parse(&bytes).unwrap();
+    let view = effectcraft_aep::Project::new(&file).unwrap();
+    let item = view.all_items().into_iter().find(|i| i.footage().and_then(|f| f.path).is_some_and(|p| p.ends_with("a.png"))).expect("footage");
+    let alas = item.chunk().child_list(b"Pin ").and_then(|p| p.child_list(b"Als2")).and_then(|a| a.child(b"alas")).and_then(|c| c.bytes()).unwrap();
+    let json = String::from_utf8_lossy(alas);
+    assert!(json.starts_with(r#"{"ascendcount_base":1,"ascendcount_target":2,"fullpath":""#), "{json}");
+    let path = item.footage().and_then(|f| f.path).unwrap();
+    assert!(path.as_bytes().get(1) == Some(&b':') && path.ends_with(r"\assets\a.png"), "{path}");
+}
