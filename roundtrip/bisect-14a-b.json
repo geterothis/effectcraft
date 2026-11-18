@@ -1,0 +1,34 @@
+{
+ "comp": "fx_invert",
+ "frames": "0-2",
+ "results": [
+  {
+   "file": "14a_invert_with_ae_param_defs.aep",
+   "renders": false,
+   "frames": 0,
+   "exit": 0,
+   "error": "An unexpected error occurred while exporting a composition. Error Code: 512"
+  },
+  {
+   "file": "14a_invert_with_sdat.aep",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error": null
+  },
+  {
+   "file": "14a_invert_with_sdat_and_param_defs.aep",
+   "renders": true,
+   "frames": 3,
+   "exit": 0,
+   "error": null
+  },
+  {
+   "file": "14a_only_fx_invert.aep",
+   "renders": false,
+   "frames": 0,
+   "exit": 0,
+   "error": "aerender log cut off (render process crashed)"
+  }
+ ]
+}
