@@ -5,6 +5,8 @@ Status: DRAFT until the After Effects read-back (test-corpus exports/effect-opac
 Title: Effect Opacity on every effect, with .aep import and export
 
 Body:
+> Supersedes #3856: that PR only reports an imported Effect Opacity as a loss; this one imports, renders and exports it.
+
 ## What
 
 After Effects blends each effect's result with its input by Compositing Options ▸ Effect Opacity. EffectCraft had no such setting, so an effect set below 100 % in After Effects rendered at full strength after import, and the value was dropped on export.
