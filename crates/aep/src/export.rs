@@ -107,6 +107,23 @@ pub fn export(project: &Project, options: &ExportOptions) -> Result<ExportResult
 /// # Errors
 /// As [`export`].
 pub fn export_with(project: &Project, options: &ExportOptions, folder_time: &dyn Fn(&str) -> Option<u64>) -> Result<ExportResult, AepExportError> {
+    export_at(project, options, None, folder_time)
+}
+
+/// [`export_with`] for an `.aep` written at `aep_path` (absolute): the footage aliases then lead
+/// from there to their files, so After Effects finds footage that moves together with the project
+/// (an `assets` folder next to the `.aep`). Footage paths are written as Windows paths, the
+/// platform the aliases name; a POSIX path goes on drive `C:`, where After Effects does not find it
+/// and looks next to the project instead.
+///
+/// # Errors
+/// As [`export`].
+pub fn export_at(
+    project: &Project,
+    options: &ExportOptions,
+    aep_path: Option<&str>,
+    folder_time: &dyn Fn(&str) -> Option<u64>,
+) -> Result<ExportResult, AepExportError> {
     let mut col = report::Collector::default();
     let mut plan = plan::plan(project, &mut col);
     let report = col.finish();
@@ -114,6 +131,7 @@ pub fn export_with(project: &Project, options: &ExportOptions, folder_time: &dyn
         return Err(AepExportError::Refused(Box::new(report)));
     }
     footage::stamp_sequences(&mut plan.root, folder_time);
+    footage::locate(&mut plan.root, aep_path);
     let bytes = emit::emit(&plan, XMP)?;
     Ok(ExportResult { bytes, report })
 }
