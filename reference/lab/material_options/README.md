@@ -1,0 +1,3 @@
+# Material Options lab (AE 26.5, Classic 3D, aerender frame 0, PNG)
+
+Comp material_options 1280x720. LIGHT_spot: Casts Shadows on, Shadow Darkness 70, Shadow Diffusion 10 (intensity 120, cone 110). FLOOR 3D solid. Twelve 200x200 3D solids (scale 70 %), each with one non-default Material Option: mo_cast_on (Casts Shadows=1 On), mo_cast_only (=2 Only), mo_accept_off (Accepts Shadows=0), mo_accept_only (=2 Only), mo_lights_off (Accepts Lights=0), mo_transmission_40, mo_ambient_30, mo_diffuse_80, mo_spec_20, mo_shininess_40 (Specular Shininess), mo_metal_0, mo_ambient_keyed (Ambient 0->100 linear over 0..1 s). Two-node camera CAM. Note: there is no ambient light, so the Ambient coefficient does not change the image.
