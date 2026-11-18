@@ -17,7 +17,7 @@ The codes come from an After Effects 2026 project whose 31 layers were each set 
 
 - `import/build.rs` `blend_code`: 35 Lighter Color, 36 Darker Color, 37 Subtract, 38 Divide. The comment says where the codes come from.
 - `export/plan.rs` `blend_code`: the same four codes.
-- `docs/aep-format.md` (the blend mode row of 3.1) and `docs/aep-import.md` (`blend_modes` is now for codes above 38) are updated.
+- `docs/aep-format.md` (the blend mode row of 3.1) and `docs/aep-import.md` (`blend_modes` lists the codes still reported, 0, 1, 3, 21, 22 and above 38, and says that cameras and lights are not counted) are updated.
 
 ## Tests
 
