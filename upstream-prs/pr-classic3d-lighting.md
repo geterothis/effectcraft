@@ -1,0 +1,38 @@
+# render: Classic 3D specular exponent and spot feather as After Effects renders them
+
+Branch: `fix/render-classic3d-lighting` (one commit on main)
+
+## Problem
+
+Classic 3D layers lit by lights came out noticeably brighter than in After Effects 2026. On a real project with a spot, point, ambient and parallel light (corpus `11_3d_camera_lights`), the card and the floor were 13-45 % too bright.
+
+## What After Effects does (measured)
+
+A lab of 21 single-light Classic 3D comps was rendered by After Effects 26.5 (frame 0, 8 bpc; one grey 3D solid facing a one-node camera, one variable per comp). EffectCraft's model already matches it for these:
+- diffuse = layer colour × Diffuse × light colour × intensity × N·L;
+- ambient = Ambient × the ambient lights;
+- several lights add up;
+- a point light has no distance falloff (falloff None);
+- the spot's hard cone edge at feather 0;
+- specular at the highlight peak, with Metal mixing the light and layer colours.
+
+Two terms differ:
+
+1. **Specular Shininess is the exponent itself.** A parallel light 60° off the normal with the viewer on the normal puts the half vector 30° off. With Specular 100 % and Metal 0, AE renders 124/255 at Shininess 5 %, which is 0.866^5. At 40 % it renders 1/255, which is 0.866^40. EffectCraft used `256^(shininess)` (1.32 at 5 %), so its highlights were far broader and added light everywhere.
+2. **The spot feather falls off over the cosine of the angle, not the angle.** For a spot 500 px in front of a plane with cone 60 and feather 50, the light is full to 15° and gone from 30°. In between it follows a smoothstep in cos(angle): 0.684 at 21.9° and 0.193 at 26.6° in AE, against 0.56 and 0.17 with a smoothstep over the angle. Feather 100 matches the same rule (0.873 at 14.1°).
+
+## Fix
+
+- `Material::exponent` returns the Shininess percentage, at least 1.
+- `LightState::attenuation` interpolates the feather between the cosines of the inner and outer angles.
+- The same two changes are made in `classic3d.wgsl`, which takes the exponent from `Material::exponent`.
+
+## Results
+
+- AE's `material_options` lab (twelve Material Options variants under a spot): mean difference from 20.2 to 3.5 of 255. The eight lit tiles and the floor I sampled are now identical to AE.
+- Corpus `11_3d_camera_lights` frames 0 / 45 / 89: mean difference from about 12 to 0.9 / 1.5 / 1.2. Most of what remains is the depth-of-field blur (looked at separately) and a missing font.
+
+## Tests
+
+- New `three_d::tests::spot_feather_falls_off_over_the_cosine_of_the_angle` and `three_d::tests::specular_shininess_is_the_exponent`, using the lab values. Both fail without the fix.
+- `cargo test -p effectcraft-render`, the GPU `tests::three_d` CPU/GPU parity tests (lavapipe, `EFFECTCRAFT_REQUIRE_GPU=1`), the engine `tests::three_d` / `rig3d` tests, clippy (`-D warnings`) and fmt pass for the touched crates. I did not run the full `cargo xtask ci`.
