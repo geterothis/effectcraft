@@ -26,3 +26,13 @@ For each, open it (no Save As) and print `footageMissing` of every footage item;
 both layer comps for the first variant whose layer items are all found
 (`<variant>_cropped.png`, `<variant>_document.png`) and compare with the originals. Results in
 `roundtrip/psd-layer/variants.json`.
+
+## Part 3
+
+v1-v3 did not help. After Effects' layer items also store the layer's name in the first `Utf8` of
+`Pin` (the export leaves it empty). Two more copies of the export:
+- `psd_layers.effectcraft.v4_pin_name.aep`: that `Utf8` set to the layer name.
+- `psd_layers.effectcraft.v5_pin_name_and_mtime.aep`: v4 plus `sspc` 118..121 copied from After
+  Effects' items (looks like the file's modification time).
+Same as part 2: `footageMissing` per item, render the first variant whose layer items resolve and
+compare with the originals. Results in `roundtrip/psd-layer/variants2.json`.
