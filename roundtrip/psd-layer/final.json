@@ -1,0 +1,106 @@
+{
+ "ae": "26.5",
+ "file": "exports/psd-layer/psd_layers.effectcraft.final.aep",
+ "opened": true,
+ "footage": [
+  {
+   "name": "Background fill/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false
+  },
+  {
+   "name": "Blue box/layers_200x100.psd",
+   "width": 60,
+   "height": 50,
+   "footageMissing": false
+  },
+  {
+   "name": "Green bar/layers_200x100.psd",
+   "width": 90,
+   "height": 15,
+   "footageMissing": false
+  },
+  {
+   "name": "layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false
+  },
+  {
+   "name": "Background fill/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false
+  },
+  {
+   "name": "Blue box/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false
+  },
+  {
+   "name": "Green bar/layers_200x100.psd",
+   "width": 200,
+   "height": 100,
+   "footageMissing": false
+  }
+ ],
+ "comps": {
+  "layers_200x100": {
+   "id": 29,
+   "layers": [
+    {
+     "name": "Green bar",
+     "source": "Green bar/layers_200x100.psd",
+     "position": "145,47.5,0",
+     "anchor": "45,7.5,0"
+    },
+    {
+     "name": "Blue box",
+     "source": "Blue box/layers_200x100.psd",
+     "position": "50,35,0",
+     "anchor": "30,25,0"
+    },
+    {
+     "name": "Background fill",
+     "source": "Background fill/layers_200x100.psd",
+     "position": "100,50,0",
+     "anchor": "100,50,0"
+    }
+   ]
+  },
+  "layers_200x101": {
+   "id": 46,
+   "layers": [
+    {
+     "name": "Green bar",
+     "source": "Green bar/layers_200x100.psd",
+     "position": "100,50,0",
+     "anchor": "100,50,0"
+    },
+    {
+     "name": "Blue box",
+     "source": "Blue box/layers_200x100.psd",
+     "position": "100,50,0",
+     "anchor": "100,50,0"
+    },
+    {
+     "name": "Background fill",
+     "source": "Background fill/layers_200x100.psd",
+     "position": "100,50,0",
+     "anchor": "100,50,0"
+    }
+   ]
+  }
+ },
+ "renders_vs_originals": {
+  "cropped": {
+   "max_abs": 0
+  },
+  "document": {
+   "max_abs": 0
+  }
+ },
+ "verdict": "All 7 footage items resolve (none missing), sizes and layer positions/anchors match the original, and both layer comps render identically to the AE originals (max diff 0). PSD layer items now round-trip."
+}
