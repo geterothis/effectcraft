@@ -17,7 +17,7 @@ The switch is bit 0 of byte 103 of the layer header (`ldta`). I checked this in 
 
 ## Tests
 
-- New test `preserve_transparency_is_imported_from_the_layer_header` in `tests/it/import/synthetic.rs`. It checks that the synthetic file imports with the switch off, then sets byte 103 to 1 and checks that every layer comes in with it on, then sets it to 3 (the switch on a Dancing Dissolve layer) and checks the same. It fails without the source change.
+- New test `preserve_transparency_is_imported_from_the_layer_header` in `tests/it/import/synthetic.rs`. It checks that the synthetic file imports with the switch off, then sets byte 103 to 1 and checks that every layer comes in with it on, then sets it to 3 (the switch on a Dancing Dissolve layer) and checks the same, then sets it to 2 (Dancing Dissolve alone) and checks that the switch stays off. It fails without the source change.
 - `cargo test -p effectcraft-aep` with the pinned corpus: 90 + 419 passed, 0 failed.
 - Clippy (`-D warnings`) and `cargo fmt --check` are clean.
 - I did not run the full `cargo xtask ci`.

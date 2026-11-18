@@ -9,3 +9,6 @@ EffectCraft's geometry matches After Effects exactly, and its blur at Aperture A
    `lab_campos.json` itself. No render.
 2. `corpus/build/lab_dof2.jsx` (new empty project, `LAB_OUT` = `roundtrip/dof2`): then render its queue with ONE
    aerender. Commit the `.aep` (saved in place, copy it to `roundtrip/dof2/lab_dof2.aep`), the PNGs and `lab_dof2.json`.
+3. `corpus/build/lab_accept_only.jsx` (new empty project, `LAB_OUT` = `roundtrip/accept_only`): render its queue
+   with ONE aerender (PNG with alpha). Commit the PNGs, `lab_accept_only.json` and a copy of the `.aep`.
+   Check in the json that `accepts` reads 3 (Only); if the 1-based guess is wrong, fix the value so it shows Only.
