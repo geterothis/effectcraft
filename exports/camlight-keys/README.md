@@ -14,7 +14,7 @@ For each property listed, print `numKeys`, and per key `keyTime`, `keyValue`,
 
 Expected:
 - Cam Zoom: 0 s 2666.7 (linear), 1 s 1800 (bezier in / out; out ease speed -50, influence 75 %),
-  2 s 3000 (in hold). valueAtTime(0.5) = 2233.35.
+  2 s 3000 (in hold). valueAtTime(0.5) is not linear (the second key eases in).
 - Cam Depth of Field: 0 s off, 1 s on, both hold.
 - Cam Aperture: 0 s 25.3, 2 s 120 (linear); valueAtTime(0.5) = 48.975.
 - Cam Blur Level: 0 s 100, 1 s 250 (linear); valueAtTime(0.5) = 175.
