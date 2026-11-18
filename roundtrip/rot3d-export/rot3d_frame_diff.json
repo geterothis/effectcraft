@@ -1,0 +1,29 @@
+{
+ "renderer": "ae-harness plugin AEGP render, 8 bpc, straight alpha, comp R 100x100",
+ "frames": [
+  {
+   "frame": 0,
+   "time": 0.0,
+   "maxAbsDiff": 0,
+   "meanAbsDiff": 0.0,
+   "pixelsChanged_gt2": 0,
+   "pixels": 10000
+  },
+  {
+   "frame": 12,
+   "time": 0.48,
+   "maxAbsDiff": 0,
+   "meanAbsDiff": 0.0,
+   "pixelsChanged_gt2": 0,
+   "pixels": 10000
+  },
+  {
+   "frame": 25,
+   "time": 1.0,
+   "maxAbsDiff": 0,
+   "meanAbsDiff": 0.0,
+   "pixelsChanged_gt2": 0,
+   "pixels": 10000
+  }
+ ]
+}
