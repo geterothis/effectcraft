@@ -1,0 +1,35 @@
+{
+ "ae": "26.5",
+ "readback": {
+  "file": "exports/dissolve/dissolve_pair.effectcraft.aep",
+  "opened": true,
+  "layers": [{"comp":"dissolve_pair","name":"dancing_dissolve","blendingMode":5214,"blendingModeName":"DANCING_DISSOLVE","preserveTransparency":false},{"comp":"dissolve_pair","name":"dissolve","blendingMode":5213,"blendingModeName":"DISSOLVE","preserveTransparency":false}],
+  "save_as": "yes: roundtrip/dissolve/dissolve_pair.resaved.aep (no crash)"
+ },
+ "pt_dissolve_sample": {
+  "file": "roundtrip/dissolve/pt_dissolve.aep",
+  "comp": "pt_dissolve 400x100, 1 s 30 fps",
+  "layers": [
+   {"name": "pt_dissolve", "blendingMode": 5213, "preserveTransparency": true},
+   {"name": "pt_dancing", "blendingMode": 5214, "preserveTransparency": true},
+   {"name": "dissolve", "blendingMode": 5213, "preserveTransparency": false},
+   {"name": "dancing", "blendingMode": 5214, "preserveTransparency": false}
+  ],
+  "note": "four 100x100 solids (1, 0.6, 0.2) at 50 % opacity, left to right; I added a full-frame BG_under solid (0.2, 0.4, 0.6) at 60 % at the bottom so Preserve Transparency has partial alpha to act on"
+ },
+ "dof_d02": {
+  "project": "corpus/aep/ae2026_v26/lab/lab_c3d.aep",
+  "comp": "d02_dof_a80 1200x300",
+  "renderer": "ADBE Advanced 3d (Classic 3D)",
+  "draft3d": false,
+  "motionBlur": false,
+  "camera": {"name": "CAM", "position": [600, 150, -1000], "pointOfInterest": [600, 150, 0], "zoom": 1000, "depthOfField": 1, "focusDistance": 1000, "aperture": 80, "blurLevel": 100, "irisShape": 1},
+  "renders": {
+   "d02_dof_a80.png": "aerender Best/Full, as built: identical to reference/lab/c3d/d02_dof_a80_00000.png (max diff 0)",
+   "d02_dof_a80_b.png": "draft3d=false + depthOfField set explicitly (it already was on): identical to the first render",
+   "d02_dof_aperture400_c.png": "diagnostic, not asked: same comp with aperture 400"
+  },
+  "finding": "AE does blur at aperture 80, but only by a few pixels. Soft alpha edge widths on row 150 are: in-focus layer z0_d1000 0 px (sharp); z500 layers 3 px; zm300_d700 4 px; z1000_d2000 5 px. At aperture 400 the same edges are 14-22 px. So the blur is real but small at a80; look at the alpha channel, since the PNGs have a transparent background and the RGB edges look hard.",
+  "fix": "none needed: DOF works in aerender with draft3d off"
+ }
+}
