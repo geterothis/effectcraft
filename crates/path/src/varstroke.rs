@@ -37,7 +37,8 @@ pub struct Wave {
     /// Units: `Some(cycles)` = cycles along each path, else `wavelength` in pixels.
     pub cycles: Option<f64>,
     pub wavelength: f64,
-    /// Degrees.
+    /// After Effects' Phase: the wave repeats every 90 units, and a positive phase moves it towards
+    /// the start of the path (30 moves a trough from 100 px to 66.7 px along a 100 px wavelength).
     pub phase: f64,
 }
 
@@ -83,7 +84,7 @@ pub fn width_factor(taper: Option<&Taper>, wave: Option<&Wave>, s: f64, len: f64
             None => w.wavelength,
         };
         if lambda > 0.0 {
-            let ph = std::f64::consts::TAU * s / lambda + w.phase.to_radians();
+            let ph = std::f64::consts::TAU * (s / lambda + w.phase / 90.0);
             k *= 1.0 - w.amount.clamp(0.0, 1.0) * (0.5 + 0.5 * ph.cos());
         }
     }
@@ -400,8 +401,12 @@ mod tests {
         assert!((width_factor(None, Some(&w), 20.0, 200.0) - 1.0).abs() < 1e-9);
         let c = Wave { cycles: Some(5.0), ..w.clone() };
         assert!((width_factor(None, Some(&c), 20.0, 200.0) - 1.0).abs() < 1e-9, "5 cycles over 200 px = 40 px");
-        let ph = Wave { phase: 180.0, ..w };
-        assert!((width_factor(None, Some(&ph), 0.0, 200.0) - 1.0).abs() < 1e-9);
+        let ph = Wave { phase: 45.0, ..w.clone() };
+        assert!((width_factor(None, Some(&ph), 0.0, 200.0) - 1.0).abs() < 1e-9, "45 is half a wave");
+        for whole in [90.0, 180.0, -90.0] {
+            let ph = Wave { phase: whole, ..w.clone() };
+            assert!(width_factor(None, Some(&ph), 0.0, 200.0).abs() < 1e-9, "{whole} is a whole number of waves");
+        }
     }
 
     /// After Effects 26.5, a 400 px line stroked 40 px wide with Wave (Wavelength 100, phase 0):
@@ -416,6 +421,19 @@ mod tests {
                 let got = column(&m, at + 10);
                 assert!((got - ae[k]).abs() < 1.5, "amount {amount}, {at} px along: {got} against {}", ae[k]);
             }
+        }
+    }
+
+    /// After Effects 26.5, the same line at Amount 100 with Phase 30: the troughs move from 0 and
+    /// 100 px to 66.7 px along the path, and the stroke is 30 px tall at the start.
+    #[test]
+    fn wave_phase_matches_after_effects() {
+        let st = StrokeStyle { width: 40.0, wave: Some(Wave { amount: 1.0, cycles: None, wavelength: 100.0, phase: 30.0 }), ..Default::default() };
+        let o = outline(&[line(400.0)], &st, 1.0).unwrap();
+        let m = fill_coverage(&[o], &Mat3::IDENTITY, 420, 100, FillRule::NonZero);
+        for (at, ae) in [(0, 30.6), (20, 39.5), (60, 1.7), (167, 0.1)] {
+            let got = column(&m, at + 10);
+            assert!((got - ae).abs() < 1.5, "{at} px along: {got} against {ae}");
         }
     }
 

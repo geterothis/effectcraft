@@ -639,8 +639,9 @@ fn stroke_wave_and_multi_dashes() {
         vec![line_path(ids, [-80.0, 0.0], [80.0, 0.0]), st]
     });
     let img = frame(&p, cid);
-    assert!(column_alpha(&img, 40) < 0.5, "trough (20 px along): {}", column_alpha(&img, 40));
-    assert!(column_alpha(&img, 60) > 9.0, "crest (40 px along): {}", column_alpha(&img, 60));
+    // A trough at the start of the path, as in After Effects.
+    assert!(column_alpha(&img, 40) > 9.0, "crest (20 px along): {}", column_alpha(&img, 40));
+    assert!(column_alpha(&img, 60) < 0.5, "trough (40 px along): {}", column_alpha(&img, 60));
 
     // Dash 20, Gap 10, Dash 2 = 5, Gap 2 = 15: on 0–20, 30–35, 50–70…
     let (p, cid) = shape_comp(|ids| {
