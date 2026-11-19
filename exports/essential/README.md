@@ -11,3 +11,7 @@ Check in AE 2026 (fresh process):
    Main/B: all follow the comp (80, "HELLO").
 4. Render Main frame 0 and Pre frame 0; A must show the box at 25 % opacity with "BYE", B at 80 % with "HELLO".
 5. Save a copy from AE and send it back (exports/essential/roundtrip_ae.aep) so the stored bytes can be compared.
+
+Update 2026-11-19: re-exported with the solid opti header fix (fix/aep-export-solid-opti-header 1ae37d2e) applied
+on top (local build test/eg-sepdim-solid: 663b4044 + eeeb9517 + 1ae37d2e). Only the 3 header bytes after "Soli"
+changed (now 0009 0000011a). Re-check: open, then app.project.save(File) a copy as roundtrip_ae.aep (fresh process).
