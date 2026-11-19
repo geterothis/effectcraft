@@ -60,7 +60,7 @@ pub(crate) struct LayerCtx<'c> {
     /// The layer's id in the file and in the project (layer parameters).
     pub aep_id: u32,
     pub ec_id: effectcraft_project::LayerId,
-    /// The layer's source size in pixels (effect points are fractions of it).
+    /// The size effect points are fractions of: the layer's source, or an adjustment layer's comp.
     pub size: (u32, u32),
     pub tm: &'c TimeMap,
 }

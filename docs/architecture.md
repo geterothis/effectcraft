@@ -176,7 +176,9 @@ masks, other layers' pixels for layer parameters (each in its own effect space),
 frames at other times (`Renderer::layer_input`, also what Puppet, Roto Brush and the Layer panel
 read) and the comp camera. Effect point handles, Puppet pins and the Layer panel map effect space
 to the comp with `EvalCtx::effect_to_comp`. Adjustment layers run their effects on the comp below
-as it is.
+as it is, and their effects take that comp's size as the layer's whatever the adjustment layer's own size
+and transform (After Effects tiles a moved, scaled or parent-stretched adjustment layer's Motion Tile across
+the comp exactly as one at the comp origin); only the result is clipped to the layer.
 
 Runs of 3D layers are composited per pixel through the
 active camera, with lights, shadows and depth of field (Classic 3D), or rasterised as meshes by

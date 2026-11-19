@@ -401,6 +401,13 @@ impl<'a> Renderer<'a> {
         Placement { matrices, sampling, seed }
     }
 
+    /// The size of the comp an adjustment layer is drawn onto: its own, or for a collapsed
+    /// precomp's layer the outermost comp it is drawn into.
+    pub(crate) fn canvas_comp_size(&self, ctx: &EvalCtx) -> [f64; 2] {
+        let comp = self.links().next().map_or(ctx.comp, |t| t.comp);
+        [f64::from(comp.width), f64::from(comp.height)]
+    }
+
     /// Draw a processed layer into `target` (transform, motion blur) with `mode`/`opacity`.
     pub(crate) fn place(&self, ctx: &EvalCtx, layer: &Layer, buf: &Buf, target: &mut Image, mode: BlendMode, opacity: f32) {
         self.place_changed(ctx, layer, buf, target, PlacementBlend { mode, opacity, quantize: None });

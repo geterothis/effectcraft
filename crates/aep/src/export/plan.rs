@@ -1115,7 +1115,11 @@ fn plan_layer(cx: &PlanCx<'_>, at: CompAt<'_>, cp: &CompPlan, layer: &Layer, col
     });
     // Layer markers count layer time in the layer's units, as its keys do.
     let markers = crate::export::markers::plan(&layer.markers, &cp.tb, &what("layer"), col);
-    let fx = crate::export::effects::plan_effects(layer, source_size, cp, comp_name, col);
+    // An adjustment layer's effect points are fractions of the comp (After Effects 26.5, lab
+    // `adj-motion-tile`: Tile Center 540 on a 1920x1080 adjustment layer in a 1920x1920 comp is
+    // 540 / 1920); `tdb4@24` keeps the source's aspect there too.
+    let fx_size = if layer.switches.adjustment { (comp.width, comp.height) } else { source_size };
+    let fx = crate::export::effects::plan_effects(layer, fx_size, cp, comp_name, col);
     let styles = crate::export::styles::plan_styles(layer, comp, cp, &format!("{comp_name}: '{}'", layer.name), col);
     let is_text = matches!(src, LayerSrc::Text(_));
     let cam_light = matches!(src, LayerSrc::Camera(_) | LayerSrc::Light(_));

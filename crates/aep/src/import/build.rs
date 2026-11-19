@@ -676,7 +676,8 @@ fn build_layers(project: &mut Project, cx: &mut Ctx<'_>, defs: &EffectDefinition
             import_masks(&layer, &comp_name, &name, ml, &mut build::Ids(&mut project.next_id), masks, &mut cx.col);
         }
         if let Some(fx) = l.props.sub_mut("effects") {
-            let lcx = LayerCtx { comp: &comp_name, layer: &name, aep_id: h.id, ec_id: l.id, size, tm: &tm };
+            let fx_size = effect_point_size(h.is_adjustment(), comp_size, size);
+            let lcx = LayerCtx { comp: &comp_name, layer: &name, aep_id: h.id, ec_id: l.id, size: fx_size, tm: &tm };
             import_effects(defs, &layer, &lcx, &mut Ids(&mut project.next_id), fx, &mut layer_refs, &mut cx.col);
         }
         if let Some(parent) = h.parent_id {
@@ -1160,6 +1161,13 @@ fn parent_cycles(links: &HashMap<LayerId, LayerId>) -> HashSet<LayerId> {
         }
     }
     cycles
+}
+
+/// The size a layer's effect points are fractions of: its source's, or on an adjustment layer
+/// the comp's (After Effects 26.5, lab `adj-motion-tile`: Tile Center 540 on a 1920x1080
+/// adjustment layer in a 1920x1920 comp is stored 540 / 1920, whatever the layer's transform).
+fn effect_point_size(adjustment: bool, comp: (u32, u32), source: (u32, u32)) -> (u32, u32) {
+    if adjustment { comp } else { source }
 }
 
 /// Sets the parent links that point at an imported layer, without loops.

@@ -810,7 +810,11 @@ impl<'a> Renderer<'a> {
             }
         }
         let lt = layer.layer_time(ctx.time);
-        let layer_size = ctx.effect_bounds(layer).0;
+        // An adjustment layer's effects take the comp they adjust as the layer, whatever its own
+        // size and transform: After Effects 26.5 tiles a moved, scaled, rotated or parent-stretched
+        // 1920x1080 adjustment layer's Motion Tile across a 1920x1920 comp exactly as one at the
+        // comp's origin (lab `adj-motion-tile`), and clips only the result to the layer.
+        let layer_size = if adjustment { self.canvas_comp_size(ctx) } else { ctx.effect_bounds(layer).0 };
         // #659 / #1205: an authored layer's buffer spans only its painted content. Effects that
         // place pixels outside it grow the buffer themselves, by exactly what they need
         // (`layer_cover_pad`: CC Tiler, CC Smear, CC Mosaic sharp) instead of a blanket cover of

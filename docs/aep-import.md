@@ -174,7 +174,7 @@ parameter gets the file's value:
 |---|---|---|---|
 | `ADBE Tint` 1 Map Black To, 2 Map White To | `black`, `white` | ARGB 0..255 -> RGBA 0..1, alpha 1 | 356, 357; keys 364 |
 | `ADBE Tint` 3 Amount to Tint | `amount` | stored percent (valid max 100) x 1 | 356, 361, 362; keys 363 |
-| `ADBE Ramp` 1 Start of Ramp, 3 End of Ramp | `start`, `end` | fraction of the layer size x source size = layer pixels; outside 0..1 stays outside | 368, 369, 374, 383; keys 382 |
+| `ADBE Ramp` 1 Start of Ramp, 3 End of Ramp | `start`, `end` | fraction of the layer size x source size = layer pixels (the composition size on an adjustment layer); outside 0..1 stays outside | 368, 369, 374, 383; keys 382 |
 | `ADBE Ramp` 2 Start Color, 4 End Color | `startColor`, `endColor` | ARGB 0..255 -> RGBA 0..1, alpha 1 | 368, 371 |
 | `ADBE Ramp` 5 Ramp Shape | `shape` | 1-based popup -> 0-based (Radial 2 -> 1) | 368, 377 |
 | `ADBE Ramp` 6 Ramp Scatter | `scatter` | pixels (valid max 512) x 1 | 368, 378 |

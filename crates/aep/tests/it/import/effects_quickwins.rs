@@ -3,10 +3,13 @@
 //! the definitions After Effects 2026 wrote for it in the importer block of 2026-11-05 (valid
 //! ranges, defaults, popup items) and the values of that block's compositions.
 
-use crate::import::fx_inject::{Default, Fx, losses, near, num, other, popup, pt, run, slider, v};
+use crate::import::fx_inject::{Default, Fx, bytes_with, import_bytes, losses, near, num, other, popup, pt, run, slider, v};
 use effectcraft_aep::ParamKind as K;
 use effectcraft_aep::import::LossCategory;
+use effectcraft_aep::import::{ImportOptions, import};
+use effectcraft_aep::{Body, Chunk, parse, write};
 use effectcraft_keyframe::Value;
+use effectcraft_project::Project;
 
 const ECHO_OPS: &[&str] = &["Add", "Maximum", "Minimum", "Screen", "Composite In Back", "Composite In Front", "Blend"];
 
@@ -176,4 +179,45 @@ fn color_stabilizer_points_sample_size_and_stabilize() {
     let g = g.expect("imported");
     assert_eq!(v(&g, "stabilize"), Value::Enum(2), "Curves");
     near(&g, "sampleSize", 25.0);
+}
+
+/// An adjustment layer's effect points are fractions of its comp, not of its own size: After
+/// Effects 26.5 stores Motion Tile's Tile Center 540 on a 1920x1080 adjustment layer in a
+/// 1920x1920 comp as 540 / 1920 (lab `adj-motion-tile`).
+#[test]
+fn an_adjustment_layers_effect_points_are_fractions_of_its_comp() {
+    let fx = Fx {
+        match_name: "ADBE Offset",
+        name: "Offset",
+        defs: vec![other(K::Point, "Shift Center To", Default::Point(0.25, 0.75)), slider(K::FixedSlider, "Blend With Original", 0.0, (0.0, 1.0))],
+        values: vec![],
+        data: vec![],
+        keys: vec![],
+    };
+    fn visit(chunks: &mut [Chunk<'_>], f: &mut dyn FnMut(&mut Chunk<'_>)) {
+        for c in chunks {
+            f(c);
+            visit(c.children_mut(), f);
+        }
+    }
+    let plain = bytes_with(&fx);
+    let mut file = parse(&plain).unwrap();
+    // `ldta` byte 38 bit 0x02: the adjustment switch.
+    visit(&mut file.chunks, &mut |c| {
+        if c.id == *b"ldta"
+            && let Body::Data(d) = &mut c.body
+        {
+            d.to_mut()[38] |= 0x02;
+        }
+    });
+    let adjusted = write(&file).unwrap();
+    let mut project = Project::default();
+    let none = |_: &str| false;
+    import(&mut project, &adjusted, &ImportOptions { allow_losses: true, ..ImportOptions::new(&none) }).unwrap();
+    let (_, comp) = project.comps().find(|(_, c)| c.layers.iter().any(|l| l.switches.adjustment)).expect("an adjustment layer");
+    let (w, h) = (f64::from(comp.width), f64::from(comp.height));
+    let (g, _) = import_bytes(&adjusted, "ec.distort.offset");
+    pt(&g.expect("imported"), "shift", [0.25 * w, 0.75 * h]);
+    // On the plain layer (8x8) the same fractions stay fractions of the layer.
+    pt(&run(&fx, "ec.distort.offset").0.expect("imported"), "shift", [2.0, 6.0]);
 }

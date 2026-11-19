@@ -236,6 +236,41 @@ fn adjustment_layer_blends_in_its_mode() {
     }
 }
 
+/// An adjustment layer's effects take the comp as the layer, whatever its own size: Motion Tile
+/// on a 200x50 adjustment layer in the middle of a 200x100 comp tiles the comp exactly as on a
+/// comp-sized one, and only the result is clipped to the layer (After Effects 26.5, lab
+/// `adj-motion-tile`).
+#[test]
+fn an_adjustment_layers_effects_take_the_comp_as_the_layer() {
+    let render = |h: u32| {
+        let (mut p, cid, comp) = setup();
+        let mut adj = solid(&mut p, &comp, [1.0, 1.0, 1.0], 200, h);
+        adj.switches.adjustment = true;
+        let vals = [("tileCenter", Value::Vec2([100.0, 40.0])), ("tileWidth", Value::Scalar(50.0)), ("tileHeight", Value::Scalar(50.0))];
+        add_effect_200(&mut p, &mut adj, "ec.stylize.motiontile", &vals);
+        let mut top = solid(&mut p, &comp, [1.0, 0.0, 0.0], 200, 50);
+        top.props.prop_mut("transform/position").unwrap().value = Value::Vec3([100.0, 25.0, 0.0]);
+        let mut bottom = solid(&mut p, &comp, [0.0, 0.0, 1.0], 200, 50);
+        bottom.props.prop_mut("transform/position").unwrap().value = Value::Vec3([100.0, 75.0, 0.0]);
+        let c = p.comp_mut(cid).unwrap();
+        c.layers.push(adj);
+        c.layers.push(top);
+        c.layers.push(bottom);
+        render_frame(&p, cid, Tick::ZERO, 1.0)
+    };
+    let (band, full) = (render(50), render(100));
+    // Tiles of 100x50 about (100, 40): the comp at half size, red above row 40, blue below.
+    assert!(band.get(100, 30)[0] > 0.99 && band.get(100, 45)[2] > 0.99, "{:?} {:?}", band.get(100, 30), band.get(100, 45));
+    for y in 26..74 {
+        for x in [10, 60, 100, 150, 190] {
+            let (a, b) = (band.get(x, y), full.get(x, y));
+            assert!((0..4).all(|i| (a[i] - b[i]).abs() < 1e-4), "({x}, {y}): {a:?} vs {b:?}");
+        }
+    }
+    // Outside the layer the comp is untouched.
+    assert!(band.get(100, 10)[0] > 0.99 && band.get(100, 90)[2] > 0.99);
+}
+
 #[test]
 fn shape_layer_draws_fill_and_stroke() {
     let (mut p, cid, comp) = setup();

@@ -8,7 +8,8 @@ use effectcraft_aep::export::LossCategory;
 use effectcraft_aep::import::{ImportOptions, import};
 use effectcraft_aep::{AepFile, ParamValue, parse};
 use effectcraft_keyframe::{Interp, Value};
-use effectcraft_project::{ItemKind, Node, Project, PropGroup};
+use effectcraft_project::{ItemKind, LayerSource, Node, Project, PropGroup, build};
+use effectcraft_time::FrameRate;
 
 fn fixtures_with_effects() -> Option<Vec<String>> {
     Some({
@@ -748,4 +749,41 @@ fn mesh_handles_moved_on_their_own_survive_the_round_trip() {
         }
     }
     assert!(found);
+}
+
+/// An adjustment layer's effect points are stored as fractions of its comp, as After Effects
+/// stores them (lab `adj-motion-tile`: Tile Center 540 on a 1920x1080 adjustment layer in a
+/// 1920x1920 comp is 540 / 1920), and read back as the same point.
+#[test]
+fn an_adjustment_layers_effect_points_are_fractions_of_its_comp() {
+    let mut p = Project::default();
+    let c = add_comp(&mut p, "C", 1920, 1920, FrameRate::new(25, 1), 2.0, None);
+    let s = add_solid(&mut p, "Adj", 1920, 1080, [1.0, 1.0, 1.0], None);
+    add_layer(&mut p, c, "Adj", LayerSource::Solid { item: s }, (1920, 1080));
+    let spec = effectcraft_effects::find("ec.generate.gradientramp").expect("ramp");
+    let mut next = p.next_id;
+    let mut g = effectcraft_effects::instantiate(spec, &mut build::Ids(&mut next), spec.name, [1920.0, 1920.0]);
+    p.next_id = next;
+    g.prop_mut("start").expect("start").value = Value::Vec2([960.0, 540.0]);
+    with_layer(&mut p, c, 0, |l| {
+        l.switches.adjustment = true;
+        l.props.sub_mut("effects").expect("effects").children.push(Node::Group(g));
+    });
+    let r = export_all(&p);
+    assert_eq!(r.report.count(LossCategory::Effects), 0, "{:?}", r.report.losses);
+    let file = parse(&r.bytes).expect("parse");
+    let seen = effects_of(&file);
+    let fx = &seen.first().expect("layer").1[0];
+    let start = fx.params.iter().find(|p| matches!(p.1, Some(ParamValue::Point(_)))).expect("a point");
+    match &start.1 {
+        Some(ParamValue::Point(v)) => assert!((v[0] - 0.5).abs() < 1e-6 && (v[1] - 540.0 / 1920.0).abs() < 1e-6, "{v:?}"),
+        other => panic!("{other:?}"),
+    }
+    let q = import_bytes(&r.bytes);
+    let back = q
+        .comps()
+        .flat_map(|(_, c)| c.layers.iter())
+        .find_map(|l| l.effects().and_then(|e| e.groups().next().and_then(|g| g.prop("start")).map(|p| p.value.clone())))
+        .expect("start");
+    assert_eq!(back, Value::Vec2([960.0, 540.0]));
 }
