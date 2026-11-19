@@ -1,0 +1,264 @@
+{
+ "ae": "26.5x89",
+ "inner": {
+  "cut": {
+   "RED": [
+    0,
+    0.24000651041667
+   ],
+   "GREEN": [
+    0.24000651041667,
+    2
+   ]
+  },
+  "cut_offgrid": {
+   "RED": [
+    0,
+    0.25
+   ],
+   "GREEN": [
+    0.25,
+    2
+   ]
+  }
+ },
+ "outer": [
+  {
+   "comp": "V_0.23999999463558197",
+   "id": 34,
+   "inner": "cut",
+   "Vset": 0.23999999463558,
+   "VreadAt1f": 0.23999999463558,
+   "keys": [
+    {
+     "t": 0,
+     "v": 0
+    },
+    {
+     "t": 0.03333333333333,
+     "v": 0.23999999463558
+    },
+    {
+     "t": 1,
+     "v": 1
+    }
+   ],
+   "frame": "V_0.23999999463558197_f1.png",
+   "frame1_rgba": [
+    0,
+    255,
+    0,
+    255
+   ],
+   "frame1_colour": "GREEN"
+  },
+  {
+   "comp": "V_0.2399999",
+   "id": 47,
+   "inner": "cut",
+   "Vset": 0.2399999,
+   "VreadAt1f": 0.23999990522861,
+   "keys": [
+    {
+     "t": 0,
+     "v": 0
+    },
+    {
+     "t": 0.03333333333333,
+     "v": 0.23999990522861
+    },
+    {
+     "t": 1,
+     "v": 1
+    }
+   ],
+   "frame": "V_0.2399999_f1.png",
+   "frame1_rgba": [
+    0,
+    255,
+    0,
+    255
+   ],
+   "frame1_colour": "GREEN"
+  },
+  {
+   "comp": "V_0.239999",
+   "id": 60,
+   "inner": "cut",
+   "Vset": 0.239999,
+   "VreadAt1f": 0.23999899625778,
+   "keys": [
+    {
+     "t": 0,
+     "v": 0
+    },
+    {
+     "t": 0.03333333333333,
+     "v": 0.23999899625778
+    },
+    {
+     "t": 1,
+     "v": 1
+    }
+   ],
+   "frame": "V_0.239999_f1.png",
+   "frame1_rgba": [
+    0,
+    255,
+    0,
+    255
+   ],
+   "frame1_colour": "GREEN"
+  },
+  {
+   "comp": "V_0.23999",
+   "id": 73,
+   "inner": "cut",
+   "Vset": 0.23999,
+   "VreadAt1f": 0.23998999595642,
+   "keys": [
+    {
+     "t": 0,
+     "v": 0
+    },
+    {
+     "t": 0.03333333333333,
+     "v": 0.23998999595642
+    },
+    {
+     "t": 1,
+     "v": 1
+    }
+   ],
+   "frame": "V_0.23999_f1.png",
+   "frame1_rgba": [
+    0,
+    255,
+    0,
+    255
+   ],
+   "frame1_colour": "GREEN"
+  },
+  {
+   "comp": "V_0.2399",
+   "id": 86,
+   "inner": "cut",
+   "Vset": 0.2399,
+   "VreadAt1f": 0.23989999294281,
+   "keys": [
+    {
+     "t": 0,
+     "v": 0
+    },
+    {
+     "t": 0.03333333333333,
+     "v": 0.23989999294281
+    },
+    {
+     "t": 1,
+     "v": 1
+    }
+   ],
+   "frame": "V_0.2399_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "comp": "V_0.24",
+   "id": 99,
+   "inner": "cut",
+   "Vset": 0.24,
+   "VreadAt1f": 0.23999999463558,
+   "keys": [
+    {
+     "t": 0,
+     "v": 0
+    },
+    {
+     "t": 0.03333333333333,
+     "v": 0.23999999463558
+    },
+    {
+     "t": 1,
+     "v": 1
+    }
+   ],
+   "frame": "V_0.24_f1.png",
+   "frame1_rgba": [
+    0,
+    255,
+    0,
+    255
+   ],
+   "frame1_colour": "GREEN"
+  },
+  {
+   "comp": "V_0.2400001",
+   "id": 112,
+   "inner": "cut",
+   "Vset": 0.2400001,
+   "VreadAt1f": 0.24000009894371,
+   "keys": [
+    {
+     "t": 0,
+     "v": 0
+    },
+    {
+     "t": 0.03333333333333,
+     "v": 0.24000009894371
+    },
+    {
+     "t": 1,
+     "v": 1
+    }
+   ],
+   "frame": "V_0.2400001_f1.png",
+   "frame1_rgba": [
+    0,
+    255,
+    0,
+    255
+   ],
+   "frame1_colour": "GREEN"
+  },
+  {
+   "comp": "X_offgrid_V_0.2483",
+   "id": 125,
+   "inner": "cut_offgrid",
+   "Vset": 0.2483,
+   "VreadAt1f": 0.2483000010252,
+   "keys": [
+    {
+     "t": 0,
+     "v": 0
+    },
+    {
+     "t": 0.03333333333333,
+     "v": 0.2483000010252
+    },
+    {
+     "t": 1,
+     "v": 1
+    }
+   ],
+   "frame": "X_offgrid_V_0.2483_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  }
+ ],
+ "notes": [
+  "Frames rendered at 1/10 resolution (192x108) with the ae-harness plugin, 8 bpc; the colour is uniform across the frame.",
+  "Inner cut: AE stored RED out / GREEN in as 0.24000651041667 s when 0.24 was set (AE time quantisation), while 0.25 in cut_offgrid stays exactly 0.25.",
+  "Time Remap values read back as float32 (e.g. 0.24 -> 0.23999999463558)."
+ ]
+}
