@@ -38,3 +38,7 @@ Bisect on the solid export, in After Effects 26.5:
 - New `export::base::tests::a_solid_carries_the_opti_header_after_effects_needs_to_save`. It fails without the fix (bytes 4..10 are zero).
 - `cargo test -p effectcraft-aep` (with the corpus fixtures), `cargo clippy -p effectcraft-aep --all-targets -D warnings` and `cargo fmt --check` pass locally. I did not run the full `cargo xtask ci`.
 - After Effects 26.5: the solid export with exactly these bytes opens, renders and saves.
+- After Effects 26.5, fresh process each time:
+  - A larger export (two compositions, a solid, a text layer and precomp instances) crashed on save 5 times out of 5. Deleting items narrowed it to the solid.
+  - With this fix the same export saves.
+  - A second export, a solid with separated Position, also saves.
