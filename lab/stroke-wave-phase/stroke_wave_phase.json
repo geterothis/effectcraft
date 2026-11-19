@@ -1,0 +1,288 @@
+{
+ "ae": "26.5x89",
+ "notes": [
+  "Line (50,100)->(450,100) in a 500x200 comp, white stroke 40 px, Line Cap 1 = Butt, no taper.",
+  "Wave Units: 1 = Pixels (Wavelength 100), 2 = Cycles (Cycles 4).",
+  "Renderer: ae-harness plugin, 8 bpc, straight alpha RGBA."
+ ],
+ "comps": [
+  {
+   "comp": "px100_ph0.25_amt100",
+   "id": 1,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 0.25
+    }
+   },
+   "frame": "px100_ph0.25_amt100_f0.png"
+  },
+  {
+   "comp": "px100_ph0.5_amt100",
+   "id": 14,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 0.5
+    }
+   },
+   "frame": "px100_ph0.5_amt100_f0.png"
+  },
+  {
+   "comp": "px100_ph0.75_amt100",
+   "id": 27,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 0.75
+    }
+   },
+   "frame": "px100_ph0.75_amt100_f0.png"
+  },
+  {
+   "comp": "px100_ph1_amt100",
+   "id": 40,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 1
+    }
+   },
+   "frame": "px100_ph1_amt100_f0.png"
+  },
+  {
+   "comp": "px100_ph1.5_amt100",
+   "id": 53,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 1.5
+    }
+   },
+   "frame": "px100_ph1.5_amt100_f0.png"
+  },
+  {
+   "comp": "px100_ph30_amt100",
+   "id": 66,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 30
+    }
+   },
+   "frame": "px100_ph30_amt100_f0.png"
+  },
+  {
+   "comp": "px100_ph45_amt100",
+   "id": 79,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 45
+    }
+   },
+   "frame": "px100_ph45_amt100_f0.png"
+  },
+  {
+   "comp": "px100_phm0.25_amt100",
+   "id": 92,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": -0.25
+    }
+   },
+   "frame": "px100_phm0.25_amt100_f0.png"
+  }
+ ],
+ "phase_property": {
+  "matchName": "ADBE Vector Taper Wave Phase",
+  "name": "Phase",
+  "valueRead_for_0.25": 0.25,
+  "unitsText": "degrees",
+  "propertyValueType": "6417 (OneD)",
+  "hasMin": false,
+  "hasMax": false,
+  "minValue_maxValue": "not readable (hasMin/hasMax false; reading minValue throws an uncatchable error)",
+  "display_in_UI": "not captured (headless); unitsText says degrees"
+ },
+ "diff_vs_stroke-wave_px100_ph0_amt100": {
+  "px100_ph0.25_amt100": {
+   "maxdiff_vs_phase0": 255,
+   "px_changed_gt8": 960
+  },
+  "px100_ph0.5_amt100": {
+   "maxdiff_vs_phase0": 255,
+   "px_changed_gt8": 1064
+  },
+  "px100_ph0.75_amt100": {
+   "maxdiff_vs_phase0": 255,
+   "px_changed_gt8": 1184
+  },
+  "px100_ph1_amt100": {
+   "maxdiff_vs_phase0": 255,
+   "px_changed_gt8": 1248
+  },
+  "px100_ph1.5_amt100": {
+   "maxdiff_vs_phase0": 255,
+   "px_changed_gt8": 1448
+  },
+  "px100_ph30_amt100": {
+   "maxdiff_vs_phase0": 255,
+   "px_changed_gt8": 9700
+  },
+  "px100_ph45_amt100": {
+   "maxdiff_vs_phase0": 255,
+   "px_changed_gt8": 11104
+  },
+  "px100_phm0.25_amt100": {
+   "maxdiff_vs_phase0": 255,
+   "px_changed_gt8": 968
+  }
+ },
+ "finding": "Empirical: the Wave pattern repeats every 90 Phase units (unitsText says degrees). In lab/stroke-wave, phase 0, 90 and 180 render pixel-identically for every units/amount pair. Here the pattern shift is about wavelength*phase/90: 1 -> ~1 px, 1.5 -> ~2 px, 30 -> ~33 px, 45 -> ~50 px (half the 100 px wavelength). Sign of the shift not verified. -0.25 and 0.25 both differ from 0 by under 1 px (antialiasing only)."
+}
