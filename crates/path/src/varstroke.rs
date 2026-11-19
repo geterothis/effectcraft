@@ -28,7 +28,8 @@ impl Taper {
     }
 }
 
-/// Stroke Wave: the width oscillates between `1 - amount` and 1 of the stroke width.
+/// Stroke Wave: the width oscillates between `1 - amount` and 1 of the stroke width, narrowest at
+/// the start of the path at phase 0 (as After Effects draws it).
 #[derive(Clone, Debug, PartialEq)]
 pub struct Wave {
     /// 0–1.
@@ -83,7 +84,7 @@ pub fn width_factor(taper: Option<&Taper>, wave: Option<&Wave>, s: f64, len: f64
         };
         if lambda > 0.0 {
             let ph = std::f64::consts::TAU * s / lambda + w.phase.to_radians();
-            k *= 1.0 - w.amount.clamp(0.0, 1.0) * (0.5 - 0.5 * ph.cos());
+            k *= 1.0 - w.amount.clamp(0.0, 1.0) * (0.5 + 0.5 * ph.cos());
         }
     }
     k
@@ -395,12 +396,27 @@ mod tests {
     #[test]
     fn wave_width_profile() {
         let w = Wave { amount: 1.0, cycles: None, wavelength: 40.0, phase: 0.0 };
-        assert!((width_factor(None, Some(&w), 0.0, 200.0) - 1.0).abs() < 1e-9);
-        assert!(width_factor(None, Some(&w), 20.0, 200.0).abs() < 1e-9);
+        assert!(width_factor(None, Some(&w), 0.0, 200.0).abs() < 1e-9);
+        assert!((width_factor(None, Some(&w), 20.0, 200.0) - 1.0).abs() < 1e-9);
         let c = Wave { cycles: Some(5.0), ..w.clone() };
-        assert!(width_factor(None, Some(&c), 20.0, 200.0).abs() < 1e-9, "5 cycles over 200 px = 40 px");
+        assert!((width_factor(None, Some(&c), 20.0, 200.0) - 1.0).abs() < 1e-9, "5 cycles over 200 px = 40 px");
         let ph = Wave { phase: 180.0, ..w };
-        assert!(width_factor(None, Some(&ph), 0.0, 200.0).abs() < 1e-9);
+        assert!((width_factor(None, Some(&ph), 0.0, 200.0) - 1.0).abs() < 1e-9);
+    }
+
+    /// After Effects 26.5, a 400 px line stroked 40 px wide with Wave (Wavelength 100, phase 0):
+    /// the stroke's height at 0, 20 and 50 px along the path, per Amount. A trough sits at the start.
+    #[test]
+    fn wave_matches_after_effects() {
+        for (amount, ae) in [(0.25, [30.1, 33.7, 40.0]), (0.5, [20.1, 27.4, 40.0]), (1.0, [0.1, 14.6, 40.1])] {
+            let st = StrokeStyle { width: 40.0, wave: Some(Wave { amount, cycles: None, wavelength: 100.0, phase: 0.0 }), ..Default::default() };
+            let o = outline(&[line(400.0)], &st, 1.0).unwrap();
+            let m = fill_coverage(&[o], &Mat3::IDENTITY, 420, 100, FillRule::NonZero);
+            for (k, at) in [100, 120, 150].into_iter().enumerate() {
+                let got = column(&m, at + 10);
+                assert!((got - ae[k]).abs() < 1.5, "amount {amount}, {at} px along: {got} against {}", ae[k]);
+            }
+        }
     }
 
     #[test]
@@ -435,9 +451,9 @@ mod tests {
         };
         let o = outline(&[line(150.0)], &st, 1.0).unwrap();
         let m = fill_coverage(&[o], &Mat3::IDENTITY, 200, 100, FillRule::NonZero);
-        assert!(column(&m, 41) > 9.0, "dash at full width (wave crest): {}", column(&m, 41));
+        assert!(column(&m, 55) > 9.0, "dash at full width (wave crest): {}", column(&m, 55));
         assert!(column(&m, 35) < 0.01, "gap");
-        assert!(column(&m, 55) > 4.0 && column(&m, 55) < 6.5, "wave trough ≈ half width: {}", column(&m, 55));
+        assert!(column(&m, 41) > 4.0 && column(&m, 41) < 6.5, "wave trough ≈ half width: {}", column(&m, 41));
     }
 
     #[test]
