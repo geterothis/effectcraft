@@ -1,0 +1,568 @@
+{
+ "ae": "26.5x89",
+ "notes": [
+  "Line (50,100)->(450,100) in a 500x200 comp, white stroke 40 px, Line Cap 1 = Butt, no taper.",
+  "Wave Units: 1 = Pixels (Wavelength 100), 2 = Cycles (Cycles 4).",
+  "Renderer: ae-harness plugin, 8 bpc, straight alpha RGBA PNG (transparent background)."
+ ],
+ "comps": [
+  {
+   "comp": "px100_ph0_amt25",
+   "id": 1,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 25
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 0
+    }
+   },
+   "frame": "px100_ph0_amt25_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "px100_ph0_amt50",
+   "id": 14,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 50
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 0
+    }
+   },
+   "frame": "px100_ph0_amt50_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "px100_ph0_amt100",
+   "id": 27,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 0
+    }
+   },
+   "frame": "px100_ph0_amt100_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "px100_ph90_amt25",
+   "id": 40,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 25
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 90
+    }
+   },
+   "frame": "px100_ph90_amt25_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "px100_ph90_amt50",
+   "id": 53,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 50
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 90
+    }
+   },
+   "frame": "px100_ph90_amt50_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "px100_ph90_amt100",
+   "id": 66,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 90
+    }
+   },
+   "frame": "px100_ph90_amt100_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "px100_ph180_amt25",
+   "id": 79,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 25
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 180
+    }
+   },
+   "frame": "px100_ph180_amt25_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "px100_ph180_amt50",
+   "id": 92,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 50
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 180
+    }
+   },
+   "frame": "px100_ph180_amt50_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "px100_ph180_amt100",
+   "id": 105,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 1
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 10
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 180
+    }
+   },
+   "frame": "px100_ph180_amt100_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "cyc4_ph0_amt25",
+   "id": 118,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 25
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 2
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 4
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 0
+    }
+   },
+   "frame": "cyc4_ph0_amt25_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "cyc4_ph0_amt50",
+   "id": 131,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 50
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 2
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 4
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 0
+    }
+   },
+   "frame": "cyc4_ph0_amt50_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "cyc4_ph0_amt100",
+   "id": 144,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 2
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 4
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 0
+    }
+   },
+   "frame": "cyc4_ph0_amt100_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "cyc4_ph90_amt25",
+   "id": 157,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 25
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 2
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 4
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 90
+    }
+   },
+   "frame": "cyc4_ph90_amt25_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "cyc4_ph90_amt50",
+   "id": 170,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 50
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 2
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 4
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 90
+    }
+   },
+   "frame": "cyc4_ph90_amt50_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "cyc4_ph90_amt100",
+   "id": 183,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 2
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 4
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 90
+    }
+   },
+   "frame": "cyc4_ph90_amt100_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "cyc4_ph180_amt25",
+   "id": 196,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 25
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 2
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 4
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 180
+    }
+   },
+   "frame": "cyc4_ph180_amt25_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "cyc4_ph180_amt50",
+   "id": 209,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 50
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 2
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 4
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 180
+    }
+   },
+   "frame": "cyc4_ph180_amt50_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  },
+  {
+   "comp": "cyc4_ph180_amt100",
+   "id": 222,
+   "strokeWidth": 40,
+   "lineCap": 1,
+   "wave": {
+    "ADBE Vector Taper Wave Amount": {
+     "name": "Amount",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Units": {
+     "name": "Units",
+     "value": 2
+    },
+    "ADBE Vector Taper Wavelength": {
+     "name": "Wavelength",
+     "value": 100
+    },
+    "ADBE Vector Taper Wave Cycles": {
+     "name": "Cycles",
+     "value": 4
+    },
+    "ADBE Vector Taper Wave Phase": {
+     "name": "Phase",
+     "value": 180
+    }
+   },
+   "frame": "cyc4_ph180_amt100_f0.png",
+   "png_mode": "RGBA",
+   "alpha_at_corner": 0
+  }
+ ]
+}
