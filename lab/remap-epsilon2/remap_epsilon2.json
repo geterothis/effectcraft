@@ -1,0 +1,332 @@
+{
+ "ae": "26.5x89",
+ "inner": {
+  "cut30_024": {
+   "fps": 30,
+   "cutSet": 0.24,
+   "RED": [
+    0,
+    0.24000651041667
+   ],
+   "GREEN": [
+    0.24000651041667,
+    2
+   ]
+  },
+  "cut60_025": {
+   "fps": 60,
+   "cutSet": 0.25,
+   "RED": [
+    0,
+    0.25
+   ],
+   "GREEN": [
+    0.25,
+    2
+   ]
+  },
+  "cut24_025": {
+   "fps": 24,
+   "cutSet": 0.25,
+   "RED": [
+    0,
+    0.25
+   ],
+   "GREEN": [
+    0.25,
+    2
+   ]
+  },
+  "cut30_off2551": {
+   "fps": 30,
+   "cutSet": 0.2551,
+   "RED": [
+    0,
+    0.25511067708333
+   ],
+   "GREEN": [
+    0.25511067708333,
+    2
+   ]
+  }
+ },
+ "outer": [
+  {
+   "group": "A",
+   "comp": "A30_V0.23998",
+   "id": 66,
+   "inner": "cut30_024",
+   "Vset": 0.23998,
+   "VreadAt1f": 0.23997999727726,
+   "frame": "A30_V0.23998_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "A",
+   "comp": "A30_V0.23996",
+   "id": 79,
+   "inner": "cut30_024",
+   "Vset": 0.23996,
+   "VreadAt1f": 0.23995999991894,
+   "frame": "A30_V0.23996_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "A",
+   "comp": "A30_V0.23995",
+   "id": 92,
+   "inner": "cut30_024",
+   "Vset": 0.23995,
+   "VreadAt1f": 0.23995000123978,
+   "frame": "A30_V0.23995_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "A",
+   "comp": "A30_V0.23994",
+   "id": 105,
+   "inner": "cut30_024",
+   "Vset": 0.23994,
+   "VreadAt1f": 0.23994000256062,
+   "frame": "A30_V0.23994_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "A",
+   "comp": "A30_V0.23992",
+   "id": 118,
+   "inner": "cut30_024",
+   "Vset": 0.23992,
+   "VreadAt1f": 0.23992000520229,
+   "frame": "A30_V0.23992_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "A",
+   "comp": "A30_V0.2399",
+   "id": 131,
+   "inner": "cut30_024",
+   "Vset": 0.2399,
+   "VreadAt1f": 0.23989999294281,
+   "frame": "A30_V0.2399_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "B",
+   "comp": "B60_V0.2499",
+   "id": 144,
+   "inner": "cut60_025",
+   "Vset": 0.2499,
+   "VreadAt1f": 0.24989999830723,
+   "frame": "B60_V0.2499_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "B",
+   "comp": "B24_V0.2499",
+   "id": 157,
+   "inner": "cut24_025",
+   "Vset": 0.2499,
+   "VreadAt1f": 0.24989999830723,
+   "frame": "B24_V0.2499_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "B",
+   "comp": "B60_V0.24995",
+   "id": 170,
+   "inner": "cut60_025",
+   "Vset": 0.24995,
+   "VreadAt1f": 0.24995000660419,
+   "frame": "B60_V0.24995_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "B",
+   "comp": "B24_V0.24995",
+   "id": 183,
+   "inner": "cut24_025",
+   "Vset": 0.24995,
+   "VreadAt1f": 0.24995000660419,
+   "frame": "B24_V0.24995_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "B",
+   "comp": "B60_V0.24998",
+   "id": 196,
+   "inner": "cut60_025",
+   "Vset": 0.24998,
+   "VreadAt1f": 0.24998000264168,
+   "frame": "B60_V0.24998_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "B",
+   "comp": "B24_V0.24998",
+   "id": 209,
+   "inner": "cut24_025",
+   "Vset": 0.24998,
+   "VreadAt1f": 0.24998000264168,
+   "frame": "B24_V0.24998_f1.png",
+   "frame1_rgba": [
+    0,
+    255,
+    0,
+    255
+   ],
+   "frame1_colour": "GREEN"
+  },
+  {
+   "group": "B",
+   "comp": "B60_V0.24999",
+   "id": 222,
+   "inner": "cut60_025",
+   "Vset": 0.24999,
+   "VreadAt1f": 0.24999000132084,
+   "frame": "B60_V0.24999_f1.png",
+   "frame1_rgba": [
+    0,
+    255,
+    0,
+    255
+   ],
+   "frame1_colour": "GREEN"
+  },
+  {
+   "group": "B",
+   "comp": "B24_V0.24999",
+   "id": 235,
+   "inner": "cut24_025",
+   "Vset": 0.24999,
+   "VreadAt1f": 0.24999000132084,
+   "frame": "B24_V0.24999_f1.png",
+   "frame1_rgba": [
+    0,
+    255,
+    0,
+    255
+   ],
+   "frame1_colour": "GREEN"
+  },
+  {
+   "group": "C",
+   "comp": "C_off_cut-1e-5",
+   "id": 248,
+   "inner": "cut30_off2551",
+   "Vset": 0.25510067708333,
+   "VreadAt1f": 0.25510066747665,
+   "frame": "C_off_cut-1e-5_f1.png",
+   "frame1_rgba": [
+    0,
+    255,
+    0,
+    255
+   ],
+   "frame1_colour": "GREEN"
+  },
+  {
+   "group": "C",
+   "comp": "C_off_cut-5e-5",
+   "id": 261,
+   "inner": "cut30_off2551",
+   "Vset": 0.25506067708333,
+   "VreadAt1f": 0.25506067276001,
+   "frame": "C_off_cut-5e-5_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  },
+  {
+   "group": "D",
+   "comp": "D_stretch_0.23999",
+   "id": 274,
+   "inner": "cut30_024",
+   "stretchSet": 13.8894676167063,
+   "stretchRead": 13.889467716217,
+   "sourceTimeAt1f_computed": 0.2399899982806,
+   "frame": "D_stretch_0.23999_f1.png",
+   "frame1_rgba": [
+    255,
+    0,
+    0,
+    255
+   ],
+   "frame1_colour": "RED"
+  }
+ ],
+ "notes": [
+  "Frames rendered with the ae-harness plugin at 1/16 resolution (96x54), 8 bpc; colour is uniform.",
+  "Renders were taken in the order of outer[] in one fresh process."
+ ]
+}
